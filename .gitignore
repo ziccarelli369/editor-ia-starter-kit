@@ -6,15 +6,19 @@
 *.pem
 *.key
 node_modules/
+# Your material never goes in the repo: only the structure does.
 inbox/*
-!inbox/.gitkeep
+!inbox/README.md
 outbox/*
-!outbox/.gitkeep
+!outbox/README.md
 video-projects/*
 !video-projects/.gitkeep
 PROJECTS.md
 brands/*
+!brands/README.md
 !brands/_template/
+styles/drafts/*
+!styles/drafts/.gitkeep
 renders/
 **/renders/
 **/assets/

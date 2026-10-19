@@ -4,6 +4,13 @@ A starter kit for short-form video editing (Reels, Shorts) with Claude Code and
 HyperFrames. Footage goes into `inbox/`, finals come out of `outbox/`.
 Built on Herk Edit Kit by Nate Herk (MIT) and HyperFrames by HeyGen (Apache-2.0).
 
+## 0. First time here?
+
+If `node_modules/` or `.env` is missing, or `npx hyperframes doctor` fails,
+the kit is not installed yet. Read `docs/SETUP.md` and walk the user through
+it step by step, in their language, before anything else. Do not create
+projects or example videos during setup.
+
 ## 1. Identity
 
 Claude Code only. No other agent runtime, no model routing files.
