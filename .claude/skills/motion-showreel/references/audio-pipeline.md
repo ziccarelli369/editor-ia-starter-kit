@@ -4,7 +4,7 @@ Read this at step 4 of the showreel workflow. Run the scripts from the kit root.
 
 ## Music source
 
-Music is the user's own licensed track, or a generated one. Generation (Kie.ai) and the SFX kit (ElevenLabs) are paid calls: read `docs/TOOLS-AND-API-KEYS.md`, name the cost, and run them only after the user's yes. Without `KIE_API_KEY` or `ELEVENLABS_API_KEY`, use the user's own track and SFX library; say so when you fall back.
+Music is the user's own licensed track from `music/` or `brands/<slug>/music/`, or a generated one. Generation (Kie.ai) and the SFX kit (ElevenLabs) are paid calls: read `docs/TOOLS-AND-API-KEYS.md`, name the cost, and run them only after the user's yes. Without `KIE_API_KEY` or `ELEVENLABS_API_KEY`, use the user's own track and SFX library; say so when you fall back.
 
 ```sh
 node .claude/skills/motion-showreel/scripts/kie.mjs music --title "Reel" --style "punchy electronic showreel, instrumental, 128 bpm, starts instantly, riser into a big drop" --out video-projects/<project-id>/assets/audio

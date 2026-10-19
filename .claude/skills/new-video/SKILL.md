@@ -43,16 +43,24 @@ Empty inbox: ask the user to drop footage in `inbox/` and stop here.
 
 Done when every approved file sits in `assets/` and is listed in `project.json` `sources`.
 
-## 5. Brief
+## 5. Goal
 
-Write `video-projects/<project-id>/DESIGN.md`: goal, audience, platform, length
+Ask once when `project.json` `goal` is empty: for the user's own account
+(`personal`), to sell classes or a service (`sell`), or to grow the account
+(`grow`). Write it to `project.json`. For `sell`, the brand's `DESIGN.md`
+must have its Offer section filled; collect the missing lines now.
+Hooks and CTAs per goal: `.claude/skills/short-form-edit/references/goals.md`.
+
+## 6. Brief
+
+Write `video-projects/<project-id>/DESIGN.md`: goal and its CTA, audience, platform, length
 target, hook idea, CTA, brand, and style (a folder under `styles/core/` or
 `styles/drafts/`, when the user names one; set `style` in `project.json`).
 Set `status` to `briefed`. Run `npm run projects`.
 
 Done when every field above has a value the user confirmed.
 
-## 6. Route
+## 7. Route
 
 | Situation | Load |
 | --- | --- |

@@ -53,3 +53,13 @@ local media and rendering QA were performed on Windows.
 
 Repeat: `npm install`, `npm run check`, `npm test`, `node scripts/check-media.mjs`, then create a
 new starter project and lint, preview, render, and inspect its output.
+
+## Hearing check
+
+`node scripts/hearing-check.mjs <project-id>` re-transcribes the final render
+with local Whisper, aligns the words to the SRT, flags captions that do not
+match what was said (MISMATCH), captions with no speech under them (SILENT),
+cuts that land inside a word (CUT_IN_WORD), and reports loudness. It writes
+`HEARING.md` in the project and exits 1 on FAIL. A steady offset between
+Whisper and the SRT is drift under music, not a caption error; it is removed
+before timing is judged and reported on its own line.

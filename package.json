@@ -9,6 +9,8 @@
     "inbox": "node scripts/inbox.mjs",
     "deliver": "node scripts/deliver.mjs",
     "projects": "node scripts/projects-index.mjs",
+    "hearing": "node scripts/hearing-check.mjs",
+    "track-crop": "node scripts/track-crop.mjs",
     "transcribe": "node scripts/transcribe.mjs",
     "transcribe:elevenlabs": "node scripts/transcribe-elevenlabs.mjs",
     "whisper-to-kit": "node scripts/whisper-to-kit.mjs",

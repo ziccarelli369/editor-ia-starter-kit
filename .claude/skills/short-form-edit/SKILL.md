@@ -33,20 +33,20 @@ Authorization persists. "Make a finished video and iterate" authorizes local edi
 4. **Cut.** Run [cut-silences](../cut-silences/SKILL.md) and [cut-mistakes](../cut-mistakes/SKILL.md). Remove abandoned takes; keep meaningful qualifications, the payoff, and natural breath at joins. Render the clean cut once and derive word timing from the frame-aligned EDL.
    Done when: every spoken line is read, the source-time cut reasons are saved, and `assets/edit-decisions.json` exists.
 
-5. **Design the journey.** Write `DESIGN.md` and a beat plan before HTML: hook, open loop, escalation, evidence, payoff, CTA, and a reason for every shot. Follow [curiosity-and-entertainment.md](references/curiosity-and-entertainment.md) for the open loops, rhythm, and duplication audit, and [opening.md](references/opening.md) for the three openings.
+5. **Design the journey.** Read [goals.md](references/goals.md) for the hook family and CTA that match `project.json` `goal`. Write `DESIGN.md` and a beat plan before HTML: hook, open loop, escalation, evidence, payoff, CTA, and a reason for every shot. Follow [curiosity-and-entertainment.md](references/curiosity-and-entertainment.md) for the open loops, rhythm, and duplication audit, and [opening.md](references/opening.md) for the three openings.
    Done when: `OPEN-LOOPS.json` closes every loop before the CTA, and three openings are compared with the choice recorded.
 
 6. **Animatic and cut lock.** Render a low-resolution moving animatic with speech and rough sound. Fix predictability, missing context, and weak payoffs here; reused approved materials still get reviewed in the new sequence. Lock the cut after this animatic. Every later timing change rebuilds captions, graphics, and sound from the same map.
    Done when: the animatic is reviewed end to end and the cut is locked.
 
-7. **Build the visual world.** Follow [visual-world.md](references/visual-world.md): direction, safe region, layers and actions, named people, product footage, brand logos, and the footage ledger. For a minimal brief, add [premium-motion-and-footage.md](references/premium-motion-and-footage.md).
+7. **Build the visual world.** For landscape footage in a 9:16 frame, run `node scripts/track-crop.mjs <video> --out crop.json --start <s> --end <s>` per shot; it prints an ffmpeg crop filter that follows the motion. Check its frames before trusting it on a pan. Follow [visual-world.md](references/visual-world.md): direction, safe region, layers and actions, named people, product footage, brand logos, and the footage ledger. For a minimal brief, add [premium-motion-and-footage.md](references/premium-motion-and-footage.md).
    Done when: every shot names its attention target and its action's outcome, and every logo traces to a saved source file.
 
 8. **Generate and assemble.**
    - Generated inserts follow [generation-and-sound.md](references/generation-and-sound.md).
    - Animate graphics from the retimed words. Store each shot's anchor phrase and time, and bind each sub-element reveal to its own spoken noun rather than an `index * 0.4` stagger. Captions and impact events land within 2 frames of word onset, with at most 0.15 s of deliberate anticipation.
    - Follow the HyperFrames timeline contract: one registered paused timeline per composition, full duration coverage, local assets, muted video with separate audio. Animate the footage wrapper. Use real 3D only when the metaphor needs it. Keep the source editable.
-   - Music: normalize the voice, start an instrumental bed about 14-20 dB below it, duck under speech, fade cleanly. Aim for about -16 LUFS and at most -1 dBTP, adapting to source dynamics. Save the bed's provenance. Score SFX and any music revision per [generation-and-sound.md](references/generation-and-sound.md).
+   - Music: pick a track from `music/` or `brands/<slug>/music/` (the user's own licensed files; `node .claude/skills/motion-showreel/scripts/music-grid.mjs <track>` gives the beat grid). With no track and no music key, the bed is an ffmpeg-made drone or silence; say which. Normalize the voice, start the bed about 14-20 dB below it, duck under speech, fade cleanly. Aim for about -16 LUFS and at most -1 dBTP, adapting to source dynamics. Save the bed's provenance. Score SFX and any music revision per [generation-and-sound.md](references/generation-and-sound.md).
    Done when: `assets/plan.json` passes `validate-plan.mjs` and every cue has a purpose.
 
 9. **Render.** Run lint and inspect the live preview. Browser automation is headless, with Pointer Lock and pointer capture disabled in every context. Render a draft, inspect, revise, then render final quality. Gotchas:

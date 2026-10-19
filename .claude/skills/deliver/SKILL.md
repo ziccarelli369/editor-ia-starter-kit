@@ -31,7 +31,20 @@ Done when `renders/cover.png` opens and the hook text is readable at phone size.
 
 Both ship unless the user drops one. Say which extras were dropped.
 
-## 4. Deliver
+## 4. Hearing check
+
+You cannot listen; this script is the ear.
+
+```sh
+node scripts/hearing-check.mjs <project-id> --video renders/final.mp4 --srt renders/subtitles.srt
+```
+
+Read `HEARING.md`. `PASS` goes on. `FAIL` means a caption does not match what
+was said, or a cut lands inside a word: fix the cut or the SRT and re-render.
+A steady offset above 1 s is Whisper drift under music; note it in `VERIFY.md`
+and tell the user to listen to the first 5 s once.
+
+## 5. Deliver
 
 ```sh
 node scripts/deliver.mjs <project-id> --video renders/final.mp4 --cover renders/cover.png --caption renders/caption.txt --srt renders/subtitles.srt
@@ -42,7 +55,7 @@ One run per deliverable (`--name <name>`) when a project ships several cuts.
 Done when the script prints the outbox path and `project.json` `status` is
 `delivered`.
 
-## 5. Close
+## 6. Close
 
 `npm run projects`. Tell the user the outbox path and the file names.
 The files stay in the outbox; publishing is the user's step.

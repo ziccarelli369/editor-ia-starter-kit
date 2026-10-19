@@ -10,6 +10,14 @@ The agent reads only the brand named in the project's `project.json`.
 - Voice: three adjectives (for example: direct, warm, no jargon)
 - Language of on-screen text: es
 
+## Offer (required for `goal: sell`)
+
+- Place: city and neighborhood, or "online"
+- Schedule: days and times, one line
+- Offer: the thing a new person gets (free trial class, first month price)
+- How to start: handle, link, or "DM 'PRUEBA'"
+- Proof: one number you can back (members, years, belts)
+
 ## Look
 
 Tokens live in `tokens.css`. Keep both files in sync.

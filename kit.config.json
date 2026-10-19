@@ -27,7 +27,9 @@
     "width": 1080,
     "height": 1920,
     "fps": 30,
-    "brand": "_template"
+    "brand": "_template",
+    "goal": "",
+    "$goal": "personal | sell | grow. Empty means the agent asks per project."
   },
   "outbox": {
     "required": [
@@ -38,5 +40,9 @@
       "caption",
       "srt"
     ]
+  },
+  "music": {
+    "folder": "music",
+    "$comment": "Drop royalty-free tracks you own the rights to in music/ (or brands/<slug>/music/ for one brand). The agent picks from there when no music key is set."
   }
 }

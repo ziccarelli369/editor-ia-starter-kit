@@ -19,6 +19,8 @@ brands/*
 !brands/_template/
 styles/drafts/*
 !styles/drafts/.gitkeep
+music/*
+!music/README.md
 renders/
 **/renders/
 **/assets/
