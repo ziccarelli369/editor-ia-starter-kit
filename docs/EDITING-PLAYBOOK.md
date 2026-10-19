@@ -43,7 +43,7 @@ The editing knowledge lives in the skill files, so you can read it, edit it, and
 
 This is the order the `short-form-edit` and `edit-video` skills follow.
 
-1. **Transcribe** with word-level timestamps (local Whisper through `npx hyperframes transcribe` is the kit's default; ElevenLabs Scribe is the optional paid path).
+1. **Transcribe** with word-level timestamps (local Whisper through `npm run transcribe` is the kit's default; ElevenLabs Scribe is the optional paid path).
 2. **Cut retakes.** Keep the last clean take of each line. Join two takes only where both sides are silent; if the takes run together, play one take whole.
 3. **Cut between phrases, never inside one.** A phrase is what you say in one breath. Remove the dead air between phrases and keep your natural beats (after a comma, after "First,"). Drop a filler only when there is silence on both sides of it: "First, what it does is it transcribes" is one phrase, and cutting "what it does is" clips the word "First". Never speed the voice up.
 4. **Plan the story before any visuals:** hook, proof, the items, the payoff, the CTA. Write it down.

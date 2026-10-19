@@ -61,6 +61,7 @@ Copia `.env.example` a `.env`. Llena una clave solo si vas a usar ese servicio
 - `language`: idioma en que te habla el agente. `es` por defecto.
 - `models.profile`: `solo` (un agente Opus 5.5 hace todo) o `team` (Opus dirige y
   diseña, Haiku 5.5 hace el trabajo mecánico en paralelo, más barato).
+- `transcription.languages`: idioma de tus grabaciones, `["es"]`, `["en"]` o las dos.
 - `transcription.provider`: `whisper` (local, gratis) o `elevenlabs`.
 - `defaults`: tamaño del video y marca por defecto.
 - `outbox`: qué es obligatorio entregar.
@@ -85,8 +86,9 @@ Copy `.env.example` to `.env` only if you want ElevenLabs or Kie.ai.
 Use: put footage in `inbox/`, open Claude Code here, type `/new-video`, choose
 guided or freeform, choose a brand, review drafts, collect the result in `outbox/`.
 
-Settings live in `kit.config.json`: agent language, model profile (`solo` or
-`team`), transcription provider, defaults, and the delivery contract.
+Settings live in `kit.config.json`: agent language, footage languages (`en`, `es`
+or both), model profile (`solo` or `team`), transcription provider, defaults,
+and the delivery contract.
 
 Reverse-engineer a style: download a reference to `inbox/`, say "edit like this
 video". The agent measures it, writes rules with evidence to `styles/drafts/`,

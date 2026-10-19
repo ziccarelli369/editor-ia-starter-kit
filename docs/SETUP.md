@@ -17,6 +17,10 @@ local Whisper default, the optional ElevenLabs and Kie.ai paths, and optional se
 5. Run `npx hyperframes doctor`. It reports Node, FFmpeg, Chrome and whisper-cpp.
    If Chromium is unavailable, follow `npx hyperframes browser --help`.
 6. Copy `.env.example` to `.env`. Fill only the keys your chosen services need.
+7. Open `kit.config.json` and set two languages: `language` (how the agent talks
+   to you, `es` or `en`) and `transcription.languages` (what your footage is in:
+   `["en"]`, `["es"]`, or `["en", "es"]` if you record in both). The agent asks
+   these on its first run if you skip this step.
 
 The repository pins HyperFrames 0.7.109 and GSAP 3.14.2. Keep package-lock.json
 with package.json. Upgrade deliberately, then repeat the render checks.

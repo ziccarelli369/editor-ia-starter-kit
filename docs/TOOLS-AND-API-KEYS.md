@@ -1,8 +1,8 @@
 # Tools, accounts, and API keys
 
 The kit's default for **transcription** is local Whisper through
-`npx hyperframes transcribe <video>`. It needs no key. **ElevenLabs Scribe**
-(`npm run transcribe`) is the optional paid path. **Kie.ai** is optional for
+`npm run transcribe -- <video>`. It needs no key and reads the footage language from `kit.config.json`. **ElevenLabs Scribe**
+(`npm run transcribe:elevenlabs`) is the optional paid path. **Kie.ai** is optional for
 generated video and image assets. Bring your own accounts and credits, and
 configure only what you use.
 
@@ -13,7 +13,7 @@ configure only what you use.
 | Claude Code | Following the agent-guided editing skills | Your own assistant access. External service API credits are separate. |
 | Node.js 22+, npm, Git, FFmpeg with ffprobe, and Chrome/Chromium | Local editing, preview, and rendering | Install on your computer. See [setup](SETUP.md). |
 | HyperFrames and GSAP | Video compositions and animation | Installed by `npm install`. Rendering runs locally. Some templates use online fonts or CDNs; localize selected assets for final rendering. |
-| Local Whisper (`npx hyperframes transcribe`) | The kit's default for speech transcription | No key. Runs on your computer; the first run downloads a model, which needs disk space and local compute. |
+| Local Whisper (`npm run transcribe`) | The kit's default for speech transcription | No key. Runs on your computer; the first run downloads a model, which needs disk space and local compute. |
 | ElevenLabs Scribe | Optional paid transcription | Your own key with `speech_to_text` access and available usage. The included helper sends audio to ElevenLabs. |
 | Kie.ai | Optional generated moving B-roll, images, and other supported assets | Your own account, key, and credits. Existing footage, supplied assets, or motion graphics built in HyperFrames can be used instead. |
 | Your footage, logos, fonts, music, and sound effects | Building the actual edit | Supply assets you can use. The kit does not include a stock-media or music subscription. |
@@ -26,7 +26,7 @@ Choose a provider only when the next stage needs it.
 From the repository root, run:
 
 ```sh
-npx hyperframes transcribe video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4
+npm run transcribe -- video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4
 ```
 
 The command uses whisper.cpp on your computer and sends no audio to a cloud

@@ -14,11 +14,10 @@ All paths below are in the project folder `video-projects/<yyyy-mm-dd>-<slug>/as
 Reuse a word-level transcript that matches this exact recording. Otherwise transcribe with the kit default, local Whisper, then convert it to the kit format:
 
 ```bash
-npx hyperframes transcribe <video>
-node scripts/whisper-to-kit.mjs <transcript.json> <raw.json>
+npm run transcribe -- <video>        # local Whisper, language from kit.config.json, writes <video>.raw.json
 ```
 
-ElevenLabs Scribe (`npm run transcribe -- <video>`) is the optional paid path; it uploads audio and spends credits, so get approval first. Read `docs/TOOLS-AND-API-KEYS.md` for provider setup and the transcript format.
+ElevenLabs Scribe (`npm run transcribe:elevenlabs -- <video>`) is the optional paid path; it uploads audio and spends credits, so get approval first. Read `docs/TOOLS-AND-API-KEYS.md` for provider setup and the transcript format.
 
 Done when: `raw.json` holds `words: [{ text, start, end }]` on the timeline of `raw.mp4`.
 

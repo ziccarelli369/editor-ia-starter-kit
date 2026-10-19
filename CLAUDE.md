@@ -7,7 +7,10 @@ Footage goes into `inbox/`, finals come out of `outbox/`.
 
 If `node_modules/` or `.env` is missing, or `npx hyperframes doctor` fails, the
 kit is not installed. Walk the user through `docs/SETUP.md` in their language
-before anything else. Setup creates no projects and no example videos.
+before anything else. Ask two things and write them to `kit.config.json`:
+the language you speak to them in (`language`), and the language of their
+footage (`transcription.languages`: `["en"]`, `["es"]` or both).
+Setup creates no projects and no example videos.
 
 ## 1. Identity
 
@@ -80,9 +83,9 @@ Before creative work read `MOTION_PHILOSOPHY.md`, the brand's `DESIGN.md` and
 the project's `DESIGN.md`. The brief wins over the brand; the brand wins over
 the kit's defaults.
 
-Transcription: `npx hyperframes transcribe <video>` (local Whisper), then
-`node scripts/whisper-to-kit.mjs` to get the `raw.json` shape the cutting tools
-read. `elevenlabs` in the config switches to `npm run transcribe`. Without
+Transcription: `npm run transcribe -- <video>` (local Whisper; picks the model
+and language from `transcription.languages` and writes the `raw.json` shape the
+cutting tools read). `provider: elevenlabs` switches to `npm run transcribe:elevenlabs`. Without
 `ELEVENLABS_API_KEY` or `KIE_API_KEY`, sound, music, stills and B-roll are
 motion graphics you design in HyperFrames; say so when you fall back.
 Analysis and rendering run on the user's machine; speed depends on its CPU,

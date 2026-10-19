@@ -13,7 +13,7 @@ The starter is landscape; the skill must set the reel's composition dimensions,
 layout, and metadata to 1080x1920 before authoring. Keep all source footage and
 outputs inside the new project.
 
-1. Transcribe with local Whisper (`npx hyperframes transcribe <video>`), the optional ElevenLabs path, or reuse verified word timestamps.
+1. Transcribe with local Whisper (`npm run transcribe -- <video>`, language from `kit.config.json`), the optional ElevenLabs path, or reuse verified word timestamps.
 2. Review mistakes in context and establish one frame-aligned edit decision list.
 3. Explore three opening directions and choose a truthful promise and payoff.
 4. Plan scenes, exact captions, moving footage, and sound cues against retained words.

@@ -12,9 +12,15 @@
   },
   "transcription": {
     "provider": "whisper",
+    "languages": [
+      "es"
+    ],
+    "$languages": "Languages spoken in your footage: [\"es\"], [\"en\"] or [\"en\",\"es\"]. One language picks a fixed Whisper model; both lets Whisper detect per file.",
+    "model": "medium",
+    "model_en": "medium.en",
     "$providers": {
-      "whisper": "npx hyperframes transcribe <video>  (local, free, no key)",
-      "elevenlabs": "npm run transcribe -- <video>  (needs ELEVENLABS_API_KEY)"
+      "whisper": "npm run transcribe -- <video>  (local, free, no key; reads languages above)",
+      "elevenlabs": "npm run transcribe:elevenlabs -- <video>  (needs ELEVENLABS_API_KEY)"
     }
   },
   "defaults": {
@@ -24,7 +30,13 @@
     "brand": "_template"
   },
   "outbox": {
-    "required": ["video", "cover"],
-    "extras": ["caption", "srt"]
+    "required": [
+      "video",
+      "cover"
+    ],
+    "extras": [
+      "caption",
+      "srt"
+    ]
   }
 }

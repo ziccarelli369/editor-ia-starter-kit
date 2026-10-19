@@ -6,11 +6,11 @@ From the repository root run `npm run new-video -- <yyyy-mm-dd>-<slug>`. Put you
 at `video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4`. Preserve this original.
 
 ```sh
-npx hyperframes transcribe video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4
+npm run transcribe -- video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4
 ```
 
 This is the kit's default. It runs local Whisper and needs no key. The optional
-paid path is ElevenLabs: `npm run transcribe -- <video>` uploads audio using your
+paid path is ElevenLabs: `npm run transcribe:elevenlabs -- <video>` uploads audio using your
 key and credits. See
 [provider setup and transcript normalization](TOOLS-AND-API-KEYS.md).
 You can also supply an existing word-level
