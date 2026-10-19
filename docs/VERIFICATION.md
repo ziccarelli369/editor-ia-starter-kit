@@ -54,12 +54,17 @@ local media and rendering QA were performed on Windows.
 Repeat: `npm install`, `npm run check`, `npm test`, `node scripts/check-media.mjs`, then create a
 new starter project and lint, preview, render, and inspect its output.
 
-## Hearing check
+## Caption alignment and hearing check
+
+`node scripts/align-captions.mjs <project-id> --srt <srt>` measures voice
+onsets in the speech band of the final audio (a 6 dB rise that holds for the
+next 100-250 ms, so ticks and clicks do not count) and snaps each cue start to
+the nearest onset within 0.6 s, frame-exact. Whisper word times are estimates
+spread across a chunk and are never used for timing.
 
 `node scripts/hearing-check.mjs <project-id>` re-transcribes the final render
 with local Whisper, aligns the words to the SRT, flags captions that do not
 match what was said (MISMATCH), captions with no speech under them (SILENT),
 cuts that land inside a word (CUT_IN_WORD), and reports loudness. It writes
-`HEARING.md` in the project and exits 1 on FAIL. A steady offset between
-Whisper and the SRT is drift under music, not a caption error; it is removed
-before timing is judged and reported on its own line.
+`HEARING.md` in the project and exits 1 on FAIL. Timing is judged against the
+measured onsets, not against Whisper.

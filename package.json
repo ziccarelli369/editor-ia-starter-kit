@@ -10,6 +10,7 @@
     "deliver": "node scripts/deliver.mjs",
     "projects": "node scripts/projects-index.mjs",
     "hearing": "node scripts/hearing-check.mjs",
+    "align": "node scripts/align-captions.mjs",
     "track-crop": "node scripts/track-crop.mjs",
     "transcribe": "node scripts/transcribe.mjs",
     "transcribe:elevenlabs": "node scripts/transcribe-elevenlabs.mjs",

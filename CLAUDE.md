@@ -112,6 +112,8 @@ per stage: original timestamps belong to the original footage only.
 Before a draft render run `node scripts/preflight.mjs <project>` and
 `npx hyperframes lint`. Review the draft in Studio (browser pane): hero frames,
 transition boundaries, audio joins. Record what you saw in `VERIFY.md`.
-Visual proof is a reviewed render; lint is a structure check. The ear is
-`node scripts/hearing-check.mjs <project>`: run it on the final before
-`deliver`, and fix every MISMATCH and CUT_IN_WORD it reports.
+Visual proof is a reviewed render; lint is a structure check. Caption timing
+is measured, never estimated: `node scripts/align-captions.mjs <project> --srt <srt>`
+snaps every caption to the voice onset in the waveform; Whisper times are for
+words only. The ear is `node scripts/hearing-check.mjs <project>`: run it on
+the final before `deliver`, and fix every MISMATCH and CUT_IN_WORD it reports.

@@ -31,18 +31,26 @@ Done when `renders/cover.png` opens and the hook text is readable at phone size.
 
 Both ship unless the user drops one. Say which extras were dropped.
 
-## 4. Hearing check
+## 4. Align, then hear
 
-You cannot listen; this script is the ear.
+Whisper word times are estimates. Caption times come from the waveform:
 
 ```sh
-node scripts/hearing-check.mjs <project-id> --video renders/final.mp4 --srt renders/subtitles.srt
+node scripts/align-captions.mjs <project-id> --srt renders/subtitles.srt --audio renders/final.mp4
 ```
 
-Read `HEARING.md`. `PASS` goes on. `FAIL` means a caption does not match what
-was said, or a cut lands inside a word: fix the cut or the SRT and re-render.
-A steady offset above 1 s is Whisper drift under music; note it in `VERIFY.md`
-and tell the user to listen to the first 5 s once.
+It snaps every cue to the measured voice onset and prints each shift. Apply
+the same shifts to the on-screen captions in the composition (they share the
+timing map), re-render, and use `renders/subtitles.aligned.srt` as the SRT.
+Then the ear:
+
+```sh
+node scripts/hearing-check.mjs <project-id> --video renders/final.mp4 --srt renders/subtitles.aligned.srt
+```
+
+Read `HEARING.md`. `PASS` goes on. MISMATCH means the caption text is not what
+was said: fix the text. CUT_IN_WORD means a cut lands on speech: move the cut.
+LATE/EARLY after alignment means an on-screen caption was not re-timed.
 
 ## 5. Deliver
 

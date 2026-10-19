@@ -8,6 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { analyze, nearestOnset, levelAt as bandLevel } from './lib/onsets.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -94,16 +95,15 @@ function checkCues(cues, words) {
     if (!heard.length) flags.push('SILENT');
     else if (sim < 0.6) flags.push('MISMATCH');
     return { ...c, heardText, sim, delta, flags };
-  }).map((r, _, all) => {
-    // A steady offset across all cues is Whisper drift (common under music), not a caption error.
-    // Judge timing against the median offset; report the offset itself in the summary.
-    const ds = all.map(x => x.delta).filter(d => d != null).sort((a, b) => a - b);
-    const med = ds.length ? ds[Math.floor(ds.length / 2)] : 0;
-    if (r.delta != null) {
-      const rel = r.delta - med;
-      if (rel > tol) r.flags.push('LATE');
-      if (rel < -tol) r.flags.push('EARLY');
-    }
+  }).map(r => {
+    // Timing is judged against measured voice onsets (scripts/lib/onsets.mjs), never Whisper times.
+    // A cue is on cue when a sustained speech onset sits within `tol` of its start.
+    const onset = nearestOnset(audio.onsets, r.start, 1.0);
+    r.onset = onset;
+    r.delta = onset == null ? null : +(onset - r.start).toFixed(3);
+    if (onset == null) { /* continuous speech, no onset to measure */ }
+    else if (r.delta > tol) r.flags.push('LATE');
+    else if (r.delta < -tol) r.flags.push('EARLY');
     return r;
   });
 }
@@ -116,17 +116,14 @@ function detectCuts() {
 // Whisper stretches word spans across silence, so a cut inside a word span only counts when the
 // speech band (300-3400 Hz) at the cut is as loud as the word itself (within 4 dB of the word's
 // midpoint) and above -35 dB. Drones and sub hits fall outside the band; whooshes mostly do.
-function levelAt(t) {
-  const r = run('ffmpeg', ['-hide_banner', '-ss', String(Math.max(0, t - 0.15)), '-t', '0.3', '-i', wavFile, '-af', 'highpass=f=300,lowpass=f=3400,astats=measure_overall=RMS_level:measure_perchannel=none', '-f', 'null', '-']);
-  const m = r.stderr.match(/RMS level dB:\s*(-?[\d.]+|-inf)/);
-  return m ? Number(m[1]) : -99;
-}
+function levelAt(t) { return bandLevel(audio.frames, t); }
 function checkCuts(cuts, words) {
   return cuts.map(t => {
     const w = words.find(w => w.start < t && t < w.end);
     const level = w ? levelAt(t) : null;
     const wordLevel = w ? levelAt((w.start + w.end) / 2) : null;
-    const inWord = w && level > -35 && level >= wordLevel - 4;
+    // The word itself must be audible where Whisper placed it; a silent span is a stretched estimate.
+    const inWord = w && wordLevel > -35 && level > -35 && level >= wordLevel - 4;
     return { t, word: w?.text.trim() ?? '', level, wordLevel, flags: inWord ? ['CUT_IN_WORD'] : [] };
   });
 }
@@ -146,20 +143,19 @@ function report(cueRes, cutRes, loud) {
   const counts = {};
   for (const r of [...cueRes, ...cutRes]) for (const f of r.flags) counts[f] = (counts[f] ?? 0) + 1;
   const timing = (counts.LATE ?? 0) + (counts.EARLY ?? 0);
-  const ds = cueRes.map(r => r.delta).filter(d => d != null).sort((a, b) => a - b);
-  const median = ds.length ? ds[Math.floor(ds.length / 2)] : null;
+  const measured = cueRes.filter(r => r.delta != null).length;
   // Whisper word times are unreliable under a music bed (it spreads words evenly). When the
   // steady offset is above 1 s, timing is reported but not judged.
-  const timingJudged = median == null || Math.abs(median) <= 1;
-  const pass = !counts.MISMATCH && !counts.CUT_IN_WORD && (!timingJudged || timing <= 0.1 * cueRes.length);
+  const timingJudged = true;
+  const pass = !counts.MISMATCH && !counts.CUT_IN_WORD && timing <= 0.1 * cueRes.length;
   const problems = [
     ...cueRes.filter(r => r.flags.length).map(r => `cue ${r.index} @${fmt(r.start)}s ${r.flags.join('+')}: "${r.text}" heard "${r.heardText}"`),
     ...cutRes.filter(r => r.flags.length).map(r => `cut @${fmt(r.t)}s CUT_IN_WORD "${r.word}" (speech band ${fmt(r.level)} dB at cut, ${fmt(r.wordLevel)} dB in word)`),
   ];
   const countStr = ['MISMATCH', 'LATE', 'EARLY', 'SILENT', 'CUT_IN_WORD'].map(k => `${k} ${counts[k] ?? 0}`).join(' · ');
   const summary = [
-    `Verdict: ${pass ? 'PASS' : 'FAIL'} — ${cueRes.length} cues, ${cutRes.length} cuts · ${countStr} · timing ${timing}/${cueRes.length} ${timingJudged ? '(limit 10%)' : '(not judged: Whisper drift above 1 s)'}`,
-    `Steady offset: ${fmt(median)} s between Whisper and the SRT (removed before judging LATE/EARLY; above 1 s, a person should listen to the first 5 s once)`,
+    `Verdict: ${pass ? 'PASS' : 'FAIL'} — ${cueRes.length} cues, ${cutRes.length} cuts · ${countStr} · timing ${timing}/${cueRes.length} (limit 10%, ${measured} cues measured against voice onsets)`,
+    `Timing source: ${audio.onsets.length} voice onsets measured from the waveform; a flagged cue is off by more than ${tol}s. Fix with: node scripts/align-captions.mjs ${id} --srt <srt>`,
     `Loudness: integrated ${fmt(loud.lufs)} LUFS, true peak ${fmt(loud.tp)} dBTP`,
     ...(pass ? [] : problems.slice(0, 3).map(p => `- ${p}`)),
   ].join('\n');
@@ -177,6 +173,7 @@ function report(cueRes, cutRes, loud) {
 }
 
 const words = transcribe();
+const audio = analyze(wavFile);
 const cueRes = checkCues(parseSrt(readFileSync(srtPath, 'utf8')), words);
 const cutRes = checkCuts(detectCuts(), words);
 const { pass, summary, md } = report(cueRes, cutRes, loudness());
