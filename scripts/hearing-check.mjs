@@ -183,7 +183,7 @@ const dropHallucinations = ws => {
     const w = ws[i];
     if (!HALLUCINATED.test(w.text)) { out.push(w); continue; }
     const head = w.text.split(/[¡¿]/)[0].trim();
-    if (head && !HALLUCINATED.test(head)) out.push({ ...w, text: head });
+    if (head && !HALLUCINATED.test(head)) out.push({ ...w, text: head, end: Math.min(w.end, w.start + 0.6) });
     while (i + 1 < ws.length && ws[i + 1].start - ws[i].end < 1.0) i++;
   }
   return out;
