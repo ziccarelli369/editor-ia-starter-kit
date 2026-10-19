@@ -82,5 +82,5 @@ Motion is half the identity, so previews are short MP4 loops (2-3s) + a poster P
 
 ## Notes
 
-- Nate's `style-templates/` (dark-graph-paper, left-glass-popout) are **reference only** — not part of this library. Borrow ideas, don't port wholesale.
+- The upstream `style-templates/` (dark-graph-paper, left-glass-popout) are **reference only** — not part of this library. Borrow ideas, don't port wholesale.
 - `MOTION_PHILOSOPHY.md` and `.claude/skills/hyperframes/` (palettes, transitions, typography, visual-styles) are shared craft resources every style can draw on.

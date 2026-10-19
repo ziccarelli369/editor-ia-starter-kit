@@ -1,6 +1,6 @@
 ---
 name: motion-showreel
-description: Design and build a 10-30 second motion-design showreel or brand reel in the style of Nate's Opus 5.5 "CLAUDE / MOTION REEL": one brand motif transformed through labeled craft chapters, a persistent HUD, cuts locked to a 120-130 BPM grid, a sub-second flurry, and a held logo lockup that answers the opening. Use when asked for a showreel, sizzle reel, brand reel, motion reel, "a reel like the Opus one", "show off motion design for <brand>", a 15-second brand film cut to music, or to study why a reference reel works and rebuild that energy for another brand.
+description: Design and build a 10-30 second motion-design showreel or brand reel in the style of the reference Opus 5.5 "CLAUDE / MOTION REEL": one brand motif transformed through labeled craft chapters, a persistent HUD, cuts locked to a 120-130 BPM grid, a sub-second flurry, and a held logo lockup that answers the opening. Use when asked for a showreel, sizzle reel, brand reel, motion reel, "a reel like the Opus one", "show off motion design for <brand>", a 15-second brand film cut to music, or to study why a reference reel works and rebuild that energy for another brand.
 ---
 
 # Motion Showreel

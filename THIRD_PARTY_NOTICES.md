@@ -1,7 +1,7 @@
 # Resource provenance
 
-editor-ia-starter-kit is a derivative of Herk Edit Kit by Nate Herk
-(https://github.com/nateherkai/herk-edit-kit, MIT). The original kit's example
+editor-ia-starter-kit is a derivative of an MIT-licensed teaching kit; its
+copyright notice is kept in `LICENSE` as that license requires. The original kit's example
 media and AIS brand assets are not included. The reverse-engineer-style skill
 borrows its evidence method (observed / inferred / unknown claims, ledgers,
 fail-closed verification) from REA by morluto (https://github.com/morluto/rea, MIT).

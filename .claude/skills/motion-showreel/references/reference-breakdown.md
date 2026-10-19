@@ -1,6 +1,6 @@
 # Reference breakdown: the Opus 5.5 "CLAUDE / MOTION REEL"
 
-Source: a 15-second motion reel made by Opus 5.5 for Nate Herk (September 2026). 1920x1080, 60fps, 15.06s, 900 frames. Analyzed with `scripts/analyze-reference.mjs` (6fps contact sheets, per-frame luminance difference, audio RMS, and onsets).
+Source: a 15-second motion reel made by Opus 5.5 for a creator's brand (September 2026). 1920x1080, 60fps, 15.06s, 900 frames. Analyzed with `scripts/analyze-reference.mjs` (6fps contact sheets, per-frame luminance difference, audio RMS, and onsets).
 
 ## Measured facts
 

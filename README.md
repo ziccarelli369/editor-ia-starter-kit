@@ -94,8 +94,8 @@ and offers a 3-second test. Promote to `styles/core/` by hand.
 
 ## Credits and licenses
 
-Built on [Herk Edit Kit](https://github.com/nateherkai/herk-edit-kit) by Nate
-Herk (MIT, plus the kit use permission in `licenses/`) and
+Built on an MIT-licensed editing kit (see `LICENSE` and the use permission in
+`licenses/`) and
 [HyperFrames](https://github.com/heygen-com/hyperframes) by HeyGen (Apache-2.0).
 The reverse-engineering method borrows from [REA](https://github.com/morluto/rea)
 (MIT). See `LICENSE`, `THIRD_PARTY_NOTICES.md` and `licenses/`.

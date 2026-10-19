@@ -1,8 +1,8 @@
-# Editing playbook: how Nate's videos get edited with AI
+# Editing playbook: how short videos get edited with AI
 
-Nate's reels, Shorts, and explainers are now edited by an AI agent (Claude Code) running skills like the ones in this kit. Nate records himself talking, hands over the file, and the agent cuts it, captions it, finds the B-roll, builds the motion graphics, mixes the music and sound effects, and checks its own work.
+The reels, Shorts, and explainers this playbook comes from are edited by an AI agent (Claude Code) running skills like the ones in this kit. The creator records himself talking, hands over the file, and the agent cuts it, captions it, finds the B-roll, builds the motion graphics, mixes the music and sound effects, and checks its own work.
 
-This page explains how that works and what we learned building it. The numbers come from studying Nate's own top reels frame by frame and from dozens of edit rounds where he gave notes.
+This page explains how that works and what we learned building it. The numbers come from studying one creator's top reels frame by frame and from dozens of edit rounds where he gave notes.
 
 - [The loop that makes it work](#the-loop-that-makes-it-work)
 - [The edit, step by step](#the-edit-step-by-step)
@@ -16,7 +16,7 @@ This page explains how that works and what we learned building it. The numbers c
 
 ## The loop that makes it work
 
-The edits got good because every note Nate gave became a permanent rule in a skill. He never had to give the same note twice.
+The edits got good because every note the creator gave became a permanent rule in a skill. He never had to give the same note twice.
 
 1. **Record and hand over the file.** No editing app.
 2. **The agent edits and renders a draft.**
@@ -26,7 +26,7 @@ The edits got good because every note Nate gave became a permanent rule in a ski
 
 Real examples of notes that became rules:
 
-| Nate's note | What the skill does now |
+| Creator's note | What the skill does now |
 |---|---|
 | "White captions on a bright website are unreadable." | Every caption sits in the same dark box, and a contrast check measures the pixels behind each one. |
 | "AI-generated B-roll always beats AI-generated images." | An AI still image used as B-roll is a build error. Stills only become first frames for AI video. |
@@ -54,7 +54,7 @@ This is the order the `short-form-edit` and `edit-video` skills follow.
 
 ## House reel style (the numbers)
 
-Measured on Nate's 27 top Instagram Reels (March to September 2026). Use them as a starting point for your own style, not as law.
+Measured on 27 top Instagram Reels of one creator (March to September 2026). Use them as a starting point for your own style, not as law.
 
 **Pacing**
 - Speech starts within 0.1 s. The file ends right after the last word. No intro or outro card.
@@ -140,7 +140,7 @@ The agent checks its own work before you see it:
 - **The first second:** read the first 2.5 s frame by frame and the first frame of every face shot. Nothing covers the mouth.
 - **Loudness and true peak** on the delivered file.
 - **AI watch tests** (a video model watching the render) are useful for candidate problems, but they are noisy and hallucinate effects. Verify every complaint on real frames before acting. A persona panel ("would this viewer finish? where did they stop?") is more useful than a 1 to 10 score.
-- **Your review is the final gate.** Nate caught a lip-sync drift that every automated check missed.
+- **Your review is the final gate.** The creator caught a lip-sync drift that every automated check missed.
 
 ## Lessons that cost us time
 
