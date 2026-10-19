@@ -178,9 +178,10 @@ const HALLUCINATED = /suscr[ií]b|canal!|amara\.org|subt[ií]tulos|gracias por v
 const dropHallucinations = ws => {
   const text = ws.map(w => w.text).join(' ');
   if (!HALLUCINATED.test(text)) return ws;
-  // Drop the matching words and every word within 1.5 s of them: the whole invented phrase.
+  // An invented phrase is appended after real speech, so drop the matching word and the words
+  // that follow it within 1.5 s; the real words before it stay.
   const bad = ws.filter(w => HALLUCINATED.test(w.text)).map(w => w.start);
-  return ws.filter(w => !bad.some(t => Math.abs(w.start - t) <= 1.5));
+  return ws.filter(w => !bad.some(t => w.start >= t - 0.05 && w.start - t <= 1.5));
 };
 const words = dropHallucinations(transcribe());
 const audio = analyze(wavFile);
