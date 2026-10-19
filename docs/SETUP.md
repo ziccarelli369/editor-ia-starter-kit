@@ -11,7 +11,8 @@ local Whisper default, the optional ElevenLabs and Kie.ai paths, and optional se
 3. Install whisper.cpp for free local transcription: on Windows download
    `whisper-bin-x64.zip` from https://github.com/ggml-org/whisper.cpp/releases,
    unzip it and add the folder to PATH; on macOS `brew install whisper-cpp`.
-   Or set `WHISPER_PATH` to the `whisper-cli` binary.
+   Or set `HYPERFRAMES_WHISPER_PATH` to the `whisper-cli` binary. Recent whisper.cpp
+   releases ship no Windows build; v1.8.3 does (`whisper-blas-bin-x64.zip`).
 4. Run `npm install` in the repository root.
 5. Run `npx hyperframes doctor`. It reports Node, FFmpeg, Chrome and whisper-cpp.
    If Chromium is unavailable, follow `npx hyperframes browser --help`.

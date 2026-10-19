@@ -84,7 +84,8 @@ Before creative work read `MOTION_PHILOSOPHY.md`, the brand's `DESIGN.md`, and
 the project's `DESIGN.md`. The brand and the project brief win over defaults.
 
 Transcription: `npx hyperframes transcribe <video>` (local Whisper) unless the
-config says `elevenlabs`. Without `ELEVENLABS_API_KEY` or `KIE_API_KEY`, the
+config says `elevenlabs`. Then `node scripts/whisper-to-kit.mjs` to get the
+`raw.json` shape the cutting tools read. Without `ELEVENLABS_API_KEY` or `KIE_API_KEY`, the
 fallback for sound, music, stills and B-roll is motion graphics designed by the
 agent in HyperFrames. Say which fallback was used. Analysis and rendering run on
 the user's machine; speed depends on its CPU, ffmpeg and Chrome.

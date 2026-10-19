@@ -10,6 +10,7 @@
     "deliver": "node scripts/deliver.mjs",
     "projects": "node scripts/projects-index.mjs",
     "transcribe": "node scripts/transcribe-elevenlabs.mjs",
+    "whisper-to-kit": "node scripts/whisper-to-kit.mjs",
     "validate-beats": "node scripts/validate-beat-sync.mjs",
     "preflight": "node scripts/preflight.mjs",
     "setup": "node scripts/setup.mjs",

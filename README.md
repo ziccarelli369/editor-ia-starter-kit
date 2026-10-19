@@ -12,7 +12,7 @@ English below.
 - FFmpeg en el PATH: https://ffmpeg.org/download.html
 - Chrome o Chromium (HyperFrames lo usa para renderizar).
 - whisper.cpp para transcribir gratis en tu máquina: https://github.com/ggml-org/whisper.cpp/releases
-  (en Windows descarga `whisper-bin-x64.zip`, descomprime y agrega la carpeta al PATH;
+  (en Windows descarga `whisper-blas-bin-x64.zip` de la versión v1.8.3, la última con binarios para Windows, descomprime y agrega `Release` al PATH o apunta `HYPERFRAMES_WHISPER_PATH` al `whisper-cli.exe`;
   en Mac `brew install whisper-cpp`). `npx hyperframes doctor` te dice si lo encuentra.
 
 Sin ninguna clave de API el kit funciona completo: transcripción local con
@@ -79,7 +79,7 @@ de cada regla, y te ofrece una prueba de 3 segundos. Si te gusta, lo mueves a
 A starter kit for short-form video editing (Reels, Shorts) with Claude Code and
 HyperFrames. Drop footage in `inbox/`, talk to the agent, pick up finals in `outbox/`.
 
-Install: Node 22+, FFmpeg, Chrome, and whisper.cpp (`whisper-cli` on PATH, or `WHISPER_PATH`). Then `npm install` and `npx hyperframes doctor`.
+Install: Node 22+, FFmpeg, Chrome, and whisper.cpp (`whisper-cli` on PATH, or `HYPERFRAMES_WHISPER_PATH`). Then `npm install` and `npx hyperframes doctor`.
 Copy `.env.example` to `.env` only if you want ElevenLabs or Kie.ai.
 
 Use: put footage in `inbox/`, open Claude Code here, type `/new-video`, choose

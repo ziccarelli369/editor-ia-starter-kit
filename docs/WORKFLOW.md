@@ -15,8 +15,9 @@ key and credits. See
 [provider setup and transcript normalization](TOOLS-AND-API-KEYS.md).
 You can also supply an existing word-level
 JSON transcript with `words: [{text, start, end}]` and `audio_duration_secs`.
-The next step reads `assets/raw.json` in that format. Normalize the Whisper
-output to that file before you cut.
+The next step reads `assets/raw.json` in that format. Convert the Whisper
+output with `node scripts/whisper-to-kit.mjs assets/transcript.json assets/raw.json`
+before you cut.
 
 ## 2. Remove dead air
 
