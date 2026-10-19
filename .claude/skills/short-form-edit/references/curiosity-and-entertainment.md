@@ -26,6 +26,26 @@ invent a percentage of viewers convinced. Check again on the encoded export.
    Judge story before shadows. Recut speech only when needed and preserve its
    meaning; rebuild all timing-dependent artifacts after any EDL change.
 
+## Loop limits
+
+Default to one main loop and at most one secondary loop open at once. Close the
+promised lesson before the CTA; a comment request is never the only answer. A
+recurring object alone is not an open loop: establish what is missing, then
+visibly change that state.
+
+## Rhythm and duplication
+
+Vary rhythm by sequence: a short cluster of discoveries, a brief anticipation,
+then a payoff. Keep word timing fixed while animation speed and scale vary. The
+1-2 second event guideline is a diagnostic, not a metronome or a licence for
+filler. Let the speaker's expression carry a conviction beat. For every shot,
+record the viewer's expectation and the new information or consequence it supplies.
+
+Narration and captions carry the exact words; graphics usually show the example,
+relationship, evidence, or consequence. Cut a third restatement as a headline
+unless deliberate emphasis earns it. Prefer a specific product action or source
+detail to generic typing footage. Build the payoff from real results only.
+
 ## Loop ledger
 
 Save OPEN-LOOPS.json as an array. Each item has:
@@ -72,7 +92,8 @@ stills/strips and signal analysis are available, use those honestly: inspect
 chronological 0.25-0.5 second samples plus contiguous action strips, audit every
 loop state, and do not call successful automated playback a listening/viewing pass.
 
-Write timestamped weaknesses and decisions in ENTERTAINMENT-REVIEW.md. Compare
+Write timestamped weaknesses and decisions in ENTERTAINMENT-REVIEW.md: attention
+drops, predictable sequences, unresolved promises, and reading overload. Compare
 adjacent shots without headings; remove generic footage and repeated headline
 copy that add no information. Distinguish audience measurements from editorial
 judgment. If future user-provided retention data exists, relate drop-offs to exact

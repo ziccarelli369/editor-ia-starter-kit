@@ -1,47 +1,45 @@
 ---
 name: apply-style
-description: Apply a reverse-engineered editing style from styles/core or styles/drafts to the current project. Use when the user names a style, says "edítalo como", "con el estilo de", or project.json has a style set. Loads the style's rules before any editing skill runs.
+description: Apply a reverse-engineered editing style from styles/ to a project. Use when the user names a style, says "con el estilo de", or project.json sets style. Loads the style's rules before the editing skill plans.
 ---
 
 # Apply a style
 
-A style is "how it is cut": pacing, hook timing, caption behavior, transitions,
-sound. A brand is "what it looks like". The style never overrides brand tokens.
+A style is how the video is cut. A brand is how it looks. The style's rules
+feed the plan; the brand's tokens stay as they are.
 
-## 1. Find it
+## 1. Find
 
 List `styles/core/` then `styles/drafts/`. Match the user's words to a folder
-name or to the `summary` in its `style.json`. If more than one matches, ask.
-If the user asks for a style that does not exist, offer `reverse-engineer-style`.
+name or a `summary` in `style.json`; ask when two match. A style that does not
+exist is an offer to run `reverse-engineer-style`.
 
-Record the choice in `project.json` as `"style": "<tier>/<slug>"`.
+Record `"style": "<tier>/<slug>"` in `project.json`.
 
-## 2. Load it
+## 2. Load
 
-Read, in this order:
+Read in order: `SKILL.md` (rules), `style.json` (numbers), `ledger.md`.
+In the ledger, `observed` rows are facts, `inferred` rows are hypotheses,
+`unknown` rows are gaps. Tell the user when a rule they want rests on an
+inferred row.
 
-1. `styles/<tier>/<slug>/SKILL.md`: the rules.
-2. `styles/<tier>/<slug>/style.json`: the measured numbers.
-3. `styles/<tier>/<slug>/ledger.md`: only the rows marked `observed`. Rows marked
-   `inferred` are hypotheses; `unknown` rows are gaps. Say so if a rule the user
-   wants depends on an inferred row.
+## 3. Carry into the plan
 
-## 3. Use it
+| style.json | Sets |
+| --- | --- |
+| `pacing.cut_median_s`, `pacing.cut_p90_s` | cut rhythm |
+| `hook.first_cut_s`, `hook.text_on_screen_s` | the opening |
+| `captions` | words per line, position, highlight |
+| `transitions` | the allowed moves, this list only |
+| `sound` | music presence, SFX density, where hits land |
 
-Carry the rules into the editing skill's plan (`plan.json`, `DESIGN.md`):
+Precedence: brief over brand, brand over style. Name each rule you dropped and
+why.
 
-- `pacing.cut_median_s` and `pacing.cut_p90_s` set the cut rhythm.
-- `hook.first_cut_s` and `hook.text_on_screen_s` set the opening.
-- `captions` sets words per line, position and highlight behavior.
-- `transitions` lists the allowed moves. Use nothing outside the list.
-- `sound` sets music presence, SFX density and where hits land.
-
-Where the style and the brand conflict (a font, a color), the brand wins.
-Where the style and the user's brief conflict, the brief wins. Say which rule
-you dropped and why.
+Done when `plan.json` or `DESIGN.md` carries every row above.
 
 ## 4. Drafts
 
-A style from `styles/drafts/` has had one test render at most. Tell the user it
-is a draft. After the project, ask whether to promote it:
-`git mv styles/drafts/<slug> styles/core/<slug>`.
+A `styles/drafts/` style has had one test render at most; say so. After the
+project, offer promotion: `git mv styles/drafts/<slug> styles/core/<slug>`,
+run by the user.

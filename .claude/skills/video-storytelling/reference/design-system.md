@@ -106,17 +106,9 @@ thresholds measure text volume, not legibility — see `qa-legibility.mjs`.
 - The item's state is the story: rows fill, the score bar moves, the border
   changes colour. A viewer follows the section by watching one chip.
 
-## Verification gates — all must pass
+## Verification gates
 
-```bash
-node scripts/qa-tokens.mjs                       # 0 off-system
-node scripts/qa-no-crossfade.mjs                 # 0 violations
-node scripts/qa-legibility.mjs renders/x.mp4     # no "NOTHING IS LIT"
-node scripts/qa-exposure.mjs renders/x.mp4 assets/edit-master.mp4 plan/cover-seams.json
-"../../node_modules/.bin/hyperframes" lint       # 0 errors 0 warnings
-ffmpeg -hide_banner -i renders/x.mp4 -vf blackdetect=d=0.03:pix_th=0.06 -f null -   # 0
-```
-Plus: read a 960x540 downscale of every major beat. Gates do not replace looking.
+The gate commands and the looking checks are in [verification.md](verification.md).
 
 ## Section-1 result (the benchmark)
 

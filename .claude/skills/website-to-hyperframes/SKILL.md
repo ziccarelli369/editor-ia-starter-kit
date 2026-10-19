@@ -1,7 +1,6 @@
 ---
 name: website-to-hyperframes
-description: |
-  Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says "capture this site", "turn this into a video", "make a promo from my site", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL — this is the skill to use.
+description: Website-to-video workflow for HyperFrames. Use when a URL or website is the source of a video, such as a promo, social ad, product tour, or launch teaser. Captures the site in the Claude desktop browser pane, then scripts, voices, and builds the video.
 ---
 
 # Website to HyperFrames
@@ -9,12 +8,6 @@ description: |
 Capture a website, then produce a professional video from it.
 
 The capture uses the built-in browser pane of the Claude desktop app (`mcp__Claude_Browser__*` tools). You see screenshots visually but cannot save them to disk; the capture result is a text file, `site-capture.md`.
-
-Users say things like:
-
-- "Capture https://... and make me a 25-second product launch video"
-- "Turn this website into a 15-second social ad for Instagram"
-- "Create a 30-second product tour from https://..."
 
 The workflow has 7 steps. Each produces an artifact that gates the next.
 

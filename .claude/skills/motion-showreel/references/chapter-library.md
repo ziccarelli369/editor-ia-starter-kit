@@ -1,6 +1,6 @@
 # Chapter library
 
-Each entry covers the technique, how the reference used it, how to build it seek-safe in HyperFrames (GSAP on one paused timeline), and brand swaps. Pick 5-7 and chain them so each one's out-transform is the next one's in-transform.
+Each entry covers the technique, how the reference used it, how to build it seek-safe in HyperFrames (GSAP on one paused timeline), and brand swaps. Pick 5-7 and chain them so each one's out-transform is the next one's in-transform. Name each chapter in the brand's own words when it has them (YouTube has "chapters" and an "end screen").
 
 ## Physics: squash and stretch
 - **Reference:** a red dot falls onto a tick ruler and bounces three times, with a ground ellipse and a POS/SCL/VEL readout on a leader line.
@@ -28,6 +28,7 @@ Each entry covers the technique, how the reference used it, how to build it seek
 - **Reference:** an iridescent chrome torus SDF-morphs into blobs and a cube, with a parameter readout (SDF, SMOOTH UNION, MORPH, IOR, ROUGH), and pushes into the lens.
 - **Build:** a generated photoreal still (seedream i2i from the logo) plus a Kling camera move, sped up about 3x and re-encoded at 60fps all-intra. For a second material, cut or crossfade to another material of the same object (lacquer to chrome, silver to gold). Put a readout on a leader line with numbers that count up in `onUpdate`. The out push is `scale 1 -> 3` plus `blur 0 -> 20px` over the last half beat, with a hard cut on the beat.
 - **Swaps:** a creator award plaque (YouTube), a bottle or can, a device, a logo sculpture.
+- **Generating the still and the move (paid, Kie.ai):** run `kie.mjs image --ref <logo.png>` (Seedream image-to-image keeps the silhouette), then `kie.mjs video --image <still>` for a 5s Kling camera move. Kling returns 24fps: speed it up and re-encode at 60fps all-intra (the command is in the header of `kie.mjs`). Without `KIE_API_KEY`, build the hero object as a motion graphic in HyperFrames (layered CSS or canvas shading on the motif) and say so.
 
 ## Easing graph
 - **Reference:** a cubic-bezier(0.83, 0, 0.17, 1) curve on paper, with a ball riding it and leaving onion-skin ghosts.
@@ -43,3 +44,7 @@ Each entry covers the technique, how the reference used it, how to build it seek
 - **Reference:** the wordmark resolves from noise with bloom, a rule draws beneath it, two mono subtitles type on with a red block cursor, the motif lands as the period with a squash and a ground ellipse, and the tagline fades in last at low opacity.
 - **Build:** the noise canvas fades as the wordmark's `filter: blur(20px) -> 0` and `opacity` rise over 12 frames, and bloom is a `text-shadow` or `drop-shadow`. The rule is `scaleX 0 -> 1` from the left. For typing, reveal characters with a `steps()` tween on a width mask, or `tl.set` per character, and a blinking block via `tl.set` toggles every 16 frames. The motif fall reuses the physics chapter's contact keys.
 - **Swaps:** the motif becomes the logo's own element (a scrubber dot becomes the play button, a dot becomes the i's tittle, a drop becomes the O).
+
+## Example mapping: a 15s YouTube reel
+
+The skill's first test: the red scrubber dot bounces on a progress bar, scrubs into a laser, types "broadcast yourself" into a rebuilt search bar, becomes eight dots, then a feed of real thumbnails, and bursts from a like button into particles that spell a verified stat. It becomes a lacquer play button and a Silver Creator Award, runs a flurry of Subscribe, Shorts, LIVE, Skip, and "+10 seconds", and lands as the play icon in the logo. Use it as a model for mapping chapters to a brand's native objects, not as a template to copy.

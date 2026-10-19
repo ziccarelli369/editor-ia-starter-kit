@@ -1,6 +1,6 @@
 ---
 name: gsap
-description: GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use when writing GSAP animations in HyperFrames compositions.
+description: GSAP animation reference for HyperFrames compositions. Use when writing or debugging tweens, eases, staggers, timelines and the position parameter, labels, nested timelines, or animation performance.
 ---
 
 # GSAP
@@ -21,7 +21,7 @@ Always use **camelCase** property names (e.g. `backgroundColor`, `rotationX`).
 - **ease** — `"power1.out"` (default), `"power3.inOut"`, `"back.out(1.7)"`, `"elastic.out(1, 0.3)"`, `"none"`.
 - **stagger** — number `0.1` or object: `{ amount: 0.3, from: "center" }`, `{ each: 0.1, from: "random" }`.
 - **overwrite** — `false` (default), `true`, or `"auto"`.
-- **repeat** — number or `-1` for infinite. **yoyo** — alternates direction with repeat.
+- **repeat** — number of repeats (HyperFrames needs a finite count; see the hyperframes skill). **yoyo** — alternates direction with repeat.
 - **onComplete**, **onStart**, **onUpdate** — callbacks.
 - **immediateRender** — default `true` for from()/fromTo(). Set `false` on later tweens targeting the same property+element to avoid overwrite.
 
@@ -39,7 +39,7 @@ Prefer GSAP's **transform aliases** over raw `transform` string:
 | `skewX`, `skewY`            | skew                |
 | `transformOrigin`           | transform-origin    |
 
-- **autoAlpha** — prefer over `opacity`. At 0: also sets `visibility: hidden`.
+- **autoAlpha** — `opacity` plus `visibility: hidden` at 0. In HyperFrames compositions, animate `opacity` (the framework owns `visibility`).
 - **CSS variables** — `"--hue": 180`.
 - **svgOrigin** _(SVG only)_ — global SVG coordinate space origin. Don't combine with `transformOrigin`.
 - **Directional rotation** — `"360_cw"`, `"-170_short"`, `"90_ccw"`.
@@ -196,16 +196,8 @@ Pause or kill off-screen animations.
 
 ## Best Practices
 
-- Use camelCase property names; prefer transform aliases and autoAlpha.
 - Prefer timelines over chaining with delay; use the position parameter.
 - Add labels with `addLabel()` for readable sequencing.
 - Pass defaults into timeline constructor.
 - Store tween/timeline return value when controlling playback.
-
-## Do Not
-
-- Animate layout properties (width/height/top/left) when transforms suffice.
-- Use both svgOrigin and transformOrigin on the same SVG element.
-- Chain animations with delay when a timeline can sequence them.
-- Create tweens before the DOM exists.
-- Skip cleanup — always kill tweens when no longer needed.
+- Create tweens after their target elements exist in the DOM.

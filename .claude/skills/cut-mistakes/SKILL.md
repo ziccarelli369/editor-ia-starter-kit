@@ -1,72 +1,57 @@
 ---
 name: cut-mistakes
-description: "Agent 2 of the video editing pipeline. Finds and removes spoken mistakes — stutters, repeated words, false starts, and retakes (re-recorded lines) — from a talking-head recording. Use after cut-silences, when asked to cut mistakes, remove stutters / repeats / filler restarts, clean up flubs, or keep the best take. Works review-gated: it proposes every cut with context and a reason for approval, then renders only the approved cuts via ffmpeg. Requires a word-level transcript."
+description: Mistake removal for a talking-head recording, review-gated. Use after cut-silences, or when asked to cut stutters, repeated words, false starts, or retakes, or to keep the best take. Proposes each cut with context, then renders only approved cuts.
 ---
 
-# Cut Mistakes & Repeats (Pipeline Agent 2)
+# Cut mistakes
 
-Second step of the automated edit, run after **cut-silences**. It removes the things a human editor cuts on a second pass: stutters ("the the", "I- I-"), immediately repeated words, false starts (an abandoned phrase that restarts), and retakes (a line re-recorded — keep the clean take, drop the botched one).
+The second stage of the edit pipeline, after [cut-silences](../cut-silences/SKILL.md). It removes what a human editor cuts on a second pass: stutters ("the the", "I- I-"), repeated words, false starts (an abandoned phrase that restarts), and retakes (a re-recorded line: keep the clean take).
 
-Deciding what counts as a mistake is **judgment, not a formula** — emphatic repetition ("never, never") and rhetorical doubling ("the first piece is, is this…") look identical to a stutter mechanically. So this agent is **review-gated by default**: it surfaces candidates with full context; the agent (and the user) decide; only approved cuts are rendered.
+A mistake is a **judgment**, not a pattern. Emphatic repetition ("never, never") and rhetorical doubling ("the piece is, is this") look like stutters to the detector. So every cut passes a review gate before it renders.
 
-## When to use
+Timestamps follow the timeline rule in [cut-silences](../cut-silences/SKILL.md#timeline-rule): the input is `raw.silence-transcript.json`, so cut times are on the silenced timeline. All paths are in `video-projects/<yyyy-mm-dd>-<slug>/assets/`.
 
-- "cut the mistakes", "remove stutters / repeats", "clean up the flubs", "keep the best take", "cut false starts"
-- As the second stage of the master edit workflow, on cut-silences' output.
-
-## The three-part flow
-
-### 1. Find candidates (mechanical)
+## 1. Find candidates
 
 ```bash
 node .claude/skills/cut-mistakes/scripts/find-cut-candidates.mjs \
-  <silence-transcript.json> --out-dir video-projects/<slug>/assets
+  raw.silence-transcript.json --out-dir <assets>
 ```
 
-Input is normally Agent 1's `<stem>.silence-transcript.json`, so cuts land on the already-silenced timeline. Writes:
+It writes `raw.cut-candidates.json` (type, confidence, proposed `cut` range, `removes` and `keeps` text, context, recommendation) and a readable `raw.cut-candidates.md`. Types: `stutter` (immediate word repeat), `retake` (near-duplicate segment by Jaccard similarity), `false_start` (short abandoned phrase).
 
-- `<stem>.cut-candidates.json` — structured candidates (type, confidence, proposed `cut` range, `removes`/`keeps` text, context, recommendation)
-- `<stem>.cut-candidates.md` — readable proposal
+Done when: both files exist.
 
-Candidate types: `stutter` (immediate word repeat), `retake` (duplicate/near-duplicate segment via Jaccard similarity), `false_start` (short abandoned phrase that restarts).
+## 2. Review
 
-### 2. Review (the gate — REQUIRED)
+Read each candidate's `removes` and `context` against the speech, and decide cut or keep. Treat `recommend` as a hint. Read the whole transcript too: the detector misses some retakes, so a zero-candidate report proves nothing. Keep emphatic repetition, a copula before a question, and lists.
 
-Read each candidate **in context** and decide keep-or-cut. The mechanical detector cannot tell intentional emphasis/rhetoric from a real flub, so do not trust `recommend` blindly — read `removes` + `context`. Common false positives: emphatic repetition ("it's never, never hands-off"), copula-then-question ("the piece is, is this…"), listing.
-
-Present the candidates to the user with a recommendation per item; collect approvals. Write the approved cuts to a file:
+Present each candidate to the user with your recommendation, then write the approved cuts:
 
 ```json
-{ "cuts": [ { "start": 100.93, "end": 101.06, "reason": "I- false start" }, ... ] }
+{ "cuts": [ { "start": 100.93, "end": 101.06, "reason": "I- false start" } ] }
 ```
 
-(`start`/`end` in seconds on the input transcript/video timeline. You can widen a candidate's range — e.g. for a retake, cut from the botched take's start to the clean restart.)
+You can widen a range: for a retake, cut from the start of the bad take to the clean restart. An empty `cuts` array is a valid result; a clean delivery needs no cuts.
 
-### 3. Apply approved cuts
+Done when: every candidate has a decision, every spoken line is read, and `approved-cuts.json` exists.
+
+## 3. Apply
 
 ```bash
-node .claude/skills/cut-mistakes/scripts/apply-cuts.mjs \
-  <silence-transcript.json> --cuts approved-cuts.json \
-  --video video-projects/<slug>/assets/edited-silenced.mp4 \
-  --output video-projects/<slug>/assets/edited-clean.mp4 --apply
+node .claude/skills/cut-mistakes/scripts/apply-cuts.mjs raw.silence-transcript.json \
+  --cuts approved-cuts.json --video silenced.mp4 \
+  --out-dir <assets> --output clean.mp4 --apply
 ```
 
-Writes the EDL, a re-timed `<stem>.mistakes-transcript.json` (feeds the motion-graphics agent + `validate-beat-sync.mjs`), a decisions log, and — with `--apply` — the cut video (ffmpeg trim+concat, A/V in sync). Drop `--apply` for a dry run.
+It writes `raw.mistakes-edl.json`, `raw.mistakes-transcript.json`, a decisions log, and with `--apply` the cut video. Omit `--apply` for a dry run. A cut between two words is a hard join; if a join clicks, add a 20-30 ms fade.
 
-## Reviewing the result
-
-Use the shared review tool to eyeball the cuts and spot-check boundaries:
+Check the joins in the EDL review page:
 
 ```bash
-node scripts/build-edl-review.mjs <stem>.mistakes-edl.json \
-  --original video-projects/<slug>/assets/edited-silenced.mp4 \
-  --edited   video-projects/<slug>/assets/edited-clean.mp4 \
-  --output   video-projects/<slug>/assets/mistakes-review.html
+node scripts/build-edl-review.mjs raw.mistakes-edl.json \
+  --original silenced.mp4 --edited clean.mp4 --output mistakes-review.html
 npx serve . -p 8080 -n
 ```
 
-## Notes
-
-- A very clean delivery may yield few or zero real cuts — that's a valid outcome; don't cut natural speech to hit a quota.
-- Cuts between two spoken words are hard joins. They're usually clean for stutters/false starts; for tighter audio a 20-30ms fade can be added later.
-- Hand the `mistakes-transcript.json` + the clean video to **Agent 3 (motion graphics / tiered cards)**.
+Done when: `clean.mp4` exists and every join is heard. Copy `raw.mistakes-transcript.json` to `assets/transcript.json` and hand it with `clean.mp4` to the graphics stage.

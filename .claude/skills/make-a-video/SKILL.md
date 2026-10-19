@@ -1,268 +1,154 @@
 ---
 name: make-a-video
-description: Beginner-friendly end-to-end video creator for HyperFrames. Use when the user says "make a video", "create a video", "new video", "build a video", "video from scratch", "I want to make a video", "help me create a video", or when someone who's never used HyperFrames before arrives with a concept, script, or rough idea and wants a finished MP4. Interviews the user in one pass, then builds the full video with mandatory preview and visual-verification gates.
+description: Motion-graphics video from a brief, no footage. Use when the user brings a concept, script, or outline and wants a finished MP4, or when new-video routes a brief-only project here. Runs a one-pass interview, then a gated build.
 ---
 
-# Make a Video — The Beginner-to-Finished-MP4 Skill
+# Make a Video
 
-Two phases, eight sequential gates. Every gate produces a concrete artifact the next gate consumes. Don't skip gates.
+Two phases, eight gates, in order. A gate stays open until its **bound**
+holds.
 
-## When to use this skill — and when to hand off
+**Done means:** `renders/<slug>-final.mp4` exists, the user signed off on the
+draft MP4, and the `deliver` skill has put the final in the outbox.
 
-**Use this skill when:**
-- The user is new to HyperFrames and starting from a concept, script, or outline
-- They want an end-to-end walkthrough, not framework reference material
-- They haven't decided on format yet
+## Routes
 
-**Hand off when:**
-- The user pastes a URL and wants a video from that site → invoke `/website-to-hyperframes`
-- The user explicitly wants a 9:16 vertical talking-head with face-cam + scene overlays → run Gates 1–4 here, then invoke `/short-form-edit` from Gate 5 onward
-- The user asks for framework rules, not a video → invoke `/hyperframes`
+- The input is a URL: load `website-to-hyperframes`.
+- The brief is a 9:16 talking head with face-cam and scene overlays: run Gates
+  1-4 here, then hand `BRIEF.md` to `short-form-edit` at Gate 5.
+- The user wants framework rules, not a video: load `hyperframes`.
 
-## The two phases
+Sound, music, stills and B-roll need no paid service. Without `KIE_API_KEY` or
+`ELEVENLABS_API_KEY`, they are motion graphics you design in HyperFrames; say
+so when you fall back.
 
-- **Phase 1 — INTERVIEW (Gates 1–4):** one conversational pass to gather *everything* before touching code. Intent, format, script, voice, style, assets, pacing. Synthesize into a `BRIEF.md` and wait for explicit approval.
-- **Phase 2 — BUILD (Gates 5–8):** scaffold → storyboard → compositions → lint → Studio preview → draft render → visual verification → MP4 preview → final render.
+## Phase 1 · Interview (Gates 1-4)
 
----
+Ask one question per `AskUserQuestion` call, from the question bank in
+[interview-questions.md](references/interview-questions.md). Read it before
+Gate 1; it holds every option and the sequencing rules.
 
-## Gate 1 · Intent & format
+### Gate 1 · Intent and format
 
-Ask one question at a time via `AskUserQuestion`, multiple-choice where possible.
+Ask Q1-Q6: purpose, audience, duration, aspect ratio, frame rate (30
+default), and delivery constraints.
 
-1. What's this video for? (promo · social ad · launch teaser · product demo · tutorial · explainer · intro/outro card · other)
-2. Who's the audience? (open-ended)
-3. Target duration? (10–20s short · 20–45s promo · 45–90s explainer · 1.5–3 min lesson · custom)
-4. Aspect ratio? (16:9 1920×1080 · 9:16 1080×1920 · 1:1 1080×1080)
-5. Frame rate? (30 default · 60 for crisp UI · 24 cinematic)
-6. Platform / delivery constraints? (file size · deadline · where it'll play)
+**Bound:** all six answers captured. A 9:16 face-cam answer marks the
+`short-form-edit` route.
 
-**Gate:** all six captured. If the answer is 9:16 + face-cam, plan to hand off to `/short-form-edit` at Gate 5.
+### Gate 2 · Script and voice
 
-Full question bank: `Read: references/interview-questions.md`
+Ask Q7-Q10: script source, TTS voice and pace (offer voices from
+`npx hyperframes tts --help`), face-cam path and placement, and caption style.
+
+**Bound:** a script or outline exists, and the audio plan and the caption plan
+are written down.
 
----
+### Gate 3 · Style intake
+
+Inventory first: `node scripts/inbox.mjs`, the project's `raw/` and `assets/`
+if it exists, and `brands/<brand>/`. Name what you found and ask only for what is missing.
 
-## Gate 2 · Script & voice
+Then ask Q11-Q20: style guide, palette, fonts, logo, reference videos, other
+assets, aesthetic, pacing, music level, and outro CTA.
 
-1. Script source? (paste · outline → I'll draft · I'll record · TTS from text · no narration)
-2. If TTS: voice preference. Offer choices from `npx hyperframes tts --help`. Also capture pace.
-3. If face-cam: recording path · full-screen or corner placement · need transcription? (`npx hyperframes transcribe <file> --model small.en --json`)
-4. Captions? (off · hype · corporate · karaoke-word-by-word · minimal)
-
-**Gate:** script captured (or drafted), audio plan captured, caption plan captured.
-
----
-
-## Gate 3 · Style intake
-
-**Before asking the user anything, inventory existing assets.** Check `<workspace-root>/assets/` and any project `assets/` folder. Don't ask for what's already there.
-
-Then ask progressively — they don't need answers to all of these:
-
-1. Style guide or brand doc? (paste/path · no)
-2. Color palette? (hex codes · none — use MOTION_PHILOSOPHY defaults)
-3. Fonts? (Google Fonts name(s) · file paths · none — use Inter + JetBrains Mono defaults)
-4. Logo file? (path · none — use text wordmark instead)
-5. Reference videos for vibe? (URLs/paths · none)
-6. Other assets? (screenshots · product photos · b-roll · music — list paths)
-7. MOTION_PHILOSOPHY aesthetic (black canvas · chrome type · perspective grid · whip transitions) or a different feel?
-8. Pacing? (kinetic 1–2s · balanced 2–3s · relaxed 3–5s)
-9. Music? (none · ambient pad 0.15 · music bed 0.4 · full 0.8 — file path if they have one)
-10. Outro / call-to-action text?
-
-**Never impose a brand on the user.** Fall back to MOTION_PHILOSOPHY defaults *only* when they explicitly decline to supply a style.
-
-Full style flow + MOTION_PHILOSOPHY defaults: `Read: references/style-intake.md`
-
----
-
-## Gate 4 · Brief synthesis (HARD-GATE before building)
-
-1. **Read `MOTION_PHILOSOPHY.md`** if it exists in the workspace root — mandatory if present. If missing, proceed with the defaults in `references/style-intake.md` and note the absence in the brief.
-2. **Ask where projects live** if it's not obvious:
-   - If `video-projects/` exists → use `video-projects/<slug>/`
-   - Otherwise → ask the user
-3. **Write `<project-folder>/BRIEF.md`**:
-   - slug · intent · audience · dimensions · fps · duration
-   - script (full or outline)
-   - voice choice · caption plan · face-cam plan
-   - style profile: palette (hex), fonts, logo path, reference videos
-   - pacing
-   - asset inventory with paths
-   - outro / CTA text
-4. **Show the brief. WAIT for explicit approval.** Don't proceed to Gate 5 without a clear "yes, build it."
-
----
-
-## Gate 5 · Scaffold & storyboard
-
-### Handoff check first
-
-If the brief describes a 9:16 vertical talking-head with face-cam + scene overlays, invoke `/short-form-edit` NOW and hand off the brief. Its transcript-driven workflow covers hooks, cuts, captions, footage, and sound.
-
-Otherwise continue:
-
-### Scaffold
-
-1. `mkdir <project-folder>`
-2. If a sibling project with similar format exists, offer to copy its `hyperframes.json` + `meta.json` as a template. Otherwise from inside the folder: `npx hyperframes init`
-3. Edit `meta.json` with the user's slug, dimensions, fps.
-4. Copy supplied assets into `<project-folder>/assets/`.
-5. Create `<project-folder>/assets/style-profile.md` from Gate 3 — single source of truth for palette/fonts/logo.
-
-### Storyboard
-
-Generate `<project-folder>/STORYBOARD.md` using the template in `references/storyboard-template.md`. Every beat gets:
-
-```
-Beat N — TITLE (start–end, duration) — Concept in one sentence
-Visual elements: [each element, size, animation, timing]
-Motion language: [kind of motion]
-Eases used: [3–4 distinct GSAP eases]
-Exit: [transition into next beat]
-Audio: [VO line / SFX / music layer]
-```
-
-Top of file: a timing table with scene · start · duration · composition file.
-
-**Propose a rule-of-threes structure:**
-- Act 1 (hook) ≈ 20% of duration
-- Act 2 (body) ≈ 55%
-- Act 3 (payoff + outro with 4–6 second hold) ≈ 25%
-
-(MOTION_PHILOSOPHY §0 Law 9, §1.)
-
-**Map user intents → catalog blocks:** `Read: references/catalog-intent-map.md`
-
-**Gate:** show storyboard + timing table. Iterate until the user approves.
-
----
-
-## Gate 6 · Build compositions
-
-Invoke `/hyperframes` for framework rules. This skill owns the scaffold and discipline; `/hyperframes` enforces the rules.
-
-### Scaffold every sub-composition
-
-```html
-<div data-composition-id="scene-name" data-start="..." data-duration="...">
-  <style>[data-composition-id="scene-name"] { /* scoped */ }</style>
-  <!-- DOM -->
-  <script>
-    (function(){
-      const SLOT_DURATION = ...;
-      const tl = gsap.timeline({ paused: true });
-      // ... tweens ...
-      tl.to({}, { duration: SLOT_DURATION }, 0);   // anchor — MOTION_PHILOSOPHY Law 11
-      window.__timelines["scene-name"] = tl;
-    })();
-  </script>
-</div>
-```
-
-Full boilerplate + captions pattern + ambient-bg pattern: `Read: references/composition-scaffold.md`
-
-### Build rules
-
-- **Ambient background** on `data-track-index="0"` for the full composition duration.
-- **Kinetic-type openers:** per-word stagger 0.06–0.10s.
-- **Captions** as body-level siblings of the root composition in `index.html`, each with `data-track-index ≥ 20`. Never inside scene timelines (MOTION_PHILOSOPHY §3.13).
-- **Catalog blocks** installed via `npx hyperframes add <name>`. Immediately **scope the block's CSS** to `[data-composition-id="..."]` — catalog blocks ship with `html, body { ... }` rules that bleed into the parent document when loaded as sub-compositions.
-- **Vertical + face-cam:** wrap native 1920×1080 face in a transform (`translate` + `scale`) for bottom-half or full-screen mode. (If you end up here instead of `/short-form-edit`, strongly consider the handoff.)
-- **Apply ONLY what the user supplied.** Their palette, their fonts, their logo. Don't inject anything else. If they chose MOTION_PHILOSOPHY defaults, pull the palette + font pair from `references/style-intake.md`.
-
-### Determinism
-
-No `Math.random()`, no `Date.now()`, no render-time `fetch()`. Use seeded PRNGs or harmonic-sin hashes (MOTION_PHILOSOPHY §3.10).
-
----
-
-## Gate 7 · Lint → Studio preview (PREVIEW GATE 1 — MANDATORY)
-
-1. `npx hyperframes lint` — fix all errors, triage warnings.
-2. `npx hyperframes preview` in the background.
-3. Wait for "Studio running" on `http://localhost:3002`.
-4. Hand the user the URL **plus** individual composition URLs (`http://localhost:3002/?comp=<id>`). If the project has WebGL shader blocks, lead with the individual URLs — software WebGL fallback can stall the master composition.
-5. **WAIT for explicit "looks good, render a draft"** before proceeding. Silence is not approval.
-
-Hot reload is on — edits show up live.
-
----
-
-## Gate 8 · Draft render → visual verification → MP4 preview → final
-
-### Draft render
-
-```bash
-npx hyperframes render --quality draft --output renders/<slug>-draft.mp4
-```
-
-### Visual verification (MANDATORY before delivery)
-
-Lint passing ≠ design working. Extract frames and **view them**.
-
-1. `mkdir -p renders/frames`
-2. For every beat hero moment AND every transition:
-   ```bash
-   ffmpeg -y -ss <t> -i renders/<slug>-draft.mp4 -frames:v 1 -q:v 2 renders/frames/t<t>.png
-   ```
-3. **Call the `Read` tool on every PNG.** The Read tool loads the image into context — don't just list filenames.
-4. Confirm per frame: no cropped faces, correct face-mode per scene, text readable and on-palette, no overflow, transitions land on intended words, no blank frames.
-5. If anything's wrong: fix → re-render → re-verify. Never ship a broken draft.
-
-### MP4 preview (PREVIEW GATE 2 — MANDATORY)
-
-```bash
-npx serve renders -p 8080 -n
-```
-
-Do NOT use Python's `http.server` — it doesn't support HTTP Range requests, so scrubbing breaks.
-
-Hand the user `http://localhost:8080/<slug>-draft.mp4`. **WAIT for explicit sign-off** on playback and audio sync.
-
-### Final render
-
-```bash
-npx hyperframes render --quality standard --output renders/<slug>-final.mp4
-```
-
-Report the output path. Done.
-
-Full preflight + pre-delivery checklist: `Read: references/build-checklist.md`
-
----
-
-## Non-negotiables (load-bearing — do not soften)
-
-- **DO NOT skip PREVIEW GATE 1 (Studio) or PREVIEW GATE 2 (rendered MP4).** Two gates per build, always.
-- **DO NOT claim a render is done** until frames have been extracted AND Read via the Read tool.
-- **DO NOT build anywhere but inside a dedicated project folder.** Never put `index.html` at the workspace root.
-- **DO NOT ask the user for assets** before inventorying their workspace.
-- **DO NOT skip the `tl.to({}, { duration: SLOT_DURATION }, 0)` anchor tween** at the end of every sub-composition timeline. MOTION_PHILOSOPHY Law 11.
-- **DO NOT use `Math.random()` / `Date.now()`** inside render logic. Seeded hashes only.
-- **DO NOT add `class="clip"` to `<video>` tags.** It breaks them.
-- **DO NOT impose a brand on the user.** Ask first; fall back to MOTION_PHILOSOPHY defaults only when they explicitly decline.
-
----
-
-## References
-
-- `references/interview-questions.md` — full question bank by Gate
-- `references/style-intake.md` — style interview + MOTION_PHILOSOPHY defaults
-- `references/catalog-intent-map.md` — "user says X → install Y"
-- `references/storyboard-template.md` — beat-by-beat template + worked example
-- `references/composition-scaffold.md` — scoped-styles + IIFE GSAP boilerplate
-- `references/build-checklist.md` — preflight + pre-delivery gates
-
-External (workspace-level):
-- `MOTION_PHILOSOPHY.md` — the one external reference this skill assumes exists. Aesthetic baseline. Fallback lives in `references/style-intake.md` if the file is missing.
-
-## Related skills
-
-- `/hyperframes` — framework rules, invoke at Gate 6
-- `/hyperframes-cli` — init · lint · preview · render · transcribe · tts
-- `/hyperframes-registry` — installing catalog blocks
-- `/gsap` — GSAP animation reference
-- `/short-form-edit` — hand off at Gate 5 for 9:16 talking-head format
-- `/website-to-hyperframes` — hand off at Gate 1 if the starting input is a URL
+The user's style wins, then the project's brand, then the MOTION_PHILOSOPHY
+defaults. Use a default only for a question the user declined, and flag each
+default in the brief. The decision tree and the defaults are in
+[style-intake.md](references/style-intake.md).
+
+**Bound:** each of the ten questions has an answer, a found asset, or a flagged
+default.
+
+### Gate 4 · Brief (hard gate)
+
+1. Read `MOTION_PHILOSOPHY.md`.
+2. If the project does not exist yet, create it:
+   `npm run new-video -- <slug> --brand <brand> --mode guided`. It lives at
+   `video-projects/<yyyy-mm-dd>-<slug>/`; that folder is the project folder.
+3. Write `<project-folder>/BRIEF.md`: slug, intent, audience, dimensions, fps,
+   duration, script, voice, captions, face-cam plan, style profile (palette
+   hex, fonts, logo path, reference videos), pacing, asset inventory with
+   paths, and outro CTA.
+4. Show the brief and wait.
+
+**Bound:** every field in step 3 is filled, and the user said "yes, build it"
+in chat.
+
+## Phase 2 · Build (Gates 5-8)
+
+### Gate 5 · Scaffold and storyboard
+
+1. On the face-cam route, hand off to `short-form-edit` now.
+2. Set the slug, dimensions and fps in `meta.json`.
+3. Copy the supplied assets into `<project-folder>/assets/`.
+4. Write `assets/style-profile.md` from Gate 3: the one source for palette,
+   fonts and logo.
+5. Write `STORYBOARD.md` from
+   [storyboard-template.md](references/storyboard-template.md): a timing table,
+   then one block per beat with its visuals, motion, 3-4 eases, exit and audio.
+   Use three acts: hook about 20%, body about 55%, payoff about 25% with a 4-6
+   second outro hold.
+6. Map each beat to catalog blocks with
+   [catalog-intent-map.md](references/catalog-intent-map.md).
+
+**Bound:** every beat has all six fields, the acts sum to the duration, and the
+user approved the storyboard.
+
+### Gate 6 · Compositions
+
+Load `hyperframes` for framework rules. Start every sub-composition from
+[composition-scaffold.md](references/composition-scaffold.md): scoped CSS, an
+IIFE GSAP timeline registered on `window.__timelines`, and the anchor tween
+`tl.to({}, { duration: SLOT_DURATION }, 0)` (MOTION_PHILOSOPHY Law 11).
+
+- Put an ambient background on `data-track-index="0"` for the full duration.
+- Stagger kinetic-type openers per word, 0.06-0.10s.
+- Mount captions as body-level siblings in `index.html`, each on
+  `data-track-index` 20 or higher.
+- Install catalog blocks with `npx hyperframes add <name>`, then scope their
+  `html, body` CSS under `[data-composition-id="..."]`.
+- Apply only the palette, fonts and logo in `style-profile.md`.
+- Make render logic deterministic: seeded hashes for every random value, and
+  all data inlined before render (MOTION_PHILOSOPHY §3.10).
+- On a 9:16 face-cam build, see the vertical face-cam section of the scaffold.
+
+**Bound:** one file per storyboard beat, each with the anchor tween.
+
+### Gate 7 · Preview gate 1: Studio
+
+1. Run `node scripts/preflight.mjs <project>` and `npx hyperframes lint`. Fix
+   every error; list the warnings you keep.
+2. Start `npx hyperframes preview` in the background and wait for "Studio
+   running" on `http://localhost:3002`.
+3. Give the user that URL and each composition URL
+   (`http://localhost:3002/?comp=<id>`). With WebGL shader blocks, lead with
+   the composition URLs; the software fallback can stall the master.
+
+**Bound:** lint shows 0 errors, and the user said "render a draft" in chat.
+Silence is not approval.
+
+### Gate 8 · Draft, verify, preview gate 2, final
+
+1. `npx hyperframes render --quality draft --output renders/<slug>-draft.mp4`
+2. Extract one frame per beat hero moment and one per transition:
+   `ffmpeg -y -ss <t> -i renders/<slug>-draft.mp4 -frames:v 1 -q:v 2 renders/frames/t<t>.png`
+3. Open every PNG with the `Read` tool and check it against the visual
+   verification list in [build-checklist.md](references/build-checklist.md).
+   Fix, re-render and re-check until every frame passes. Record what you saw
+   in `VERIFY.md`.
+4. Serve with `npx serve renders -p 8080 -n`; it supports the range requests
+   that scrubbing needs. Give the user `http://localhost:8080/<slug>-draft.mp4`
+   and wait for sign-off on playback and audio sync.
+5. `npx hyperframes render --quality standard --output renders/<slug>-final.mp4`
+6. Load `deliver`.
+
+**Bound:** every extracted frame passes step 3, the user signed off in chat,
+and the final is in the outbox.
+
+## Guardrails
+
+- Run both preview gates on every build: Studio, then the rendered MP4.
+- Call a render done only after you opened its frames with `Read`.
+- Build inside the project folder; `index.html` never sits at the kit root.
+- Keep `<video>` tags free of `class="clip"`; it breaks them.

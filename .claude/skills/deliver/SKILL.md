@@ -1,35 +1,35 @@
 ---
 name: deliver
-description: Put a finished video in the outbox. Use when a render is approved, the user says "entregar", "listo", "final", or any editing skill reaches its final render. Enforces the delivery contract from kit.config.json: video and cover required, caption and srt by default.
+description: Deliver a finished video to the outbox. Use when a final render is approved, the user says "entregar", "listo" or "final", or an editing skill reaches its last step. Enforces the delivery contract in kit.config.json.
 ---
 
 # Deliver
 
-The outbox is the end of every project. Nothing leaves the kit any other way.
+The outbox is the end of every project.
 
 ## 1. Final render
 
-The final render must already exist in `video-projects/<id>/renders/` and must
-have been reviewed by the user (see `VERIFY.md`). If not, stop and go back to
-the editing skill. A lint pass is not a review.
+A reviewed final exists in `video-projects/<id>/renders/` and `VERIFY.md`
+records the review. Otherwise return to the editing skill.
 
 ## 2. Cover
 
-Build a one-frame HyperFrames composition `compositions/cover.html` at the
-project's width and height: the hero frame (a still from the render, extracted
-with `ffmpeg -ss <t> -i <render> -frames:v 1 cover-frame.png`) plus the hook
+`compositions/cover.html`: one frame at the project's width and height. The
+hero still (`ffmpeg -ss <t> -i <render> -frames:v 1 cover-frame.png`), the hook
 sentence in the brand's `--font-display`, logo bottom-right, brand tokens only.
-Render it to `renders/cover.png` with `npx hyperframes render --format png`
-or by extracting frame 0 of a 1-second render.
+Render to `renders/cover.png` (`npx hyperframes render --format png`, or frame 0
+of a 1-second render).
+
+Done when `renders/cover.png` opens and the hook text is readable at phone size.
 
 ## 3. Caption and subtitles
 
-- `renders/caption.txt`: the post text in the brand's language. Hook line first,
-  then one or two lines, then 3 to 5 hashtags. No emoji unless the brand says so.
-- `renders/subtitles.srt`: from the retimed transcript of the final cut. Lines of
-  at most 5 words, matching the on-screen captions.
+- `renders/caption.txt`: hook line, one or two lines of body, 3 to 5 hashtags,
+  in the brand's language. Emoji only when the brand's `DESIGN.md` allows them.
+- `renders/subtitles.srt`: from the retimed transcript of the final cut, at most
+  5 words per line, matching the on-screen captions.
 
-Skip an extra only if the user says so. Say which extras were skipped.
+Both ship unless the user drops one. Say which extras were dropped.
 
 ## 4. Deliver
 
@@ -37,10 +37,12 @@ Skip an extra only if the user says so. Say which extras were skipped.
 node scripts/deliver.mjs <project-id> --video renders/final.mp4 --cover renders/cover.png --caption renders/caption.txt --srt renders/subtitles.srt
 ```
 
-For more than one deliverable (for example a 9:16 and a 16:9 cut), run it once
-per deliverable with `--name <name>`.
+One run per deliverable (`--name <name>`) when a project ships several cuts.
+
+Done when the script prints the outbox path and `project.json` `status` is
+`delivered`.
 
 ## 5. Close
 
-Run `npm run projects`. Tell the user the outbox path and the file names.
-Never upload, post or send anything.
+`npm run projects`. Tell the user the outbox path and the file names.
+The files stay in the outbox; publishing is the user's step.

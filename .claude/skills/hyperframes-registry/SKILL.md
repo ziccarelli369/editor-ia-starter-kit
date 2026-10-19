@@ -1,6 +1,6 @@
 ---
 name: hyperframes-registry
-description: Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery.
+description: HyperFrames registry blocks and components. Use when running hyperframes add, wiring an installed block or component into a composition, editing hyperframes.json, or browsing the registry for a reusable item.
 ---
 
 # HyperFrames Registry
@@ -9,13 +9,6 @@ The registry provides reusable blocks and components installable via `hyperframe
 
 - **Blocks** — standalone sub-compositions (own dimensions, duration, timeline). Included via `data-composition-src` in a host composition.
 - **Components** — effect snippets (no own dimensions). Pasted directly into a host composition's HTML.
-
-## When to use this skill
-
-- User mentions `hyperframes add`, "block", "component", or `hyperframes.json`
-- Output from `hyperframes add` appears in the session (file paths, clipboard snippet)
-- You need to wire an installed item into an existing composition
-- You want to discover what's available in the registry
 
 ## Quick reference
 
@@ -74,7 +67,7 @@ Key attributes:
 - `data-start` — when the block appears in the host timeline (seconds)
 - `data-duration` — how long the block plays
 - `data-width` / `data-height` — block canvas dimensions
-- `data-track-index` — layer ordering (higher = in front)
+- `data-track-index` — timeline track (visual layering comes from CSS `z-index`)
 
 See [wiring-blocks.md](./references/wiring-blocks.md) for full details.
 

@@ -1,6 +1,6 @@
 ---
 name: hyperframes
-description: Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For CLI commands (init, lint, preview, render, transcribe, tts) see the hyperframes-cli skill.
+description: HyperFrames composition authoring: video as HTML with data-* timing and GSAP timelines. Use when building or editing a composition, title card, overlay, or scene transition; syncing captions to audio; generating text-to-speech narration; audio-reactive motion; or animated text highlights.
 ---
 
 # HyperFrames
@@ -22,7 +22,7 @@ For small edits (fix a color, adjust timing, add one element), skip straight to 
 ### Visual Identity Gate
 
 <HARD-GATE>
-Before writing ANY composition HTML, you MUST have a visual identity defined. Do NOT write compositions with default or generic colors.
+Before writing ANY composition HTML, you MUST have a visual identity defined.
 
 Check in this order:
 
@@ -35,7 +35,7 @@ Check in this order:
    - Any specific brand colors, fonts, or visual references?
      Then generate a minimal DESIGN.md from the answers.
 
-Every composition must trace its palette and typography back to a DESIGN.md, visual-style.md, or explicit user direction. If you're reaching for `#333`, `#3b82f6`, or `Roboto` — you skipped this step.
+Every composition must trace its palette and typography back to a DESIGN.md, visual-style.md, or explicit user direction.
 </HARD-GATE>
 
 For motion defaults, sizing, entrance patterns, and easing — follow [house-style.md](./house-style.md). The house style handles HOW things move. The DESIGN.md handles WHAT things look like.
@@ -209,24 +209,20 @@ Video must be `muted playsinline`. Audio is always a separate `<audio>` element:
 
 **Never do:**
 
-1. Forget `window.__timelines` registration
-2. Use video for audio — always muted video + separate `<audio>`
-3. Nest video inside a timed div — use a non-timed wrapper
-4. Use `data-layer` (use `data-track-index`) or `data-end` (use `data-duration`)
-5. Animate video element dimensions — animate a wrapper div
-6. Call play/pause/seek on media — framework owns playback
-7. Create a top-level container without `data-composition-id`
-8. Use `repeat: -1` on any timeline or tween — always finite repeats
-9. Build timelines asynchronously (inside `async`, `setTimeout`, `Promise`)
-10. Use `gsap.set()` on clip elements from later scenes — they don't exist in the DOM at page load. Use `tl.set(selector, vars, timePosition)` inside the timeline at or after the clip's `data-start` time instead.
-11. Use `<br>` in content text — forced line breaks don't account for actual rendered font width. Text that wraps naturally + a `<br>` produces an extra unwanted break, causing overlap. Let text wrap via `max-width` instead. Exception: short display titles where each word is deliberately on its own line (e.g., "THE\nIMMORTAL\nGAME" at 130px).
+1. Nest video inside a timed div — use a non-timed wrapper
+2. Use `data-layer` (use `data-track-index`) or `data-end` (use `data-duration`)
+3. Animate video element dimensions — animate a wrapper div
+4. Call play/pause/seek on media — framework owns playback
+5. Create a top-level container without `data-composition-id`
+6. Use `gsap.set()` on clip elements from later scenes — they don't exist in the DOM at page load. Use `tl.set(selector, vars, timePosition)` inside the timeline at or after the clip's `data-start` time instead.
+7. Use `<br>` in content text — forced line breaks don't account for actual rendered font width. Text that wraps naturally + a `<br>` produces an extra unwanted break, causing overlap. Let text wrap via `max-width` instead. Exception: short display titles where each word is deliberately on its own line (e.g., "THE\nIMMORTAL\nGAME" at 130px).
 
 ## Scene Transitions (Non-Negotiable)
 
-Every multi-scene composition MUST follow ALL of these rules. Violating any one of them is a broken composition.
+Every multi-scene composition MUST follow ALL of these rules.
 
-1. **ALWAYS use transitions between scenes.** No jump cuts. No exceptions.
-2. **ALWAYS use entrance animations on every scene.** Every element animates IN via `gsap.from()`. No element may appear fully-formed. If a scene has 5 elements, it needs 5 entrance tweens.
+1. **ALWAYS use transitions between scenes.**
+2. **ALWAYS use entrance animations on every scene.** Every element animates IN via `gsap.from()`. If a scene has 5 elements, it needs 5 entrance tweens.
 3. **NEVER use exit animations** except on the final scene. This means: NO `gsap.to()` that animates opacity to 0, y offscreen, scale to 0, or any other "out" animation before a transition fires. The transition IS the exit. The outgoing scene's content MUST be fully visible at the moment the transition starts.
 4. **Final scene only:** The last scene may fade elements out (e.g., fade to black). This is the ONLY scene where `gsap.to(..., { opacity: 0 })` is allowed.
 
@@ -254,8 +250,8 @@ tl.from("#s2-heading", { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" }, 
 
 - Offset first animation 0.1-0.3s (not t=0)
 - Vary eases across entrance tweens — use at least 3 different eases per scene
-- Don't repeat an entrance pattern within a scene
-- Avoid full-screen linear gradients on dark backgrounds (H.264 banding — use radial or solid + localized glow)
+- Give each entrance in a scene its own pattern
+- On dark backgrounds, use radial gradients or solid + localized glow (full-screen linear gradients band in H.264)
 - 60px+ headlines, 20px+ body, 16px+ data labels for rendered video
 - `font-variant-numeric: tabular-nums` on number columns
 
@@ -271,7 +267,6 @@ When no `visual-style.md` or animation direction is provided, follow [house-styl
 ## Editing Existing Compositions
 
 - Read the full composition first — match existing fonts, colors, animation patterns
-- Only change what was requested
 - Preserve timing of unrelated clips
 
 ## Output Checklist
@@ -295,7 +290,7 @@ If warnings appear:
 
 - On dark backgrounds: brighten the failing color until it clears 4.5:1 (normal text) or 3:1 (large text, 24px+ or 19px+ bold)
 - On light backgrounds: darken it
-- Stay within the palette family — don't invent a new color, adjust the existing one
+- Adjust the existing color within its palette family
 - Re-run `hyperframes validate` until clean
 
 Use `--no-contrast` to skip if iterating rapidly and you'll check later.
@@ -305,7 +300,7 @@ Use `--no-contrast` to skip if iterating rapidly and you'll check later.
 After authoring animations, run the animation map to verify choreography:
 
 ```bash
-node skills/hyperframes/scripts/animation-map.mjs <composition-dir> \
+node .claude/skills/hyperframes/scripts/animation-map.mjs <composition-dir> \
   --out <composition-dir>/.hyperframes/anim-map
 ```
 

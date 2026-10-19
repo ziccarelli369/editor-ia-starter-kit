@@ -7,8 +7,8 @@ Used by `/make-a-video` Gates 1–3. Ask one at a time via `AskUserQuestion`, mu
 Run these to see what already exists so you don't ask for supplied assets:
 
 ```bash
-ls "<workspace-root>/assets" 2>/dev/null
-ls "<project-folder>/assets" 2>/dev/null
+node scripts/inbox.mjs
+ls "<project-folder>/raw" "<project-folder>/assets" "brands/<brand>"
 ```
 
 Reference anything you find by path in the eventual `BRIEF.md`.

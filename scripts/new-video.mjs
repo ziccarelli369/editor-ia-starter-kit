@@ -25,7 +25,7 @@ if (existsSync(dest)) throw new Error(`Project already exists: ${id}.`);
 const gsap = join(root, 'node_modules/gsap/dist/gsap.min.js');
 if (!existsSync(gsap)) throw new Error('Run npm install in the kit root first.');
 cpSync(join(root, 'examples/starter'), dest, { recursive: true, errorOnExist: true });
-for (const d of ['assets', 'compositions', 'renders', 'raw']) mkdirSync(join(dest, d), { recursive: true });
+for (const d of ['assets', 'compositions', 'renders']) mkdirSync(join(dest, d), { recursive: true });
 copyFileSync(gsap, join(dest, 'assets/gsap.min.js'));
 copyFileSync(join(root, 'brands', brand, 'tokens.css'), join(dest, 'assets/brand-tokens.css'));
 const meta = JSON.parse(readFileSync(join(dest, 'meta.json'), 'utf8'));

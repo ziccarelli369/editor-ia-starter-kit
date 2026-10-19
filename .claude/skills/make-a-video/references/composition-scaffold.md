@@ -187,3 +187,9 @@ const noise = i => 80 + 220 * Math.abs(Math.sin(i * 0.7 + 0.3) * Math.cos(i * 1.
 ```
 
 Renders must be identical frame-to-frame across runs.
+
+---
+
+## Vertical face-cam
+
+On a 9:16 build with face-cam, wrap the native 1920×1080 face video in a `<div>` and position it with `translate` + `scale` on the wrapper, for bottom-half or full-screen mode. A build that lands here usually belongs in `/short-form-edit`; offer that hand-off first.

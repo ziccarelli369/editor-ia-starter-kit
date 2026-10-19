@@ -1,185 +1,84 @@
 ---
 name: hyperframes-video-beats
-description: Plan, write, time, style, and validate motion-graphic beats for long-form talking-head HyperFrames videos. Use when the agent is asked to add or improve visual beats, glassmorphism lower thirds, crumpled-paper full-screen takeovers, transcript-synced callouts, pacing coverage, YouTube retention graphics, or render-ready overlays in an existing HyperFrames video project.
+description: Overlay beats for long-form talking-head HyperFrames videos: glass lower thirds and paper takeovers timed to the transcript. Use when adding, improving or retiming beats, or scanning a project for coverage gaps.
 ---
 
 # HyperFrames Video Beats
 
-Use this skill to turn a talking-head video plus transcript into a paced set of motion graphics that support the narration without covering the speaker unnecessarily.
+Turn a talking-head video plus its transcript into a paced set of **beats**:
+motion graphics that support the narration and keep the speaker visible.
 
-## Core Goal
-
-Keep the viewer oriented and engaged. Every beat must answer one of these:
+A beat earns its place by answering one question:
 
 - What should the viewer remember?
 - What concept needs visual structure?
-- What stat, contrast, or pivot deserves emphasis?
-- Where is the pacing getting quiet enough that the viewer may drift?
+- What stat, contrast or pivot deserves emphasis?
+- Where is the pacing quiet enough that the viewer may drift?
 
-Do not add graphics just because a gap exists. Add graphics because the narration has a topic, transition, proof point, or mental model that benefits from visual support.
+A gap alone is no reason for a beat. The reason is a topic, transition, proof
+point or mental model in the narration.
 
-## First Pass
+**Done means:** every new or retimed beat is mounted and timed to its topic
+span, the coverage scan shows no gap over threshold that the transcript can
+support, and lint shows 0 errors.
 
-1. Read project instructions (`CLAUDE.md`, local skill docs, and project-specific notes).
-2. Inspect the root composition, current beat schedule, shared CSS, and transcript.
-3. Build a coverage map from the root `data-start` / `data-duration` entries or the master `SHOW` array.
-4. Extract transcript chunks for any requested region and any uncovered gaps.
-5. Identify topic spans by narration, not by arbitrary timestamps.
-6. Decide whether each topic needs a full-screen paper beat, a lower-third glass card, or no new beat.
+## 1. First pass
 
-Use fast local commands. Prefer `rg`, `Select-String`, and small Node/PowerShell transcript scripts.
+1. Read the project's `CLAUDE.md`, its `DESIGN.md`, and any local skill notes.
+2. Inspect the root composition, the beat schedule, the shared CSS and the
+   transcript.
+3. Build a coverage map from the root `data-start` / `data-duration` entries,
+   or from the master `SHOW` array when one exists; it is usually the
+   authoritative visible range.
+4. Extract transcript chunks for the requested region and every uncovered gap.
+   Use fast local tools: `rg`, `Select-String`, small Node or PowerShell
+   scripts.
+5. Mark topic spans by narration, not by round timestamps.
 
-## Beat Type Decision
+**Bound:** every topic span in scope is listed with its start and end words.
 
-### Use Full-Screen Crumpled Paper
+## 2. Pick a beat type per topic span
 
-Use a paper takeover when the narration reaches a major thesis, list, section marker, quote, or stat that should briefly become the whole frame.
+- **Paper takeover:** a major thesis, list, section marker, quote or stat
+  becomes the whole frame for a few seconds. Read
+  [paper-takeover.md](references/paper-takeover.md) before building one.
+- **Glass lower third:** the speaker stays visible and the card supports the
+  current idea. Read [glass-lower-third.md](references/glass-lower-third.md)
+  before building one.
+- **No beat:** the narration has no concept to support.
 
-Good uses:
+Default to glass when the speaker's face matters. Follow the project's design
+system first; the two references hold this project family's defaults.
 
-- Hook payoff or "in this video" overview
-- Major section transition
-- Big stat or study result
-- Memorable thesis line
-- Short quote or mantra
-- Contrast that needs the audience to stop and look
+**Bound:** every topic span has one of the three answers.
 
-Rules:
-
-- Keep it short, usually 4-12 seconds.
-- Use sparse black text.
-- Let only true stat numbers or one extremely important word use accent color.
-- Do not cover long explanations with paper takeovers.
-- Do not make full-screen text playful, huge, or over-bold by default.
-
-### Use Glassmorphism Lower Third
-
-Use a glass lower-third when the speaker should remain visible and the graphic should support the current idea.
-
-Good uses:
-
-- Explanation scaffolds
-- Topic labels
-- Equation-style mental models
-- Small lists
-- "What this means" translations
-- Pacing fills during long talking-head stretches
-- Follow-up cards after a shortened full-screen or split-screen beat
-
-Rules:
-
-- Keep lower thirds in the lower third or lower half.
-- Avoid covering the face.
-- Use concise text: one headline plus optional short subline, or a 2-4 item list.
-- Prefer one card per topic span over many tiny flashes.
-- Preserve the existing glass-card style unless the user asks for a design change.
-
-## Pacing Heuristics
-
-For long-form YouTube talking-head videos:
-
-- Early video: avoid more than 20-30 seconds without a visual beat.
-- Main body: avoid more than 30-45 seconds without a beat.
-- Dense explanation sections: use lower thirds roughly every topic span, not every sentence.
-- Big paper takeovers should be occasional punctuation, not the default.
-- If an existing beat was manually shortened because it felt too long, respect that choice and fill after it with a new shorter card.
-
-When scanning a schedule, report true gaps from the visibility schedule, not just the DOM order. If the root timeline uses a `SHOW` array, that is usually the authoritative visible range.
-
-## Timing Method
-
-Time every beat to the transcript topic:
+## 3. Time each beat to its topic
 
 1. Find the first word or phrase where the topic starts.
 2. Start the beat 0.2-0.6 seconds before that anchor when possible.
-3. Keep the beat visible until the topic ends or naturally hands off.
-4. If the next beat begins immediately, clear 0.1-0.5 seconds before it unless the handoff is intentional.
+3. Keep it visible until the topic ends or hands off.
+4. When the next beat starts at once, clear 0.1-0.5 seconds before it, unless
+   the handoff is intentional.
 5. Match sub-element entrances to spoken phrases.
 
-Avoid this failure mode:
+A card lives across its whole topic. When the speaker talks about one topic for
+20-40 seconds, one card holds for that span and builds a subline or list item
+midway.
 
-- Card appears on the right topic but only lasts 5-8 seconds while the speaker keeps discussing the topic for 20-40 seconds.
+**Bound:** each beat's start and end trace to a transcript word.
 
-Prefer:
+## 4. Write the copy
 
-- One card lives across the whole topic, with a subline or list item building midway through if the narration evolves.
+Write for a glance: the viewer understands the card in under one second.
+Use short noun phrases, direct labels, one mental model per card, numbers only
+when they mean something, and verbs where they clarify the action. Carry the
+idea, not the voiceover: one short line in place of a sentence, plain words in
+place of hype, at most one highlighted word. The card speaks about the topic,
+not about how to watch the video. The references hold copy patterns.
 
-## Content Writing
+**Bound:** every card reads in one glance.
 
-Write for glance comprehension. The viewer should understand the card in under one second.
-
-Use:
-
-- Short noun phrases
-- Direct labels
-- One mental model per card
-- Numbers only when they are meaningful
-- Verbs when they clarify the action
-
-Avoid:
-
-- Repeating the whole voiceover
-- Long sentences
-- Vague hype language
-- Too many highlighted words
-- Explaining how to use the video inside the graphic
-
-Good patterns:
-
-```text
-The bottleneck
-Not enough AI inside real workflows.
-The problem is adoption, not raw talent.
-```
-
-```text
-The bridge
-Skills + Workflows = 40 hrs saved
-```
-
-```text
-In this video
--> The study
--> The stats
--> The paths you can take
--> What actually matters
-```
-
-## Visual Style Rules
-
-Follow the local design system first. For this project family, use:
-
-- Serious professional typography.
-- Black primary text on paper beats.
-- Accent blue only for major stat numbers or rare power words.
-- Glass cards with the existing dark frosted style.
-- Lower-third cards that do not cover the speaker's face.
-
-For paper beats:
-
-- Use black for kickers, labels, arrows, sources, quotes, and supporting text.
-- Keep font weight restrained.
-- Avoid oversized playful type unless the user explicitly asks for it.
-- Make the crumpled-paper motion deterministic.
-
-For glass cards:
-
-- Reuse `.glass-card dim lower-third` or the closest existing class.
-- Prefer bottom-center placement.
-- Keep cards compact.
-- Use equation/list helpers when the idea is structural.
-
-## HyperFrames Implementation Rules
-
-Follow project `CLAUDE.md` and HyperFrames lint rules:
-
-- Every mounted timed element needs `data-start`, `data-duration`, and `data-track-index`.
-- Visible timed root-mounted elements should have the expected clip/layer class used by the project.
-- Sub-compositions should register a paused GSAP timeline on `window.__timelines`.
-- Pin each sub-composition timeline with `tl.set({}, {}, SLOT);`.
-- Keep deterministic logic only.
-- Do not animate video element dimensions or media properties in ways that can freeze renders.
-- Run `npx hyperframes lint` after editing HTML.
+## 5. Build
 
 When adding a beat:
 
@@ -187,45 +86,44 @@ When adding a beat:
 2. Add the root mount in `index.html`.
 3. Add or update the master visibility schedule if one exists.
 4. Make the sub-composition `SLOT` match the mounted duration.
-5. Verify no same-track overlaps unless the project intentionally uses multiple overlay tracks.
+5. Check for same-track overlaps; use a separate overlay track only where the
+   project already does.
 
-## Coverage Scan
+Every beat follows the project's `CLAUDE.md` and the HyperFrames lint rules:
 
-After edits, scan the master schedule:
+- Each mounted timed element has `data-start`, `data-duration` and
+  `data-track-index`, plus the clip or layer class the project uses.
+- Each sub-composition registers a paused GSAP timeline on `window.__timelines`
+  and pins it with `tl.set({}, {}, SLOT);`.
+- Logic is deterministic.
+- Animate wrappers, never the video element's dimensions or media properties;
+  those freeze renders.
 
-- List beats sorted by visible start.
-- Print gaps over the target threshold.
-- Add or retime beats only where the transcript has a supportable concept.
+**Bound:** all five steps done for every new beat.
 
-For this project pattern, use 30 seconds as the strict scan threshold and 45 seconds as the maximum acceptable main-body threshold.
+## 6. Coverage scan
 
-## Validation
+Sort beats by visible start, taken from the visibility schedule rather than DOM
+order, and print every gap over 30 seconds. In the main body, 45 seconds is the
+maximum acceptable gap; early in the video, aim for 20-30. Add or retime a beat
+only where the transcript has a concept to support. Dense explanation sections
+get roughly one lower third per topic span, not one per sentence.
 
-Before finishing:
+**Bound:** every gap over 30 seconds is filled or has a reason in your report.
 
-1. Run the HyperFrames linter.
-2. Fix all errors.
-3. Mention warnings separately if they are known and non-blocking.
-4. If the user asked for render-ready output, render or draft-render as appropriate.
-5. Give the user exact file paths and timestamps changed.
+## 7. Validate
 
-## Practical Defaults
+1. Run `npx hyperframes lint` and fix every error.
+2. List the known, non-blocking warnings separately.
+3. If the user asked for render-ready output, render or draft-render.
+4. Report the exact file paths and timestamps you changed.
 
-Use these defaults unless project context says otherwise:
+**Bound:** lint shows 0 errors, and the report names every changed file.
 
-- Full-screen paper overview: 8-10 seconds.
-- Full-screen paper stat: 5-8 seconds.
-- Glass lower-third explanation: 12-30 seconds.
-- Long topic glass card: 25-45 seconds with staggered sub-elements.
-- Beat start lead-in: 0.2-0.6 seconds.
-- Gap scan threshold: 30 seconds.
-- Lower-third width: about 68-72vw, max about 1240-1280px.
+## Taste decisions win
 
-## What To Preserve
+A choice the user made in review beats any generic rule here:
 
-Preserve user taste decisions discovered during review:
-
-- If the user says a beat is too long, do not restore it just to satisfy a generic coverage rule.
-- If glass card style is approved, reuse it instead of redesigning it.
-- If typography is approved, keep it stable and adjust only local sizing/weight.
-- If the speaker's face is important, prefer lower-third cards over center-screen cards.
+- A beat the user shortened stays short; fill after it with a new, shorter card.
+- An approved glass style is reused as is.
+- Approved typography stays stable; adjust only local size and weight.

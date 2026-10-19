@@ -1,6 +1,6 @@
 ---
 name: hyperframes-cli
-description: HyperFrames CLI tool — hyperframes init, lint, preview, render, transcribe, tts, doctor, browser, info, upgrade, compositions, docs, benchmark. Use when scaffolding a project, linting or validating compositions, previewing in the studio, rendering to video, transcribing audio, generating TTS, or troubleshooting the HyperFrames environment.
+description: HyperFrames CLI (npx hyperframes). Use when scaffolding a project, linting or validating compositions, previewing in the studio, rendering to MP4 or WebM, transcribing audio, generating TTS, or diagnosing a failed render or broken environment.
 ---
 
 # HyperFrames CLI
@@ -73,8 +73,6 @@ npx hyperframes render --docker                       # byte-identical
 | `--gpu`        | flag                  | off                        | GPU-accelerated encoding    |
 | `--strict`     | flag                  | off                        | Fail on lint errors         |
 | `--strict-all` | flag                  | off                        | Fail on errors AND warnings |
-
-**Quality guidance:** `draft` while iterating, `standard` for review, `high` for final delivery.
 
 ## Transcription
 

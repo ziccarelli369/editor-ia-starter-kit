@@ -21,7 +21,7 @@ Skills, docs and code stay in English.
 - `inbox/`: the user drops footage, audio and references here, unsorted. At
   project start run `node scripts/inbox.mjs`, propose which files belong to the
   project, and move them after the user confirms.
-- `video-projects/<yyyy-mm-dd>-<slug>/`: all work in progress. `raw/` holds the
+- `video-projects/<yyyy-mm-dd>-<slug>/`: all work in progress. `assets/` holds the
   moved sources. `project.json` is the truth about the project. Run HyperFrames
   from this folder.
 - `outbox/<project-id>/`: finals only. Every project ends here with a video and

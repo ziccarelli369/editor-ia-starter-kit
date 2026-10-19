@@ -1,63 +1,72 @@
 ---
 name: new-video
-description: The front door of the kit. Use when the user wants to make a video, reel, Short, or says "nuevo video", "quiero hacer un video", or /new-video. Creates the project, assigns inbox footage, picks the brand, and routes to guided or freeform mode.
+description: Front door for every video. Use when the user wants a video, reel or Short made, says "nuevo video" or /new-video, or drops footage in inbox/. Picks mode, brand and footage, creates the project, then routes to the editing skill.
 ---
 
 # New video
 
-Read `kit.config.json` first. Speak in its `language`.
+Read `kit.config.json`. Speak in its `language`.
 
 ## 1. Mode
 
-Ask one question: **guided** or **freeform**.
+Ask one question when the user has not said: **guided** or **freeform**.
 
-- Guided: the known path. The editing playbook, the short-form gates, the validators.
-  Recommend it to anyone making their first videos with the kit.
+- Guided: the editing playbook, the short-form gates, the validators. The
+  recommendation for anyone's first videos with the kit.
 - Freeform: no workflow, no gates. The user drives and you suggest. Same tools,
-  same delivery contract at the end.
+  same delivery at the end.
 
-If the user already said which, do not ask.
+Done when `mode` is known.
 
 ## 2. Brand
 
-List `brands/` (skip `_template` unless it is the only one). Ask which brand this
-project is for. If the brand does not exist, copy `brands/_template/` to
-`brands/<slug>/` and ask the user for name, colors and fonts before continuing.
+List `brands/` (hide `_template` when another brand exists) and ask which one.
+For a new brand, copy `brands/_template/` to `brands/<slug>/` and collect name,
+colors and fonts into its `DESIGN.md` and `tokens.css`.
 From here, read only that brand's folder.
+
+Done when `brands/<slug>/DESIGN.md` and `tokens.css` hold the user's values.
 
 ## 3. Project
 
-Run `npm run new-video -- <slug> --brand <brand> --mode <mode>`. Pick the slug
-from the user's one-line description: lowercase, kebab-case, 2 to 4 words.
+`npm run new-video -- <slug> --brand <brand> --mode <mode>`. Slug from the
+user's one-line description: lowercase kebab-case, 2 to 4 words.
+
+Done when the command prints the project id.
 
 ## 4. Footage
 
-Run `node scripts/inbox.mjs`. Show the list. Propose which files belong to this
-project and which stay. Move only after the user says yes:
+`node scripts/inbox.mjs` and show the list. Propose which files belong to this
+project. After the user's yes:
 `node scripts/inbox.mjs <project-id> <file> [<file>...]`.
-If the inbox is empty, ask the user to drop the footage in `inbox/` and stop.
+Empty inbox: ask the user to drop footage in `inbox/` and stop here.
+
+Done when every approved file sits in `assets/` and is listed in `project.json` `sources`.
 
 ## 5. Brief
 
-Write `video-projects/<project-id>/DESIGN.md` with: goal, audience, platform,
-length target, hook idea, CTA, the brand, and the style (if the user names one
-from `styles/core/` or `styles/drafts/`). Set `style` in `project.json`.
-Update `project.json` `status` to `briefed`. Run `npm run projects`.
+Write `video-projects/<project-id>/DESIGN.md`: goal, audience, platform, length
+target, hook idea, CTA, brand, and style (a folder under `styles/core/` or
+`styles/drafts/`, when the user names one; set `style` in `project.json`).
+Set `status` to `briefed`. Run `npm run projects`.
+
+Done when every field above has a value the user confirmed.
 
 ## 6. Route
 
-- Guided, footage of a person talking, short: load `short-form-edit`.
-- Guided, long recording: load `edit-video`.
-- Guided, no footage, a brief only: load `make-a-video`.
-- Guided, a website: load `website-to-hyperframes`.
-- A style was chosen: load `apply-style` before the editing skill.
-- Freeform: ask what the user wants to try first. Suggest two concrete options.
-  Load skills as needed. Keep every file inside the project folder.
+| Situation | Load |
+| --- | --- |
+| Guided, a person talking, short | `short-form-edit` |
+| Guided, long recording | `edit-video` |
+| Guided, brief only, no footage | `make-a-video` |
+| Guided, a website | `website-to-hyperframes` |
+| A style is set | `apply-style` first, then the row above |
+| Freeform | Offer two concrete first moves, then load skills as needed |
 
-Every path ends with the `deliver` skill. Never skip it.
+Every route ends in `deliver`.
 
-## Model profile
+## Team profile
 
-If `models.profile` is `team`, you (Opus) decide and design. Hand Haiku 5.5
-subagents only mechanical jobs: transcription runs, ffprobe, validators,
-contact sheets, file moves. Never a cut decision, never a design choice.
+When `models.profile` is `team`, you (Opus) decide and design. Haiku 5.5
+subagents take mechanical jobs only: transcription runs, ffprobe, validators,
+contact sheets, file moves.
