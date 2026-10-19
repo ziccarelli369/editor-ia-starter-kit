@@ -98,7 +98,7 @@ function checkCues(cues, words) {
   }).map(r => {
     // Timing is judged against measured voice onsets (scripts/lib/onsets.mjs), never Whisper times.
     // A cue is on cue when a sustained speech onset sits within `tol` of its start.
-    const onset = nearestOnset(audio.onsets, r.start, 1.0);
+    const onset = nearestOnset(audio.onsets, r.start, 0.6);
     r.onset = onset;
     r.delta = onset == null ? null : +(onset - r.start).toFixed(3);
     if (onset == null) { /* continuous speech, no onset to measure */ }
@@ -116,14 +116,15 @@ function detectCuts() {
 // Whisper stretches word spans across silence, so a cut inside a word span only counts when the
 // speech band (300-3400 Hz) at the cut is as loud as the word itself (within 4 dB of the word's
 // midpoint) and above -35 dB. Drones and sub hits fall outside the band; whooshes mostly do.
-function levelAt(t) { return bandLevel(audio.frames, t); }
+// A cut is judged on 100 ms around the frame; a 300 ms span would pick up the next word.
+function levelAt(t, span = 0.05) { return bandLevel(audio.frames, t, span); }
 function checkCuts(cuts, words) {
   return cuts.map(t => {
     const w = words.find(w => w.start < t && t < w.end);
     const level = w ? levelAt(t) : null;
-    const wordLevel = w ? levelAt((w.start + w.end) / 2) : null;
+    const wordLevel = w ? levelAt((w.start + w.end) / 2, 0.15) : null;
     // The word itself must be audible where Whisper placed it; a silent span is a stretched estimate.
-    const inWord = w && wordLevel > -35 && level > -35 && level >= wordLevel - 4;
+    const inWord = w && wordLevel > -32 && level > -32 && level >= wordLevel - 4;
     return { t, word: w?.text.trim() ?? '', level, wordLevel, flags: inWord ? ['CUT_IN_WORD'] : [] };
   });
 }
@@ -172,7 +173,16 @@ function report(cueRes, cutRes, loud) {
   return { pass, summary, md };
 }
 
-const words = transcribe();
+// Whisper invents these over silence or room tone. They are never in the footage.
+const HALLUCINATED = /suscr[ií]b|canal!|amara\.org|subt[ií]tulos|gracias por ver|thank you for watching|subscribe/i;
+const dropHallucinations = ws => {
+  const text = ws.map(w => w.text).join(' ');
+  if (!HALLUCINATED.test(text)) return ws;
+  // Drop the matching words and every word within 1.5 s of them: the whole invented phrase.
+  const bad = ws.filter(w => HALLUCINATED.test(w.text)).map(w => w.start);
+  return ws.filter(w => !bad.some(t => Math.abs(w.start - t) <= 1.5));
+};
+const words = dropHallucinations(transcribe());
 const audio = analyze(wavFile);
 const cueRes = checkCues(parseSrt(readFileSync(srtPath, 'utf8')), words);
 const cutRes = checkCuts(detectCuts(), words);
