@@ -11,7 +11,7 @@ Read `kit.config.json` first. Speak in its `language`.
 
 Ask one question: **guided** or **freeform**.
 
-- Guided: the known path. Nate's playbook, the short-form gates, the validators.
+- Guided: the known path. The editing playbook, the short-form gates, the validators.
   Recommend it to anyone making their first videos with the kit.
 - Freeform: no workflow, no gates. The user drives and you suggest. Same tools,
   same delivery contract at the end.

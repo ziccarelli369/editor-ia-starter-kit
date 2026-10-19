@@ -1,6 +1,6 @@
 # Release verification
 
-## Consolidated Herk Edit Kit, version 2
+## Consolidated kit checks
 
 - All 14 skills passed frontmatter validation. The distribution check reports
   zero errors across 406 cards and the skill tree.
