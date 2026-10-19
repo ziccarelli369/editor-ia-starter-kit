@@ -26,10 +26,11 @@ function run(cmd, a, o = {}) {
   return r;
 }
 
+const wavFile = join(proj, 'work', 'hearing', 'hearing.wav');
 function transcribe() {
   const dir = join(proj, 'work', 'hearing');
   mkdirSync(dir, { recursive: true });
-  const wav = join(dir, 'hearing.wav'), raw = join(dir, 'hearing.wav.raw.json');
+  const wav = wavFile, raw = join(dir, 'hearing.wav.raw.json');
   const ff = run('ffmpeg', ['-y', '-v', 'error', '-i', video, '-vn', '-ac', '1', '-ar', '16000', wav]);
   if (ff.status !== 0) throw new Error(`ffmpeg audio extract failed: ${ff.stderr}`);
   const win = process.platform === 'win32';
@@ -112,10 +113,21 @@ function detectCuts() {
   return [...r.stderr.matchAll(/Parsed_showinfo.*?pts_time:\s*([\d.]+)/g)].map(m => +m[1]);
 }
 
+// Whisper stretches word spans across silence, so a cut inside a word span only counts when the
+// speech band (300-3400 Hz) at the cut is as loud as the word itself (within 4 dB of the word's
+// midpoint) and above -35 dB. Drones and sub hits fall outside the band; whooshes mostly do.
+function levelAt(t) {
+  const r = run('ffmpeg', ['-hide_banner', '-ss', String(Math.max(0, t - 0.15)), '-t', '0.3', '-i', wavFile, '-af', 'highpass=f=300,lowpass=f=3400,astats=measure_overall=RMS_level:measure_perchannel=none', '-f', 'null', '-']);
+  const m = r.stderr.match(/RMS level dB:\s*(-?[\d.]+|-inf)/);
+  return m ? Number(m[1]) : -99;
+}
 function checkCuts(cuts, words) {
   return cuts.map(t => {
     const w = words.find(w => w.start < t && t < w.end);
-    return { t, word: w?.text.trim() ?? '', flags: w ? ['CUT_IN_WORD'] : [] };
+    const level = w ? levelAt(t) : null;
+    const wordLevel = w ? levelAt((w.start + w.end) / 2) : null;
+    const inWord = w && level > -35 && level >= wordLevel - 4;
+    return { t, word: w?.text.trim() ?? '', level, wordLevel, flags: inWord ? ['CUT_IN_WORD'] : [] };
   });
 }
 
@@ -142,7 +154,7 @@ function report(cueRes, cutRes, loud) {
   const pass = !counts.MISMATCH && !counts.CUT_IN_WORD && (!timingJudged || timing <= 0.1 * cueRes.length);
   const problems = [
     ...cueRes.filter(r => r.flags.length).map(r => `cue ${r.index} @${fmt(r.start)}s ${r.flags.join('+')}: "${r.text}" heard "${r.heardText}"`),
-    ...cutRes.filter(r => r.flags.length).map(r => `cut @${fmt(r.t)}s CUT_IN_WORD "${r.word}"`),
+    ...cutRes.filter(r => r.flags.length).map(r => `cut @${fmt(r.t)}s CUT_IN_WORD "${r.word}" (speech band ${fmt(r.level)} dB at cut, ${fmt(r.wordLevel)} dB in word)`),
   ];
   const countStr = ['MISMATCH', 'LATE', 'EARLY', 'SILENT', 'CUT_IN_WORD'].map(k => `${k} ${counts[k] ?? 0}`).join(' · ');
   const summary = [
@@ -157,8 +169,8 @@ function report(cueRes, cutRes, loud) {
     '## Summary', '', '```', summary, '```', '',
     '## Cues', '', '| # | start | cue text | heard text | similarity | delta (s) | flags |', '|---|---|---|---|---|---|---|',
     ...cueRes.map(r => `| ${r.index} | ${fmt(r.start)} | ${cell(r.text)} | ${cell(r.heardText)} | ${fmt(r.sim)} | ${fmt(r.delta)} | ${r.flags.join(' ')} |`), '',
-    '## Cuts', '', '| time (s) | word spanning the cut | flags |', '|---|---|---|',
-    ...(cutRes.length ? cutRes.map(r => `| ${fmt(r.t)} | ${cell(r.word)} | ${r.flags.join(' ')} |`) : ['| - | no hard cuts found | |']), '',
+    '## Cuts', '', '| time (s) | word spanning the cut | speech band at cut (dB) | in word (dB) | flags |', '|---|---|---|',
+    ...(cutRes.length ? cutRes.map(r => `| ${fmt(r.t)} | ${cell(r.word)} | ${fmt(r.level)} | ${fmt(r.wordLevel)} | ${r.flags.join(' ')} |`) : ['| - | no hard cuts found | | | |']), '',
     '## Loudness', '', `- Integrated: ${fmt(loud.lufs)} LUFS`, `- True peak: ${fmt(loud.tp)} dBTP`, '',
   ].join('\n');
   return { pass, summary, md };
