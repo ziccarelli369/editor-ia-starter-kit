@@ -176,12 +176,17 @@ function report(cueRes, cutRes, loud) {
 // Whisper invents these over silence or room tone. They are never in the footage.
 const HALLUCINATED = /suscr[ií]b|canal!|amara\.org|subt[ií]tulos|gracias por ver|thank you for watching|subscribe/i;
 const dropHallucinations = ws => {
-  const text = ws.map(w => w.text).join(' ');
-  if (!HALLUCINATED.test(text)) return ws;
-  // An invented phrase is appended after real speech, so drop the matching word and the words
-  // that follow it within 1.5 s; the real words before it stay.
-  const bad = ws.filter(w => HALLUCINATED.test(w.text)).map(w => w.start);
-  return ws.filter(w => !bad.some(t => w.start >= t - 0.05 && w.start - t <= 1.5));
+  // An invented phrase is appended after real speech. Keep any real text glued before the
+  // first "¡" in the matching token, then drop every following word until a 1 s gap.
+  const out = [];
+  for (let i = 0; i < ws.length; i++) {
+    const w = ws[i];
+    if (!HALLUCINATED.test(w.text)) { out.push(w); continue; }
+    const head = w.text.split(/[¡¿]/)[0].trim();
+    if (head && !HALLUCINATED.test(head)) out.push({ ...w, text: head });
+    while (i + 1 < ws.length && ws[i + 1].start - ws[i].end < 1.0) i++;
+  }
+  return out;
 };
 const words = dropHallucinations(transcribe());
 const audio = analyze(wavFile);
