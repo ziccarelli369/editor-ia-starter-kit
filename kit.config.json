@@ -1,0 +1,30 @@
+{
+  "$comment": "editor-ia-starter-kit settings. The agent reads this file at the start of every task. Keys never go here; they go in .env.",
+  "language": "es",
+  "models": {
+    "profile": "solo",
+    "$profiles": {
+      "solo": "One Claude Opus 5.5 agent does everything: taste, design, cuts, render.",
+      "team": "Claude Opus 5.5 orchestrates and makes every design decision. Claude Haiku 5.5 subagents run mechanical, parallel work: transcripts, probes, validators, contact sheets."
+    },
+    "design": "claude-opus-5-5",
+    "worker": "claude-haiku-5-5"
+  },
+  "transcription": {
+    "provider": "whisper",
+    "$providers": {
+      "whisper": "npx hyperframes transcribe <video>  (local, free, no key)",
+      "elevenlabs": "npm run transcribe -- <video>  (needs ELEVENLABS_API_KEY)"
+    }
+  },
+  "defaults": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "brand": "_template"
+  },
+  "outbox": {
+    "required": ["video", "cover"],
+    "extras": ["caption", "srt"]
+  }
+}
