@@ -99,6 +99,11 @@ function checkCues(cues, words) {
     else if (!heard.length) flags.push('SILENT');
     else if (sim < 0.6) flags.push('MISMATCH');
     return { ...c, heardText, sim, delta, flags };
+  }).map((r, i, all) => {
+    // Scribe renames single short words on a mixed reel from run to run. A one-word cue whose
+    // neighbours both matched well is a transcriber slip: UNSURE, and the verdict stays.
+    if (r.flags.includes('MISMATCH') && r.text.trim().split(/\s+/).length <= 1 && (all[i - 1]?.sim ?? 1) >= 0.8 && (all[i + 1]?.sim ?? 1) >= 0.8) r.flags = r.flags.map(f => (f === 'MISMATCH' ? 'UNSURE' : f));
+    return r;
   }).map(r => {
     // Timing is judged against measured voice onsets (scripts/lib/onsets.mjs), never Whisper times.
     // A cue is on cue when a sustained speech onset sits within `tol` of its start.
