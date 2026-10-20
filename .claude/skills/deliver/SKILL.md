@@ -34,8 +34,9 @@ Both ship unless the user drops one. Say which extras were dropped.
 ## 4. Sync, align, then hear
 
 First, the render itself: does the picture show and the sound play what the
-edit list says, together? One probe per shot, a second after each cut, as
-`reelTime:sourceTime` pairs from your EDL:
+edit list says, together? One probe per shot, 0.3 s into shots shorter than 2 s and 1 s into the
+others, skipping freezes and speed ramps, as `reelTime:sourceTime` pairs from
+your `edl.json`:
 
 ```sh
 node scripts/av-sync-check.mjs <project-id> --source <source video> --probes 1.0:58.75,9.0:66.75,...

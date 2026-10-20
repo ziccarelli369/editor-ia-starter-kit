@@ -124,7 +124,7 @@ const form = new FormData();
 form.append("file", await openAsBlob(uploadPath), basename(uploadPath));
 form.append("model_id", opts.model);
 form.append("timestamps_granularity", "word");
-if (opts.language) form.append("language_code", opts.language);
+if (opts.language && opts.language !== "auto") form.append("language_code", opts.language);
 form.append("diarize", String(opts.diarize));
 form.append("tag_audio_events", String(opts.tagAudioEvents));
 

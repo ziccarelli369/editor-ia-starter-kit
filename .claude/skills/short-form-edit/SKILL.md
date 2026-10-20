@@ -30,7 +30,7 @@ Authorization persists. "Make a finished video and iterate" authorizes local edi
 3. **Shortlist assets.** Inspect the footage, brand assets, and source demos before you lock the concept, and let a distinctive moment shape the idea. Prefer what reads in one glance; fit the complete action and result before a tighter crop.
    Done when: the shortlist gives every usable asset an exact interval, visible action, consequence, provenance, and possible story role.
 
-4. **Cut.** Run [cut-silences](../cut-silences/SKILL.md) and [cut-mistakes](../cut-mistakes/SKILL.md). Remove abandoned takes; keep meaningful qualifications, the payoff, and natural breath at joins. Render the clean cut once and derive word timing from the frame-aligned EDL.
+4. **Cut.** Run [cut-silences](../cut-silences/SKILL.md) and [cut-mistakes](../cut-mistakes/SKILL.md). Remove abandoned takes; keep meaningful qualifications, the payoff, and natural breath at joins. Render the clean cut once and derive word timing from the frame-aligned EDL. Cut picture and sound from the same EDL numbers in one ffmpeg call per shot, `-ss` before `-i`, always re-encode (a stream copy lands on a keyframe and shifts the picture). Cut on Scribe word edges: a shot starts in the gap before its first word and ends after its last word ends, never inside a word. Keep the EDL as `edl.json` with source in/out per shot; every later tool reads it.
    Done when: every spoken line is read, the source-time cut reasons are saved, and `assets/edit-decisions.json` exists.
 
 5. **Design the journey.** Read [goals.md](references/goals.md) for the hook family and CTA that match `project.json` `goal`. Write `DESIGN.md` and a beat plan before HTML: hook, open loop, escalation, evidence, payoff, CTA, and a reason for every shot. Follow [curiosity-and-entertainment.md](references/curiosity-and-entertainment.md) for the open loops, rhythm, and duplication audit, and [opening.md](references/opening.md) for the three openings.
@@ -49,7 +49,10 @@ Authorization persists. "Make a finished video and iterate" authorizes local edi
    - Music: pick a track from `music/` or `brands/<slug>/music/` (the user's own licensed files; `node .claude/skills/motion-showreel/scripts/music-grid.mjs <track>` gives the beat grid). With no track and no music key, the bed is an ffmpeg-made drone or silence; say which. Normalize the voice, start the bed about 14-20 dB below it, duck under speech, fade cleanly. Aim for about -16 LUFS and at most -1 dBTP, adapting to source dynamics. Save the bed's provenance. Score SFX and any music revision per [generation-and-sound.md](references/generation-and-sound.md).
    Done when: `assets/plan.json` passes `validate-plan.mjs` and every cue has a purpose.
 
-9. **Render.** Run lint and inspect the live preview. Browser automation is headless, with Pointer Lock and pointer capture disabled in every context. Render a draft, inspect, revise, then render final quality. Gotchas:
+9. **Render.** Run lint and inspect the live preview. Browser automation is headless, with Pointer Lock and pointer capture disabled in every context. Render a draft, inspect, revise, then render final quality. Edit compositions with the Edit tool or a script saved to a file; a shell-inline regex loses its backslashes and has corrupted compositions three times. Gotchas:
+   - Name fonts directly in CSS (`font-family: "Bebas Neue"`), never through a CSS variable: the renderer falls back to Arial and text runs off the frame.
+   - A five-word caption line at 1080 px wide fits at 68 px; 76 px wraps.
+   - When a keyword span animates, keep a literal space on each side of it or words collapse ("ELTOBILLO").
    - If framework capture stalls, a deterministic graphics export plus FFmpeg assembly is acceptable.
    - Await local fonts before capturing a canvas.
    - Normalize every video input to one frame time base before overlaying, and inspect every encoded cut for one-frame mismatches.

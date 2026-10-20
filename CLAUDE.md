@@ -107,7 +107,12 @@ The outbox is the end: nothing is published, uploaded, posted or sent.
 Raw footage and delivered outbox files stay as they are.
 
 Cut silences first, then cut mistakes on the retimed transcript. One timeline
-per stage: original timestamps belong to the original footage only.
+per stage: original timestamps belong to the original footage only. Picture
+and sound are cut from the same `edl.json` numbers, `-ss` before `-i`, always
+re-encoded. Caption times come from Scribe word starts on the source, mapped
+through the EDL; never from a transcript of the mixed reel.
+Edit compositions with the Edit tool or a script saved to a file, never a
+shell-inline regex.
 
 Before a draft render run `node scripts/preflight.mjs <project>` and
 `npx hyperframes lint`. Review the draft in Studio (browser pane): hero frames,

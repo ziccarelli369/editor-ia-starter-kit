@@ -15,6 +15,8 @@ const opt = n => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1]
 const input = args.find((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--')));
 if (!input || !existsSync(input)) { console.error('Usage: npm run transcribe -- <video-or-audio> [--out <raw.json>] [--language en|es|auto]'); process.exit(1); }
 const config = JSON.parse(readFileSync(join(root, 'kit.config.json'), 'utf8'));
+// .env may carry HYPERFRAMES_WHISPER_PATH; subagent shells often lack it.
+try { for (const line of readFileSync(join(root, '.env'), 'utf8').split(/\r?\n/)) { const m = line.match(/^([A-Z_]+)=(.*)$/); if (m && !process.env[m[1]] && m[2]) process.env[m[1]] = m[2].trim(); } } catch {}
 const langs = config.transcription.languages ?? ['es'];
 const language = opt('language') ?? (langs.length === 1 ? langs[0] : 'auto');
 const model = language === 'en' ? (config.transcription.model_en ?? 'medium.en') : (config.transcription.model ?? 'medium');
@@ -27,7 +29,7 @@ const hasKey = Boolean(process.env.ELEVENLABS_API_KEY || envKey);
 if (config.transcription.provider === 'elevenlabs') {
   if (!hasKey) { console.error('provider is elevenlabs but ELEVENLABS_API_KEY is empty in .env; falling back to whisper'); }
   else {
-    const el = spawnSync(process.execPath, [join(root, 'scripts/transcribe-elevenlabs.mjs'), input, '--output', out, ...(language !== 'auto' ? ['--language', language] : [])], { stdio: 'inherit', cwd: root });
+    const el = spawnSync(process.execPath, [join(root, 'scripts/transcribe-elevenlabs.mjs'), input, '--output', out, '--language', language], { stdio: 'inherit', cwd: root });
     process.exit(el.status ?? 1);
   }
 }

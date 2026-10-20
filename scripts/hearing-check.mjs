@@ -192,6 +192,7 @@ const dropHallucinations = ws => {
   }
   return out;
 };
+try { for (const line of readFileSync(join(root, '.env'), 'utf8').split(/\r?\n/)) { const m = line.match(/^([A-Z_]+)=(.*)$/); if (m && !process.env[m[1]] && m[2]) process.env[m[1]] = m[2].trim(); } } catch {}
 const verifiedPath = join(proj, 'VERIFIED.json');
 const verified = existsSync(verifiedPath) ? JSON.parse(readFileSync(verifiedPath, 'utf8')).map(t => t.replace(/\s+/g, ' ').trim().toLowerCase()) : [];
 const words = dropHallucinations(transcribe());
