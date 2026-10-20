@@ -26,8 +26,8 @@ Done when `renders/cover.png` opens and the hook text is readable at phone size.
 
 - `renders/caption.txt`: hook line, one or two lines of body, 3 to 5 hashtags,
   in the brand's language. Emoji only when the brand's `DESIGN.md` allows them.
-- `renders/subtitles.srt`: from the retimed transcript of the final cut, at most
-  5 words per line, matching the on-screen captions.
+- `renders/subtitles.srt`: from the retimed transcript of the final cut, one cue
+  per on-screen chunk, same text and times as the screen.
 
 Both ship unless the user drops one. Say which extras were dropped.
 
