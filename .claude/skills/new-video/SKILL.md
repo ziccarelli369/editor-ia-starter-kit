@@ -22,7 +22,9 @@ Done when `mode` is known.
 
 List `brands/` (hide `_template` when another brand exists) and ask which one.
 For a new brand, copy `brands/_template/` to `brands/<slug>/` and collect name,
-colors and fonts into its `DESIGN.md` and `tokens.css`.
+colors and fonts into its `DESIGN.md` and `tokens.css`. When `brands/<slug>/`
+already exists, ask whether it is the same client; two clients never share a
+folder, so a second one gets a different slug.
 From here, read only that brand's folder.
 
 Done when `brands/<slug>/DESIGN.md` and `tokens.css` hold the user's values.

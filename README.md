@@ -31,6 +31,10 @@ npx hyperframes doctor
 Copia `.env.example` a `.env`. Llena una clave solo si vas a usar ese servicio
 (ElevenLabs para voz y efectos, Kie.ai para música y clips generados).
 
+## Primer arranque
+
+Lee `docs/ONBOARDING.md` (5 minutos). En Claude Code escribe `/onboard` una vez.
+
 ## Usar
 
 1. Deja tu grabación en `inbox/`.
@@ -83,6 +87,7 @@ HyperFrames. Drop footage in `inbox/`, talk to the agent, pick up finals in `out
 Install: Node 22+, FFmpeg, Chrome, and whisper.cpp (`whisper-cli` on PATH, or `HYPERFRAMES_WHISPER_PATH`). Then `npm install` and `npx hyperframes doctor`.
 Copy `.env.example` to `.env` only if you want ElevenLabs or Kie.ai.
 
+First run: `docs/ONBOARDING.md`, then `/onboard` once in Claude Code.
 Use: put footage in `inbox/`, open Claude Code here, type `/new-video`, choose
 guided or freeform, choose a brand, review drafts, collect the result in `outbox/`.
 

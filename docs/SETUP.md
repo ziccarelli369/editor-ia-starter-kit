@@ -1,5 +1,7 @@
 # Setup and troubleshooting
 
+Short version for a first run: `docs/ONBOARDING.md`.
+
 Start with [tools, accounts, and API keys](TOOLS-AND-API-KEYS.md) for the kit's
 local Whisper default, the optional ElevenLabs and Kie.ai paths, and optional services.
 

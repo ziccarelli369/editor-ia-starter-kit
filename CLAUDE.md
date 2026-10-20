@@ -5,12 +5,10 @@ Footage goes into `inbox/`, finals come out of `outbox/`.
 
 ## 0. First run
 
-If `node_modules/` or `.env` is missing, or `npx hyperframes doctor` fails, the
-kit is not installed. Walk the user through `docs/SETUP.md` in their language
-before anything else. Ask two things and write them to `kit.config.json`:
-the language you speak to them in (`language`), and the language of their
-footage (`transcription.languages`: `["en"]`, `["es"]` or both).
-Setup creates no projects and no example videos.
+If `node_modules/` or `.env` is missing, `brands/` holds only `_template`, or
+`npx hyperframes doctor` fails, the kit is not set up: load the `onboard`
+skill before anything else. It checks the machine, asks the two languages,
+and fills the first brand. Setup creates no projects and no example videos.
 
 ## 1. Identity
 
@@ -60,6 +58,7 @@ Guided is the known path: the editing playbook and its gates.
 
 | Need | Skill |
 | --- | --- |
+| First run: machine check, languages, first brand | `onboard` |
 | Start any video: mode, brand, project, footage | `new-video` |
 | Reel, Short, short ad from footage | `short-form-edit` |
 | Full raw-video edit, long form | `edit-video` |
