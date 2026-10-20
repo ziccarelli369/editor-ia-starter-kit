@@ -49,8 +49,11 @@ node scripts/hearing-check.mjs <project-id> --video renders/final.mp4 --srt rend
 ```
 
 Read `HEARING.md`. `PASS` goes on. MISMATCH means the caption text is not what
-was said: fix the text. CUT_IN_WORD means a cut lands on speech: move the cut.
-LATE/EARLY after alignment means an on-screen caption was not re-timed.
+was said: fix the text. When the user has confirmed a line by ear and Whisper
+still hears it differently, put the exact cue text in `VERIFIED.json` in the
+project folder; the ear outranks the transcriber. CUT_IN_WORD means a cut lands
+on speech: move the cut. LATE/EARLY after alignment means an on-screen caption
+was not re-timed.
 
 ## 5. Deliver
 

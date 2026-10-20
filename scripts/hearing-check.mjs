@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // The ear: check a final render against its subtitles and its cuts, then write HEARING.md.
 // Usage: node scripts/hearing-check.mjs <project-id> [--video renders/final.mp4] [--srt renders/subtitles.srt] [--tolerance 0.35]
+// A line the user confirmed by ear goes in video-projects/<id>/VERIFIED.json as ["exact cue text", ...];
+// such cues are marked VERIFIED and never MISMATCH, since the ear outranks the transcriber.
 //   Paths are relative to video-projects/<project-id>/.
 //   Needs ffmpeg on PATH and local Whisper (HYPERFRAMES_WHISPER_PATH passes through to `npm run transcribe`).
 //   Writes video-projects/<id>/HEARING.md, prints the summary, exits 1 on FAIL.
@@ -92,7 +94,9 @@ function checkCues(cues, words) {
     const sim = heard.length ? similarity(c.text, heardText) : 0;
     const delta = heard.length ? heard[0].start - c.start : null;
     const flags = [];
-    if (!heard.length) flags.push('SILENT');
+    const isVerified = verified.includes(c.text.replace(/\s+/g, ' ').trim().toLowerCase());
+    if (isVerified) flags.push('VERIFIED');
+    else if (!heard.length) flags.push('SILENT');
     else if (sim < 0.6) flags.push('MISMATCH');
     return { ...c, heardText, sim, delta, flags };
   }).map(r => {
@@ -188,6 +192,8 @@ const dropHallucinations = ws => {
   }
   return out;
 };
+const verifiedPath = join(proj, 'VERIFIED.json');
+const verified = existsSync(verifiedPath) ? JSON.parse(readFileSync(verifiedPath, 'utf8')).map(t => t.replace(/\s+/g, ' ').trim().toLowerCase()) : [];
 const words = dropHallucinations(transcribe());
 const audio = analyze(wavFile);
 const cueRes = checkCues(parseSrt(readFileSync(srtPath, 'utf8')), words);
