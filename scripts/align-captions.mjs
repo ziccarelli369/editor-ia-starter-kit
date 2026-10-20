@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // Snap every caption to the measured voice onset, frame-exact.
-// Usage: node scripts/align-captions.mjs <project-id> --srt <in.srt> [--audio renders/final.mp4] [--out <out.srt>] [--window 0.6] [--fps 30]
+// Usage: node scripts/align-captions.mjs <project-id> --srt <in.srt> [--audio renders/final.mp4] [--out <out.srt>] [--window 0.2] [--fps 30]
 // Paths are relative to video-projects/<project-id>/. Writes the aligned SRT and ALIGN.json
 // (per cue: old start, onset used, new start, delta) and prints a summary.
-// A cue with no onset inside the window (continuous speech) keeps its time and is listed as "kept".
+// A cue with no onset inside the window (continuous speech, or a soft first word) keeps its time and is
+// listed as "kept". With Scribe word times as the base, the window stays small: a wide window drags a
+// soft first word onto the next loud syllable.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,12 +14,12 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const id = args[0];
 const opt = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : d; };
-if (!id || id.startsWith('--') || !opt('srt')) { console.error('Usage: node scripts/align-captions.mjs <project-id> --srt <in.srt> [--audio renders/final.mp4] [--out <out.srt>] [--window 0.6] [--fps 30]'); process.exit(2); }
+if (!id || id.startsWith('--') || !opt('srt')) { console.error('Usage: node scripts/align-captions.mjs <project-id> --srt <in.srt> [--audio renders/final.mp4] [--out <out.srt>] [--window 0.2] [--fps 30]'); process.exit(2); }
 const proj = join(root, 'video-projects', id);
 const srtPath = join(proj, opt('srt'));
 const audio = join(proj, opt('audio', 'renders/final.mp4'));
 const out = join(proj, opt('out', opt('srt').replace(/\.srt$/i, '.aligned.srt')));
-const window = Number(opt('window', '0.6'));
+const window = Number(opt('window', '0.2'));
 const fps = Number(opt('fps', '30'));
 if (!existsSync(srtPath) || !existsSync(audio)) { console.error('srt or audio not found'); process.exit(2); }
 

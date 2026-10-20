@@ -11,6 +11,7 @@
     "projects": "node scripts/projects-index.mjs",
     "hearing": "node scripts/hearing-check.mjs",
     "align": "node scripts/align-captions.mjs",
+    "avsync": "node scripts/av-sync-check.mjs",
     "track-crop": "node scripts/track-crop.mjs",
     "transcribe": "node scripts/transcribe.mjs",
     "transcribe:elevenlabs": "node scripts/transcribe-elevenlabs.mjs",
