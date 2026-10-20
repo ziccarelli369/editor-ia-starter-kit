@@ -44,6 +44,7 @@ Authorization persists. "Make a finished video and iterate" authorizes local edi
 
 8. **Generate and assemble.**
    - Generated inserts follow [generation-and-sound.md](references/generation-and-sound.md).
+   - Captions, guided house style (the playbook's measured spec, `docs/EDITING-PLAYBOOK.md` → Captions): 1 to 3 words per chunk, split on phrase boundaries, never inside a phrase. Hard swap, no pop, each chunk on screen 2 frames before its first word's Scribe start. One look for the whole reel: every chunk in the same dark box with a thin light edge, all caps, the brand's display font at 62 to 64 px. Color on 25 to 45 % of chunks, whole chunk only, the brand accent for the keyword or payoff. Never over the mouth or chin, never white on light (measure the pixels behind it), and a chunk that would cross a cut moves to the new shot's spot on the cut frame. Freeform may choose another style; guided does not.
    - Animate graphics from the retimed words. Store each shot's anchor phrase and time, and bind each sub-element reveal to its own spoken noun rather than an `index * 0.4` stagger. Captions and impact events land within 2 frames of word onset, with at most 0.15 s of deliberate anticipation.
    - Follow the HyperFrames timeline contract: one registered paused timeline per composition, full duration coverage, local assets, muted video with separate audio. Animate the footage wrapper. Use real 3D only when the metaphor needs it. Keep the source editable.
    - Music: pick a track from `music/` or `brands/<slug>/music/` (the user's own licensed files; `node .claude/skills/motion-showreel/scripts/music-grid.mjs <track>` gives the beat grid). With no track and no music key, the bed is an ffmpeg-made drone or silence; say which. Normalize the voice, start the bed about 14-20 dB below it, duck under speech, fade cleanly. Aim for about -16 LUFS and at most -1 dBTP, adapting to source dynamics. Save the bed's provenance. Score SFX and any music revision per [generation-and-sound.md](references/generation-and-sound.md).
@@ -51,7 +52,7 @@ Authorization persists. "Make a finished video and iterate" authorizes local edi
 
 9. **Render.** Run lint and inspect the live preview. Browser automation is headless, with Pointer Lock and pointer capture disabled in every context. Render a draft, inspect, revise, then render final quality. Edit compositions with the Edit tool or a script saved to a file; a shell-inline regex loses its backslashes and has corrupted compositions three times. Gotchas:
    - Name fonts directly in CSS (`font-family: "Bebas Neue"`), never through a CSS variable: the renderer falls back to Arial and text runs off the frame.
-   - A five-word caption line at 1080 px wide fits at 68 px; 76 px wraps.
+   - A 1 to 3 word chunk at 62 to 64 px never wraps; a longer line at 76 px does.
    - When a keyword span animates, keep a literal space on each side of it or words collapse ("ELTOBILLO").
    - If framework capture stalls, a deterministic graphics export plus FFmpeg assembly is acceptable.
    - Await local fonts before capturing a canvas.

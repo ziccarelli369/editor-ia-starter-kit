@@ -39,7 +39,7 @@ Put font files in `fonts/` or use a Google Fonts link. Never mix more than two.
 
 ## Rules the agent must keep
 
-- Captions: one or two lines, max 5 words per line, at most 68 px at 1080 wide, centered in the lower third,
+- Captions (guided): 1 to 3 words per chunk, all caps, 62 to 64 px in `--font-display`, one dark box with a thin light edge, placed by the face (never over the mouth), in the lower third,
   safe from the platform UI (keep 220 px clear at the bottom of a 1080x1920 frame).
 - Keyword highlight uses `--brand-accent` only.
 - Cover: hero frame plus the hook sentence in `--font-display`, logo bottom-right.

@@ -29,7 +29,7 @@ inferred row.
 | --- | --- |
 | `pacing.cut_median_s`, `pacing.cut_p90_s` | cut rhythm |
 | `hook.first_cut_s`, `hook.text_on_screen_s` | the opening |
-| `captions` | words per line, position, highlight |
+| `captions` | words per chunk, position, highlight (guided keeps the playbook box and size) |
 | `transitions` | the allowed moves, this list only |
 | `sound` | music presence, SFX density, where hits land |
 
