@@ -33,7 +33,7 @@ if (config.transcription.provider === 'elevenlabs' && !eleven && whisper) consol
 env.KIE_API_KEY ? ok('Kie.ai key (música y clips generados)') : console.log('  opc.   sin KIE_API_KEY: la música y el B-roll serán gráficos del agente');
 
 ok(`idioma del agente: ${config.language} · idioma del metraje: ${config.transcription.languages.join(', ')} (cámbialo en kit.config.json)`);
-const brands = spawnSync(win ? 'cmd' : 'ls', win ? ['/c', 'dir', '/b', join(root, 'brands')] : [join(root, 'brands')], { encoding: 'utf8' }).stdout.split(/\r?\n/).filter(b => b && b !== '_template' && b !== 'README.md');
+const brands = readdirSync(join(root, 'brands'), { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== '_template').map(d => d.name);
 brands.length ? ok(`marcas: ${brands.join(', ')}`) : console.log('  opc.   sin marcas todavía: el agente crea la primera en tu primer /new-video');
 
 console.log('');
