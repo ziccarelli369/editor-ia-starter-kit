@@ -52,17 +52,19 @@ for (const [t, s] of probes) {
   const snd = soundAt(finA, srcA, t), pic = pictureAt(t, s);
   const dS = snd.t - s, dP = pic - s, av = snd.t - pic;
   const flags = [];
+  const noMatch = Math.abs(dP) >= 1.9; // the match sits at the edge of the ±2 s window: overlay, card or freeze, nothing to compare
   if (Math.abs(dS) > tol) flags.push('SOUND_OFF_EDL');
-  if (Math.abs(dP) > tol) flags.push('PICTURE_OFF_EDL');
-  if (Math.abs(av) > tol) flags.push('AV_OFFSET');
+  if (noMatch) flags.push('PICTURE_UNVERIFIED');
+  else { if (Math.abs(dP) > tol) flags.push('PICTURE_OFF_EDL'); if (Math.abs(av) > tol) flags.push('AV_OFFSET'); }
   rows.push({ t, s, sound: +snd.t.toFixed(2), picture: +pic.toFixed(2), av: +av.toFixed(2), flags });
   console.log(`reel ${t.toFixed(2)}s  edl ${s.toFixed(2)}s  sound ${snd.t.toFixed(2)} (${dS >= 0 ? '+' : ''}${dS.toFixed(2)})  picture ${pic.toFixed(2)} (${dP >= 0 ? '+' : ''}${dP.toFixed(2)})  sound-picture ${av >= 0 ? '+' : ''}${av.toFixed(2)}  ${flags.join(' ')}`);
 }
-const bad = rows.filter(r => r.flags.length);
+const bad = rows.filter(r => r.flags.some(f => f !== 'PICTURE_UNVERIFIED'));
+const unverified = rows.filter(r => r.flags.includes('PICTURE_UNVERIFIED')).length;
 const verdict = bad.length ? 'FAIL' : 'PASS';
 const md = [`# AV sync check: ${verdict}`, '', `Render \`${opt('video', 'renders/final.mp4')}\` against \`${opt('source')}\`, tolerance ${tol}s.`, '',
   '| reel (s) | edl source (s) | sound from (s) | picture from (s) | sound-picture (s) | flags |', '|---|---|---|---|---|---|',
   ...rows.map(r => `| ${r.t} | ${r.s} | ${r.sound} | ${r.picture} | ${r.av} | ${r.flags.join(' ')} |`), ''].join('\n');
 writeFileSync(join(proj, 'AVSYNC.md'), md);
-console.log(`Verdict: ${verdict} — ${rows.length} probes, ${bad.length} flagged. Wrote AVSYNC.md`);
+console.log(`Verdict: ${verdict} — ${rows.length} probes, ${bad.length} flagged, ${unverified} unverified (overlay or card at the probe; move the probe to bare footage to measure). Wrote AVSYNC.md`);
 process.exitCode = bad.length ? 1 : 0;

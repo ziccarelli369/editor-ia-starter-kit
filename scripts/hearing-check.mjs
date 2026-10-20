@@ -157,7 +157,7 @@ function report(cueRes, cutRes, loud) {
     ...cueRes.filter(r => r.flags.length).map(r => `cue ${r.index} @${fmt(r.start)}s ${r.flags.join('+')}: "${r.text}" heard "${r.heardText}"`),
     ...cutRes.filter(r => r.flags.length).map(r => `cut @${fmt(r.t)}s CUT_IN_WORD "${r.word}" (speech band ${fmt(r.level)} dB at cut, ${fmt(r.wordLevel)} dB in word)`),
   ];
-  const countStr = ['MISMATCH', 'LATE', 'EARLY', 'SILENT', 'CUT_IN_WORD'].map(k => `${k} ${counts[k] ?? 0}`).join(' · ');
+  const countStr = ['MISMATCH', 'UNSURE', 'LATE', 'EARLY', 'SILENT', 'CUT_IN_WORD'].map(k => `${k} ${counts[k] ?? 0}`).join(' · ');
   const summary = [
     `Verdict: ${pass ? 'PASS' : 'FAIL'} — ${cueRes.length} cues, ${cutRes.length} cuts · ${countStr} · timing ${timing}/${cueRes.length} (limit 10%, ${measured} cues measured against voice onsets)`,
     `Timing source: ${audio.onsets.length} voice onsets measured from the waveform; a flagged cue is off by more than ${tol}s. Fix with: node scripts/align-captions.mjs ${id} --srt <srt>`,
