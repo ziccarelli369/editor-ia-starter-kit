@@ -105,7 +105,7 @@ function checkCues(cues, words) {
     const onset = nearestOnset(audio.onsets, r.start, 0.6);
     r.onset = onset;
     r.delta = onset == null ? null : +(onset - r.start).toFixed(3);
-    if (onset == null) { /* continuous speech, no onset to measure */ }
+    if (onset == null || r.flags.includes('VERIFIED')) { /* no onset to measure, or the ear already ruled */ }
     else if (r.delta > tol) r.flags.push('LATE');
     else if (r.delta < -tol) r.flags.push('EARLY');
     return r;

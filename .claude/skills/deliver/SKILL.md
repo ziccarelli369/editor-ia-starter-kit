@@ -41,7 +41,9 @@ edit list says, together? One probe per shot, a second after each cut, as
 node scripts/av-sync-check.mjs <project-id> --source <source video> --probes 1.0:58.75,9.0:66.75,...
 ```
 
-`AVSYNC.md` must say PASS. A PICTURE_OFF_EDL flag means the video was cut on
+`AVSYNC.md` must say PASS for every full-bleed shot. A deliberate voice-over
+(sound from one moment, picture from another) and a square-window layout are
+known exceptions: record the probe and a direct frame match in `VERIFY.md`. A PICTURE_OFF_EDL flag means the video was cut on
 a keyframe, not on the frame: re-cut that shot with `-ss` before `-i` and
 re-encode, never stream-copy. An AV_OFFSET flag means audio and video were
 cut from different places: cut both from the same EDL numbers.
