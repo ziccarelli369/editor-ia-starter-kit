@@ -20,6 +20,17 @@ const language = opt('language') ?? (langs.length === 1 ? langs[0] : 'auto');
 const model = language === 'en' ? (config.transcription.model_en ?? 'medium.en') : (config.transcription.model ?? 'medium');
 const dir = dirname(input);
 const out = opt('out') ?? join(dir, basename(input, extname(input)) + '.raw.json');
+// provider elevenlabs (needs ELEVENLABS_API_KEY in .env): Scribe returns measured word times.
+const envFile = join(root, '.env');
+const envKey = existsSync(envFile) ? (readFileSync(envFile, 'utf8').match(/^ELEVENLABS_API_KEY=(.+)$/m)?.[1] ?? '').trim() : '';
+const hasKey = Boolean(process.env.ELEVENLABS_API_KEY || envKey);
+if (config.transcription.provider === 'elevenlabs') {
+  if (!hasKey) { console.error('provider is elevenlabs but ELEVENLABS_API_KEY is empty in .env; falling back to whisper'); }
+  else {
+    const el = spawnSync(process.execPath, [join(root, 'scripts/transcribe-elevenlabs.mjs'), input, '--output', out, ...(language !== 'auto' ? ['--language', language] : [])], { stdio: 'inherit', cwd: root });
+    process.exit(el.status ?? 1);
+  }
+}
 const cliArgs = ['hyperframes', 'transcribe', input, '--model', model];
 if (language !== 'auto') cliArgs.push('--language', language);
 console.log(`whisper model ${model}, language ${language}`);

@@ -11,7 +11,7 @@
     "worker": "claude-haiku-5-5"
   },
   "transcription": {
-    "provider": "whisper",
+    "provider": "elevenlabs",
     "languages": [
       "es"
     ],
@@ -19,8 +19,8 @@
     "model": "medium",
     "model_en": "medium.en",
     "$providers": {
-      "whisper": "npm run transcribe -- <video>  (local, free, no key; reads languages above)",
-      "elevenlabs": "npm run transcribe:elevenlabs -- <video>  (needs ELEVENLABS_API_KEY)"
+      "whisper": "npm run transcribe -- <video>  (local, free; the fallback when no key is set)",
+      "elevenlabs": "npm run transcribe -- <video>  (used when provider is elevenlabs and ELEVENLABS_API_KEY is set in .env; Scribe word times are measured)"
     }
   },
   "defaults": {
