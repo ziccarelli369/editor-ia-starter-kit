@@ -65,9 +65,16 @@ Added by the reverse-engineering reports and the integration (also fixed):
   are clamped >= 1e-3 and objects hide with hide_render; bloom reads the Emission pass only; screen
   grades apply to camera rays only; only lights the look names as glossy-visible are.
 - Blender resolves a plain relative `render.filepath` against the DRIVE ROOT (not the cwd) and a
-  relative image load against the .blend; the engine makes every render and read-back path absolute.
-  Windows refuses file writes near 260 characters: keep project paths short (about 240 for the longest
-  render path).
+  relative image load against the .blend. Every path the engine writes goes through one fence
+  (`filmkit.outpath.under`, `render.safe_out` inside Blender): absolute, inside the project folder, or a
+  ValueError; read-back paths are made absolute. gpu.py adds the last line inside Blender: before any
+  render it refuses a `render.filepath` that is relative, has no drive or sits at a drive root (exit 1,
+  nothing written). Windows refuses file writes near 260 characters: keep project paths short (about 240
+  for the longest render path).
+- Tools: env `BLENDER` and `CHROME` first, then the install folders of this OS, then PATH
+  (`filmkit.tools`, `tool-paths.mjs`). gpu.py picks the first Cycles kind with a device in the order
+  OPTIX, CUDA, HIP, METAL, ONEAPI; `CYCLES_DEVICE=<kind>` forces one; `CYCLES_DEVICE=CPU` is the only
+  CPU path and warns. Never a silent CPU fallback.
 - Measurements use frame fractions (margins, sizes, void), frame widths/s (speed), frame widths/frame^2
   (acceleration), deg/frame (turn), px at film width (blur), sRGB 8-bit medians (colour). The engine
   holds no threshold; thresholds come from the project's RULES.
@@ -92,6 +99,8 @@ Added by the reverse-engineering reports and the integration (also fixed):
     comp-kit.mjs              browser canvas helpers (window.FilmKit)    [node]
     ui-render.mjs             UI page -> textures + layout contract      [node]
     frames-render.mjs         canvas page -> PNG sequences               [node]
+    tool-paths.mjs            where Chrome is (env, OS folders, PATH)    [node]
+    doctor.py                 machine probe with fix hints               [checker]
     contact.py                contact sheets, grids (Pillow)             [checker]
     encode.py                 PNG + WAV -> MP4                           [checker]
     verify_final.py           probe, luma scan, audio lag                [checker]
@@ -110,10 +119,12 @@ Added by the reverse-engineering reports and the integration (also fixed):
       hero_points.py          hero spec -> posed surface point cloud     [motion]
       check.py                rule framework, metrics, previs SVG        [checker]
       fresh.py                stamps, require_fresh                      [checker]
+      tools.py                where Blender and Chrome are               [checker]
+      outpath.py              the output-path fence, the drive-root rule [checker]
       measure.py              numpy/ffmpeg pixel measurements           [checker]
       ui_html.py              HTML primitives tagged data-in             [node]
       blender/
-        gpu.py                OptiX enable, every call                   [blender-build]
+        gpu.py                GPU pick + render-path guard, every call   [blender-build]
         bake.py               Bake: one key per frame, bulk write       [blender-build]
         geo.py                rounded_box, capsule, rect boxes, cards    [blender-build]
         hero.py               build_hero(spec), pose_channels            [blender-build]
@@ -194,7 +205,8 @@ camera solve reads them; the blend step needs the sequences; stills need a clean
 final needs fresh stills the director has looked at (final_9x16: fresh vertical stills). The five 9x16 steps
 (`build.STEPS_9X16`) print `skipped` and exit 0 when build.json has no `stills_9x16` list.
 Tool paths: env `BLENDER`, `CHROME`, `NODE`, `FILM_ENGINE`, `FILM_PYTHON` (default: the kit's `.venv`
-when the engine sits in the kit, else the running interpreter).
+when the engine sits in the kit, else the running interpreter); without `BLENDER` or `CHROME`,
+`filmkit.tools` looks in the install folders of this OS, then on PATH.
 
 `build.json` (project folder, every key optional; the values are placeholders, none is taste):
 
@@ -528,6 +540,30 @@ status(build_dir, artifact, tl_hash) -> ('fresh'|'stale', reasons)   require_fre
 CLI: python -B -m filmkit.fresh <project_dir> [--require a,b] [--status]
 ```
 
+### filmkit/tools.py [checker]
+```
+blender_candidates(platform, env, which) -> [paths]   chrome_candidates(platform, env, which) -> [paths]
+find_blender(env) -> path   find_chrome(env) -> path   (env BLENDER / CHROME, else the first candidate that exists,
+    else the first place looked at, so a doctor line names it)
+```
+Blender: Windows the newest `Blender 5.*` folder under `%ProgramFiles%/Blender Foundation` (numeric compare), then
+PATH; macOS `/Applications` and `~/Applications`, then PATH; Linux PATH, then `/snap/bin/blender`. Chrome: Windows
+`ProgramFiles`, `ProgramFiles(x86)`, `LOCALAPPDATA` under `Google/Chrome/Application`, then PATH `chrome`, `chromium`;
+macOS Google Chrome.app and Chromium.app, then PATH; Linux PATH `google-chrome`, `google-chrome-stable`, `chromium`,
+`chromium-browser`.
+`scripts/tool-paths.mjs` (`chromeCandidates`, `findChrome`) is the JS twin the renderers use.
+
+### filmkit/outpath.py [checker]
+```
+under(base, path, cwd=None) -> absolute path inside base   (a relative path is taken from cwd, default base; ValueError when
+    base is relative or a root, path is rooted with no drive ('/renders' on Windows) or the result leaves base)
+root_problem(path) -> reason | None   (the last line gpu.py applies to bpy.path.abspath(render.filepath) before any render:
+    empty, rooted with no drive, relative, or a file or sequence folder at a filesystem or drive root)
+rooted_no_drive(path)   is_root(folder)
+```
+Users: `render.safe_out` (every bpy write); `encode.py --out`, `contact.py` outputs, `verify_final.py --json` and
+`soundcheck.check_png` (inside the cwd). A trailing separator (a frame folder) survives `under`.
+
 ### filmkit/measure.py [checker, venv]
 ```
 sequence_signature(pattern, frames, params) -> md5
@@ -567,10 +603,17 @@ The registry is built from the Layout tables (panels, buttons, screens -> UI_EMP
 The page embeds window.UI_SIZE, UI_RECTS, UI_EMPTY (screens + flat hex), UI_SPRITES.
 
 ### filmkit/blender/gpu.py [blender-build]
-Runs on import/-P: `enable_gpu(kind)` -> device names; sets every scene to GPU; load_post handler;
-raises when no device. Env `CYCLES_DEVICE` (default OPTIX). Sets dont_write_bytecode first.
+Runs on -P: `enable_gpu(kind=None)` -> (kind, device names): kind None takes the first of OPTIX, CUDA,
+HIP, METAL, ONEAPI with a device and enables only that kind's devices (an iGPU of another kind stays
+off); a named kind is forced and raises when absent. Env `CYCLES_DEVICE=<kind>` forces; `CYCLES_DEVICE=CPU`
+sets every scene to CPU and prints a loud warning (the one CPU path). Sets every scene's device, again
+in a load_post handler. `devices_of(prefs, kind)` -> names. Sets dont_write_bytecode first.
 The raise stops Blender only with `--python-exit-code 1` (exit 1, later -P and -a skipped); without
 the flag Blender exits 0 and renders on the CPU.
+Render guard: a render_init handler (fires for write_still, animation and -a) checks
+`outpath.root_problem(bpy.path.abspath(scene.render.filepath))` and calls `sys.exit(1)` on a problem:
+"gpu.py: RENDER REFUSED: ..." on stderr, exit 1, nothing written. A raise inside a handler does not
+stop a render in Blender 5.2; sys.exit does (proven on 5.2.2 for both paths).
 
 ### filmkit/blender/bake.py [blender-build]
 ```
@@ -637,12 +680,16 @@ make_cyc(scene, floor_z, material, wall_y, cove_r, top, half_x, name)
 setup_lights(scene, lights, follow, rig_name) -> {rig, name: obj}    set_light_power(light_ob, watts)
 key_yaw_of(loc) -> rad (added)   light_rig_track(hero_yaws, cam_rz, key_yaw, full_deg, symmetry, sigma, gain_sigma, gain_clamp) -> (rig_rz[], gain[])
 camera_object(scene, name, sensor_w, lens)   apply_look(scene, look, registry)   stored_look(scene) -> (look, registry) (added)
-save_blend(path) -> {objects, non_relative}   (frame_set(1), relative paths, no .blend1 backup)
+save_blend(path) -> {objects, non_relative}   (frame_set(1), relative paths, no .blend1 backup; path through safe_out)
+project_dir() -> folder   (the parent of the open .blend's folder, <project>/build/film.blend; else the cwd)
+safe_out(path) -> absolute path inside project_dir()   (outpath.under; a relative path is taken from the cwd; ValueError
+    on a path outside the project, rooted with no drive, or at a root; every bpy write in stills and lookdev uses it;
+    setup_render's out_path passes a //-relative path as given and fences any other)
 ```
 
 ### filmkit/blender/stills.py [blender-look]
 ```
-render_still(scene, f, path, percent, samples, adaptive, denoise=True) -> s   (paths made absolute)
+render_still(scene, f, path, percent, samples, adaptive, denoise=True) -> s   (paths through render.safe_out)
 render_mask(scene, f, path, mask_material, samples=32)   (Standard view, exposure 0, gamma 1: the look's view gamma is set
     aside and restored, as materials.mask_bands holds gamma-1 codes; objects with ob['mask_skip'] are camera-invisible for it, then restored)
 mask_skipped(scene) -> [Object]
@@ -669,8 +716,9 @@ selfcheck(out_dir) -> dict   tune_base(scene, material, shots, target_srgb, band
 turnaround(scene, rig, views=[(name, az_deg, elev_deg)], pose_fn, out_path, percent, samples, dist, lens, fstop, height, adaptive)
 numbered_sequence(seq_dir, n, size)   decode_frame(rgb_linear)
 ```
-selfcheck's out_dir and numbered_sequence's seq_dir may be relative to the cwd: both are made absolute
-before any bpy path (Blender resolves a plain relative path against the drive root).
+selfcheck's out_dir, numbered_sequence's seq_dir and turnaround's out_path may be relative to the cwd: each goes
+through render.safe_out before any bpy path (absolute, inside the project; Blender resolves a plain relative
+path against the drive root).
 
 ### filmkit/blender/scene_kit.py [blender-look]
 ```
@@ -816,8 +864,15 @@ python -B verify_final.py --mp4 renders/film.mp4 --wav build/sound.wav --fps 30 
 python -B build.py <project_dir> [--from step] [--upto step] [--only step] [--force] [--dry]
   Steps: timeline ui comp sound blend check check_9x16 stills stills_9x16 animatic final encode verify final_9x16
   encode_9x16 verify_9x16. Env: BLENDER, CHROME,
-  FILM_PYTHON (kit venv; default the kit's .venv), NODE, FILM_ENGINE. Defaults: Blender 5.2 in Program Files,
-  Chrome in Program Files, node on PATH.
+  FILM_PYTHON (kit venv; default the kit's .venv), NODE, FILM_ENGINE. Without BLENDER or CHROME: filmkit.tools
+  (the install folders of this OS, then PATH); node on PATH.
+
+python -B doctor.py
+  One line per check (blender, gpu device, compositor api, chrome, node, puppeteer-core, ffmpeg, ffprobe, venv, disk,
+  pdftotext): 'ok    name: detail', 'FAIL  name: detail → fix hint' or 'warn  name: detail'; last 'DOCTOR: ok' or
+  'DOCTOR: N failed'; exit 1 on a FAIL. The gpu line names the kind gpu.py auto mode picks; CYCLES_DEVICE=CPU
+  turns it into a warn; disk warns under 10 GB free at the kit root. `npm run setup -- --film` and
+  `npm run new-video -- <slug> --kind film` run it (scripts/lib/film-doctor.mjs).
 
 python -B -m filmkit.fresh <project_dir> [--require a,b] [--status]
 
@@ -846,10 +901,10 @@ python -B checks/run_checks.py [--only name] [--python <kit venv python>]
   --python that does not exist prints one line and exits 2). Children get PYTHONDONTWRITEBYTECODE=1 and -B.
 ```
 
-Tool paths: engine code reads env `BLENDER` (default `C:/Program Files/Blender Foundation/Blender 5.2/blender.exe`),
-`CHROME` (default `C:/Program Files/Google/Chrome/Application/chrome.exe`), `FILM_PYTHON` (kit venv), `NODE`.
-puppeteer-core resolves from the kit's node_modules. GPU test renders stay tiny: <= 320x180, <= 8 samples,
-a few frames.
+Tool paths: engine code reads env `BLENDER` and `CHROME`, else `filmkit.tools` / `tool-paths.mjs` discovery
+(section 5), `FILM_PYTHON` (kit venv), `NODE`. puppeteer-core resolves from the kit's node_modules. GPU test
+renders stay tiny: <= 320x180, <= 8 samples, a few frames. A check that renders runs Blender with the cwd at
+its output folder, so every path stays inside the fence.
 
 ## 7. The template project (`templates/project`)
 

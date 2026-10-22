@@ -81,6 +81,8 @@ node scripts/deliver.mjs <project-id> --video renders/final.mp4 --cover renders/
 ```
 
 One run per deliverable (`--name <name>`) when a project ships several cuts.
+Inside a git worktree the script refuses and names the main checkout, because
+the git-ignored outbox dies with the worktree (`--allow-worktree` overrides).
 
 Done when the script prints the outbox path and `project.json` `status` is
 `delivered`.

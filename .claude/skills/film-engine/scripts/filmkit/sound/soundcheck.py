@@ -28,6 +28,7 @@ import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 from scipy import signal
 
+from .. import outpath
 from . import synth
 
 # Onset detector bands: (lo Hz, hi Hz, follower release ms). Detection parameters, not taste.
@@ -345,7 +346,9 @@ def _color(c):
 def check_png(wav, png, markers, width=1600, tick_s=0.5, wave_color="0xd0d0d0"):
     """Spectrogram (log frequency, log scale) over waveform with coloured event markers [(t, colour)]
     and ticks every tick_s; the filter graph goes through -filter_complex_script (no command-line
-    length limit); written to a temp name and renamed. -> png path."""
+    length limit); written to a temp name and renamed. png stays inside the cwd (outpath.under refuses
+    anything else). -> png path."""
+    png = outpath.under(os.getcwd(), png)
     from pedalboard.io import AudioFile
     with AudioFile(wav) as f:
         duration = f.frames / f.samplerate

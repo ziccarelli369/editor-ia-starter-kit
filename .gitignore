@@ -51,3 +51,5 @@ Thumbs.db
 # Deliberately public synthetic timing data, without media.
 !examples/short-form/assets/
 !examples/short-form/assets/*.json
+
+.claude/worktrees/

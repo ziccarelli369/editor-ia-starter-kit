@@ -9,6 +9,7 @@ If `node_modules/` or `.env` is missing, `brands/` holds only `_template`, or
 `npx hyperframes doctor` fails, the kit is not set up: load the `onboard`
 skill before anything else. It checks the machine, asks the two languages,
 and fills the first brand. Setup creates no projects and no example videos.
+The film path (`character-film`) is optional; `npm run setup -- --film` checks it.
 
 ## 1. Identity
 
@@ -39,6 +40,7 @@ Skills, docs and code stay in English.
 
 Create a project with `npm run new-video -- <slug> --brand <brand> --mode guided|freeform --goal personal|sell|grow`.
 The goal picks the hook family and the CTA (`short-form-edit/references/goals.md`).
+Projects live in the main checkout: `new-video` refuses inside a git worktree.
 Keep raw files intact and write each editing stage to a new filename.
 Keep secrets and private media out of the kit's examples and styles.
 
@@ -110,6 +112,7 @@ Each gate needs the user's yes, in chat, every time:
 
 The outbox is the end: nothing is published, uploaded, posted or sent.
 Raw footage and delivered outbox files stay as they are.
+Before you move or archive a project folder, run `npm run unlock -- <id>`.
 
 Cut silences first, then cut mistakes on the retimed transcript. One timeline
 per stage: original timestamps belong to the original footage only. Picture

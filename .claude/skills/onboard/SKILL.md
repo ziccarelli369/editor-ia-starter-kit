@@ -50,6 +50,23 @@ touching it.
 
 Done when `brands/<slug>/DESIGN.md` has no placeholder text left.
 
-## 5. Hand over
+## 5. Optional: 3D character films
+
+Ask once: do you want 3D character films (`character-film`)? They are heavy:
+Blender 5.x, a GPU that Cycles supports, Python 3.10+, about 5 GB per film and
+about 11 min of GPU render per 12 s. If no, skip to step 6.
+
+If yes, name the downloads: Python packages about 35-65 MB (about 230 MB on
+disk), Blender about 350-400 MB (about 900 MB installed). After the user's yes:
+
+```sh
+npm run film:install
+npm run setup -- --film
+```
+
+The user installs Blender from https://www.blender.org/download/; you never
+install it. Done when `setup -- --film` prints "DOCTOR: ok".
+
+## 6. Hand over
 
 Say: drop a video in `inbox/`, then type `/new-video`. Nothing else.

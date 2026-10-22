@@ -9,7 +9,12 @@ la primera vez, la mayor parte instalando.
 2. En esta carpeta: `npm install`.
 3. Copia `.env.example` a `.env`. Si tienes clave de ElevenLabs, ponla ahí.
    Sin clave: instala whisper.cpp (`docs/SETUP.md`, paso 3).
-4. Comprueba: `node scripts/setup.mjs`. Debe decir "Todo listo".
+4. Comprueba: `npm run setup`. Debe decir "Todo listo".
+
+La película 3D (`character-film`) es opcional y pesada: Blender 5.x, una GPU
+que Cycles soporte y Python 3.10+. Instala Blender 5.x; luego
+`npm run film:install` crea `.venv` y `npm run setup -- --film` lo comprueba
+(`docs/SETUP.md`, "Film path").
 
 ## En Claude Code
 
@@ -38,7 +43,12 @@ Un clip horizontal y oscuro funciona, pero el resultado tiene techo.
 
 Before Claude Code: install Node 22+, ffmpeg, Chrome; `npm install`; copy
 `.env.example` to `.env` (ElevenLabs key, or whisper.cpp per `docs/SETUP.md`
-step 3); run `node scripts/setup.mjs` until it says "Todo listo".
+step 3); run `npm run setup` until it says "Todo listo".
+
+The 3D character film (`character-film`) is optional and heavy: Blender 5.x, a
+GPU that Cycles supports, and Python 3.10+. Install Blender 5.x; then
+`npm run film:install` builds `.venv` and `npm run setup -- --film` checks it
+(`docs/SETUP.md`, "Film path").
 
 In Claude Code: open this folder, type `/onboard` (machine check, two languages,
 first brand, no video made), drop footage in `inbox/`, type `/new-video`, choose

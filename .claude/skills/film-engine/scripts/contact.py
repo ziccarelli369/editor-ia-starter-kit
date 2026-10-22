@@ -3,7 +3,8 @@ Runs in the kit venv (Pillow).
 
 Layout: cells of `cell` px (image scaled to fit, padded with the background), a label strip of
 label_h px under each, `gap` px around and between cells. Sheet size = cols * cell_w + (cols + 1) * gap
-by rows * (cell_h + label_h) + (rows + 1) * gap. Outputs go to a temp name and are renamed on success.
+by rows * (cell_h + label_h) + (rows + 1) * gap. Outputs go to a temp name and are renamed on success,
+and stay inside the cwd (filmkit.outpath.under refuses anything else).
 Colours (background, label) are neutral placeholders; --bg and --fg override them.
 
 CLI:
@@ -19,6 +20,9 @@ import argparse
 import os
 
 from PIL import Image, ImageDraw, ImageFont
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from filmkit import outpath  # noqa: E402
 
 BG = (20, 20, 20)
 FG = (232, 232, 232)
@@ -70,7 +74,8 @@ def _tile(images, out, cols, gap, bg):
     sheet = Image.new("RGB", (cols * cw + (cols + 1) * gap, rows * ch + (rows + 1) * gap), bg)
     for i, im in enumerate(images):
         sheet.paste(im, (gap + (i % cols) * (cw + gap), gap + (i // cols) * (ch + gap)))
-    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    out = outpath.under(os.getcwd(), out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     tmp = out + ".part.png"
     sheet.save(tmp)
     os.replace(tmp, out)

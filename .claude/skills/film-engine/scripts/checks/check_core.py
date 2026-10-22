@@ -151,7 +151,7 @@ def check_events_and_export():
 
 # ---------------------------------------------------------------- layout
 def check_layout():
-    items = [("opus", 1, 10.0), ("swoosh", 1, 3.5), ("spark", 1, 3.0), ("title", 4, 2.5), ("clawd", 1, -1.0)]
+    items = [("opus", 1, 10.0), ("swoosh", 1, 3.5), ("spark", 1, 3.0), ("title", 4, 2.5), ("hero", 1, -1.0)]
     L = lo.Layout((1280, 720), 0.0025,
                   panels={"menubar": (0, 0, 1280, 22), "toolbar": (0, 22, 1280, 44), "comp": (258, 70, 700, 378),
                           "timeline": (4, 452, 1272, 264)},
@@ -188,15 +188,15 @@ def check_layout():
     check(lo.rect_scale((1, 2, 3, 4), 3) == (3, 6, 9, 12), "rect_scale")
     tops = lo.stack_tops(12.0, items, 506, 22, 0.12)
     final = lo.stack_final_tops(items, 506, 22)
-    check(tops == final == {"opus": 506, "swoosh": 528, "spark": 550, "title": 572, "clawd": 660}, f"stack tops at the end {tops}")
+    check(tops == final == {"opus": 506, "swoosh": 528, "spark": 550, "title": 572, "hero": 660}, f"stack tops at the end {tops}")
     t0 = lo.stack_tops(0.0, items, 506, 22, 0.12)
-    check(t0["title"] is None and t0["clawd"] == 506, "before creation: None; the first block sits at y0")
+    check(t0["title"] is None and t0["hero"] == 506, "before creation: None; the first block sits at y0")
     t1 = lo.stack_tops(2.5, items, 506, 22, 0.12)
-    check(t1["title"] == 506 and t1["clawd"] == 506, "a new block appears at y0; the one below has not moved yet")
+    check(t1["title"] == 506 and t1["hero"] == 506, "a new block appears at y0; the one below has not moved yet")
     t2 = lo.stack_tops(2.56, items, 506, 22, 0.12)
-    check(506 < t2["clawd"] < 594 and near(t2["clawd"], 506 + 88 * 0.5), "mid slide is eased (smoothstep 0.5)")
-    check(lo.stack_tops(2.62, items, 506, 22, 0.12)["clawd"] == 594, "slide done after slide_s")
-    check(lo.stack_tops(2.5, items, 506, 22, 0.0)["clawd"] == 594, "slide_s 0 is a step")
+    check(506 < t2["hero"] < 594 and near(t2["hero"], 506 + 88 * 0.5), "mid slide is eased (smoothstep 0.5)")
+    check(lo.stack_tops(2.62, items, 506, 22, 0.12)["hero"] == 594, "slide done after slide_s")
+    check(lo.stack_tops(2.5, items, 506, 22, 0.0)["hero"] == 594, "slide_s 0 is a step")
     check(lo.ruler_x(2.0, 548, 170) == 888, "ruler_x")
 
 

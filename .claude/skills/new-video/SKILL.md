@@ -36,6 +36,12 @@ user's one-line description: lowercase kebab-case, 2 to 4 words. For a 3D
 character film, add `--kind film --size <WxH> --fps <n>` (`--brand none` is
 allowed: the film's BRAND block lives in its `DESIGN.md`).
 
+A film first runs the film doctor: on a FAIL it creates nothing and prints the
+install steps (`--skip-doctor` creates it anyway, but it cannot render until
+`npm run setup -- --film` passes). Inside a git worktree the command refuses and
+names the main checkout, because the project dies with the worktree
+(`--allow-worktree` overrides).
+
 Done when the command prints the project id.
 
 ## 4. Footage

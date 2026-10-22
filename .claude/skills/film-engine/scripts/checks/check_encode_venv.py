@@ -5,7 +5,8 @@ Makes 30 PNG frames (320x180, a moving bar, a flash on frame 15) and a 1.0 s 48 
 with clicks) in a temp folder, encodes them with encode.py (16:9 with audio, and a 9:16 crop without),
 then verify_final.py must report 30 frames, 1.0 s, H.264 High, yuv420p, BT.709 tags, AAC 48 kHz, 0 black
 frames, audio lag 0, and the biggest luma step at the flash. contact.py tiles every 10th frame plus the
-last into a sheet of the documented size. encode.py must refuse a missing frame.
+last into a sheet of the documented size. encode.py must refuse a missing frame; verify_final.py must refuse a
+report outside the project folder.
 """
 import sys
 sys.dont_write_bytecode = True
@@ -29,9 +30,9 @@ def expect(cond, msg):
         print("  FAIL " + msg)
 
 
-def run(args):
+def run(args, cwd=None):
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONIOENCODING="utf-8")
-    r = subprocess.run([sys.executable, "-B"] + args, capture_output=True, text=True, env=env)
+    r = subprocess.run([sys.executable, "-B"] + args, capture_output=True, text=True, env=env, cwd=cwd)
     return r.returncode, (r.stdout + r.stderr).strip()
 
 
@@ -71,13 +72,13 @@ def main():
         make_wav(wav)
         enc = os.path.join(SCRIPTS, "encode.py")
         code, out = run([enc, "--frames", frames, "--wav", wav, "--out", mp4, "--fps", "30", "--n", "30",
-                         "--duration", "1.0", "--crf", "20", "--preset", "veryfast"])
+                         "--duration", "1.0", "--crf", "20", "--preset", "veryfast"], cwd=tmp)
         print(out)
         expect(code == 0 and os.path.exists(mp4), f"encode exit {code}")
         expect(not os.path.exists(os.path.join(tmp, "film.part.mp4")), "temp mp4 renamed away")
         rep_path = os.path.join(tmp, "verify.json")
         code, out = run([os.path.join(SCRIPTS, "verify_final.py"), "--mp4", mp4, "--wav", wav, "--fps", "30", "--n", "30",
-                         "--duration", "1.0", "--json", rep_path, "--expect-size", "320x180", "--frames-dir", frames])
+                         "--duration", "1.0", "--json", rep_path, "--expect-size", "320x180", "--frames-dir", frames], cwd=tmp)
         print(out)
         expect(code == 0, f"verify exit {code}")
         with open(rep_path, encoding="utf-8") as fh:
@@ -94,41 +95,46 @@ def main():
         expect(rep["luma"]["steps"][0][0] in (15, 16), f"biggest luma step at the flash, got {rep['luma']['steps'][:2]}")
         # the luma scan decoded from the MP4 itself agrees on the flash
         code, out = run([os.path.join(SCRIPTS, "verify_final.py"), "--mp4", mp4, "--wav", wav, "--fps", "30", "--n", "30",
-                         "--duration", "1.0", "--json", rep_path])
+                         "--duration", "1.0", "--json", rep_path], cwd=tmp)
         with open(rep_path, encoding="utf-8") as fh:
             rep2 = json.load(fh)
         expect(code == 0 and rep2["luma"]["steps"][0][0] in (15, 16), "luma scan from the MP4")
         # a 9:16 crop without audio
         tall = os.path.join(tmp, "tall.mp4")
         code, out = run([enc, "--frames", frames, "--out", tall, "--fps", "30", "--n", "30", "--duration", "1.0",
-                         "--preset", "veryfast", "--size", "91x160", "--fit", "crop", "--no-audio"])     # odd width rounds down to 90
+                         "--preset", "veryfast", "--size", "91x160", "--fit", "crop", "--no-audio"], cwd=tmp)
         expect(code == 0, f"9:16 encode exit {code}: {out}")
         code, out = run([os.path.join(SCRIPTS, "verify_final.py"), "--mp4", tall, "--fps", "30", "--n", "30",
-                         "--duration", "1.0", "--expect-size", "90x160"])
+                         "--duration", "1.0", "--expect-size", "90x160"], cwd=tmp)
         expect(code == 0, f"9:16 verify: {out}")
         # odd source frames (321x181) round down to 320x180 instead of crashing libx264
         odd_frames, odd = os.path.join(tmp, "odd"), os.path.join(tmp, "odd.mp4")
         make_frames(odd_frames, size=(321, 181))
         code, out = run([enc, "--frames", odd_frames, "--out", odd, "--fps", "30", "--n", "30", "--duration", "1.0",
-                         "--preset", "veryfast", "--no-audio"])
+                         "--preset", "veryfast", "--no-audio"], cwd=tmp)
         expect(code == 0, f"odd-size encode exit {code}: {out}")
         code, out = run([os.path.join(SCRIPTS, "verify_final.py"), "--mp4", odd, "--fps", "30", "--n", "30",
-                         "--duration", "1.0", "--expect-size", "320x180"])
+                         "--duration", "1.0", "--expect-size", "320x180"], cwd=tmp)
         expect(code == 0, f"odd-size verify (320x180): {out}")
         # a missing frame is refused
         code, out = run([enc, "--frames", frames, "--wav", wav, "--out", os.path.join(tmp, "bad.mp4"), "--fps", "30",
-                         "--n", "31", "--duration", "1.0"])
+                         "--n", "31", "--duration", "1.0"], cwd=tmp)
         expect(code != 0 and "missing" in out, f"encode must refuse a missing frame: {code} {out}")
+        outside = os.path.join(tempfile.gettempdir(), f"film_verify_outside_{os.getpid()}.json")
+        code, out = run([os.path.join(SCRIPTS, "verify_final.py"), "--mp4", mp4, "--fps", "30", "--n", "30",
+                         "--duration", "1.0", "--json", outside], cwd=tmp)
+        expect(code != 0 and "outpath" in out and not os.path.exists(outside),
+               f"verify must refuse a report outside the project: {code} {out[-200:]}")
         # contact sheet: frames 1, 11, 21 + last 30 -> 4 cells of 160x90 + 20 label, gap 4
         sheet = os.path.join(tmp, "sheet.png")
         code, out = run([os.path.join(SCRIPTS, "contact.py"), "--seq", frames, "--every", "10", "--fps", "30", "--cols", "4",
-                         "--cell", "160x90", "--label-h", "20", "--gap", "4", "--last", "--out", sheet])
+                         "--cell", "160x90", "--label-h", "20", "--gap", "4", "--last", "--out", sheet], cwd=tmp)
         print(out)
         expect(code == 0, f"contact exit {code}")
         with Image.open(sheet) as im:
             expect(im.size == (4 * 160 + 5 * 4, 90 + 20 + 2 * 4), f"sheet size {im.size}")
         code, out = run([os.path.join(SCRIPTS, "contact.py"), "--strips", frames, "--every", "2", "--per-sheet", "10",
-                         "--cols", "5", "--cell", "96x54", "--out-prefix", os.path.join(tmp, "strip")])
+                         "--cols", "5", "--cell", "96x54", "--out-prefix", os.path.join(tmp, "strip")], cwd=tmp)
         expect(code == 0 and os.path.exists(os.path.join(tmp, "strip_2.png")), f"filmstrips: {out}")
     if FAILS:
         print(f"check_encode_venv: {len(FAILS)} failures")

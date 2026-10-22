@@ -22,10 +22,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { findChrome } from './tool-paths.mjs';
 
 const require = createRequire(import.meta.url);
 
-export const CHROME_DEFAULT = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 export const CHROME_ARGS = ['--force-color-profile=srgb', '--hide-scrollbars', '--font-render-hinting=none'];
 const DEFAULT_MODES = [['ui.png', ''], ['ui_base.png', 'base'], ['ui_check.png', 'check']];
 
@@ -63,7 +63,7 @@ export function parseArgs(argv) {
 }
 
 /** Launch Chrome through puppeteer-core with the fixed flags. -> browser */
-export async function launch(chromePath = process.env.CHROME || CHROME_DEFAULT) {
+export async function launch(chromePath = findChrome()) {
   const puppeteer = require('puppeteer-core');
   if (!fs.existsSync(chromePath)) throw new Error(`Chrome not found at ${chromePath} (set env CHROME)`);
   return puppeteer.launch({ executablePath: chromePath, headless: true, args: CHROME_ARGS });

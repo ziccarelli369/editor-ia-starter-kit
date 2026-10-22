@@ -25,7 +25,8 @@ check_9x16 = `check_model.py --shots <shots_9x16>`); the final needs fresh still
 at them in chat; the runner only checks they exist and are fresh); final_9x16 the same with the vertical stills. The timeline step stamps film.json (the
 film format new-video writes), never project.json: deliver rewrites project.json and must not stale the film.
 Tool paths: env BLENDER, CHROME, FILM_PYTHON (kit venv python; default the kit's .venv when the engine
-lives in the kit, else this interpreter), NODE, FILM_ENGINE; defaults in API.md.
+lives in the kit, else this interpreter), NODE, FILM_ENGINE; without the env, Blender and Chrome come
+from filmkit.tools (the install folders of this OS, then PATH).
 
 Project knobs (build.json in the project folder, every value optional, placeholders otherwise):
   {"slug": "<folder name>", "stills": [1, <mid>, <last>], "mask": true, "crf": 17, "preset": "slow",
@@ -53,7 +54,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from filmkit import fresh  # noqa: E402
+from filmkit import fresh, tools  # noqa: E402
 
 STEPS = ["timeline", "ui", "comp", "sound", "blend", "check", "check_9x16", "stills", "stills_9x16", "animatic", "final",
          "encode", "verify", "final_9x16", "encode_9x16", "verify_9x16"]
@@ -71,10 +72,10 @@ def kit_venv_python(engine=HERE):
 
 
 def tool_paths():
-    """-> {'blender', 'chrome', 'python', 'node', 'engine'} from env with documented defaults."""
+    """-> {'blender', 'chrome', 'python', 'node', 'engine'}: env first, then filmkit.tools discovery."""
     engine = os.environ.get("FILM_ENGINE") or HERE
-    return {"blender": os.environ.get("BLENDER") or "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
-            "chrome": os.environ.get("CHROME") or "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    return {"blender": tools.find_blender(),
+            "chrome": tools.find_chrome(),
             "python": os.environ.get("FILM_PYTHON") or kit_venv_python(engine) or sys.executable,
             "node": os.environ.get("NODE") or "node",
             "engine": engine}

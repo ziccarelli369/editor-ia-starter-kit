@@ -1,6 +1,7 @@
 """check_blender_look.py: quick check of the blender-look modules on the GPU. Standard library only.
 
-Runs look_scene_blender.py inside Blender (env BLENDER or the 5.2 default) with gpu.py first:
+Runs look_scene_blender.py inside Blender (env BLENDER, else filmkit.tools discovery) with gpu.py first
+and the cwd at the output folder (every render path must stay inside it):
 the lookdev shader/sequence self-check, a tiny scene (screen material + bloom + camera-ray world +
 3-light rig + cyc), apply_look twice, save_blend, two stills with a mask through stills.main, a mask
 rendered with the look's view gamma at 1.2 (the class counts must match gamma 1), and a model-vs-mask
@@ -19,7 +20,10 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ENGINE = os.path.normpath(os.path.join(HERE, ".."))
-BLENDER = os.environ.get("BLENDER") or "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe"
+sys.path.insert(0, ENGINE)
+from filmkit import tools  # noqa: E402
+
+BLENDER = tools.find_blender()
 problems = []
 
 
@@ -36,7 +40,7 @@ def main():
     cmd = [BLENDER, "-b", "--factory-startup", "-P", os.path.join(ENGINE, "filmkit", "blender", "gpu.py"),
            "-P", os.path.join(HERE, "look_scene_blender.py"), "--", "--out", out]
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
-    proc = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=900)
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=900, cwd=out)
     log = proc.stdout + proc.stderr
     with open(os.path.join(out, "blender.log"), "w", encoding="utf-8") as fh:
         fh.write(log)

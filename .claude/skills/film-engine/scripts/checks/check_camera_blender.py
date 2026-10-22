@@ -21,9 +21,9 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS = os.path.normpath(os.path.join(HERE, ".."))
 sys.path.insert(0, SCRIPTS)
-from filmkit import camera, ease, vec  # noqa: E402
+from filmkit import camera, ease, tools, vec  # noqa: E402
 
-BLENDER = os.environ.get("BLENDER") or "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe"
+BLENDER = tools.find_blender()
 TOL = 1e-4
 AXIS_TOL = 1e-6
 

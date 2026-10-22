@@ -258,6 +258,8 @@ def main():
         print("skip ease.seed_of not implemented yet; mix.seed_of uses the documented formula")
 
     tmp = tempfile.mkdtemp(prefix="film-sound-check-")
+    cwd = os.getcwd()
+    os.chdir(tmp)
     try:
         wav = os.path.join(tmp, "sound.wav")
         n = mix.write_wav(wav, out, SR)
@@ -267,6 +269,11 @@ def main():
         png = os.path.join(tmp, "sound_check.png")
         soundcheck.check_png(wav, png, [(e["t"], "#ff0000" if e["kind"] == "thump" else "cyan") for e in events])
         check(os.path.isfile(png) and os.path.getsize(png) > 1000, f"check PNG written ({os.path.getsize(png) if os.path.isfile(png) else 0} bytes)")
+        try:
+            soundcheck.check_png(wav, os.path.join(os.path.dirname(tmp), "film_sound_outside.png"), [])
+            check(False, "check_png must refuse a PNG outside the cwd")
+        except ValueError as e:
+            check("outpath" in str(e), f"check_png refuses a PNG outside the cwd: {e}")
         ff = soundcheck.ffmpeg_ebur128(wav)
         check(ff["integrated"] is not None and abs(ff["integrated"] - soundcheck.integrated_lufs(back, SR)) <= 1.0,
               f"ffmpeg integrated {ff['integrated']} vs own {soundcheck.integrated_lufs(back, SR):.1f} LUFS within 1.0")
@@ -350,6 +357,7 @@ def main():
         check(sum("aud     none NO" in line for line in logged2) == 3,
               f"step.run logs the three dropped rows as 'aud none NO': {[ln for ln in logged2 if ln.startswith('hit')]}")
     finally:
+        os.chdir(cwd)
         if failures:
             print(f"outputs kept in {tmp}")
         else:

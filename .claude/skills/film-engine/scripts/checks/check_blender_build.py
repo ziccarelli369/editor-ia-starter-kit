@@ -14,7 +14,7 @@ world positions; then renders frame 6 at 160x90 with 4 samples to <out_dir>/fram
 with the cwd at <out_dir>, runs lookdev.main(['selfcheck', '--out', 'lookdev_rel']) (a RELATIVE out:
 bpy resolves a plain relative path against the drive root) and asserts <out_dir>/lookdev_rel holds a
 fresh lookdev.json with selfcheck ok and the 24 sequence PNGs.
-Env: BLENDER (default Program Files Blender 5.2), FILM_SCRATCH (default <temp>/film-engine-checks).
+Env: BLENDER (else filmkit.tools discovery), FILM_SCRATCH (default <temp>/film-engine-checks).
 Blender exits 0 on a script exception unless --python-exit-code is given, so this passes it and
 also requires the line 'BLENDER_BUILD_CHECK: PASS'. Exit 1 on any failure, including bytecode left
 under the skill folder (removed, then reported).
@@ -32,7 +32,6 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ENGINE = os.path.dirname(HERE)
 SKILL = os.path.dirname(ENGINE)
-DEFAULT_BLENDER = "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe"
 N = 12
 EPS = 1e-5
 MAX_PATH = 240          # Windows refuses file writes near 260 chars; Blender adds '@' while saving
@@ -375,7 +374,9 @@ def sweep_bytecode(root):
 
 
 def main():
-    blender = os.environ.get("BLENDER") or DEFAULT_BLENDER
+    sys.path.insert(0, ENGINE)
+    from filmkit import tools
+    blender = tools.find_blender()
     if not os.path.isfile(blender):
         print(f"FAIL: Blender not found at {blender} (set env BLENDER)")
         return 1

@@ -7,7 +7,7 @@ import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 const root = resolve(import.meta.dirname, '..');
-function run(args) { return spawnSync(process.execPath, [join(root, 'scripts/new-video.mjs'), ...args], { encoding: 'utf8', cwd: root }); }
+function run(args) { return spawnSync(process.execPath, [join(root, 'scripts/new-video.mjs'), ...args, '--allow-worktree'], { encoding: 'utf8', cwd: root }); }
 
 const TEMPLATE_FILES = ['timeline.py', 'build.py', 'scene.py', 'motion.py', 'shots.py', 'look.py', 'comp.html'];
 const STARTER_FILES = ['index.html', 'meta.json', 'hyperframes.json'];
@@ -26,7 +26,7 @@ function cleanup(p) {
 test('new-video --kind film scaffolds the film-engine template with the given size and fps', () => {
   const p = project('film-test');
   try {
-    const result = run([p.slug, '--kind', 'film', '--brand', 'none', '--size', '1080x1920', '--fps', '30']);
+    const result = run([p.slug, '--kind', 'film', '--brand', 'none', '--size', '1080x1920', '--fps', '30', '--skip-doctor']);
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, new RegExp(`video-projects/${p.id}`));
     const doc = JSON.parse(readFileSync(join(p.dir, 'project.json'), 'utf8'));

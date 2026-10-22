@@ -50,6 +50,7 @@ Crew rules:
 - Measure, never guess: every claim of a fix carries a number before and after. Look at every image you produce (Read the PNG) before you call it done.
 - The GPU is shared: test renders stay small (<= 50 % size, <= 16 samples, few frames) unless your role says otherwise. Time a render only when nvidia-smi shows the GPU idle.
 - Python entry scripts start with sys.dont_write_bytecode = True. Write big files in parts of about 300 lines per tool call. Say "quick check", never the other phrase.
+- Watch a long command in the foreground, never with tail -f or a background monitor. Stop every background process you started before your final answer: on Windows an open log handle locks the project folder, and only "npm run unlock" finds it later.
 Final answer: a plain-text report of at most ${CAP} lines with the headings CHANGED (file: what, why) / CHECKED (command -> number before -> after; images looked at) / CONTRACT CHANGES / ENGINE / OPEN.`
 
 // A role that already carries `report` (a string) is done: no agent runs for it. Give every role a

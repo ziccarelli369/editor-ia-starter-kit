@@ -5,12 +5,13 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, copyFileSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { filmDoctor } from './lib/film-doctor.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const win = process.platform === 'win32';
 let missing = 0;
 const ok = m => console.log(`  ok    ${m}`);
 const bad = m => { console.log(`  FALTA ${m}`); missing++; };
-const has = (cmd, args) => { const r = spawnSync(cmd, args, { encoding: 'utf8', windowsHide: true, shell: win }); return !r.error && r.status === 0 ? (r.stdout || r.stderr).split(/\r?\n/)[0] : null; };
+const has = (cmd, args) => { const r = win ? spawnSync([cmd, ...args].join(' '), { encoding: 'utf8', windowsHide: true, shell: true }) : spawnSync(cmd, args, { encoding: 'utf8' }); return !r.error && r.status === 0 ? (r.stdout || r.stderr).split(/\r?\n/)[0] : null; };
 
 console.log('editor-ia-starter-kit · comprobación de instalación / install check\n');
 const node = Number(process.versions.node.split('.')[0]);
@@ -35,6 +36,16 @@ env.KIE_API_KEY ? ok('Kie.ai key (música y clips generados)') : console.log('  
 ok(`idioma del agente: ${config.language} · idioma del metraje: ${config.transcription.languages.join(', ')} (cámbialo en kit.config.json)`);
 const brands = readdirSync(join(root, 'brands'), { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== '_template').map(d => d.name);
 brands.length ? ok(`marcas: ${brands.join(', ')}`) : console.log('  opc.   sin marcas todavía: el agente crea la primera en tu primer /new-video');
+
+if (!process.argv.includes('--film')) console.log('  opc.   película 3D (character-film): opcional; necesita Blender 5.x con GPU y Python 3.10+ → npm run setup -- --film');
+else {
+  console.log('\npelícula 3D (character-film) · film doctor\n');
+  const doctor = filmDoctor(root);
+  for (const line of doctor.lines) console.log(`  ${line}`);
+  const fails = doctor.lines.filter(l => l.startsWith('FAIL')).length || (doctor.ok ? 0 : 1);
+  missing += fails;
+  if (fails) console.log('\n  Siguiente: npm run film:install (venv de Python) · Blender 5.x → https://www.blender.org/download/');
+}
 
 console.log('');
 if (missing) { console.log(`${missing} cosa(s) por instalar. Luego: npx hyperframes doctor`); process.exitCode = 1; }

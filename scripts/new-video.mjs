@@ -5,13 +5,25 @@
 import { cpSync, mkdirSync, existsSync, readFileSync, writeFileSync, copyFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { filmDoctor } from './lib/film-doctor.mjs';
+import { mainCheckoutOf } from './lib/worktree.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : def; };
-const slug = args.find((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--')));
+const flags = ['--skip-doctor', '--allow-worktree'];
+const slug = args.find((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--') && !flags.includes(args[i - 1])));
 if (!slug || slug === '--help') {
-  console.log('Usage: npm run new-video -- <lowercase-slug> [--brand <brand>] [--mode guided|freeform] [--goal personal|sell|grow] [--kind video|film] [--size WxH] [--fps N]');
+  console.log('Usage: npm run new-video -- <lowercase-slug> [--brand <brand>] [--mode guided|freeform] [--goal personal|sell|grow] [--kind video|film] [--size WxH] [--fps N] [--skip-doctor] [--allow-worktree]');
   process.exit(slug ? 0 : 1);
+}
+const main = mainCheckoutOf(root);
+if (main && !args.includes('--allow-worktree')) {
+  console.error([
+    'Refused: this kit is a git worktree. video-projects/ and outbox/ are git-ignored, so removing the worktree deletes the project.',
+    `Run new-video from the main checkout: ${main}`,
+    '--allow-worktree creates it here anyway.',
+  ].join('\n'));
+  process.exit(1);
 }
 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error('Use a lowercase kebab-case slug, not a path.');
 const config = JSON.parse(readFileSync(join(root, 'kit.config.json'), 'utf8'));
@@ -37,6 +49,23 @@ if (kind === 'film') {
   if (![width, height, fps].every((v) => Number.isInteger(v) && v > 0)) throw new Error('--size must be WxH and --fps a whole number');
   const template = join(root, '.claude/skills/film-engine/templates/project');
   if (!existsSync(template)) throw new Error('Film template missing: .claude/skills/film-engine/templates/project');
+  if (!args.includes('--skip-doctor')) {
+    const doctor = filmDoctor(root);
+    if (!doctor.ok) {
+      const fails = doctor.lines.filter(l => l.startsWith('FAIL'));
+      console.error([
+        'This machine cannot render a film yet:',
+        ...(fails.length ? fails : doctor.lines).map(l => `  ${l}`),
+        'Install:',
+        '  npm run film:install   builds the Python venv',
+        '  Blender 5.x            https://www.blender.org/download/ (set BLENDER for a custom folder)',
+        'Check again: npm run setup -- --film',
+        '--skip-doctor creates the project anyway, but it cannot render until the check passes.',
+      ].join('\n'));
+      process.exit(1);
+    }
+    console.log('film doctor: ok');
+  }
   cpSync(template, dest, { recursive: true, errorOnExist: true });
   for (const d of ['build', 'renders', 'reviews', 'scratch']) mkdirSync(join(dest, d), { recursive: true });
   // The final renders to renders/<build.json slug>.mp4: name it after the project, not the template.

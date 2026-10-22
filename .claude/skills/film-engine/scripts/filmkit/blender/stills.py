@@ -1,9 +1,10 @@
 """stills: render chosen frames and measure them; animatic mode. Owner: blender-look. Imports bpy, numpy.
 
 Rules: persistent data OFF, render the context scene after frame_set(f),
-never save the .blend afterwards. Render paths are made absolute before
-they reach scene.render.filepath: Blender resolves a plain relative path
-against the drive root, not the cwd. The class mask is one material_override
+never save the .blend afterwards. Render paths go through render.safe_out
+before they reach scene.render.filepath (absolute, inside the project folder,
+else a ValueError): Blender resolves a plain relative path against the drive
+root, not the cwd. The class mask is one material_override
 (materials.make_mask_material) rendered with the Standard view, exposure 0,
 gamma 1 (the look's view gamma stays out of the mask: the bands are gamma-1 codes),
 world strength 0, no denoise, no compositor, no adaptive sampling, motion
@@ -76,8 +77,8 @@ def render_still(scene, f, path, percent, samples, adaptive, denoise=True):
     cy.adaptive_threshold = float(adaptive or 0.0)
     cy.use_denoising = bool(denoise)
     r.use_persistent_data = False
-    path = os.path.abspath(path)                   # Blender resolves a plain relative path against the drive root
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    path = render_mod.safe_out(path)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     scene.frame_set(int(f))
     tmp = _tmp(path)
     r.filepath = tmp
@@ -117,8 +118,8 @@ def render_mask(scene, f, path, mask_material, samples=32):
         r.use_persistent_data = False
         if bg:
             bg.inputs["Strength"].default_value = 0.0
-        path = os.path.abspath(path)
-        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        path = render_mod.safe_out(path)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         scene.frame_set(int(f))
         tmp = _tmp(path)
         r.filepath = tmp
@@ -192,7 +193,7 @@ def render_stills(scene, frames, out_dir, percent=50, samples=40, adaptive=0.03,
     Entry: {frame, t, seconds_render, path, colour, silhouette: {mask_w, mask_h, model_w}, hot, void,
     studio_luma, max, content_in_frame}. Prints one STILL line per frame. -> [per-frame dicts]."""
     fps = scene.render.fps / scene.render.fps_base
-    out_dir = os.path.abspath(out_dir)
+    out_dir = render_mod.safe_out(out_dir)
     os.makedirs(out_dir, exist_ok=True)
     entries = []
     for f in frames:
@@ -231,6 +232,7 @@ def render_animatic(scene, out_dir, percent=50, samples=16, adaptive=0.05, frame
     given frames (out of order: persistent data OFF, one still each) at low quality. denoise: the
     preset's flag. -> seconds."""
     r, cy = scene.render, scene.cycles
+    out_dir = render_mod.safe_out(out_dir)
     os.makedirs(out_dir, exist_ok=True)
     t0 = time.perf_counter()
     if frames:
@@ -244,7 +246,7 @@ def render_animatic(scene, out_dir, percent=50, samples=16, adaptive=0.05, frame
         cy.adaptive_threshold = float(adaptive or 0.0)
         cy.use_denoising = bool(denoise)
         r.use_persistent_data = True
-        r.filepath = os.path.join(os.path.abspath(out_dir), "")
+        r.filepath = os.path.join(out_dir, "")
         bpy.ops.render.render(animation=True)
         n = scene.frame_end - scene.frame_start + 1
     secs = time.perf_counter() - t0

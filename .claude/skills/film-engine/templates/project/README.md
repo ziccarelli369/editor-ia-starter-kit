@@ -32,5 +32,12 @@ python -B build.py --only sound --force # one step, freshness gate off
 
 Outputs: `build/` (timeline.json, ui*.png, comp/####.png, sound.wav + report, film.blend, model_report.txt,
 previs.svg) and `renders/` (stills + masks + stills.json, animatic/ + animatic.mp4 + strips, frames/,
-`<slug>.mp4`, verify.json). Keep the project path short: Blender fails past about 240 characters.
+`<slug>.mp4`, verify.json). Every output stays inside this folder: the engine refuses a path outside it,
+a relative path handed to Blender or one at a drive root (Blender would write there). Keep the project
+path short: Blender fails past about 240 characters.
 The render presets in `look.py` are tiny placeholders (25 %, 4-8 samples); a real film sets its own.
+
+Tools: env `BLENDER`, `CHROME`, `NODE`, `FILM_PYTHON` win; otherwise the engine looks in the install
+folders of this OS, then on PATH. `CYCLES_DEVICE` picks the Cycles kind (default: the first of OPTIX,
+CUDA, HIP, METAL, ONEAPI with a device; `CPU` is the explicit, slow opt-in). `npm run setup -- --film`
+says what is missing.

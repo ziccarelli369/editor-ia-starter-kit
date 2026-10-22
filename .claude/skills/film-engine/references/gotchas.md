@@ -12,12 +12,19 @@ item says "project". Production rules (ownership, the critic loop) are in
 - AgX looks carry a prefix ("AgX - Punchy"). Light ray visibility is on the object (`visible_glossy`).
   The Attribute node's output is "Factor".
 - Layered actions: reach an F-curve through the slot's channelbag (`bake.fcurve`).
-- The GPU device is a user preference, not part of the .blend: pass `-P gpu.py` on every render.
+- The GPU device is a user preference, not part of the .blend: pass `-P gpu.py` on every render. It picks
+  the first kind with a device (OPTIX, CUDA, HIP, METAL, ONEAPI) and turns the other kinds off, so an AMD
+  iGPU next to an NVIDIA card never joins the render. `CYCLES_DEVICE=CPU` is the only CPU path.
+- A raise inside a `render_init` handler does not stop the render (Blender prints it and renders on);
+  `sys.exit(1)` inside the handler does. gpu.py's render guard uses that.
 - Stills rendered out of order with persistent data on lose keyed state (shards vanished). Stills: persistent
   data off, `frame_set` on the context scene. A second scene rendered with `render(scene=...)` keeps image
   sequences on frame 1. Never save the .blend after a stills or lookdev run.
 - A relative render path resolves against the DRIVE ROOT, not the project (a stills run wrote to
-  `C:\renders\`). Project: every path a scene or render script writes is absolute.
+  `C:\renders\`). The engine now refuses: every bpy write goes through `render.safe_out` (absolute, inside
+  the project folder, else a ValueError) and gpu.py exits 1 before any render whose path is relative,
+  has no drive or sits at a drive root. Project: pass paths relative to the project folder or absolute
+  inside it; `//`-relative render paths stay with the .blend.
 - Blender fails past about 240 characters of path. Project: keep `video-projects/<id>/` short; a deep
   scratch folder needs a directory junction.
 - Blender writes `__pycache__` next to every module it imports: every entry starts with
@@ -44,13 +51,21 @@ item says "project". Production rules (ownership, the critic loop) are in
   bus dropped) fails on its audibility (`none`), floor or not.
 - After a `timeline.py` change, rebuild everything downstream (`build.py` refuses stale inputs).
 
-## Windows and tools
+## Tools and platforms
 
-- System Python has numpy only; scipy, pedalboard and Pillow live in the kit `.venv`. Blender's Python is
-  separate (3.13): modules it imports are standard library only.
-- Printing reports with non-ASCII characters crashes the cp1252 console: set `PYTHONIOENCODING=utf-8`.
-- ffmpeg `drawtext` segfaults on this Windows build (no fontconfig): label contact sheets with Pillow.
-- puppeteer has no bundled browser: puppeteer-core with the system Chrome (env `CHROME`), launched with
+- Blender and Chrome: env `BLENDER` / `CHROME` first, then the install folders of this OS (Windows
+  `Program Files`, macOS `/Applications`, Linux PATH and snap), then PATH (`filmkit/tools.py`,
+  `tool-paths.mjs`). When nothing is found the doctor names the first place it looked. Never hard-code
+  a tool path in engine code, a template or a check.
+- `python -B scripts/doctor.py` (or `npm run setup -- --film`) says what is installed; every FAIL line
+  carries a fix hint after `→`, and a warn says when the kit root has under 10 GB free (a finished film
+  took 5.2 GB).
+- scipy, pedalboard and Pillow live in the kit `.venv` (`npm run film:install`); system Python may have
+  numpy only. Blender's Python is separate (3.13): modules it imports are standard library only.
+- Printing reports with non-ASCII characters crashes a cp1252 Windows console: set
+  `PYTHONIOENCODING=utf-8` (doctor.py reconfigures its own stdout).
+- ffmpeg `drawtext` segfaults on the Windows build (no fontconfig): label contact sheets with Pillow.
+- puppeteer has no bundled browser: puppeteer-core with the system Chrome, launched with
   `--force-color-profile=srgb --hide-scrollbars --font-render-hinting=none`. Prove every font face before
   the first frame; a silent fallback is a failure.
 - A `.js` file with `import` fails the kit's syntax check (the package is CommonJS): engine JS is `.mjs`.

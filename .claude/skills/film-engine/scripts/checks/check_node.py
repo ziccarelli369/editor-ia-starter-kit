@@ -10,7 +10,7 @@
    a page whose render(3) reports a failed check exits 1 and leaves no frame behind; a page whose
    tc sequence skips even frames exits 1 with the gap message and leaves nothing behind, and passes
    with --frames 1,3,5 (the gap check uses the requested frames).
-Env: NODE (default node on PATH), CHROME (default Chrome in Program Files). Exit 1 on any failure.
+Env: NODE (default node on PATH), CHROME (else filmkit.tools discovery). Exit 1 on any failure.
 """
 import sys
 sys.dont_write_bytecode = True
@@ -24,10 +24,10 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS = os.path.dirname(HERE)
 sys.path.insert(0, SCRIPTS)
-from filmkit import ui_html  # noqa: E402
+from filmkit import tools, ui_html  # noqa: E402
 
 NODE = os.environ.get("NODE") or shutil.which("node") or "node"
-CHROME = os.environ.get("CHROME") or "C:/Program Files/Google/Chrome/Application/chrome.exe"
+CHROME = tools.find_chrome()
 UI = (200, 120)
 SCALE = 2
 LAYOUT = {

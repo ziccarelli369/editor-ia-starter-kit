@@ -12,7 +12,7 @@ CLI:
       [--dist 0.5 --lens 50]
 --python-exit-code 1 makes Blender stop with exit 1 on the first exception in a -P script (gpu.py's
 'no device' included); without it Blender exits 0 and runs the next script. --out may be relative to
-the cwd: every path handed to bpy is made absolute first.
+the cwd: every path handed to bpy goes through render.safe_out first (absolute, inside the project).
 Every number printed goes to stdout prefixed LOOKDEV / CHECK / TUNE / TURN and to <out>/lookdev.json
 (keys: 'frames' {tag: entries}, 'selfcheck', 'tune', 'turnaround'). The frames/tune/turnaround steps
 re-apply the LOOK stored in the .blend by render.apply_look first, then the CLI overrides, in memory.
@@ -131,7 +131,7 @@ def numbered_sequence(seq_dir, n, size=8):
     """Write <seq_dir>/0001..n PNGs (size x size) whose byte values encode the frame number:
     R = 12 (n mod 20), G = 12 (n div 20). -> path of 0001.png."""
     import numpy as np
-    seq_dir = os.path.abspath(seq_dir)            # bpy saves a plain relative path against the drive root
+    seq_dir = render_mod.safe_out(seq_dir)
     os.makedirs(seq_dir, exist_ok=True)
     im = bpy.data.images.new("seqgen", size, size, alpha=False)
     for k in range(1, n + 1):
@@ -179,7 +179,7 @@ def selfcheck(out_dir, n_seq=24, size=(160, 80), samples=4):
     which frame each plane shows. out_dir may be relative to the cwd. -> dict; prints CHECK lines;
     raises on a failure."""
     import numpy as np
-    out_dir = os.path.abspath(out_dir)
+    out_dir = render_mod.safe_out(out_dir)
     os.makedirs(out_dir, exist_ok=True)
     for ob in list(bpy.data.objects):
         bpy.data.objects.remove(ob, do_unlink=True)
@@ -226,7 +226,7 @@ def selfcheck(out_dir, n_seq=24, size=(160, 80), samples=4):
     r = sc.render
     r.image_settings.file_format = "OPEN_EXR"
     r.image_settings.color_depth = "32"
-    r.filepath = os.path.abspath(os.path.join(out_dir, "chk_"))      # a relative path lands at the drive root
+    r.filepath = os.path.join(out_dir, "chk_")
     bpy.ops.render.render(animation=True)
 
     results, problems = {}, []
@@ -245,7 +245,7 @@ def selfcheck(out_dir, n_seq=24, size=(160, 80), samples=4):
             problems.append(f"frame {f}: sequence shows frame {dec}")
     for f in (n_seq // 2, n_seq):
         sc.frame_set(f)
-        p = os.path.abspath(os.path.join(out_dir, f"still_{f:04d}.exr"))
+        p = os.path.join(out_dir, f"still_{f:04d}.exr")
         r.filepath = p
         bpy.ops.render.render(write_still=True)
         dec = decode_frame(_sample_exr(p, 1.0))
@@ -314,7 +314,8 @@ def turnaround(scene, rig, views, pose_fn, out_path, percent=50, samples=32, dis
     hero's -Y face, elev up) with a temporary 'lookdev_cam' (lens mm, dist m, focus on the hero at
     `height`), after pose_fn(rig, name) when given, then tile them with contact.py (needs FILM_PYTHON
     with Pillow; without it the frames stay single). -> sheet path or None; writes 'turnaround'."""
-    out_dir = os.path.dirname(os.path.abspath(out_path))
+    out_path = render_mod.safe_out(out_path)
+    out_dir = os.path.dirname(out_path)
     os.makedirs(out_dir, exist_ok=True)
     keep_cam = scene.camera
     cam = render_mod.camera_object(scene, "lookdev_cam", 36.0, lens)
@@ -340,7 +341,7 @@ def turnaround(scene, rig, views, pose_fn, out_path, percent=50, samples=32, dis
     py = os.environ.get("FILM_PYTHON")
     contact = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "contact.py"))
     if py and os.path.exists(contact):
-        args = [py, "-B", contact, "--out", os.path.abspath(out_path), "--cols", str(min(3, len(paths)))]
+        args = [py, "-B", contact, "--out", out_path, "--cols", str(min(3, len(paths)))]
         args += [f"{p}:{e['view']}" for p, e in zip(paths, entries)]
         proc = subprocess.run(args, capture_output=True, text=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
         if proc.returncode == 0 and os.path.exists(out_path):

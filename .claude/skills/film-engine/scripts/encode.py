@@ -3,7 +3,8 @@
 H.264 High, CRF 17, preset slow, explicit BT.709 conversion (scale=out_color_matrix=bt709:out_range=tv)
 and BT.709 tags, yuv420p, optional vignette, AAC 320k 48 kHz, -t duration, +faststart. Refuses to run when
 a frame or the WAV is missing. --size WxH with --fit pad|crop|scale makes another aspect (9:16) from the
-same frames. The MP4 is written to a temp name and renamed after a probe shows the frame count.
+same frames. The MP4 is written to a temp name and renamed after a probe shows the frame count. --out
+stays inside the cwd (the project folder): filmkit.outpath.under refuses anything else.
 
 CLI:
   python -B encode.py --frames renders/frames --wav build/sound.wav --out renders/film.mp4
@@ -16,6 +17,9 @@ import argparse
 import json
 import os
 import subprocess
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from filmkit import outpath  # noqa: E402
 
 FFMPEG = os.environ.get("FFMPEG", "ffmpeg")
 FFPROBE = os.environ.get("FFPROBE", "ffprobe")
@@ -86,7 +90,8 @@ def encode(frames_dir, wav, out, fps, n, duration, crf=17, preset="slow", vignet
         raise SystemExit(f"{len(miss)} frames missing in {frames_dir}, first: {miss[:5]}")
     if wav and not os.path.exists(wav):
         raise SystemExit(f"missing {wav}")
-    os.makedirs(os.path.dirname(os.path.abspath(out)) or ".", exist_ok=True)
+    out = outpath.under(os.getcwd(), out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     tmp = os.path.splitext(out)[0] + ".part.mp4"
     args = ffmpeg_args(frames_dir, wav, tmp, fps, duration, crf, preset, vignette, size, fit, audio_kbps)
     r = subprocess.run(args, capture_output=True, text=True)

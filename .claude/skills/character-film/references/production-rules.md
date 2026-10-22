@@ -102,5 +102,13 @@ Each rule cost the reference film ("No After Effects", 5 rounds, 24 agents,
     and needs an admin prompt). Then install in the background.
 31. Send the first animatic and the v1 as soon as they exist. ETAs were about
     2x low; say the round count.
-32. The project folder and the outbox are git-ignored. When the film lives in
-    a worktree, say so, and ask before copying it (about 2.7 GB) elsewhere.
+32. The project folder and the outbox are git-ignored, so a film inside a
+    worktree dies with the worktree. `new-video` refuses there; make the film
+    in the main checkout. [TAP TO SUBMIT was made in a worktree and had to be
+    moved, 5.2 GB.]
+33. Watch long commands in the foreground. A `tail -f` left running holds the
+    log open, and on Windows the project folder cannot move. Before moving or
+    archiving a project, run `npm run unlock -- <id>`. [Eight orphan tails
+    locked TAP TO SUBMIT.]
+34. Every output path is absolute and inside the project; the engine refuses
+    any other. [A relative stills path wrote to the drive root.]

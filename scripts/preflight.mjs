@@ -9,6 +9,9 @@
 
 import { readFileSync, existsSync, statSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { filmDoctor } from "./lib/film-doctor.mjs";
 
 const SHADER_BLOCK_NAMES = new Set([
   "glitch", "whip-pan", "cinematic-zoom", "flash-through-white", "light-leak",
@@ -124,6 +127,41 @@ const projectDir = resolve(projectArg);
 if (!existsSync(projectDir) || !statSync(projectDir).isDirectory()) {
   console.error(`Project folder not found: ${projectDir}`);
   process.exit(2);
+}
+
+const projectFile = join(projectDir, "project.json");
+if (existsSync(projectFile) && JSON.parse(readFileSync(projectFile, "utf8")).kind === "film") {
+  const kit = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+  const indent = (text) => text.split(/\r?\n/).filter((l) => l.trim()).forEach((l) => console.log(`  ${l}`));
+  console.log(`\n${ansi.bold("◆")} Film preflight: ${projectDir.replace(/\\/g, "/")}`);
+  const doctor = filmDoctor(kit);
+  indent(doctor.lines.join("\n"));
+  const venv = [process.env.FILM_PYTHON, join(kit, ".venv/Scripts/python.exe"), join(kit, ".venv/bin/python")].find((p) => p && existsSync(p));
+  const python = venv ? [venv] : doctor.python;
+  const steps = [
+    ["build_dry_run", "Build dry run: build.py --dry", ["build.py", "--dry"], projectDir],
+    ["stamps", "Stale steps: filmkit.fresh --status", ["-m", "filmkit.fresh", projectDir, "--status"], join(kit, ".claude/skills/film-engine/scripts")],
+  ];
+  for (const [label, title, argv, cwd] of steps) {
+    console.log(`\n${ansi.bold("◆")} ${title}`);
+    if (!python) {
+      warn(label, "skipped: no Python 3.10+");
+      continue;
+    }
+    const r = spawnSync(python[0], [...python.slice(1), "-B", ...argv], {
+      cwd, encoding: "utf8", windowsHide: true, env: { ...process.env, PYTHONIOENCODING: "utf-8" },
+    });
+    const out = `${r.stdout || ""}${r.stderr || ""}${r.error ? r.error.message : ""}`;
+    out.trim() ? indent(out) : ok(label, "no stamps yet: every step will run");
+    if (r.status !== 0) warn(label, `exit ${r.status}`);
+  }
+  console.log("");
+  if (!doctor.ok) {
+    console.log(`${ansi.red("◇")} film doctor failed — this machine cannot render the film. Run npm run film:install, then npm run setup -- --film`);
+    process.exit(1);
+  }
+  console.log(`${ansi.green("◇")} film doctor ok`);
+  process.exit(0);
 }
 
 const indexPath = join(projectDir, "index.html");

@@ -36,9 +36,11 @@ Two kinds of work, two models (`kit.config.json` `models`):
 ## Project
 
 `npm run new-video -- <slug> --kind film --mode guided --brand <brand|none> --size 1920x1080 --fps 30`
-copies `film-engine/templates/project/` into `video-projects/<id>/`. The
-scaffold runs as is with grey placeholders; every `# TASTE:` line is a
-decision for the design model. File owners:
+copies `film-engine/templates/project/` into `video-projects/<id>/`. It
+refuses when the machine check fails, and inside a git worktree: the project
+folder is git-ignored and dies with the worktree. The scaffold runs as is
+with grey placeholders; every `# TASTE:` line is a decision for the design
+model. File owners:
 
 | Files | Owner |
 | --- | --- |
@@ -57,10 +59,12 @@ Each gate needs the user's yes in chat, unless the user gave the taste
 decisions to the design model for this film. Then the director decides,
 writes the reason in `DESIGN.md`, and keeps going.
 
-0. **Machine.** Run `python -B .claude/skills/film-engine/scripts/doctor.py`.
+0. **Machine.** The film path is optional; run `npm run setup -- --film`.
    Done when it prints ok for Blender 5.x with a GPU device, Chrome,
    puppeteer-core, ffmpeg and the kit `.venv` (numpy, scipy, pedalboard,
-   Pillow). Install only after the user's yes, and name the download size.
+   Pillow). For each FAIL, follow its hint: `npm run film:install` builds the
+   venv; the user installs Blender. Install only after the user's yes, and
+   name the download size.
 1. **Brief.** Run `film-brief`. Done when the project `DESIGN.md` holds ONE
    SENTENCE, BRAND (HERO, APP, RESULT, SET), BEATS, CAMERA, LOOK, SOUND,
    VERTICAL, CHECKS and DO NOT.
@@ -128,11 +132,12 @@ round 1 and before each director note. The short form:
 
 ## Kit checks
 
-`preflight`, `hyperframes lint`, `align-captions`, `hearing-check` and
-`av-sync-check` check HyperFrames and speech, so they do not apply. Name them
-in a "Kit checks that do not apply" section of `VERIFY.md`. The replacements:
-the UI contract, the result contact sheet, the model check, `stills.json`,
-the sound check and `verify_final.py`.
+For a film project, `node scripts/preflight.mjs <id>` runs the machine check
+and the build dry run (the stale steps). `hyperframes lint`,
+`align-captions`, `hearing-check` and `av-sync-check` check HyperFrames and
+speech, so they do not apply. Name them in a "Kit checks that do not apply"
+section of `VERIFY.md`. The replacements: the UI contract, the result contact
+sheet, the model check, `stills.json`, the sound check and `verify_final.py`.
 
 ## Deliver
 
@@ -146,4 +151,5 @@ Then, from the kit root, with no `--srt` (the film has no voice):
 `node scripts/deliver.mjs <id> --video video-projects/<id>/renders/<slug>.mp4 --cover video-projects/<id>/renders/cover.png --caption video-projects/<id>/renders/caption.txt`.
 Deliver the vertical cut with `--name <slug>-9x16` and its own cover, and a
 fix with `--name <slug>-v2`. Ask the user to listen: a measured mix is not
-a heard mix.
+a heard mix. Before you move or archive the project folder, run
+`npm run unlock -- <id>` and stop only the processes this session started.

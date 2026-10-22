@@ -4,15 +4,28 @@ import assert from 'node:assert/strict';
 import { writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { rng } from '../.claude/skills/film-engine/scripts/ease.mjs';
 import {
   box, grow, shift, union, inFrame, margin, pad4, timecode, typeOnPrefixes, makeRibbon,
 } from '../.claude/skills/film-engine/scripts/comp-kit.mjs';
 import * as ui from '../.claude/skills/film-engine/scripts/ui-render.mjs';
 import * as fr from '../.claude/skills/film-engine/scripts/frames-render.mjs';
+import { chromeCandidates, findChrome } from '../.claude/skills/film-engine/scripts/tool-paths.mjs';
+import { findPython, filmDoctor } from '../scripts/lib/film-doctor.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const engine = join(root, '.claude/skills/film-engine/scripts');
+const python = findPython();
+const noPython = !python && 'no Python 3.10+ on this machine';
+
+function pyJson(code, env = {}) {
+  const r = spawnSync(python[0], [...python.slice(1), '-B', '-c', code], {
+    cwd: engine, encoding: 'utf8', windowsHide: true, env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1', ...env },
+  });
+  assert.equal(r.status, 0, r.stderr);
+  return JSON.parse(r.stdout.trim().split(/\r?\n/).pop());
+}
 
 // Five draws per seed from filmkit.ease.mulberry32 (python -B, repr()); the JS twin must match bit for bit.
 const PY_RNG = {
@@ -180,4 +193,119 @@ test('writeDataURL refuses anything but a PNG data URL', () => {
   assert.throws(() => fr.writeDataURL(join(dir, 'x.png'), 'data:text/plain;base64,aGk='), /not a PNG data URL/);
   fr.writeDataURL(join(dir, 'y.png'), 'data:image/png;base64,iVBORw0KGgo=');
   assert.deepEqual([...Buffer.from('iVBORw0KGgo=', 'base64')], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+});
+
+test('tool-paths: CHROME wins, then the install folders of the platform, then PATH', () => {
+  assert.equal(findChrome({ CHROME: 'q' }), 'q');
+  assert.deepEqual(chromeCandidates('win32', { ProgramFiles: 'C:\\PF', 'ProgramFiles(x86)': 'C:\\PF86', LOCALAPPDATA: 'C:\\LA' }),
+    ['C:\\PF\\Google\\Chrome\\Application\\chrome.exe', 'C:\\PF86\\Google\\Chrome\\Application\\chrome.exe', 'C:\\LA\\Google\\Chrome\\Application\\chrome.exe']);
+  assert.equal(chromeCandidates('darwin', {})[0], '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
+  assert.deepEqual(chromeCandidates('linux', { PATH: '' }), ['google-chrome']);
+  const dir = mkdtempSync(join(tmpdir(), 'film-engine-test-'));
+  writeFileSync(join(dir, 'chromium'), '');
+  assert.deepEqual(chromeCandidates('linux', { PATH: dir }), [join(dir, 'chromium')]);
+  assert.equal(findChrome({ PATH: dir }, 'linux'), join(dir, 'chromium'));
+  assert.equal(findChrome({ PATH: '' }, 'linux'), 'google-chrome', 'nothing found: the first place looked at');
+  assert.equal(chromeCandidates('darwin', { PATH: dir }).at(-1), join(dir, 'chromium'), 'macOS falls back to PATH');
+  writeFileSync(join(dir, 'chrome.exe'), '');
+  assert.deepEqual(chromeCandidates('win32', { ProgramFiles: 'C:\\PF', PATH: dir }),
+    ['C:\\PF\\Google\\Chrome\\Application\\chrome.exe', join(dir, 'chrome.exe')], 'Windows falls back to PATH');
+});
+
+test('build.tool_paths honours BLENDER and CHROME', { skip: noPython }, () => {
+  const t = pyJson('import json, build; print(json.dumps(build.tool_paths()))', { BLENDER: 'x/blender', CHROME: 'y/chrome' });
+  assert.equal(t.blender, 'x/blender');
+  assert.equal(t.chrome, 'y/chrome');
+  assert.ok(t.python && t.node && t.engine);
+});
+
+test('filmkit.tools: newest Blender 5.x by numeric version, per-platform Chrome and Blender places', { skip: noPython }, () => {
+  const t = pyJson(`
+import json, os, tempfile
+from filmkit import tools
+tmp = tempfile.mkdtemp(prefix='film_tools_')
+for v in ('5.2', '5.10', '4.9'):
+    d = os.path.join(tmp, 'Blender Foundation', 'Blender ' + v)
+    os.makedirs(d)
+    open(os.path.join(d, 'blender.exe'), 'w').close()
+none = lambda n: None
+print(json.dumps({
+ 'win': [p.replace(os.sep, '/') for p in tools.blender_candidates('win32', {'ProgramFiles': tmp}, none)],
+ 'win_empty': [p.replace(os.sep, '/') for p in tools.blender_candidates('win32', {'ProgramFiles': os.path.join(tmp, 'none')}, none)],
+ 'mac': tools.blender_candidates('darwin', {'HOME': '/h'}, none),
+ 'lin': tools.blender_candidates('linux', {}, lambda n: '/usr/bin/' + n),
+ 'lin_none': tools.blender_candidates('linux', {}, none),
+ 'chrome_win': [p.replace(os.sep, '/') for p in tools.chrome_candidates('win32', {'ProgramFiles': 'P', 'LOCALAPPDATA': 'L'}, none)],
+ 'chrome_lin': tools.chrome_candidates('linux', {}, none),
+ 'chrome_mac_path': tools.chrome_candidates('darwin', {}, lambda n: '/opt/homebrew/bin/' + n),
+ 'chrome_win_path': tools.chrome_candidates('win32', {'ProgramFiles': 'P'}, lambda n: 'C:/shims/' + n),
+ 'env': [tools.find_blender({'BLENDER': 'z'}), tools.find_chrome({'CHROME': 'c'})],
+}))`);
+  assert.equal(t.win.length, 2, 'Blender 4.9 is left out');
+  assert.ok(t.win[0].endsWith('/Blender 5.10/blender.exe') && t.win[1].endsWith('/Blender 5.2/blender.exe'), `${t.win}`);
+  assert.ok(t.win_empty[0].endsWith('/Blender Foundation/Blender 5.x/blender.exe'), 'nothing found: names where it looked');
+  assert.deepEqual(t.mac, ['/Applications/Blender.app/Contents/MacOS/Blender', '/h/Applications/Blender.app/Contents/MacOS/Blender']);
+  assert.deepEqual(t.lin, ['/usr/bin/blender', '/snap/bin/blender']);
+  assert.deepEqual(t.lin_none, ['/snap/bin/blender']);
+  assert.deepEqual(t.chrome_win, ['P/Google/Chrome/Application/chrome.exe', 'L/Google/Chrome/Application/chrome.exe']);
+  assert.deepEqual(t.chrome_lin, ['google-chrome']);
+  assert.deepEqual(t.chrome_mac_path.slice(2), ['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser'].map((n) => '/opt/homebrew/bin/' + n), 'macOS falls back to PATH');
+  assert.deepEqual(t.chrome_win_path.slice(1), ['C:/shims/chrome', 'C:/shims/chromium'], 'Windows falls back to PATH');
+  assert.deepEqual(t.env, ['z', 'c']);
+});
+
+test('filmkit.outpath: under refuses an escape, an outside path, a root base and a rooted no-drive path; root_problem flags the drive root', { skip: noPython }, () => {
+  const t = pyJson(`
+import json, os, tempfile
+from filmkit import outpath
+base = os.path.join(tempfile.gettempdir(), 'film_outpath_test', 'proj')
+root = os.path.splitdrive(base)[0] + os.sep
+def err(fn):
+    try:
+        fn()
+        return None
+    except ValueError as e:
+        return str(e)
+print(json.dumps({
+ 'rel': outpath.under(base, os.path.join('renders', 'x.png')).replace(os.sep, '/'),
+ 'abs_inside': outpath.under(base, os.path.join(base, 'build', 'a.blend')).replace(os.sep, '/'),
+ 'cwd_rel': outpath.under(base, 'out', os.path.join(base, 'renders')).replace(os.sep, '/'),
+ 'seq': outpath.under(base, 'renders/frames/').replace(os.sep, '/'),
+ 'escape': err(lambda: outpath.under(base, os.path.join('..', 'x.png'))),
+ 'outside': err(lambda: outpath.under(base, os.path.join(tempfile.gettempdir(), 'elsewhere.png'))),
+ 'root_base': err(lambda: outpath.under(root, 'x.png')),
+ 'rel_base': err(lambda: outpath.under('proj', 'x.png')),
+ 'rooted': err(lambda: outpath.under(base, '/renders')),
+ 'rp_rel': outpath.root_problem('renders/x.png'),
+ 'rp_empty': outpath.root_problem(''),
+ 'rp_root_file': outpath.root_problem(os.path.join(root, 'x.png')),
+ 'rp_root_seq': outpath.root_problem(root),
+ 'rp_slash': outpath.root_problem('/renders/x.png'),
+ 'rp_ok_seq': outpath.root_problem(os.path.join(base, 'renders', 'frames') + os.sep),
+ 'rp_ok_file': outpath.root_problem(os.path.join(base, 'f.png')),
+ 'nt': os.name == 'nt',
+}))`);
+  assert.ok(t.rel.endsWith('/film_outpath_test/proj/renders/x.png'), t.rel);
+  assert.ok(t.abs_inside.endsWith('/proj/build/a.blend'));
+  assert.ok(t.cwd_rel.endsWith('/proj/renders/out'), 'a relative path is taken from the cwd');
+  assert.ok(t.seq.endsWith('/proj/renders/frames/'), `a frame folder keeps its trailing separator: ${t.seq}`);
+  for (const k of ['escape', 'outside', 'root_base', 'rel_base', 'rooted']) assert.match(t[k] || '', /^outpath: /, k);
+  for (const k of ['rp_rel', 'rp_empty', 'rp_root_file', 'rp_root_seq']) assert.ok(t[k], k);
+  if (t.nt) assert.match(t.rp_slash, /no drive/);
+  assert.equal(t.rp_ok_seq, null);
+  assert.equal(t.rp_ok_file, null);
+});
+
+test('doctor.py keeps its line format: ok/FAIL/warn lines, a fix hint on every FAIL, a DOCTOR verdict', { skip: noPython, timeout: 180_000 }, () => {
+  const { ok, lines } = filmDoctor(root);
+  assert.ok(lines.length >= 9, lines.join('\n'));
+  const verdict = lines[lines.length - 1];
+  assert.match(verdict, /^DOCTOR: (ok|\d+ failed)$/);
+  const failed = lines.filter((l) => l.startsWith('FAIL  '));
+  assert.equal(ok, verdict === 'DOCTOR: ok');
+  assert.equal(verdict, failed.length ? `DOCTOR: ${failed.length} failed` : 'DOCTOR: ok');
+  for (const l of lines.slice(0, -1)) {
+    assert.match(l, /^(ok  |FAIL|warn)  [a-z -]+: \S/, l);
+    if (l.startsWith('FAIL')) assert.match(l, / → \S/, `no fix hint: ${l}`);
+  }
 });

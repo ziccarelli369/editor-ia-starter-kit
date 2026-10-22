@@ -34,11 +34,11 @@ import vm from 'node:vm';
 import { createRequire } from 'node:module';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { inFrame, margin, pad4 } from './comp-kit.mjs';
+import { findChrome } from './tool-paths.mjs';
 
 const require = createRequire(import.meta.url);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-export const CHROME_DEFAULT = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 export const CHROME_ARGS = ['--force-color-profile=srgb', '--allow-file-access-from-files', '--hide-scrollbars', '--font-render-hinting=none'];
 /** The engine modules a page gets, in order, and the global each one's import resolves to. */
 export const ENGINE_MODULES = [['ease.mjs', 'FilmEase'], ['comp-kit.mjs', 'FilmKit']];
@@ -100,7 +100,7 @@ export function checkBundle(bundle = engineBundle()) {
 }
 
 /** Launch Chrome with the fixed flags. -> browser */
-export async function launch(chromePath = process.env.CHROME || CHROME_DEFAULT) {
+export async function launch(chromePath = findChrome()) {
   const puppeteer = require('puppeteer-core');
   if (!fs.existsSync(chromePath)) throw new Error(`Chrome not found at ${chromePath} (set env CHROME)`);
   return puppeteer.launch({ executablePath: chromePath, headless: true, args: CHROME_ARGS });

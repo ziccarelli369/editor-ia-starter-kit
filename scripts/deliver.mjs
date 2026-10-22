@@ -4,11 +4,21 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { mainCheckoutOf } from './lib/worktree.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const id = args[0];
 const opt = n => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined; };
-if (!id || id.startsWith('--')) throw new Error('Usage: node scripts/deliver.mjs <project-id> --video <mp4> --cover <png> [--caption <txt>] [--srt <srt>] [--name <name>]');
+if (!id || id.startsWith('--')) throw new Error('Usage: node scripts/deliver.mjs <project-id> --video <mp4> --cover <png> [--caption <txt>] [--srt <srt>] [--name <name>] [--allow-worktree]');
+const main = mainCheckoutOf(root);
+if (main && !args.includes('--allow-worktree')) {
+  console.error([
+    'Refused: this kit is a git worktree. video-projects/ and outbox/ are git-ignored, so removing the worktree deletes the delivery.',
+    `Run deliver from the main checkout: ${main}`,
+    '--allow-worktree delivers here anyway.',
+  ].join('\n'));
+  process.exit(1);
+}
 const config = JSON.parse(readFileSync(join(root, 'kit.config.json'), 'utf8'));
 const projectFile = join(root, 'video-projects', id, 'project.json');
 if (!existsSync(projectFile)) throw new Error(`No project: ${id}`);

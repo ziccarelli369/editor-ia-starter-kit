@@ -11,6 +11,10 @@ Engine defaults are neutral placeholders.
 apply_look stores the LOOK and registry dicts as JSON in scene['film_look']
 and scene['film_registry'], so stills.py and lookdev.py re-read them from a
 saved .blend (presets, mask classes, target colour) without the project module.
+
+Every path this package hands to bpy for writing goes through safe_out: absolute,
+inside project_dir() (the parent of the open .blend's folder, else the cwd), or
+a ValueError. Blender resolves a plain relative path against the drive root.
 """
 import json
 import math
@@ -19,6 +23,7 @@ import os
 import bpy
 from mathutils import Vector
 
+from filmkit import outpath
 from filmkit.blender import bake as bake_mod, materials
 
 PRESETS = {
@@ -42,6 +47,20 @@ def _collection(scene, name):
 _fcurve = bake_mod.fcurve      # the FCurve animating idb.path, or None (Blender 5 layered actions)
 
 
+def project_dir():
+    """-> the folder every output path must stay inside: the parent of the open .blend's folder
+    (<project>/build/film.blend), else the cwd."""
+    if bpy.data.filepath:
+        return os.path.dirname(os.path.dirname(os.path.abspath(bpy.data.filepath)))
+    return os.getcwd()
+
+
+def safe_out(path):
+    """-> path absolute inside project_dir() (a relative path is taken from the cwd). Raises ValueError on a
+    path outside it, a rooted path with no drive or a root (outpath.under)."""
+    return outpath.under(project_dir(), path, os.getcwd())
+
+
 # ---------------------------------------------------------------- render settings
 def setup_render(scene, preset="final", presets=None, film=(1920, 1080), fps=30, frames=1, view="AgX",
                  look="None", exposure=0.0, shutter=0.5, persistent=True, bounces=None, clamp_indirect=6.0,
@@ -50,7 +69,8 @@ def setup_render(scene, preset="final", presets=None, film=(1920, 1080), fps=30,
     motion blur (centred shutter in frames; 0 = off), persistent data, PNG RGB 8-bit, GPU, OIDN on the
     GPU, bounces (dict like BOUNCES), clamps (direct 0, indirect clamp_indirect), caustics off, light
     tree, Filter Glossy blur_glossy (0 = sharp reflections; a look value, placeholder 1.0), view
-    transform/look/exposure. out_path sets render.filepath (relative //). -> scene."""
+    transform/look/exposure. out_path sets render.filepath: a //-relative path as given (it moves with
+    the .blend), any other through safe_out. -> scene."""
     pct, samples, adaptive, denoise = (presets or PRESETS)[preset]
     r = scene.render
     r.engine = "CYCLES"
@@ -67,7 +87,7 @@ def setup_render(scene, preset="final", presets=None, film=(1920, 1080), fps=30,
     r.image_settings.color_mode = "RGB"
     r.image_settings.color_depth = "8"
     if out_path:
-        r.filepath = out_path
+        r.filepath = out_path if out_path.startswith("//") else safe_out(out_path)
 
     cy = scene.cycles
     cy.device = "GPU"
@@ -429,8 +449,9 @@ def save_blend(path):
     -> {'objects': n, 'non_relative': [paths]}."""
     bpy.context.scene.frame_set(1)
     bpy.context.preferences.filepaths.save_version = 0      # the second save below would leave a .blend1
-    os.makedirs(os.path.dirname(os.path.abspath(path)) or ".", exist_ok=True)
-    bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(path), relative_remap=True)
+    path = safe_out(path)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    bpy.ops.wm.save_as_mainfile(filepath=path, relative_remap=True)
     bpy.ops.file.make_paths_relative()
     bpy.ops.wm.save_mainfile()
     bad = [im.filepath for im in bpy.data.images if im.filepath and not im.filepath.startswith("//")]

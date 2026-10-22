@@ -4,7 +4,8 @@ Checks: ffprobe frame count (decoded), duration, codecs, profile, pixel format, 
 per-frame mean luma (decoded from the MP4, or from the PNG frames with --frames-dir); black frames; the
 biggest frame-to-frame luma steps (listed for the director: each must be a designed event); audio
 cross-correlation lag against the WAV (must be 0 samples) and the decoded sample count.
-Writes a JSON report and exits 1 on any failed expectation.
+Writes a JSON report (inside the cwd: filmkit.outpath.under refuses anything else) and exits 1 on any
+failed expectation.
 
 CLI:
   python -B verify_final.py --mp4 renders/film.mp4 --wav build/sound.wav --fps 30 --n 360 --duration 12.0
@@ -21,7 +22,7 @@ import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from filmkit import measure  # noqa: E402
+from filmkit import measure, outpath  # noqa: E402
 
 FFPROBE = os.environ.get("FFPROBE", "ffprobe")
 
@@ -129,9 +130,11 @@ def main(argv=None):
     ap.add_argument("--json")
     ap.add_argument("--expect-size", type=_size)
     a = ap.parse_args(argv)
+    if a.json:
+        a.json = outpath.under(os.getcwd(), a.json)
     rep = verify(a.mp4, a.wav, a.fps, a.n, a.duration, a.frames_dir, a.steps, a.black_below, a.expect_size)
     if a.json:
-        os.makedirs(os.path.dirname(os.path.abspath(a.json)) or ".", exist_ok=True)
+        os.makedirs(os.path.dirname(a.json), exist_ok=True)
         with open(a.json, "w", encoding="utf-8") as fh:
             json.dump(rep, fh, indent=1)
     p = rep["probe"]

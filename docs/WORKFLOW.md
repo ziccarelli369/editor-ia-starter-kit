@@ -2,7 +2,7 @@
 
 ## 1. Create a project and transcribe
 
-From the repository root run `npm run new-video -- <yyyy-mm-dd>-<slug>`. Put your recording
+From the main checkout (not a git worktree) run `npm run new-video -- <slug>`. Put your recording
 at `video-projects/<yyyy-mm-dd>-<slug>/assets/raw.mp4`. Preserve this original.
 
 ```sh

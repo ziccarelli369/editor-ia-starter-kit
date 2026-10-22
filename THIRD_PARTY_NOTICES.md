@@ -25,3 +25,31 @@ workflow. Third-party notices override these grants for their respective assets.
 
 Library names, handles, statistics, and source labels inside cards are illustrative
 placeholders. Replace them with your own verified copy before publishing a video.
+
+## Film path tools (optional, none bundled)
+
+The 3D character film (`character-film`) uses these tools. The kit ships none of
+them. Each keeps its own license.
+
+- Blender: https://www.blender.org (GPL-3.0-or-later as distributed, from the
+  `license/license.md` of Blender 5.2; its source files carry GPL-2.0-or-later
+  headers). The user installs it. The kit's Blender scripts in
+  `.claude/skills/film-engine/` fall under the kit's MIT `LICENSE`, a
+  GPL-compatible license, and run inside the user's own Blender.
+- pedalboard by Spotify: https://github.com/spotify/pedalboard (GPL-3.0, from
+  its `.venv` metadata). `npm run film:install` installs it into the user's `.venv`.
+- numpy: https://numpy.org (BSD-3-Clause; its wheel also lists 0BSD, MIT, Zlib
+  and CC0-1.0 for bundled parts) and scipy: https://scipy.org (BSD-3-Clause).
+  Both from their `.venv` metadata, installed into the user's `.venv`.
+- Pillow: https://python-pillow.org (MIT-CMU, from its `.venv` metadata),
+  installed into the user's `.venv`.
+- puppeteer-core: https://github.com/puppeteer/puppeteer (Apache-2.0, from
+  `node_modules/puppeteer-core/package.json`). `npm install` installs it.
+- Chrome: https://www.google.com/chrome/ The user installs it. Its use falls
+  under the Google Terms of Service and the Chrome Additional Terms
+  (https://www.google.com/chrome/terms/).
+
+The character-film format comes from a study of the "No After Effects" prompt
+pack by Clawd Motion Lab and the article "Motion Engineering: Build a Video
+Studio Around Opus 5.5" by @0xwhrrari
+(https://x.com/0xwhrrari/status/2105643919119696297).
