@@ -2,14 +2,20 @@
 
 ## Consolidated kit checks
 
-- All 14 skills passed frontmatter validation. The distribution check reports
+Verified locally on Windows, 2026-10-22, using Node 24.14.0: `npm run check`
+and `npm test`.
+
+- All 23 skills passed frontmatter validation. The distribution check reports
   zero errors across 406 cards and the skill tree.
-- A clean `npm ci` succeeded. All 11 behavior tests passed, including new checks
-  for caption drift, incorrect source mapping, scene coverage, footage reuse,
-  missing ledger rows, and changed footage hashes.
-- The starter passed preflight and HyperFrames lint with zero errors or warnings.
-- The synthetic media check passed again: silence output 3.960 seconds,
-  clean output 3.673 seconds versus a 3.660-second transcript.
+- All 35 behavior tests passed, including checks for caption drift, incorrect
+  source mapping, scene coverage, footage reuse, missing ledger rows, changed
+  footage hashes, and the film path's scaffold, guards and tool discovery.
+- The film path (`character-film`, `film-engine`) is verified on Windows only.
+  On macOS and Linux, only its unit tests in `npm test` cover it.
+- From the previous kit check, not repeated on 2026-10-22: a clean `npm ci`
+  succeeded; the starter passed preflight and HyperFrames lint with zero errors
+  or warnings; the synthetic media check gave a silence output of 3.960
+  seconds and a clean output of 3.673 seconds versus a 3.660-second transcript.
 - No real reel or paid generation was run for this release; short-form
   verification covers its validators and resource package.
 

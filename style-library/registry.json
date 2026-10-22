@@ -21,7 +21,7 @@
         "accent": "#37BDF8",
         "red": "#e23b2e",
         "orange": "#f26a1b",
-        "notes": "5 symbolic colors: warm paper, warm ink, AIS blue (the eye-magnet), editorial red, cutout orange. Mirrored in tokens.css."
+        "notes": "5 symbolic colors: warm paper, warm ink, brand blue (the eye-magnet), editorial red, cutout orange. Mirrored in tokens.css."
       },
       "fonts": {
         "display": "Fraunces",
@@ -2385,7 +2385,7 @@
       "name": "Kallaway",
       "status": "draft",
       "folder": "02-kallaway",
-      "inspiration": "Kallaway-style premium dark creator explainer. Near-black cool canvas with a blue 'aurora' glow blooming from below; glassmorphism cards and pills; edge-lit neon frames; gradient glow text; focus-stack blur; smooth After-Effects easing (glide + bloom + breathe, never choppy). Palette is the AIS brand — blue is the hero glow where the references used purple. Reference frames in references/.",
+      "inspiration": "Kallaway-style premium dark creator explainer. Near-black cool canvas with a blue 'aurora' glow blooming from below; glassmorphism cards and pills; edge-lit neon frames; gradient glow text; focus-stack blur; smooth After-Effects easing (glide + bloom + breathe, never choppy). Palette is the brand palette — blue is the hero glow where the references used purple. Reference frames in references/.",
       "palette": {
         "bg": "#0A0E14",
         "fg": "#F0EEE9",
@@ -2393,7 +2393,7 @@
         "accent2": "#F5D82A",
         "alert": "#FF3B30",
         "warm": "#FF8A5C",
-        "notes": "Dark cool canvas (#0A0E14 / deep #07121C), cream/white text, AIS blue hero glow, yellow secondary pop, red/orange punctuation. One saturated glow per beat. Mirrored in tokens.css."
+        "notes": "Dark cool canvas (#0A0E14 / deep #07121C), cream/white text, brand blue hero glow, yellow secondary pop, red/orange punctuation. One saturated glow per beat. Mirrored in tokens.css."
       },
       "fonts": {
         "display": "Plus Jakarta Sans",

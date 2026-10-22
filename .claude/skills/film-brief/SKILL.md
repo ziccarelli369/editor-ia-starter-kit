@@ -5,11 +5,12 @@ description: Director's brief for a code-rendered film: studies a reference (pro
 
 # Film brief
 
-The generic AI film comes from missing decisions: the model fills them with
-its safest defaults. The brief removes the missing decisions before anything
-renders. It separates **facts** (the real app, the real logo, the real rules
-of the subject) from **choices** (camera, timing, style). The model may invent
-choices. It never invents a fact: a missing fact is a question to the user.
+Each decision the brief leaves open, the model settles with its blandest
+default, and the film turns generic. So the brief settles every one of them
+before the first render. It splits **facts** (the real app, the real logo, the
+real rules of the subject) from **choices** (camera, timing, style). The model
+may invent choices. It never invents a fact: a missing fact is a question to
+the user.
 
 All of this is taste work for the design model.
 
@@ -26,8 +27,9 @@ Skip when there is no reference. Use the REA discipline: **observe**, then
 **infer**, then admit **unknown**.
 
 1. Write the questions the brief must answer, each with the evidence that
-   answers it: palette, type, composition, pacing, motion classes, texture,
-   the beat structure, the payoff, the sound shape, the render pipeline.
+   answers it: the beat structure, the payoff, colour, light and surface,
+   framing, rhythm, motion classes, type, the sound shape, the render
+   pipeline.
 2. Measure a reference video:
    `node .claude/skills/motion-showreel/scripts/analyze-reference.mjs <video> <out> --fps 6 --bpm <bpm>`.
    Read every sheet. For a prompt pack, copy its BRAND block, its beat table
@@ -36,11 +38,22 @@ Skip when there is no reference. Use the REA discipline: **observe**, then
    `| id | claim | evidence (file, time or page) | observed / inferred / unknown |`.
    A measured number is observed. A reason it works is inferred. A thing you
    could not see or hear is unknown.
-4. Write REFERENCE ANALYSIS in `DESIGN.md`: palette (hex values, not
-   adjectives), type (family, width, weight, scale), composition (where the
-   eye goes first), pacing (time between meaningful changes), motion (snap,
-   settle, overshoot, hold per object class), texture. Add DO NOT COPY: the
-   reference's subjects, logos, copy and specific imagery.
+4. Write REFERENCE ANALYSIS in `DESIGN.md`, one measured line per field:
+   - colour: hex values, measured from frames or quoted from the source,
+     never adjectives;
+   - light and surface: what makes each highlight, and the finish (grain,
+     glass, clean);
+   - framing: the first place the eye lands in a shot, and where the hero
+     sits;
+   - rhythm: seconds from one change that matters to the next, against the
+     BPM grid;
+   - motion: for each object class, the entry (snap or ease), any overshoot,
+     and the rest (settle or hold);
+   - type: family, width and weight, and cap height as a % of the frame
+     height.
+
+   Add DO NOT COPY: whatever identifies the reference, such as its subject,
+   its marks, its words and its signature shots.
 
 Done when every question has a ledger row, or an unknown row that names the
 missing evidence.
@@ -88,10 +101,11 @@ every section. The rules that make it buildable:
   area lights fight: hide the fill and rim lights from glossy rays.
 - **SOUND**: a copy-ready synth prompt (no samples, no words), one sound per
   hit, and a loudness contour per half second.
-- **VERTICAL**: what changes in 9:16 (fewer elements, a stronger vertical
-  hierarchy, its own holds).
-- **DO NOT**: clichés (big centred text on a gradient, everything fades in,
-  the logo at the end), wrong facts about the subject, legal risks.
+- **VERTICAL**: what changes in 9:16: what drops out of the frame, how the
+  hero and the result stack top to bottom, and its own holds.
+- **DO NOT**: the stock AI-film look (one fade-in for every element, a title
+  parked mid-frame over a soft gradient, a logo saved for the last beat),
+  wrong facts about the subject, legal risks.
 
 Done when every section has a value, every subject fact has a source or the
 user's word, and the user said yes (or gave the taste decisions to the design

@@ -12,7 +12,7 @@
     "accent": "#37BDF8",
     "red": "#e23b2e",
     "orange": "#f26a1b",
-    "notes": "5 symbolic colors: warm paper, warm ink, AIS blue (the eye-magnet), editorial red, cutout orange. Mirrored in tokens.css."
+    "notes": "5 symbolic colors: warm paper, warm ink, brand blue (the eye-magnet), editorial red, cutout orange. Mirrored in tokens.css."
   },
   "fonts": {
     "display": "Fraunces",

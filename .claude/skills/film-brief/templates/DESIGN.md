@@ -27,11 +27,14 @@
 
 ## REFERENCE ANALYSIS
 
-Palette: <hex values> · Type: <family, width, weight, scale> · Composition:
-<where the eye goes first> · Pacing: <time between meaningful changes> ·
-Motion: <per object class> · Texture: <grain, glass, none>
+- Colour: <hex values, measured or quoted>
+- Light and surface: <what makes each highlight; grain, glass or clean>
+- Framing: <first place the eye lands; where the hero sits>
+- Rhythm: <seconds between changes that matter, against the BPM grid>
+- Motion: <per object class: entry, overshoot, rest>
+- Type: <family, width and weight; cap height in % of the frame height>
 
-DO NOT COPY: <subjects, logos, copy, imagery of the reference>
+DO NOT COPY: <what identifies the reference: subject, marks, words, signature shots>
 
 ## FACTS AND CHOICES
 
@@ -63,7 +66,8 @@ contour per half second.>
 
 ## VERTICAL (9:16)
 
-<What changes: fewer elements, stronger vertical hierarchy, its own holds.>
+<What changes: what drops out of the frame, how the hero and the result stack
+top to bottom, its own holds.>
 
 ## RULINGS
 

@@ -897,8 +897,9 @@ blender -b --python-exit-code 1 film.blend -P gpu.py [-s A -e B] -a            f
 
 python -B checks/run_checks.py [--only name] [--python <kit venv python>]
   Runs every checks/check_*.py; PASS/FAIL per check; exit 1 on any fail; *_venv.py need --python (a relative
-  path is taken from the caller's cwd, so `--python .venv/Scripts/python.exe` from the kit root works; a
-  --python that does not exist prints one line and exits 2). Children get PYTHONDONTWRITEBYTECODE=1 and -B.
+  path is taken from the caller's cwd, so `--python .venv/Scripts/python.exe` from the kit root works, or
+  `.venv/bin/python` on macOS and Linux; a --python that does not exist prints one line and exits 2).
+  Children get PYTHONDONTWRITEBYTECODE=1 and -B.
 ```
 
 Tool paths: engine code reads env `BLENDER` and `CHROME`, else `filmkit.tools` / `tool-paths.mjs` discovery

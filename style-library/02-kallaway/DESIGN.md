@@ -1,6 +1,6 @@
 # Kallaway — Design Spec
 
-> Source of truth: the reference frames in `references/` (Kallaway-style premium dark creator explainer). Everything below is derived from them. Palette is the **AIS brand** (blue is the hero glow where the references used purple). Internally this look is "aurora glass": dark canvas + aurora bloom + glassmorphism.
+> Source of truth: the reference frames in `references/` (Kallaway-style premium dark creator explainer). Everything below is derived from them. Palette is the **brand palette** (blue is the hero glow where the references used purple). Internally this look is "aurora glass": dark canvas + aurora bloom + glassmorphism.
 
 ## Style Prompt
 
@@ -12,7 +12,7 @@ Type carries the message and it **glows**: headlines lift off the canvas with a 
 
 - Canvas: `#0A0E14` — near-black cool. Deep well / vignette: `#07121C` navy.
 - Text: `#F0EEE9` primary on dark; dim `rgba(240,238,233,.62)`; faint `rgba(240,238,233,.34)`. Pure `#FFFFFF` for max-emphasis glow text.
-- **Accent (AIS blue): `#37BDF8`** — the hero. The aurora bloom, edge-lights, glow halos, the one word that pops. This *replaces* the references' purple.
+- **Accent (brand blue): `#37BDF8`** — the hero. The aurora bloom, edge-lights, glow halos, the one word that pops. This *replaces* the references' purple.
 - Secondary: `#F5D82A` yellow — highlight numerals, the rare second pop.
 - Alert: `#FF3B30` red — alarm, negative delta, "the lie." Warm: `#FF8A5C` orange.
 - Light surface: `#F0EEE9` / `#FFFFFF` for white glass tiles and chips (with `#2A251F` ink text on them).

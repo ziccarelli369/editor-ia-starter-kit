@@ -15,7 +15,7 @@
   --paper:        #efe9dc;   /* warm newsprint background */
   --paper-2:      #e6dcc4;   /* kraft / aged paper variant */
   --ink:          #17130e;   /* warm near-black print ink (text + engravings) */
-  --yellow:       #37BDF8;   /* AIS blue accent — THE highlight (circles, marker boxes). Token name kept --yellow; value is now blue. */
+  --yellow:       #37BDF8;
   --red:          #e23b2e;   /* editorial red — circles, scribbles, alarm */
   --orange:       #f26a1b;   /* cutout outline / secondary accent */
 

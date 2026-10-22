@@ -12,7 +12,7 @@ The motion is the soul of it: **choppy, low-shutter, stop-motion**. Nothing ease
 
 - Background (paper): `#efe9dc` — warm newsprint. Variant kraft: `#e6dcc4`
 - Foreground / ink: `#17130e` — warm near-black print ink (text + engravings)
-- Accent (AIS blue): `#37BDF8` — the signature; circles + marker highlight boxes
+- Accent (brand blue): `#37BDF8` — the signature; circles + marker highlight boxes
 - Editorial red: `#e23b2e` — circles, scribbles, alarm
 - Cutout orange: `#f26a1b` — sticker outline / secondary accent
 

@@ -77,7 +77,9 @@ item says "project". Production rules (ownership, the critic loop) are in
 
 ## GPU and time
 
-- Render times measured while other agents use the GPU are about 5x too high. Check `nvidia-smi` first.
+- Render times measured while other agents use the GPU are about 5x too high. Check the GPU monitor first:
+  `nvidia-smi` (NVIDIA), `amd-smi` (AMD on Linux), `intel_gpu_top` (Intel on Linux), Task Manager >
+  Performance > GPU (Windows), Activity Monitor > Window > GPU History (macOS).
 - Idle RTX 5070 Ti, 1080p, 64 samples, OIDN: about 1.8 s a frame (11 min for 360 frames). Animation
   renders with persistent data on are about 37 % faster per frame after frame 1.
 - Never write `build/` sequences while a Blender render reads them: frame 356 rendered with a black screen.

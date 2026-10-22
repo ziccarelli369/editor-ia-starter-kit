@@ -121,7 +121,6 @@
       const COUNT = 7;
       const heroLevel = Math.max(1, Math.min(COUNT, parseInt(row.getAttribute("data-level"), 10) || 5));
 
-      // Color ramp: paper-2 (#e6dcc4) → AIS blue (#37BDF8) → orange (#f26a1b) → red (#e23b2e)
       // 7 stops spread deterministically
       function lerpColor(a, b, t) {
         return [
@@ -132,8 +131,8 @@
       }
       const stops = [
         [230, 220, 196],  // paper-2
-        [55, 189, 248],   // AIS blue
-        [55, 189, 248],   // AIS blue (hold)
+        [55, 189, 248],
+        [55, 189, 248],
         [242, 106, 27],   // orange
         [242, 106, 27],   // orange (hold)
         [226, 59, 46],    // red

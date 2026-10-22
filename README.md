@@ -34,9 +34,12 @@ Núcleo (obligatorio):
 | [whisper.cpp](https://github.com/ggml-org/whisper.cpp/releases) o una clave de [ElevenLabs](https://elevenlabs.io) | Transcribir tu voz |
 
 whisper.cpp transcribe gratis en tu máquina. En Windows descarga
-`whisper-blas-bin-x64.zip` de la versión v1.8.3 (la última con binarios para
-Windows), descomprime y agrega `Release` al PATH, o apunta
-`HYPERFRAMES_WHISPER_PATH` al `whisper-cli.exe`. En Mac: `brew install whisper-cpp`.
+`whisper-blas-bin-x64.zip` de la versión v1.8.3 (la probada con este kit; las
+versiones más nuevas no traen binarios para Windows), descomprime y agrega
+`Release` al PATH, o apunta `HYPERFRAMES_WHISPER_PATH` al `whisper-cli.exe`.
+En Mac: `brew install whisper-cpp`. En Linux: compílalo según su README
+(`cmake -B build && cmake --build build -j --config Release`, el binario queda
+en `build/bin/whisper-cli`) o instala el paquete de tu distribución si lo tiene.
 
 Película 3D (opcional):
 
@@ -191,9 +194,12 @@ Core (required):
 | [whisper.cpp](https://github.com/ggml-org/whisper.cpp/releases) or an [ElevenLabs](https://elevenlabs.io) key | Transcribe your voice |
 
 whisper.cpp transcribes for free on your machine. On Windows, download
-`whisper-blas-bin-x64.zip` from release v1.8.3 (the last one with Windows
-binaries), unzip it and add `Release` to PATH, or point
-`HYPERFRAMES_WHISPER_PATH` at `whisper-cli.exe`. On a Mac: `brew install whisper-cpp`.
+`whisper-blas-bin-x64.zip` from release v1.8.3 (the one tested with this kit;
+the newest releases ship no Windows binaries), unzip it and add `Release` to
+PATH, or point `HYPERFRAMES_WHISPER_PATH` at `whisper-cli.exe`. On a Mac:
+`brew install whisper-cpp`. On Linux: build it from source per its README
+(`cmake -B build && cmake --build build -j --config Release`; the binary lands
+in `build/bin/whisper-cli`), or install your distro's package if it has one.
 
 3D character film (optional):
 

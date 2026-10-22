@@ -48,7 +48,7 @@ Crew rules:
 - Write only the files you own. Never edit timeline.py, DESIGN.md or checks_config.py (the director owns the contract and every threshold). Put a needed change under CONTRACT CHANGES with the exact new value and the reason.
 - Never write build/ or renders/ outputs that another owner produces, and never while a Blender render reads them. Scratch work goes under scratch/<your-role>/.
 - Measure, never guess: every claim of a fix carries a number before and after. Look at every image you produce (Read the PNG) before you call it done.
-- The GPU is shared: test renders stay small (<= 50 % size, <= 16 samples, few frames) unless your role says otherwise. Time a render only when nvidia-smi shows the GPU idle.
+- The GPU is shared: test renders stay small (<= 50 % size, <= 16 samples, few frames) unless your role says otherwise. Time a render only when the GPU monitor shows the GPU idle: nvidia-smi (NVIDIA), amd-smi (AMD on Linux), intel_gpu_top (Intel on Linux), Task Manager > Performance > GPU (Windows), Activity Monitor > Window > GPU History (macOS).
 - Python entry scripts start with sys.dont_write_bytecode = True. Write big files in parts of about 300 lines per tool call. Say "quick check", never the other phrase.
 - Watch a long command in the foreground, never with tail -f or a background monitor. Stop every background process you started before your final answer: on Windows an open log handle locks the project folder, and only "npm run unlock" finds it later.
 Final answer: a plain-text report of at most ${CAP} lines with the headings CHANGED (file: what, why) / CHECKED (command -> number before -> after; images looked at) / CONTRACT CHANGES / ENGINE / OPEN.`

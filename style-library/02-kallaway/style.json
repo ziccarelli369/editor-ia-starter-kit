@@ -4,7 +4,7 @@
   "name": "Kallaway",
   "number": "02",
   "status": "draft",
-  "inspiration": "Kallaway-style premium dark creator explainer. Near-black cool canvas with a blue 'aurora' glow blooming from below; glassmorphism cards and pills; edge-lit neon frames; gradient glow text; focus-stack blur; smooth After-Effects easing (glide + bloom + breathe, never choppy). Palette is the AIS brand — blue is the hero glow where the references used purple. Reference frames in references/.",
+  "inspiration": "Kallaway-style premium dark creator explainer. Near-black cool canvas with a blue 'aurora' glow blooming from below; glassmorphism cards and pills; edge-lit neon frames; gradient glow text; focus-stack blur; smooth After-Effects easing (glide + bloom + breathe, never choppy). Palette is the brand palette — blue is the hero glow where the references used purple. Reference frames in references/.",
   "summary": "Premium dark motion-graphics. Use for modern, high-engagement explainer content — tech, business, creator/marketing topics — where glowing glass UI, big gradient numbers, and cinematic depth carry the piece. The smooth, lit counterpart to Vox's paper-collage.",
   "palette": {
     "bg": "#0A0E14",
@@ -13,7 +13,7 @@
     "accent2": "#F5D82A",
     "alert": "#FF3B30",
     "warm": "#FF8A5C",
-    "notes": "Dark cool canvas (#0A0E14 / deep #07121C), cream/white text, AIS blue hero glow, yellow secondary pop, red/orange punctuation. One saturated glow per beat. Mirrored in tokens.css."
+    "notes": "Dark cool canvas (#0A0E14 / deep #07121C), cream/white text, brand blue hero glow, yellow secondary pop, red/orange punctuation. One saturated glow per beat. Mirrored in tokens.css."
   },
   "fonts": {
     "display": "Plus Jakarta Sans",

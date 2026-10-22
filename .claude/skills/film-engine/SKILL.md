@@ -57,7 +57,7 @@ choice needs an engine change, the request names the exact new argument; the def
 ## Checks
 
 `python -B .claude/skills/film-engine/scripts/checks/run_checks.py --python .venv/Scripts/python.exe`
-runs every quick check (Blender ones need the GPU). `npm test` covers the Node pieces in CI.
+(`--python .venv/bin/python` on macOS and Linux) runs every quick check (Blender ones need the GPU). `npm test` covers the Node pieces in CI.
 Before a change ships: both pass, and `npm run check` prints 0 errors.
 
 ## When it breaks

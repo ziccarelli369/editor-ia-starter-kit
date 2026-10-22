@@ -27,7 +27,7 @@ room, the correction landing, the people. Every reel ends with a way in.
   schedule, offer, handle or link. A sell reel with a missing field stops and
   asks for it.
 - CTA, on screen and in the caption, in this order: offer, place, how to start.
-  Example: "Clase de prueba gratis · Tatami Lab, Chamberí · DM 'PRUEBA'".
+  Example: "Clase de prueba gratis · Tu Academia, Tu Barrio · DM 'PRUEBA'".
   Keep it on screen at least 2.5 s, above the 220 px safe zone.
 - Pacing: medium. The correction must be readable; the coach's face must appear
   at least once in the first 5 s.

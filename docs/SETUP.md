@@ -11,10 +11,13 @@ local Whisper default, the optional ElevenLabs and Kie.ai paths, and optional se
 2. Install FFmpeg with ffprobe. On Windows, reopen your terminal after you
    install FFmpeg to refresh PATH.
 3. Install whisper.cpp for free local transcription: on Windows download
-   `whisper-bin-x64.zip` from https://github.com/ggml-org/whisper.cpp/releases,
-   unzip it and add the folder to PATH; on macOS `brew install whisper-cpp`.
-   Or set `HYPERFRAMES_WHISPER_PATH` to the `whisper-cli` binary. Recent whisper.cpp
-   releases ship no Windows build; v1.8.3 does (`whisper-blas-bin-x64.zip`).
+   `whisper-blas-bin-x64.zip` from release v1.8.3 at
+   https://github.com/ggml-org/whisper.cpp/releases (the newest releases ship
+   no Windows build), unzip it and add the `Release` folder to PATH; on macOS
+   `brew install whisper-cpp`; on Linux build it from source per its README
+   (`cmake -B build && cmake --build build -j --config Release`, binary in
+   `build/bin/whisper-cli`) or install your distro's package if it has one.
+   Or set `HYPERFRAMES_WHISPER_PATH` to the `whisper-cli` binary.
 4. Run `npm install` in the repository root.
 5. Run `npm run setup`. It checks the core tools, creates `.env` from
    `.env.example` when `.env` is missing, and prints one optional line for the film path.

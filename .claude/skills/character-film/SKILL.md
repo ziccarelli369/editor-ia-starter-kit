@@ -11,14 +11,15 @@ frame and changes the RESULT that plays on the app's viewer. At the end the
 app falls away, and only the result stays. The reference is the prompt pack
 "No After Effects": 12 s, 1920x1080, 30 fps, 120 BPM, Blender Cycles.
 
-A prompt makes a clip. A studio makes the next film without rebuilding itself.
-The studio has five layers, and each layer has one skill:
+One prompt yields one clip. This skill runs a studio instead: the second film
+starts from a new brief and reuses the engine, the checks and the gates of
+the first. Five layers split across three skills:
 
 | Layer | Question | Skill |
 | --- | --- | --- |
-| Director, reference | What must the viewer remember? What should it feel like? | `film-brief` |
-| Timeline, renderer | What changes at each beat? How is each frame made? | `film-engine` |
-| Critic | What failed, exactly where, and why? | `film-critic` |
+| Director, reference | Which one sentence stays with the viewer? Which measured look serves it? | `film-brief` |
+| Timeline, renderer | Which frame holds each hit, and what does it change? What draws each frame, from which inputs? | `film-engine` |
+| Critic | Which defect, on which frames, from which cause? | `film-critic` |
 
 This skill runs the gates and the rounds between them.
 
@@ -132,7 +133,7 @@ round 1 and before each director note. The short form:
 
 ## Kit checks
 
-For a film project, `node scripts/preflight.mjs <id>` runs the machine check
+For a film project, `node scripts/preflight.mjs video-projects/<id>` runs the machine check
 and the build dry run (the stale steps). `hyperframes lint`,
 `align-captions`, `hearing-check` and `av-sync-check` check HyperFrames and
 speech, so they do not apply. Name them in a "Kit checks that do not apply"

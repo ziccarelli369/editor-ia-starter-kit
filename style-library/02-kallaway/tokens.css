@@ -7,7 +7,7 @@
    Aesthetic: premium dark motion-graphics — near-black cool canvas, a blue
    "aurora" glow blooming from below, glassmorphism cards, edge-lit neon
    elements, gradient glow text, focus-stack blur, smooth After-Effects easing.
-   Palette is the AIS brand (blue is the hero glow). The opposite of Vox in
+   Palette is the brand palette (blue is the hero glow). The opposite of Vox in
    every axis: smooth not choppy, dark not paper, glow not ink.
    ============================================================================ */
 
@@ -16,7 +16,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap");
 
 :root {
-  /* --- palette (mirror style.json + DESIGN.md). AIS brand, dark. ----------- */
   --canvas:       #0A0E14;   /* main near-black cool background */
   --canvas-deep:  #07121C;   /* deeper navy — vignette / depth wells */
   --ink:          #2A251F;   /* dark text for the rare light/cream surface */
@@ -27,7 +26,7 @@
   --text-dim:     rgba(240, 238, 233, 0.62);  /* secondary copy */
   --text-faint:   rgba(240, 238, 233, 0.34);  /* metadata, fine print */
 
-  --accent:       #37BDF8;   /* AIS blue — THE hero glow (where refs used purple) */
+  --accent:       #37BDF8;
   --accent-2:     #F5D82A;   /* yellow — secondary pop / highlight numerals */
   --alert:        #FF3B30;   /* red — alarm, negative delta, "lie" */
   --warm:         #FF8A5C;   /* orange — warm secondary accent */
