@@ -48,7 +48,9 @@ Claude Opus 5.5 owns taste: story, cuts, graphics, sound.
 Profile `solo` (default): one Opus agent does everything.
 Profile `team`: Opus orchestrates and decides; Claude Haiku 5.5 subagents run
 mechanical parallel work only (transcripts, probes, validators, contact sheets).
-Switch to `team` when the user says usage is low. Fable is outside this kit.
+Switch to `team` when the user says usage is low. Fable is outside this kit,
+with one exception: in `character-film` the engineer model (`models.engineer`)
+writes and fixes engine code and measurement, never taste.
 
 ## 4. Map
 
@@ -72,6 +74,10 @@ Guided is the known path: the editing playbook and its gates.
 | Pick or extend motion-graphics cards | `style-library` |
 | Apply a reverse-engineered editing style | `apply-style` |
 | Turn a reference video into a new style | `reverse-engineer-style` |
+| 3D character film: a toy hero builds the video inside a software UI | `character-film` |
+| Film brief: reference study, concept panel, BRAND block, beats | `film-brief` |
+| Film engine: Blender build, UI texture, camera solve, synth sound | `film-engine` |
+| Film critic: judge rendered frames, ranked defects, local fixes | `film-critic` |
 | Put finals in the outbox | `deliver` |
 | HTML compositions and media timing | `hyperframes` |
 | Preview, lint, render, transcribe | `hyperframes-cli` |
@@ -112,6 +118,9 @@ re-encoded. Caption times come from Scribe word starts on the source, mapped
 through the EDL; never from a transcript of the mixed reel.
 Edit compositions with the Edit tool or a script saved to a file, never a
 shell-inline regex.
+
+A character film (`kind: film`) replaces the next paragraph with its own
+checks: see `character-film`, Kit checks.
 
 Before a draft render run `node scripts/preflight.mjs <project>` and
 `npx hyperframes lint`. Review the draft in Studio (browser pane): hero frames,

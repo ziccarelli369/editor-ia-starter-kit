@@ -27,6 +27,23 @@ local Whisper default, the optional ElevenLabs and Kie.ai paths, and optional se
 The repository pins HyperFrames 0.7.109 and GSAP 3.14.2. Keep package-lock.json
 with package.json. Upgrade deliberately, then repeat the render checks.
 
+## Film path (optional)
+
+The 3D character film (`character-film`) needs more tools. Install them once:
+
+1. Install Blender 5.x. If Blender is not in its default folder, set `BLENDER`
+   to the `blender` binary.
+2. In the repository root, run `python -m venv .venv`.
+3. Install the four packages into the venv:
+   `.venv/Scripts/python -m pip install numpy scipy pedalboard Pillow`
+   (on macOS and Linux, `.venv/bin/python`).
+4. Run `npm install` (it installs puppeteer-core; Chrome renders the UI texture).
+5. Run `python -B .claude/skills/film-engine/scripts/doctor.py`. It prints one
+   ok or FAIL line for Blender with a GPU device, Chrome, Node, ffmpeg and the venv.
+
+`.venv/` stays out of Git. Cycles renders on the GPU; a 12 s film at 1080p
+takes about 11 minutes on an RTX 5070 Ti.
+
 ## Projects and skills
 
 `npm run new-video -- <slug> --brand <brand> --mode guided|freeform` creates

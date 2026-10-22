@@ -16,6 +16,7 @@ configure only what you use.
 | Local Whisper (`npm run transcribe`) | The kit's default for speech transcription | No key. Runs on your computer; the first run downloads a model, which needs disk space and local compute. |
 | ElevenLabs Scribe | Optional paid transcription | Your own key with `speech_to_text` access and available usage. The included helper sends audio to ElevenLabs. |
 | Kie.ai | Optional generated moving B-roll, images, and other supported assets | Your own account, key, and credits. Existing footage, supplied assets, or motion graphics built in HyperFrames can be used instead. |
+| Blender 5.x and a Python venv (`.venv`: numpy, scipy, pedalboard, Pillow) | Only the 3D character film (`character-film`) | Free. Install on your computer; Cycles needs a GPU. See [setup](SETUP.md#film-path-optional). |
 | Your footage, logos, fonts, music, and sound effects | Building the actual edit | Supply assets you can use. The kit does not include a stock-media or music subscription. |
 
 The kit's checks need no paid transcription or generation API.

@@ -8,7 +8,9 @@
       "team": "Claude Opus 5.5 orchestrates and makes every design decision. Claude Haiku 5.5 subagents run mechanical, parallel work: transcripts, probes, validators, contact sheets."
     },
     "design": "claude-opus-5-5",
-    "worker": "claude-haiku-5-5"
+    "worker": "claude-haiku-5-5",
+    "engineer": "claude-fable-5-1",
+    "$engineer": "character-film only: writes and fixes engine code and measurement, never taste."
   },
   "transcription": {
     "provider": "elevenlabs",

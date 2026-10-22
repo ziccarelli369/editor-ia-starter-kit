@@ -77,6 +77,12 @@ mide con ffmpeg, escribe las reglas en `styles/drafts/<nombre>/` con la evidenci
 de cada regla, y te ofrece una prueba de 3 segundos. Si te gusta, lo mueves a
 `styles/core/`.
 
+## Película 3D
+
+Di "quiero una película 3D" y el agente usa `character-film`: un personaje de
+juguete arma un gráfico en movimiento sobre una app gigante, en Blender. Necesita
+Blender 5.x y un venv de Python (`docs/SETUP.md`, "Film path").
+
 ---
 
 ## English
@@ -98,6 +104,9 @@ and the delivery contract.
 Reverse-engineer a style: download a reference to `inbox/`, say "edit like this
 video". The agent measures it, writes rules with evidence to `styles/drafts/`,
 and offers a 3-second test. Promote to `styles/core/` by hand.
+
+3D character film: say "make a character film". The `character-film` skill
+renders a toy hero in Blender; it needs Blender 5.x and a Python venv (`docs/SETUP.md`).
 
 ## Credits and licenses
 

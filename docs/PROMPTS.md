@@ -21,6 +21,10 @@ joins. Fix visible defects and write VERIFY.md with evidence and limitations.
 [music or reference]. Measure the beat grid first, map six or seven chapters to the
 brand's own objects, and show me the storyboard and beat sheet before building.
 
+**Character film:** Use character-film to make a 12-second 3D film for [brand]:
+a toy hero builds [result] by hopping on the tools of [app]. Run the machine
+check first. Show me the brief and the beat sheet before round 1.
+
 ## A reel with a clear payoff
 
 > Use short-form-edit to create a 9:16 reel from [local recording]. Explore three

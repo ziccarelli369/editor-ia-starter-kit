@@ -32,7 +32,9 @@ Done when `brands/<slug>/DESIGN.md` and `tokens.css` hold the user's values.
 ## 3. Project
 
 `npm run new-video -- <slug> --brand <brand> --mode <mode>`. Slug from the
-user's one-line description: lowercase kebab-case, 2 to 4 words.
+user's one-line description: lowercase kebab-case, 2 to 4 words. For a 3D
+character film, add `--kind film --size <WxH> --fps <n>` (`--brand none` is
+allowed: the film's BRAND block lives in its `DESIGN.md`).
 
 Done when the command prints the project id.
 
@@ -41,7 +43,8 @@ Done when the command prints the project id.
 `node scripts/inbox.mjs` and show the list. Propose which files belong to this
 project. After the user's yes:
 `node scripts/inbox.mjs <project-id> <file> [<file>...]`.
-Empty inbox: ask the user to drop footage in `inbox/` and stop here.
+Empty inbox: ask the user to drop footage in `inbox/` and stop here. A
+character film needs no footage: skip this step.
 
 Done when every approved file sits in `assets/` and is listed in `project.json` `sources`.
 
@@ -70,6 +73,7 @@ Done when every field above has a value the user confirmed.
 | Guided, long recording | `edit-video` |
 | Guided, brief only, no footage | `make-a-video` |
 | Guided, a website | `website-to-hyperframes` |
+| A 3D character film: a toy hero builds the video inside a software UI | `character-film` |
 | A style is set | `apply-style` first, then the row above |
 | Freeform | Offer two concrete first moves, then load skills as needed |
 

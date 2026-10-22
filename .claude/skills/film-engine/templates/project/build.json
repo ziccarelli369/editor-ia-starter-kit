@@ -1,0 +1,13 @@
+{
+  "slug": "greybox",
+  "stills": [1, 16, 31],
+  "mask": true,
+  "crf": 17,
+  "preset": "slow",
+  "vignette": null,
+  "animatic_samples": 4,
+  "audio_kbps": 320,
+  "ui_font": "UiFont",
+  "contact_every": 15,
+  "points": "motion:hero_points"
+}

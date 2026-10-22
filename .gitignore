@@ -6,6 +6,10 @@
 *.pem
 *.key
 node_modules/
+# The film studio's Python venv (numpy, scipy, pedalboard, Pillow) and Blender scene files.
+.venv/
+*.blend
+*.blend1
 # Your material never goes in the repo: only the structure does.
 inbox/*
 !inbox/README.md
