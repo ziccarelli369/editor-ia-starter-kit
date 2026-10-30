@@ -1,6 +1,6 @@
 # Style Library — Guide
 
-The library of motion-graphic card styles that **Agent 3** pulls from to add tiered cards to a video. Each "style" is a named visual identity (e.g. a Vox-inspired explainer look, or a smooth-animated YouTuber look) with its own set of card variants. This file is the contract: read it before adding a style or a card.
+The library of motion-graphic card styles that **Agent 3** pulls from to add tiered cards to a video. Each "style" is a named visual identity (e.g. a paper-collage explainer look, or a smooth-animated YouTuber look) with its own set of card variants. This file is the contract: read it before adding a style or a card.
 
 ## Mental model
 
@@ -9,7 +9,7 @@ style-library/
 ├── GUIDE.md                  ← this file (the rules)
 ├── registry.json             ← GENERATED master index of every style + card (Agent 3 reads this)
 ├── _blueprint/               ← copy-me skeleton for a new style (never edit in place; clone it)
-└── NN-slug/                  ← one folder per style, e.g. 01-vox-explainer/
+└── NN-slug/                  ← one folder per style, e.g. 01-paper-collage/
 ```
 
 One style = one folder. We build **one style fully before starting the next**.
@@ -18,9 +18,9 @@ One style = one folder. We build **one style fully before starting the next**.
 
 Three-part scheme (numeric prefix + slug + dotted IDs):
 
-- **Style folder:** `NN-slug` — e.g. `02-vox-explainer`. `NN` is a zero-padded order/ID, `slug` is human-readable kebab-case.
-- **Style id:** the slug without the number — e.g. `vox-explainer` (stable even if the number changes).
-- **Card id:** `<style>.<tier>.<purpose>[.<variant>]` — e.g. `vox-explainer.t1.stat`, `vox-explainer.t2.list.compact`. Stable, unique, self-describing.
+- **Style folder:** `NN-slug` — e.g. `02-paper-collage`. `NN` is a zero-padded order/ID, `slug` is human-readable kebab-case.
+- **Style id:** the slug without the number — e.g. `paper-collage` (stable even if the number changes).
+- **Card id:** `<style>.<tier>.<purpose>[.<variant>]` — e.g. `paper-collage.t1.stat`, `paper-collage.t2.list.compact`. Stable, unique, self-describing.
 
 ## A style folder
 
@@ -64,7 +64,7 @@ Cards are authored as **standalone compositions** — the `data-composition-id` 
 - **tier2 — support** purposes: `label`, `list`, `equation`, `definition`, `lower-third`
 - **custom** — anything else; give it a clear purpose tag.
 
-Agent 3 asks the registry for "a `tier1` `stat` card in style `vox-explainer`", fills the slots, times it to the transcript.
+Agent 3 asks the registry for "a `tier1` `stat` card in style `paper-collage`", fills the slots, times it to the transcript.
 
 ## The build loop (per style)
 

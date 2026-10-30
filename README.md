@@ -162,7 +162,8 @@ El método para copiar estilos toma ideas de [REA](https://github.com/morluto/re
 (MIT). El formato de la película 3D sale del análisis del paquete de prompts
 "No After Effects" de Clawd Motion Lab y del artículo
 ["Motion Engineering: Build a Video Studio Around Opus 5.5"](https://x.com/0xwhrrari/status/2105643919119696297)
-de @0xwhrrari. Ver `LICENSE`, `THIRD_PARTY_NOTICES.md` y `licenses/`.
+de @0xwhrrari. Ver `LICENSE`, `THIRD_PARTY_NOTICES.md` y `licenses/`. Los archivos
+Python de `.claude/skills/film-engine/` usan la licencia GPL-3.0-or-later.
 
 ---
 
@@ -322,4 +323,5 @@ The reverse-engineering method borrows from [REA](https://github.com/morluto/rea
 (MIT). The 3D character film format was reverse-engineered from the
 "No After Effects" prompt pack by Clawd Motion Lab and the article
 ["Motion Engineering: Build a Video Studio Around Opus 5.5"](https://x.com/0xwhrrari/status/2105643919119696297)
-by @0xwhrrari. See `LICENSE`, `THIRD_PARTY_NOTICES.md` and `licenses/`.
+by @0xwhrrari. See `LICENSE`, `THIRD_PARTY_NOTICES.md` and `licenses/`. The Python
+files in `.claude/skills/film-engine/` are licensed GPL-3.0-or-later.

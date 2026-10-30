@@ -4,7 +4,7 @@
   "name": "Human Readable Style Name",
   "number": "NN",
   "status": "draft",
-  "inspiration": "What creator / look this is based on (e.g. Vox explainer). Reference images live in references/.",
+  "inspiration": "What creator / look this is based on (e.g. paper-collage explainer). Reference images live in references/.",
   "summary": "One-line description of the feeling and when to use this style.",
   "palette": {
     "bg": "#000000",
