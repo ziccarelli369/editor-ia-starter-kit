@@ -2,9 +2,9 @@
 
 Edita videos cortos con Claude Code. Español primero; [English below](#english).
 
-![Tap to Submit: a toy fighter on a giant scoreboard app](docs/images/character-film-tap-to-submit.jpg)
+[![Tap to Submit: a toy fighter on a giant scoreboard app](docs/images/character-film-tap-to-submit.jpg)](https://github.com/ziccarelli369/editor-ia-starter-kit/releases/tag/sample-reels)
 
-*"Tap to Submit", a 12 s BJJ character film made with the kit.*
+*"Tap to Submit", a 12 s BJJ character film made with the kit. [Get the video](https://github.com/ziccarelli369/editor-ia-starter-kit/releases/tag/sample-reels) in 16:9 or 9:16.*
 
 ## Español
 
