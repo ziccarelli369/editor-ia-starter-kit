@@ -1,6 +1,6 @@
 # MOTION PHILOSOPHY — The Gold Standard
 
-> Deconstruction of the **Infinite — Global Payments** 30s spot. The reference every Hyperframes motion build aspires to. Re-read §0 and §4 before and during any creative session.
+> Deconstruction of a 30s global payments brand spot. The reference every Hyperframes motion build aspires to. Re-read §0 and §4 before and during any creative session.
 
 ---
 
@@ -66,7 +66,7 @@
 
 For every new scene, name the one color carrying the beat. If you can't, you haven't earned it.
 
-Reference palette (Infinite-spot specific — your brand or other briefs override): Chrome white→gray `#fff → #999` (premium/brand voice) · Red `#e10b1f` (problem/broken) · Teal `#33d4c8`/`#5ee2d9` (solution/core) · Magenta/purple `#a155ff`/`#7e42d8` (speed/energy/API) · Blue `#3b82f6`/`#5db4ff` (connection/global) · Neon orange/yellow `#ff9430`/`#ffd84a` (value/affordability).
+Reference palette (specific to that spot — your brand or other briefs override): Chrome white→gray `#fff → #999` (premium/brand voice) · Red `#e10b1f` (problem/broken) · Teal `#33d4c8`/`#5ee2d9` (solution/core) · Magenta/purple `#a155ff`/`#7e42d8` (speed/energy/API) · Blue `#3b82f6`/`#5db4ff` (connection/global) · Neon orange/yellow `#ff9430`/`#ffd84a` (value/affordability).
 
 **Palette cap: 5 active hues, each with a meaning.** Over that, you're decorating.
 

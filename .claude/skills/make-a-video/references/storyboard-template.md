@@ -127,7 +127,7 @@ Used by `/make-a-video` Gate 5. Generates `<project-folder>/STORYBOARD.md` — t
 3. **Every beat names its eases** (at least entry + exit). Don't let every beat default to `power2.out`.
 4. **The outro holds 4–6 seconds.** No exceptions.
 5. **At least one visual callback** appears in Act 2 or Act 3 — an element that echoes something set up earlier (MOTION_PHILOSOPHY §0 Law 6).
-6. **Rule of threes** where possible — 3 benefits · 3 product surfaces · 3 icons. The reference Infinite spot uses it everywhere.
+6. **Rule of threes** where possible — 3 benefits · 3 product surfaces · 3 icons. The reference spot uses it everywhere.
 7. **Ambient background composition** always present on `data-track-index="0"` for the full duration.
 
 ---

@@ -14,8 +14,8 @@ fail-closed verification) from REA by morluto (https://github.com/morluto/rea, M
   node_modules/gsap and https://gsap.com/community/standard-license/.
 - Some library styles reference Google Fonts. Font licenses remain with their
   publishers. Install and preserve applicable licenses when localizing fonts.
-- Infinite is an aesthetic reference name. The style templates are not official
-  brand assets or endorsed by any creator or organization.
+- The style templates are not official brand assets or endorsed by any creator
+  or organization.
 
 No blanket relicensing of third-party components is implied. See LICENSE for the
 MIT permission for the original kit material. Imported pipeline resources
