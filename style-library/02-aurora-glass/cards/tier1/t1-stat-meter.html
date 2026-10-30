@@ -219,7 +219,7 @@
           { autoAlpha: 0, y: 18, filter: "blur(8px)", duration: 0.75, ease: "power3.out" }, 0.50)
 
         /* big stat counts up */
-        .fromTo({ val: 0 }, { val: pct,
+        .to({ val: 0 }, { val: pct,
           duration: 1.8, ease: "power2.out",
           onUpdate: function() {
             numEl.textContent = Math.round(this.targets()[0].val) + suffix;
