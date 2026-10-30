@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Scaffold a new style folder by cloning _blueprint/ and substituting the id.
 // Usage: node scripts/style-library/new-style.mjs <NN> <slug> ["Human Name"]
-//   e.g. node scripts/style-library/new-style.mjs 01 vox-explainer "Vox Explainer"
+//   e.g. node scripts/style-library/new-style.mjs 01 paper-collage "Paper Collage"
 
 import { cpSync, existsSync, readFileSync, writeFileSync, renameSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";

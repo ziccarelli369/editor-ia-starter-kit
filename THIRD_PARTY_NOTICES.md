@@ -14,8 +14,8 @@ fail-closed verification) from REA by morluto (https://github.com/morluto/rea, M
   node_modules/gsap and https://gsap.com/community/standard-license/.
 - Some library styles reference Google Fonts. Font licenses remain with their
   publishers. Install and preserve applicable licenses when localizing fonts.
-- Vox, Kallaway, and Infinite are aesthetic reference names. These templates are
-  not official brand assets or endorsed by those creators or organizations.
+- The style templates are not official brand assets or endorsed by any creator
+  or organization.
 
 No blanket relicensing of third-party components is implied. See LICENSE for the
 MIT permission for the original kit material. Imported pipeline resources
@@ -33,9 +33,10 @@ them. Each keeps its own license.
 
 - Blender: https://www.blender.org (GPL-3.0-or-later as distributed, from the
   `license/license.md` of Blender 5.2; its source files carry GPL-2.0-or-later
-  headers). The user installs it. The kit's Blender scripts in
-  `.claude/skills/film-engine/` fall under the kit's MIT `LICENSE`, a
-  GPL-compatible license, and run inside the user's own Blender.
+  headers). The user installs it. The Python files in
+  `.claude/skills/film-engine/` use its Python API or load together with files
+  that do, so they are GPL-3.0-or-later (see `LICENSE` and
+  `licenses/GPL-3.0.txt`), and they run inside the user's own Blender.
 - pedalboard by Spotify: https://github.com/spotify/pedalboard (GPL-3.0, from
   its `.venv` metadata). `npm run film:install` installs it into the user's `.venv`.
 - numpy: https://numpy.org (BSD-3-Clause; its wheel also lists 0BSD, MIT, Zlib
