@@ -84,10 +84,11 @@
         font-size: 140px;
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 8%, rgba(var(--accent-rgb), 0.82) 88%);
+        background: linear-gradient(155deg, var(--white) 8%, rgba(var(--accent-rgb), 0.82) 88%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 32px rgba(var(--accent-rgb), 0.60));
+        font-variant-numeric: tabular-nums;
       }
 
       #t1-stat-orbit .stat-unit {
@@ -146,9 +147,9 @@
             <defs>
               <!-- ring gradient: bright arc fades to invisible -->
               <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"   stop-color="rgba(55,189,248,0.05)"/>
-                <stop offset="60%"  stop-color="rgba(55,189,248,0.70)"/>
-                <stop offset="100%" stop-color="rgba(255,255,255,0.90)"/>
+                <stop offset="0%"   stop-color="rgba(var(--accent-rgb), 0.05)"/>
+                <stop offset="60%"  stop-color="rgba(var(--accent-rgb), 0.70)"/>
+                <stop offset="100%" stop-color="rgba(var(--white-rgb), 0.90)"/>
               </linearGradient>
               <!-- glow filter -->
               <filter id="orbitGlow" x="-10%" y="-10%" width="120%" height="120%">
@@ -159,7 +160,7 @@
 
             <!-- dim track ring -->
             <circle cx="280" cy="280" r="240"
-              stroke="rgba(255,255,255,0.07)"
+              stroke="rgba(var(--white-rgb), 0.07)"
               stroke-width="1.5"
               stroke-dasharray="4 8"
               fill="none"
@@ -178,13 +179,13 @@
 
             <!-- satellite dot -->
             <circle id="t1-stat-orbit-sat" cx="280" cy="40" r="10"
-              fill="#ffffff"
-              style="filter: drop-shadow(0 0 12px rgba(55,189,248,1.0)) drop-shadow(0 0 30px rgba(55,189,248,0.60));"
+              fill="var(--white)"
+              style="filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), 1.0)) drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.60));"
             />
             <!-- satellite trail (smaller dim dot slightly behind) -->
             <circle id="t1-stat-orbit-trail" cx="280" cy="40" r="5"
-              fill="rgba(55,189,248,0.40)"
-              style="filter: drop-shadow(0 0 8px rgba(55,189,248,0.60));"
+              fill="rgba(var(--accent-rgb), 0.40)"
+              style="filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.60));"
             />
           </svg>
 

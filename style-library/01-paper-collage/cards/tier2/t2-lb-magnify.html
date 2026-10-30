@@ -44,14 +44,14 @@
         border-radius: 50%;
         border: 7px solid var(--ink);
         /* subtle warm glass tint inside */
-        background: rgba(239, 233, 220, 0.78);
+        background: rgba(var(--paper-rgb), 0.78);
         box-sizing: border-box;
         overflow: hidden; /* clip the term text to the circle */
         display: flex; align-items: center; justify-content: center;
         /* slight yellow highlight rim for the "lens" effect */
         box-shadow:
-          0 0 0 3px rgba(55, 189, 248, 0.55),
-          inset 0 2px 18px rgba(55, 189, 248, 0.20);
+          0 0 0 3px rgba(var(--accent-rgb), 0.55),
+          inset 0 2px 18px rgba(var(--accent-rgb), 0.20);
       }
 
       /* Term text — enlarged, inside the lens */
@@ -87,7 +87,7 @@
         font-size: var(--size-body);
         line-height: 1.4;
         color: var(--ink);
-        background: rgba(239, 233, 220, 0.92);
+        background: rgba(var(--paper-rgb), 0.92);
         padding: 10px 16px;
         display: inline-block;
         max-width: 620px;

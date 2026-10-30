@@ -23,12 +23,12 @@
       }
       #t1-stat-ledger .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.2) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.2) 100%);
       }
       #t1-stat-ledger .book {
         position: absolute; left: 160px; right: 160px; top: 170px; bottom: 170px;
         background: var(--paper);
-        box-shadow: 0 26px 50px rgba(23,19,14,0.28); padding: 0 70px;
+        box-shadow: 0 26px 50px rgba(var(--ink-rgb), 0.28); padding: 0 70px;
         /* the red left margin rule of a ledger */
         border-left: 5px solid var(--red);
       }
@@ -41,7 +41,7 @@
       #t1-stat-ledger .rows { position: absolute; left: 70px; right: 70px; top: 150px; }
       #t1-stat-ledger .row {
         display: flex; align-items: baseline; justify-content: space-between;
-        border-bottom: 2px solid rgba(23,19,14,0.16); padding: 22px 0;
+        border-bottom: 2px solid rgba(var(--ink-rgb), 0.16); padding: 22px 0;
       }
       #t1-stat-ledger .row .l {
         font-family: var(--font-label); font-weight: var(--wt-bold);

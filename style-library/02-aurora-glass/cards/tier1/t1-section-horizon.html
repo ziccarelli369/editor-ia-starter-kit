@@ -46,7 +46,7 @@
       /* Ground plane — dark gradient from horizon down */
       #t1-sec-horizon .ground {
         position: absolute; left: 0; right: 0; bottom: 0; height: 320px;
-        background: linear-gradient(to top, var(--canvas-deep) 0%, rgba(7,18,28,0.70) 60%, transparent 100%);
+        background: linear-gradient(to top, var(--canvas-deep) 0%, rgba(var(--canvas-deep-rgb), 0.70) 60%, transparent 100%);
         z-index: 3;
       }
 
@@ -57,13 +57,13 @@
         background: linear-gradient(to right,
           transparent 0%,
           rgba(var(--accent-rgb), 0.40) 10%,
-          rgba(255,255,255,0.90) 30%,
-          rgba(255,255,255,1.00) 50%,
-          rgba(255,255,255,0.90) 70%,
+          rgba(var(--white-rgb), 0.90) 30%,
+          rgba(var(--white-rgb), 1.00) 50%,
+          rgba(var(--white-rgb), 0.90) 70%,
           rgba(var(--accent-rgb), 0.40) 90%,
           transparent 100%);
         box-shadow:
-          0 0 8px  rgba(255,255,255,0.80),
+          0 0 8px  rgba(var(--white-rgb), 0.80),
           0 0 24px rgba(var(--accent-rgb), 0.55),
           0 0 70px rgba(var(--accent-rgb), 0.25);
         z-index: 4;
@@ -104,7 +104,7 @@
       #t1-sec-horizon .plate {
         position: absolute; left: 50%; top: 72px; transform: translateX(-50%);
         width: 1220px; height: 160px; border-radius: 50%;
-        background: radial-gradient(60% 100% at 50% 50%, rgba(255,255,255,0.12), transparent 70%);
+        background: radial-gradient(60% 100% at 50% 50%, rgba(var(--white-rgb), 0.12), transparent 70%);
         filter: blur(16px); z-index: -1;
       }
       #t1-sec-horizon .headline {
@@ -139,20 +139,20 @@
       <div class="persp-grid">
         <svg viewBox="0 0 1920 280" preserveAspectRatio="none">
           <!-- Vanishing point lines -->
-          <line x1="960" y1="0" x2="0"    y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="240"  y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="480"  y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="720"  y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="960"  y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="1200" y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="1440" y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="1680" y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
-          <line x1="960" y1="0" x2="1920" y2="280" stroke="rgba(55,189,248,0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="0"    y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="240"  y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="480"  y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="720"  y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="960"  y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="1200" y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="1440" y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="1680" y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
+          <line x1="960" y1="0" x2="1920" y2="280" stroke="rgba(var(--accent-rgb), 0.7)" stroke-width="1"/>
           <!-- Cross lines getting further apart toward bottom -->
-          <line x1="840" y1="70"  x2="1080" y2="70"  stroke="rgba(55,189,248,0.5)" stroke-width="1"/>
-          <line x1="720" y1="140" x2="1200" y2="140" stroke="rgba(55,189,248,0.5)" stroke-width="1"/>
-          <line x1="540" y1="210" x2="1380" y2="210" stroke="rgba(55,189,248,0.5)" stroke-width="1"/>
-          <line x1="240" y1="280" x2="1680" y2="280" stroke="rgba(55,189,248,0.5)" stroke-width="1"/>
+          <line x1="840" y1="70"  x2="1080" y2="70"  stroke="rgba(var(--accent-rgb), 0.5)" stroke-width="1"/>
+          <line x1="720" y1="140" x2="1200" y2="140" stroke="rgba(var(--accent-rgb), 0.5)" stroke-width="1"/>
+          <line x1="540" y1="210" x2="1380" y2="210" stroke="rgba(var(--accent-rgb), 0.5)" stroke-width="1"/>
+          <line x1="240" y1="280" x2="1680" y2="280" stroke="rgba(var(--accent-rgb), 0.5)" stroke-width="1"/>
         </svg>
       </div>
 

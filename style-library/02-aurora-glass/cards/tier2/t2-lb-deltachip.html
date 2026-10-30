@@ -50,7 +50,7 @@
         border: 1.5px solid rgba(var(--accent-rgb), 0.60);
         box-shadow:
           0 0 24px rgba(var(--accent-rgb), 0.38),
-          inset 0 1px 0 rgba(255,255,255,0.18),
+          inset 0 1px 0 rgba(var(--white-rgb), 0.18),
           0 4px 18px rgba(0,0,0,0.45);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
@@ -93,7 +93,7 @@
       #t2-lb-delta .text-block::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.38) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.38) 50%, transparent);
       }
 
       #t2-lb-delta .term {
@@ -120,7 +120,7 @@
             <!-- Up-arrow SVG (inline, no external fetch) -->
             <svg class="arrow-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 22V8M14 8L7 15M14 8L21 15"
-                    stroke="#37BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span class="delta-val">+34%</span>
           </div>

@@ -50,7 +50,7 @@
         border: 1.5px solid rgba(var(--accent-rgb), 0.55);
         box-shadow:
           0 0 28px rgba(var(--accent-rgb), 0.38),
-          inset 0 1px 0 rgba(255,255,255,0.18),
+          inset 0 1px 0 rgba(var(--white-rgb), 0.18),
           0 6px 24px rgba(0,0,0,0.50);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
@@ -61,7 +61,7 @@
       #t2-lb-price .tag::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.45) 50%, transparent);
       }
 
       /* Currency symbol */
@@ -76,7 +76,7 @@
       #t2-lb-price .price-val {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 88px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb), 0.85) 85%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb), 0.85) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 18px rgba(var(--accent-rgb), 0.55));
@@ -115,7 +115,7 @@
       #t2-lb-price .text-block::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.36) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.36) 50%, transparent);
       }
 
       #t2-lb-price .term {

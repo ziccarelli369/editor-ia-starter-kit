@@ -53,7 +53,7 @@
       #t1-sec-constel .plate {
         position: absolute; left: 50%; top: 76px; transform: translateX(-50%);
         width: 1200px; height: 160px; border-radius: 50%;
-        background: radial-gradient(60% 100% at 50% 50%, rgba(10,14,20,0.68), transparent 70%);
+        background: radial-gradient(60% 100% at 50% 50%, rgba(var(--canvas-rgb), 0.68), transparent 70%);
         filter: blur(22px); z-index: -1;
       }
       #t1-sec-constel .headline {
@@ -97,7 +97,7 @@
         </defs>
 
         <!-- Connection lines (hardcoded, deterministic) -->
-        <g class="constel-lines" filter="url(#lineGlow)" stroke="rgba(55,189,248,0.55)" stroke-width="1.2" fill="none">
+        <g class="constel-lines" filter="url(#lineGlow)" stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.2" fill="none">
           <line class="cline" x1="210" y1="180" x2="480" y2="310"/>
           <line class="cline" x1="480" y1="310" x2="720" y2="200"/>
           <line class="cline" x1="720" y1="200" x2="960" y2="290"/>
@@ -126,31 +126,31 @@
         <!-- Node circles — hardcoded positions -->
         <g class="constel-nodes" filter="url(#nodeGlow)">
           <!-- Large primary nodes -->
-          <circle class="cnode cnode-large" cx="960"  cy="290" r="8" fill="rgba(255,255,255,0.95)" />
-          <circle class="cnode cnode-large" cx="960"  cy="540" r="7" fill="rgba(55,189,248,0.90)" />
-          <circle class="cnode cnode-large" cx="1200" cy="160" r="7" fill="rgba(255,255,255,0.90)" />
+          <circle class="cnode cnode-large" cx="960"  cy="290" r="8" fill="rgba(var(--white-rgb), 0.95)" />
+          <circle class="cnode cnode-large" cx="960"  cy="540" r="7" fill="rgba(var(--accent-rgb), 0.90)" />
+          <circle class="cnode cnode-large" cx="1200" cy="160" r="7" fill="rgba(var(--white-rgb), 0.90)" />
           <!-- Medium nodes -->
-          <circle class="cnode cnode-med" cx="210"  cy="180" r="5" fill="rgba(55,189,248,0.80)" />
-          <circle class="cnode cnode-med" cx="480"  cy="310" r="5" fill="rgba(255,255,255,0.85)" />
-          <circle class="cnode cnode-med" cx="720"  cy="200" r="5" fill="rgba(55,189,248,0.80)" />
-          <circle class="cnode cnode-med" cx="1440" cy="280" r="5" fill="rgba(255,255,255,0.85)" />
-          <circle class="cnode cnode-med" cx="1700" cy="200" r="5" fill="rgba(55,189,248,0.80)" />
-          <circle class="cnode cnode-med" cx="840"  cy="620" r="5" fill="rgba(55,189,248,0.80)" />
-          <circle class="cnode cnode-med" cx="1140" cy="700" r="5" fill="rgba(255,255,255,0.85)" />
-          <circle class="cnode cnode-med" cx="1320" cy="580" r="5" fill="rgba(55,189,248,0.80)" />
+          <circle class="cnode cnode-med" cx="210"  cy="180" r="5" fill="rgba(var(--accent-rgb), 0.80)" />
+          <circle class="cnode cnode-med" cx="480"  cy="310" r="5" fill="rgba(var(--white-rgb), 0.85)" />
+          <circle class="cnode cnode-med" cx="720"  cy="200" r="5" fill="rgba(var(--accent-rgb), 0.80)" />
+          <circle class="cnode cnode-med" cx="1440" cy="280" r="5" fill="rgba(var(--white-rgb), 0.85)" />
+          <circle class="cnode cnode-med" cx="1700" cy="200" r="5" fill="rgba(var(--accent-rgb), 0.80)" />
+          <circle class="cnode cnode-med" cx="840"  cy="620" r="5" fill="rgba(var(--accent-rgb), 0.80)" />
+          <circle class="cnode cnode-med" cx="1140" cy="700" r="5" fill="rgba(var(--white-rgb), 0.85)" />
+          <circle class="cnode cnode-med" cx="1320" cy="580" r="5" fill="rgba(var(--accent-rgb), 0.80)" />
           <!-- Small nodes -->
-          <circle class="cnode cnode-sm" cx="600"  cy="520" r="4" fill="rgba(55,189,248,0.70)" />
-          <circle class="cnode cnode-sm" cx="300"  cy="750" r="4" fill="rgba(55,189,248,0.70)" />
-          <circle class="cnode cnode-sm" cx="680"  cy="880" r="4" fill="rgba(55,189,248,0.65)" />
-          <circle class="cnode cnode-sm" cx="1480" cy="820" r="4" fill="rgba(55,189,248,0.70)" />
-          <circle class="cnode cnode-sm" cx="1820" cy="480" r="4" fill="rgba(55,189,248,0.65)" />
+          <circle class="cnode cnode-sm" cx="600"  cy="520" r="4" fill="rgba(var(--accent-rgb), 0.70)" />
+          <circle class="cnode cnode-sm" cx="300"  cy="750" r="4" fill="rgba(var(--accent-rgb), 0.70)" />
+          <circle class="cnode cnode-sm" cx="680"  cy="880" r="4" fill="rgba(var(--accent-rgb), 0.65)" />
+          <circle class="cnode cnode-sm" cx="1480" cy="820" r="4" fill="rgba(var(--accent-rgb), 0.70)" />
+          <circle class="cnode cnode-sm" cx="1820" cy="480" r="4" fill="rgba(var(--accent-rgb), 0.65)" />
         </g>
 
         <!-- Node halo rings (outer glow rings, slightly larger) -->
         <g class="constel-halos" opacity="0.35">
-          <circle cx="960"  cy="290" r="22" fill="none" stroke="rgba(55,189,248,0.60)" stroke-width="1"/>
-          <circle cx="960"  cy="540" r="18" fill="none" stroke="rgba(55,189,248,0.50)" stroke-width="1"/>
-          <circle cx="1200" cy="160" r="18" fill="none" stroke="rgba(55,189,248,0.50)" stroke-width="1"/>
+          <circle cx="960"  cy="290" r="22" fill="none" stroke="rgba(var(--accent-rgb), 0.60)" stroke-width="1"/>
+          <circle cx="960"  cy="540" r="18" fill="none" stroke="rgba(var(--accent-rgb), 0.50)" stroke-width="1"/>
+          <circle cx="1200" cy="160" r="18" fill="none" stroke="rgba(var(--accent-rgb), 0.50)" stroke-width="1"/>
         </g>
       </svg>
 

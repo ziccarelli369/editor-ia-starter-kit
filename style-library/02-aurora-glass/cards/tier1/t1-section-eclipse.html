@@ -44,7 +44,7 @@
       /* Dark disc — the moon face */
       #t1-sec-eclipse .disc {
         position: absolute; inset: 0; border-radius: 50%;
-        background: radial-gradient(circle at 50% 45%, #0E1620 0%, #07121C 60%, #050C14 100%);
+        background: radial-gradient(circle at 50% 45%, #0E1620 0%, var(--canvas-deep) 60%, #050C14 100%);
       }
 
       /* Corona outer glow rings — achieved with box-shadow layers */
@@ -63,9 +63,9 @@
       #t1-sec-eclipse .rim-arc {
         position: absolute; inset: 0; border-radius: 50%;
         box-shadow:
-          inset 0 -4px 0 rgba(255,255,255,0.0),
-          0 0 0 3px rgba(255,255,255,0.70),
-          0 0 0 7px rgba(255,255,255,0.20);
+          inset 0 -4px 0 rgba(var(--white-rgb), 0.0),
+          0 0 0 3px rgba(var(--white-rgb), 0.70),
+          0 0 0 7px rgba(var(--white-rgb), 0.20);
         -webkit-mask-image: conic-gradient(
           from 300deg at 50% 50%,
           transparent 0deg, #000 40deg, #000 130deg, transparent 170deg,

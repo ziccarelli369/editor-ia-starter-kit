@@ -54,12 +54,12 @@
         z-index: 3;
         background: radial-gradient(circle at 38% 32%,
           rgba(var(--accent-rgb), 0.28) 0%,
-          rgba(7, 18, 28, 0.88) 68%);
+          rgba(var(--canvas-deep-rgb), 0.88) 68%);
         box-shadow:
           0 0 0 2.5px var(--accent),
           0 0 22px rgba(var(--accent-rgb), 0.65),
           0 0 60px rgba(var(--accent-rgb), 0.30),
-          inset 0 1px 0 rgba(255,255,255,0.18);
+          inset 0 1px 0 rgba(var(--white-rgb), 0.18);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
         display: flex;
@@ -75,7 +75,7 @@
         height: 34px;
         border-radius: 50% 50% 0 0;
         background: linear-gradient(180deg,
-          rgba(255,255,255,0.22) 0%,
+          rgba(var(--white-rgb), 0.22) 0%,
           transparent 100%);
       }
 
@@ -113,7 +113,7 @@
       #t2-lt-bcard .card::before {
         content: "";
         position: absolute; top: 0; left: 0; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.50) 50%, transparent);
+        background: linear-gradient(90deg, transparent 10%, rgba(var(--white-rgb), 0.50) 50%, transparent);
       }
 
       #t2-lt-bcard .name {

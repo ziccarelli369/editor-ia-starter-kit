@@ -55,7 +55,7 @@
       #t1-stat-moons .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: var(--size-mega); line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb),0.80) 72%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb),0.80) 72%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
@@ -128,18 +128,18 @@
         </defs>
         <!-- outer orbit ring -->
         <ellipse id="mn-ring1" cx="960" cy="540" rx="520" ry="310"
-                 stroke="rgba(55,189,248,0.12)" stroke-width="1"
+                 stroke="rgba(var(--accent-rgb), 0.12)" stroke-width="1"
                  stroke-dasharray="8 12" opacity="0"/>
         <!-- inner orbit ring -->
         <ellipse id="mn-ring2" cx="960" cy="540" rx="310" ry="190"
-                 stroke="rgba(55,189,248,0.08)" stroke-width="1"
+                 stroke="rgba(var(--accent-rgb), 0.08)" stroke-width="1"
                  stroke-dasharray="4 10" opacity="0"/>
         <!-- orbit dot connectors (dashes from moon to center) -->
         <line id="mn-conn1" x1="1290" y1="310" x2="960" y2="540"
-              stroke="rgba(55,189,248,0.22)" stroke-width="1"
+              stroke="rgba(var(--accent-rgb), 0.22)" stroke-width="1"
               stroke-dasharray="6 8" opacity="0"/>
         <line id="mn-conn2" x1="380" y1="700" x2="960" y2="540"
-              stroke="rgba(55,189,248,0.22)" stroke-width="1"
+              stroke="rgba(var(--accent-rgb), 0.22)" stroke-width="1"
               stroke-dasharray="6 8" opacity="0"/>
       </svg>
 

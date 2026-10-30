@@ -21,8 +21,7 @@
       #t1-stat-quote .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-quote .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-stat-quote .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       /* oversized quotation mark */
       #t1-stat-quote .quote-mark {

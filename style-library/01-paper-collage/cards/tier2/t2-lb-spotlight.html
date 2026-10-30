@@ -28,9 +28,9 @@
         background: radial-gradient(
           ellipse 680px 560px at 340px 490px,
           transparent 0%,
-          rgba(23, 19, 14, 0.10) 42%,
-          rgba(23, 19, 14, 0.35) 70%,
-          rgba(23, 19, 14, 0.44) 100%
+          rgba(var(--ink-rgb), 0.10) 42%,
+          rgba(var(--ink-rgb), 0.35) 70%,
+          rgba(var(--ink-rgb), 0.44) 100%
         );
         pointer-events: none;
       }
@@ -50,7 +50,7 @@
         padding: 6px 22px;
         display: inline-block;
         transform: skewX(var(--marker-skew));
-        box-shadow: 6px 6px 0 rgba(23, 19, 14, 0.25);
+        box-shadow: 6px 6px 0 rgba(var(--ink-rgb), 0.25);
         line-height: 1.1;
       }
 

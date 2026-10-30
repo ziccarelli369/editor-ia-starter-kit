@@ -94,11 +94,12 @@
         font-weight: var(--wt-black);
         font-size: 220px;
         letter-spacing: -0.04em;
-        background: linear-gradient(150deg, #ffffff 15%, rgba(var(--accent-rgb), 0.85) 75%);
+        background: linear-gradient(150deg, var(--white) 15%, rgba(var(--accent-rgb), 0.85) 75%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
         line-height: 1;
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-score .score-denom {
         font-family: var(--font-display);
@@ -124,7 +125,7 @@
         filter: drop-shadow(0 0 6px rgba(var(--accent2-rgb),0.70));
       }
       #t1-stat-score .star.dim path {
-        fill: rgba(255,255,255,0.12);
+        fill: rgba(var(--white-rgb), 0.12);
       }
 
       #t1-stat-score .label {

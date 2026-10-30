@@ -23,7 +23,7 @@
       }
       #t1-stat-callout .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       #t1-stat-callout .stack {
         position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
@@ -39,6 +39,7 @@
       #t1-stat-callout .rule.bot { transform-origin: center; width: 760px; margin-top: 6px; }
       #t1-stat-callout .figure { padding: 40px 0; }
       #t1-stat-callout .stat {
+        display: inline-block;
         font-weight: var(--wt-black); font-size: 300px; line-height: 0.9;
         letter-spacing: -0.04em; color: var(--ink); font-variant-numeric: tabular-nums;
       }

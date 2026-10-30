@@ -11,6 +11,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&family=Caveat:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,900;1,9..144,900&display=swap");
 
 :root {
+  --ink-rgb: 23, 19, 14;
+  --paper-rgb: 239, 233, 220;
+  --paper-2-rgb: 230, 220, 196;
+  --accent-rgb: 55, 189, 248;
+  --red-rgb: 226, 59, 46;
+  --orange-rgb: 242, 106, 27;
+  --tex-grid: repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size)), repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
   /* --- palette (mirror style.json + DESIGN.md). 5 symbolic colors. --------- */
   --paper:        #efe9dc;   /* warm newsprint background */
   --paper-2:      #e6dcc4;   /* kraft / aged paper variant */

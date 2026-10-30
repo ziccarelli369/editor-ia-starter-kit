@@ -60,19 +60,20 @@
         line-height: 0.85;
         letter-spacing: -0.04em;
         background: linear-gradient(165deg,
-          #ffffff 0%,
+          var(--white) 0%,
           rgba(var(--accent-rgb), 0.75) 55%,
           rgba(var(--accent-rgb), 0.40) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 50px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       /* Underline track (dim) — full width of number */
       #t1-stat-uscore .uscore-track {
         width: 820px; height: 7px;
         border-radius: 4px;
-        background: rgba(255,255,255,0.06);
+        background: rgba(var(--white-rgb), 0.06);
         margin-top: 28px;
         position: relative; overflow: visible;
       }
@@ -85,7 +86,7 @@
         border-radius: 4px;
         background: linear-gradient(90deg,
           rgba(var(--accent-rgb), 0.6) 0%,
-          rgba(255,255,255,0.95) 50%,
+          rgba(var(--white-rgb), 0.95) 50%,
           rgba(var(--accent-rgb), 0.6) 100%);
         box-shadow: 0 0 24px 6px rgba(var(--accent-rgb), 0.55),
                     0 0 60px 10px rgba(var(--accent-rgb), 0.25);
@@ -96,7 +97,7 @@
         position: absolute;
         top: 50%; width: 18px; height: 18px; border-radius: 50%;
         transform: translateY(-50%);
-        background: #ffffff;
+        background: var(--white);
         box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9),
                     0 0 30px rgba(var(--accent-rgb), 0.50);
         opacity: 0;

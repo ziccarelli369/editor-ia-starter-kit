@@ -82,7 +82,7 @@
       #t1-st-col .h-line {
         width: 100%;
         height: 1px;
-        background: rgba(255,255,255,0.06);
+        background: rgba(var(--white-rgb), 0.06);
       }
 
       /* Single column */
@@ -115,7 +115,7 @@
 
       /* Accent column (column 3 by default — the highlighted one) */
       #t1-st-col .col.is-accent .col-fill {
-        background: linear-gradient(180deg, #ffffff 0%, var(--accent) 60%, rgba(var(--accent-rgb),0.40) 100%);
+        background: linear-gradient(180deg, var(--white) 0%, var(--accent) 60%, rgba(var(--accent-rgb),0.40) 100%);
         box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.70), 0 0 70px rgba(var(--accent-rgb), 0.38);
       }
 
@@ -128,8 +128,8 @@
         box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9), 0 0 30px rgba(var(--accent-rgb), 0.55);
       }
       #t1-st-col .col.is-accent .col-cap {
-        background: #ffffff;
-        box-shadow: 0 0 16px rgba(255,255,255,0.9), 0 0 40px rgba(var(--accent-rgb), 0.70);
+        background: var(--white);
+        box-shadow: 0 0 16px rgba(var(--white-rgb), 0.9), 0 0 40px rgba(var(--accent-rgb), 0.70);
       }
 
       /* Value above bar */
@@ -152,7 +152,7 @@
       #t1-st-col .axis-line {
         width: 100%;
         height: 2px;
-        background: rgba(255,255,255,0.14);
+        background: rgba(var(--white-rgb), 0.14);
         border-radius: 1px;
         margin-top: 0;
       }

@@ -19,8 +19,7 @@
       #t1-ov-numlist .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-ov-numlist .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -29,7 +28,7 @@
       }
       #t1-ov-numlist .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(130% 120% at 50% 44%, transparent 58%, rgba(23,19,14,0.15) 100%);
+        background: radial-gradient(130% 120% at 50% 44%, transparent 58%, rgba(var(--ink-rgb), 0.15) 100%);
       }
 
       /* marker title */
@@ -54,10 +53,10 @@
       }
       #t1-ov-numlist .row {
         display: flex; align-items: baseline; gap: 40px;
-        padding: 28px 0; border-bottom: 2px solid rgba(23,19,14,0.12);
+        padding: 28px 0; border-bottom: 2px solid rgba(var(--ink-rgb), 0.12);
         overflow: hidden;
       }
-      #t1-ov-numlist .row:first-child { border-top: 2px solid rgba(23,19,14,0.12); }
+      #t1-ov-numlist .row:first-child { border-top: 2px solid rgba(var(--ink-rgb), 0.12); }
 
       #t1-ov-numlist .ordinal {
         flex: 0 0 120px; text-align: right;
@@ -65,7 +64,7 @@
         letter-spacing: var(--track-tight); color: var(--yellow);
         /* yellow outline with ink stroke using text-shadow for contrast */
         -webkit-text-stroke: 3px var(--ink);
-        text-shadow: 4px 4px 0 rgba(23,19,14,0.10);
+        text-shadow: 4px 4px 0 rgba(var(--ink-rgb), 0.10);
         font-variant-numeric: tabular-nums;
       }
       #t1-ov-numlist .divider {

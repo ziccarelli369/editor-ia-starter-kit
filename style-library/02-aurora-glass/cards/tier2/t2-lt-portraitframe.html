@@ -40,7 +40,7 @@
         left: 80px; bottom: 120px;
         width: 148px; height: 192px;
         border-radius: 22px;
-        background: rgba(10, 14, 20, 0.65);
+        background: rgba(var(--canvas-rgb), 0.65);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
         /* neon rim — multi-layer box-shadow for the glow effect */
@@ -49,7 +49,7 @@
           0 0 14px rgba(var(--accent-rgb), 0.55),
           0 0 38px rgba(var(--accent-rgb), 0.28),
           0 0 80px rgba(var(--accent-rgb), 0.14),
-          inset 0 1px 0 rgba(255,255,255,0.18),
+          inset 0 1px 0 rgba(var(--white-rgb), 0.18),
           0 24px 60px rgba(0,0,0,0.55);
         z-index: 2;
         overflow: hidden;
@@ -59,7 +59,7 @@
       #t2-lt-pframe .portrait-frame::before {
         content: "";
         position: absolute; top: 0; left: 8px; right: 8px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.50) 65%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.50) 35%, rgba(var(--white-rgb), 0.50) 65%, transparent);
         border-radius: 1px;
       }
 
@@ -106,7 +106,7 @@
       #t2-lt-pframe .namecard::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50) 40%, rgba(255,255,255,0.50) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.50) 40%, rgba(var(--white-rgb), 0.50) 60%, transparent);
       }
 
       /* Vertical accent bar on the left edge of namecard */
@@ -155,8 +155,8 @@
         <!-- Minimal person silhouette SVG -->
         <svg class="frame-icon" width="56" height="72" viewBox="0 0 56 72" fill="none"
              xmlns="http://www.w3.org/2000/svg">
-          <circle cx="28" cy="20" r="15" stroke="#37BDF8" stroke-width="2"/>
-          <path d="M4 68 C4 50 52 50 52 68" stroke="#37BDF8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="28" cy="20" r="15" stroke="var(--accent)" stroke-width="2"/>
+          <path d="M4 68 C4 50 52 50 52 68" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
 

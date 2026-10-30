@@ -40,7 +40,7 @@
         position: absolute; inset: 0;
         background-image: repeating-linear-gradient(
           180deg, transparent 0px, transparent 5px,
-          rgba(23,19,14,0.14) 5px, rgba(23,19,14,0.14) 6px
+          rgba(var(--ink-rgb), 0.14) 5px, rgba(var(--ink-rgb), 0.14) 6px
         );
         mix-blend-mode: multiply;
       }
@@ -50,9 +50,9 @@
         position: absolute; inset: 0; z-index: 2;
         background: linear-gradient(
           90deg,
-          rgba(23,19,14,0.92) 0%,
-          rgba(23,19,14,0.72) 30%,
-          rgba(23,19,14,0.10) 58%,
+          rgba(var(--ink-rgb), 0.92) 0%,
+          rgba(var(--ink-rgb), 0.72) 30%,
+          rgba(var(--ink-rgb), 0.10) 58%,
           transparent 100%
         );
       }
@@ -76,7 +76,7 @@
         font-weight: var(--wt-black); font-size: 480px; line-height: 0.85;
         letter-spacing: -0.06em; color: var(--paper);
         font-variant-numeric: tabular-nums;
-        text-shadow: 0 12px 48px rgba(23,19,14,0.6);
+        text-shadow: 0 12px 48px rgba(var(--ink-rgb), 0.6);
       }
 
       /* label */
@@ -96,7 +96,7 @@
         position: absolute; left: 130px; bottom: 96px; z-index: 4;
         font-family: var(--font-label); font-weight: var(--wt-bold);
         font-size: var(--size-tiny); letter-spacing: var(--track-wide);
-        text-transform: uppercase; color: rgba(239,233,220,0.6);
+        text-transform: uppercase; color: rgba(var(--paper-rgb), 0.6);
       }
 
       /* small decorative orange rule under kicker */

@@ -72,15 +72,16 @@
         line-height: 0.88;
         letter-spacing: -0.05em;
         background: linear-gradient(145deg,
-          #ffffff 0%,
+          var(--white) 0%,
           rgba(var(--accent-rgb), 0.90) 45%,
-          #ffffff 60%,
+          var(--white) 60%,
           rgba(var(--accent-rgb), 0.70) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 40px rgba(var(--accent-rgb), 0.65))
                 drop-shadow(0 0 100px rgba(var(--accent-rgb), 0.30));
         text-align: center;
+        font-variant-numeric: tabular-nums;
       }
 
       /* Hairline underline rule — subtly grounds the number */
@@ -89,7 +90,7 @@
         background: linear-gradient(90deg,
           transparent 0%,
           rgba(var(--accent-rgb), 0.60) 30%,
-          rgba(255,255,255,0.70) 50%,
+          rgba(var(--white-rgb), 0.70) 50%,
           rgba(var(--accent-rgb), 0.60) 70%,
           transparent 100%);
         box-shadow: 0 0 10px 1px rgba(var(--accent-rgb), 0.40);

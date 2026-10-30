@@ -60,7 +60,7 @@
       #t2-lt-logo .card::before {
         content: "";
         position: absolute; top: 0; left: 14px; right: 14px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.52) 40%, rgba(255,255,255,0.52) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.52) 40%, rgba(var(--white-rgb), 0.52) 60%, transparent);
         border-radius: 1px;
         z-index: 10;
       }
@@ -83,12 +83,12 @@
         background: linear-gradient(135deg,
           rgba(var(--accent-rgb), 0.85) 0%,
           rgba(var(--accent-rgb), 0.38) 55%,
-          rgba(255,255,255,0.18) 100%);
+          rgba(var(--white-rgb), 0.18) 100%);
         border: 1.5px solid rgba(var(--accent-rgb), 0.70);
         box-shadow:
           0 0 14px rgba(var(--accent-rgb), 0.65),
           0 0 32px rgba(var(--accent-rgb), 0.30),
-          inset 0 1px 0 rgba(255,255,255,0.35);
+          inset 0 1px 0 rgba(var(--white-rgb), 0.35);
         display: flex; align-items: center; justify-content: center;
       }
 
@@ -98,7 +98,7 @@
         font-weight: var(--wt-black);
         font-size: 22px;
         color: var(--white);
-        text-shadow: 0 0 12px rgba(255,255,255,0.80);
+        text-shadow: 0 0 12px rgba(var(--white-rgb), 0.80);
         letter-spacing: -0.02em;
         line-height: 1;
       }

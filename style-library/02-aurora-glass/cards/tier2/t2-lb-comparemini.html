@@ -76,7 +76,7 @@
 
       /* Left value — accent gradient */
       #t2-lb-cmp .half-a .val {
-        background: linear-gradient(110deg, #FFFFFF 0%, var(--accent) 100%);
+        background: linear-gradient(110deg, var(--white) 0%, var(--accent) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; color: transparent;
         filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.55));
@@ -85,7 +85,7 @@
       /* Right value — dimmer, white-ish */
       #t2-lb-cmp .half-b .val {
         color: var(--text-dim);
-        text-shadow: 0 0 14px rgba(255,255,255,0.20);
+        text-shadow: 0 0 14px rgba(var(--white-rgb), 0.20);
       }
 
       /* Sub-label */

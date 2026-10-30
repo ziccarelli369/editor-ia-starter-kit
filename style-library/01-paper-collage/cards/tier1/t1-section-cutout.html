@@ -19,8 +19,7 @@
       #t1-sec-cutout .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-sec-cutout .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -28,7 +27,7 @@
       }
       #t1-sec-cutout .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(130% 120% at 35% 50%, transparent 58%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(130% 120% at 35% 50%, transparent 58%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       #t1-sec-cutout .kicker {
         position: absolute; left: 150px; top: 250px; z-index: 4;
@@ -49,7 +48,7 @@
         background-color: var(--paper-2); background-image: var(--tex-halftone);
         background-size: var(--tex-halftone-size); z-index: 2;
         outline: 12px solid var(--yellow); outline-offset: -12px; transform: rotate(1.5deg);
-        box-shadow: -16px 20px 0 rgba(23,19,14,0.14);
+        box-shadow: -16px 20px 0 rgba(var(--ink-rgb), 0.14);
       }
       #t1-sec-cutout .wordmark {
         position: absolute; left: 980px; top: 760px; width: 200px; height: 200px;

@@ -59,8 +59,8 @@
         /* White core at top-left → accent blue at bottom-right */
         background: linear-gradient(
           125deg,
-          #FFFFFF 0%,
-          rgba(255,255,255,0.90) 18%,
+          var(--white) 0%,
+          rgba(var(--white-rgb), 0.90) 18%,
           var(--accent) 52%,
           rgba(var(--accent-rgb), 0.70) 80%,
           rgba(var(--accent-rgb), 0.40) 100%
@@ -70,7 +70,7 @@
         -webkit-text-fill-color: transparent;
         /* Glow: soft white halo + blue bloom behind */
         filter:
-          drop-shadow(0 0 30px rgba(255,255,255,0.30))
+          drop-shadow(0 0 30px rgba(var(--white-rgb), 0.30))
           drop-shadow(0 0 80px rgba(var(--accent-rgb), 0.50))
           drop-shadow(0 0 180px rgba(var(--accent-rgb), 0.25));
         margin-bottom: 28px;
@@ -96,7 +96,7 @@
         width: 900px; height: 500px;
         background: radial-gradient(ellipse at 30% 50%,
           rgba(var(--accent-rgb), 0.22) 0%,
-          rgba(255,255,255,0.06) 35%,
+          rgba(var(--white-rgb), 0.06) 35%,
           transparent 65%);
         filter: blur(50px);
         z-index: 3; pointer-events: none;

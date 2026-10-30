@@ -56,7 +56,7 @@
       #t2-lb-leg .legend-card::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.45) 50%, transparent);
       }
 
       /* Optional header kicker inside card */
@@ -71,7 +71,7 @@
       #t2-lb-leg .divider {
         height: 1px; margin: 12px 0;
         background: linear-gradient(90deg, transparent, rgba(var(--glass-border), 0.50) 50%, transparent);
-        background: rgba(255,255,255,0.08);
+        background: rgba(var(--white-rgb), 0.08);
       }
 
       /* Each legend row */
@@ -97,7 +97,7 @@
         box-shadow:
           0 0 12px rgba(var(--accent-rgb), 0.80),
           0 0 28px rgba(var(--accent-rgb), 0.40),
-          inset 0 1px 0 rgba(255,255,255,0.30);
+          inset 0 1px 0 rgba(var(--white-rgb), 0.30);
       }
 
       #t2-lb-leg .swatch-warm {
@@ -105,15 +105,10 @@
         box-shadow:
           0 0 12px rgba(var(--warm-rgb), 0.75),
           0 0 26px rgba(var(--warm-rgb), 0.36),
-          inset 0 1px 0 rgba(255,255,255,0.25);
+          inset 0 1px 0 rgba(var(--white-rgb), 0.25);
       }
 
       /* Sub-label beneath each row (the "detail" slot is row 2's label) */
-      #t2-lb-leg .row-sub {
-        font-family: var(--font-body); font-weight: var(--wt-reg);
-        font-size: 18px; color: var(--text-dim);
-        text-align: right; margin-top: 2px;
-      }
     </style>
   </head>
   <body>

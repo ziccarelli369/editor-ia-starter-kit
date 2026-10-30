@@ -53,13 +53,13 @@
           transparent 0%,
           rgba(var(--accent-rgb), 0.15) 8%,
           rgba(var(--accent-rgb), 0.70) 30%,
-          rgba(255,255,255,0.95) 50%,
+          rgba(var(--white-rgb), 0.95) 50%,
           rgba(var(--accent-rgb), 0.70) 70%,
           rgba(var(--accent-rgb), 0.15) 92%,
           transparent 100%
         );
         box-shadow:
-          0 0 6px 2px rgba(255,255,255,0.60),
+          0 0 6px 2px rgba(var(--white-rgb), 0.60),
           0 0 28px 6px rgba(var(--accent-rgb), 0.55),
           0 0 90px 18px rgba(var(--accent-rgb), 0.20);
       }
@@ -82,7 +82,7 @@
         transform: translate(-50%, -50%);
         width: 140px; height: 140px; border-radius: 50%;
         background: radial-gradient(circle at 50% 50%,
-          rgba(255,255,255,0.96) 0%,
+          rgba(var(--white-rgb), 0.96) 0%,
           rgba(var(--accent-rgb), 0.80) 18%,
           rgba(var(--accent-rgb), 0.22) 50%,
           transparent 70%);
@@ -100,8 +100,8 @@
         position: absolute; left: calc(50% + 260px); top: 50%;
         transform: translate(-50%, -50%);
         width: 18px; height: 18px; border-radius: 50%;
-        background: rgba(255,255,255,0.60);
-        box-shadow: 0 0 12px rgba(255,255,255,0.45);
+        background: rgba(var(--white-rgb), 0.60);
+        box-shadow: 0 0 12px rgba(var(--white-rgb), 0.45);
       }
       #t1-sec-flare .flare-ring-3 {
         position: absolute; left: calc(50% - 400px); top: 50%;

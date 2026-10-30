@@ -69,7 +69,7 @@
         background: var(--glass-bg);
         backdrop-filter: var(--glass-blur);
         border-top: var(--stroke) solid var(--glass-hi);
-        border-bottom: var(--stroke) solid rgba(255,255,255,0.04);
+        border-bottom: var(--stroke) solid rgba(var(--white-rgb), 0.04);
         box-shadow:
           var(--glass-shadow),
           0 0 60px 12px rgba(var(--accent-rgb), 0.22),
@@ -107,11 +107,11 @@
         font-size: var(--size-mega);
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 5%, rgba(var(--accent-rgb), 0.90) 88%);
+        background: linear-gradient(155deg, var(--white) 5%, rgba(var(--accent-rgb), 0.90) 88%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 40px rgba(var(--accent-rgb), 0.70));
-        position: relative; z-index: 2;
+        position: relative; z-index: 2; font-variant-numeric: tabular-nums;
       }
 
       #t1-stat-heat .stat-suffix {

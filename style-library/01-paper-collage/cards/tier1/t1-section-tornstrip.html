@@ -30,13 +30,13 @@
       }
       #t1-sec-torn .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(130% 120% at 50% 50%, transparent 54%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(130% 120% at 50% 50%, transparent 54%, rgba(var(--ink-rgb), 0.18) 100%);
       }
       /* the torn strip */
       #t1-sec-torn .strip {
         position: absolute; left: -40px; right: -40px; top: 380px; padding: 60px 120px;
         background: var(--paper-2); z-index: 3; transform: rotate(-3.4deg);
-        box-shadow: 0 26px 50px rgba(23,19,14,0.32);
+        box-shadow: 0 26px 50px rgba(var(--ink-rgb), 0.32);
         clip-path: polygon(0 14%, 6% 6%, 14% 12%, 23% 4%, 33% 13%, 44% 5%, 55% 14%, 66% 6%, 77% 13%, 87% 5%, 95% 12%, 100% 6%,
                            100% 84%, 94% 94%, 85% 87%, 75% 96%, 64% 86%, 54% 95%, 43% 86%, 33% 96%, 23% 87%, 13% 95%, 5% 87%, 0 94%);
       }

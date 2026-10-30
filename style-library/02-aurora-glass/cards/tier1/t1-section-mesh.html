@@ -55,10 +55,10 @@
         background: linear-gradient(to right,
           transparent 0%,
           rgba(var(--accent-rgb), 0.50) 10%,
-          rgba(255,255,255,0.88) 50%,
+          rgba(var(--white-rgb), 0.88) 50%,
           rgba(var(--accent-rgb), 0.50) 90%,
           transparent 100%);
-        box-shadow: 0 0 12px rgba(255,255,255,0.75), 0 0 40px rgba(var(--accent-rgb),0.50);
+        box-shadow: 0 0 12px rgba(var(--white-rgb), 0.75), 0 0 40px rgba(var(--accent-rgb),0.50);
         z-index: 4;
       }
 
@@ -83,7 +83,7 @@
       #t1-sec-mesh .plate {
         position: absolute; left: 50%; top: 82px; transform: translateX(-50%);
         width: 1200px; height: 160px; border-radius: 50%;
-        background: radial-gradient(60% 100% at 50% 50%, rgba(255,255,255,0.11), transparent 70%);
+        background: radial-gradient(60% 100% at 50% 50%, rgba(var(--white-rgb), 0.11), transparent 70%);
         filter: blur(18px); z-index: -1;
       }
       #t1-sec-mesh .headline {
@@ -123,9 +123,9 @@
               </filter>
               <!-- Gradient fades lines toward far edge (perspective fade) -->
               <linearGradient id="meshFade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stop-color="rgba(55,189,248,0.75)"/>
-                <stop offset="60%"  stop-color="rgba(55,189,248,0.28)"/>
-                <stop offset="100%" stop-color="rgba(55,189,248,0.04)"/>
+                <stop offset="0%"   stop-color="rgba(var(--accent-rgb), 0.75)"/>
+                <stop offset="60%"  stop-color="rgba(var(--accent-rgb), 0.28)"/>
+                <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0.04)"/>
               </linearGradient>
             </defs>
 
@@ -149,7 +149,7 @@
             </g>
 
             <!-- Horizontal lines with a constant stroke (not perspective-faded) -->
-            <g filter="url(#meshGlow)" stroke="rgba(55,189,248,0.55)" stroke-width="1.2" fill="none">
+            <g filter="url(#meshGlow)" stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.2" fill="none">
               <line x1="0" y1="0"   x2="2120" y2="0"/>
               <line x1="0" y1="100" x2="2120" y2="100"/>
               <line x1="0" y1="200" x2="2120" y2="200"/>

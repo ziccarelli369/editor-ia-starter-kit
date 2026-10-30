@@ -35,8 +35,8 @@
       #t1-stat-map .map-grid {
         position: absolute; inset: 0;
         background-image:
-          repeating-linear-gradient(0deg,  rgba(23,19,14,0.06) 0 1px, transparent 1px 40px),
-          repeating-linear-gradient(90deg, rgba(23,19,14,0.06) 0 1px, transparent 1px 40px);
+          repeating-linear-gradient(0deg,  rgba(var(--ink-rgb), 0.06) 0 1px, transparent 1px 40px),
+          repeating-linear-gradient(90deg, rgba(var(--ink-rgb), 0.06) 0 1px, transparent 1px 40px);
       }
       /* Topo contour lines — diagonal ruled hatching at low opacity */
       #t1-stat-map .map-contours {
@@ -46,15 +46,15 @@
             22deg,
             transparent 0px,
             transparent 38px,
-            rgba(23,19,14,0.065) 38px,
-            rgba(23,19,14,0.065) 40px
+            rgba(var(--ink-rgb), 0.065) 38px,
+            rgba(var(--ink-rgb), 0.065) 40px
           ),
           repeating-linear-gradient(
             -22deg,
             transparent 0px,
             transparent 68px,
-            rgba(23,19,14,0.04) 68px,
-            rgba(23,19,14,0.04) 70px
+            rgba(var(--ink-rgb), 0.04) 68px,
+            rgba(var(--ink-rgb), 0.04) 70px
           );
       }
       /* Concentric "elevation rings" centered on the marker location ~(1080, 520) */
@@ -69,25 +69,25 @@
           radial-gradient(
             ellipse 98% 72% at 50% 50%,
             transparent 14%,
-            rgba(23,19,14,0.055) 14.5%,
+            rgba(var(--ink-rgb), 0.055) 14.5%,
             transparent 15.5%,
             transparent 24%,
-            rgba(23,19,14,0.05) 24.5%,
+            rgba(var(--ink-rgb), 0.05) 24.5%,
             transparent 25.5%,
             transparent 36%,
-            rgba(23,19,14,0.045) 36.5%,
+            rgba(var(--ink-rgb), 0.045) 36.5%,
             transparent 37.5%,
             transparent 48%,
-            rgba(23,19,14,0.04) 48.5%,
+            rgba(var(--ink-rgb), 0.04) 48.5%,
             transparent 49.5%,
             transparent 62%,
-            rgba(23,19,14,0.035) 62.5%,
+            rgba(var(--ink-rgb), 0.035) 62.5%,
             transparent 63.5%,
             transparent 76%,
-            rgba(23,19,14,0.03) 76.5%,
+            rgba(var(--ink-rgb), 0.03) 76.5%,
             transparent 77.5%,
             transparent 90%,
-            rgba(23,19,14,0.025) 90.5%,
+            rgba(var(--ink-rgb), 0.025) 90.5%,
             transparent 91.5%
           );
       }
@@ -102,16 +102,16 @@
           radial-gradient(
             ellipse 95% 75% at 50% 50%,
             transparent 18%,
-            rgba(23,19,14,0.03) 18.5%,
+            rgba(var(--ink-rgb), 0.03) 18.5%,
             transparent 19.5%,
             transparent 32%,
-            rgba(23,19,14,0.028) 32.5%,
+            rgba(var(--ink-rgb), 0.028) 32.5%,
             transparent 33.5%,
             transparent 48%,
-            rgba(23,19,14,0.025) 48.5%,
+            rgba(var(--ink-rgb), 0.025) 48.5%,
             transparent 49.5%,
             transparent 65%,
-            rgba(23,19,14,0.02) 65.5%,
+            rgba(var(--ink-rgb), 0.02) 65.5%,
             transparent 66.5%
           );
       }
@@ -128,10 +128,10 @@
         position: absolute; inset: 0; z-index: 2; pointer-events: none;
         background: linear-gradient(
           135deg,
-          rgba(23,19,14,0.08) 0%,
+          rgba(var(--ink-rgb), 0.08) 0%,
           transparent 40%,
           transparent 60%,
-          rgba(23,19,14,0.12) 100%
+          rgba(var(--ink-rgb), 0.12) 100%
         );
       }
 
@@ -148,7 +148,7 @@
         background: var(--yellow);
         border: 4px solid var(--ink);
         transform: rotate(45deg);
-        box-shadow: 3px 3px 0 0 rgba(23,19,14,0.4);
+        box-shadow: 3px 3px 0 0 rgba(var(--ink-rgb), 0.4);
       }
       /* Thin crosshair lines from diamond center */
       #t1-stat-map .marker-cross-h,
@@ -186,7 +186,7 @@
         font-weight: var(--wt-black); font-size: 420px;
         line-height: 0.82; letter-spacing: -0.05em;
         color: var(--ink); font-variant-numeric: tabular-nums;
-        text-shadow: 0 8px 28px rgba(23,19,14,0.15);
+        text-shadow: 0 8px 28px rgba(var(--ink-rgb), 0.15);
       }
 
       /* === KICKER === */
@@ -221,7 +221,7 @@
       }
       #t1-stat-map .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 8;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 50%, rgba(23,19,14,0.22) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 50%, rgba(var(--ink-rgb), 0.22) 100%);
       }
     </style>
   </head>

@@ -69,7 +69,7 @@
         background: rgba(var(--accent-rgb), 0.12);
         border: 1.5px solid rgba(var(--accent-rgb), 0.50);
         box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.30),
-                    inset 0 1px 0 rgba(255,255,255,0.14),
+                    inset 0 1px 0 rgba(var(--white-rgb), 0.14),
                     0 3px 14px rgba(0,0,0,0.42);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
@@ -98,7 +98,7 @@
       #t2-lb-status .text-block::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.36) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.36) 50%, transparent);
       }
 
       #t2-lb-status .term {

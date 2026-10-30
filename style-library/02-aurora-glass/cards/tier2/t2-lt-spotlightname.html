@@ -43,7 +43,7 @@
         width: 260px; height: 180px;
         border-radius: 50%;
         background: radial-gradient(ellipse at 40% 70%,
-          rgba(255,255,255,0.14) 0%,
+          rgba(var(--white-rgb), 0.14) 0%,
           transparent 70%);
         filter: blur(28px);
         pointer-events: none;
@@ -64,7 +64,7 @@
         letter-spacing: var(--track-snug);
         color: var(--white);
         text-shadow:
-          0 0 22px rgba(255,255,255,0.55),
+          0 0 22px rgba(var(--white-rgb), 0.55),
           0 0 60px rgba(var(--accent-rgb),0.38),
           0 2px 12px rgba(0,0,0,0.60);
         line-height: 1.05;
@@ -83,7 +83,7 @@
         font-weight: var(--wt-med);
         font-size: 23px;
         letter-spacing: 0.02em;
-        color: rgba(255,255,255,0.72);
+        color: rgba(var(--white-rgb), 0.72);
         text-shadow: 0 0 16px rgba(var(--accent-rgb),0.28), 0 1px 8px rgba(0,0,0,0.50);
         line-height: 1.3;
       }

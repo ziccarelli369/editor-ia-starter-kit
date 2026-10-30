@@ -42,7 +42,7 @@
         width: 900px;
         padding: 26px 72px 24px 80px;
         background: linear-gradient(90deg,
-          rgba(10, 14, 20, 0.82) 0%,
+          rgba(var(--canvas-rgb), 0.82) 0%,
           rgba(16, 22, 34, 0.68) 55%,
           rgba(16, 22, 34, 0.32) 82%,
           transparent 100%);
@@ -83,12 +83,6 @@
       }
 
       /* Strip height proxy — so hairlines know the bottom offset */
-      #t2-lt-cine .strip-height-proxy {
-        position: absolute;
-        left: 0; bottom: 130px;
-        width: 900px; height: 96px;  /* matches strip content height */
-        pointer-events: none; visibility: hidden;
-      }
 
       #t2-lt-cine .name {
         font-family: var(--font-display);

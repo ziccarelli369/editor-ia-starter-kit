@@ -68,7 +68,7 @@
       #t1-ov-legend .legend-row {
         display: flex; align-items: center; gap: 40px;
         padding: 32px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(var(--white-rgb), 0.06);
       }
       #t1-ov-legend .legend-row:last-child { border-bottom: none; }
 
@@ -87,7 +87,7 @@
       /* Bar track */
       #t1-ov-legend .legend-bar-track {
         width: 360px; height: 10px; border-radius: 5px;
-        background: rgba(255,255,255,0.08); overflow: hidden;
+        background: rgba(var(--white-rgb), 0.08); overflow: hidden;
         flex-shrink: 0;
       }
       #t1-ov-legend .legend-bar-fill {
@@ -128,54 +128,54 @@
 
         <div class="legend-row" id="lr-1" data-pct="82">
           <div class="legend-swatch" id="ls-1" data-color="#37BDF8"
-               style="background:#37BDF8;box-shadow:0 0 18px rgba(55,189,248,0.75);"></div>
+               style="background:var(--accent);box-shadow:0 0 18px rgba(var(--accent-rgb), 0.75);"></div>
           <div class="legend-label" data-slot="r1-label">Completed All Modules</div>
           <div class="legend-bar-track">
             <div class="legend-bar-fill" id="lbf-1"
-                 style="background:linear-gradient(90deg,#37BDF8,rgba(55,189,248,0.55));
-                        box-shadow:0 0 8px rgba(55,189,248,0.55);"></div>
+                 style="background:linear-gradient(90deg,var(--accent),rgba(var(--accent-rgb), 0.55));
+                        box-shadow:0 0 8px rgba(var(--accent-rgb), 0.55);"></div>
           </div>
           <div class="legend-val" id="lv-1" data-slot="r1-val"
-               style="color:#37BDF8;">0%</div>
+               style="color:var(--accent);">0%</div>
         </div>
 
         <div class="legend-row" id="lr-2" data-pct="64">
           <div class="legend-swatch" id="ls-2" data-color="#FF8A5C"
-               style="background:#FF8A5C;box-shadow:0 0 18px rgba(255,138,92,0.70);"></div>
+               style="background:var(--warm);box-shadow:0 0 18px rgba(var(--warm-rgb), 0.70);"></div>
           <div class="legend-label" data-slot="r2-label">Reached the Midpoint</div>
           <div class="legend-bar-track">
             <div class="legend-bar-fill" id="lbf-2"
-                 style="background:linear-gradient(90deg,#FF8A5C,rgba(255,138,92,0.55));
-                        box-shadow:0 0 8px rgba(255,138,92,0.55);"></div>
+                 style="background:linear-gradient(90deg,var(--warm),rgba(var(--warm-rgb), 0.55));
+                        box-shadow:0 0 8px rgba(var(--warm-rgb), 0.55);"></div>
           </div>
           <div class="legend-val" id="lv-2" data-slot="r2-val"
-               style="color:#FF8A5C;">0%</div>
+               style="color:var(--warm);">0%</div>
         </div>
 
         <div class="legend-row" id="lr-3" data-pct="48">
           <div class="legend-swatch" id="ls-3" data-color="#F5D82A"
-               style="background:#F5D82A;box-shadow:0 0 18px rgba(245,216,42,0.70);"></div>
+               style="background:var(--accent-2);box-shadow:0 0 18px rgba(var(--accent2-rgb), 0.70);"></div>
           <div class="legend-label" data-slot="r3-label">Watched Less Than Half</div>
           <div class="legend-bar-track">
             <div class="legend-bar-fill" id="lbf-3"
-                 style="background:linear-gradient(90deg,#F5D82A,rgba(245,216,42,0.55));
-                        box-shadow:0 0 8px rgba(245,216,42,0.55);"></div>
+                 style="background:linear-gradient(90deg,var(--accent-2),rgba(var(--accent2-rgb), 0.55));
+                        box-shadow:0 0 8px rgba(var(--accent2-rgb), 0.55);"></div>
           </div>
           <div class="legend-val" id="lv-3" data-slot="r3-val"
-               style="color:#F5D82A;">0%</div>
+               style="color:var(--accent-2);">0%</div>
         </div>
 
         <div class="legend-row" id="lr-4" data-pct="12">
           <div class="legend-swatch" id="ls-4" data-color="#FF3B30"
-               style="background:#FF3B30;box-shadow:0 0 18px rgba(255,59,48,0.70);"></div>
+               style="background:var(--alert);box-shadow:0 0 18px rgba(var(--alert-rgb), 0.70);"></div>
           <div class="legend-label" data-slot="r4-label">Dropped Off in Week 1</div>
           <div class="legend-bar-track">
             <div class="legend-bar-fill" id="lbf-4"
-                 style="background:linear-gradient(90deg,#FF3B30,rgba(255,59,48,0.55));
-                        box-shadow:0 0 8px rgba(255,59,48,0.55);"></div>
+                 style="background:linear-gradient(90deg,var(--alert),rgba(var(--alert-rgb), 0.55));
+                        box-shadow:0 0 8px rgba(var(--alert-rgb), 0.55);"></div>
           </div>
           <div class="legend-val" id="lv-4" data-slot="r4-val"
-               style="color:#FF3B30;">0%</div>
+               style="color:var(--alert);">0%</div>
         </div>
 
       </div>

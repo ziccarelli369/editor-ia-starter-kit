@@ -54,10 +54,11 @@
       #t1-stat-needle .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: var(--size-mega); line-height: 0.9; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 15%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(150deg, var(--white) 15%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-needle .unit {
         font-family: var(--font-display); font-weight: var(--wt-bold);
@@ -124,12 +125,12 @@
              fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="ngFill" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="var(--white)" stop-opacity="0.85"/>
             </linearGradient>
             <linearGradient id="ngNeedle" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#37BDF8" stop-opacity="0.70"/>
+              <stop offset="0%" stop-color="var(--white)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.70"/>
             </linearGradient>
             <filter id="nGlow" x="-30%" y="-60%" width="160%" height="220%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b"/>
@@ -142,24 +143,24 @@
 
           <!-- Track background -->
           <rect x="60" y="52" width="1380" height="76" rx="14"
-                fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+                fill="rgba(var(--white-rgb), 0.05)" stroke="rgba(var(--white-rgb), 0.10)" stroke-width="1.5"/>
 
           <!-- Filled portion via clipped rect -->
           <rect x="60" y="52" width="1380" height="76" rx="14"
                 fill="url(#ngFill)" clip-path="url(#nClip)"/>
 
           <!-- Tick marks + labels -->
-          <line x1="60"   y1="40" x2="60"   y2="142" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-          <line x1="405"  y1="48" x2="405"  y2="134" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          <line x1="750"  y1="40" x2="750"  y2="142" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-          <line x1="1095" y1="48" x2="1095" y2="134" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          <line x1="1440" y1="40" x2="1440" y2="142" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+          <line x1="60"   y1="40" x2="60"   y2="142" stroke="rgba(var(--white-rgb), 0.25)" stroke-width="1.5"/>
+          <line x1="405"  y1="48" x2="405"  y2="134" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1"/>
+          <line x1="750"  y1="40" x2="750"  y2="142" stroke="rgba(var(--white-rgb), 0.25)" stroke-width="1.5"/>
+          <line x1="1095" y1="48" x2="1095" y2="134" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1"/>
+          <line x1="1440" y1="40" x2="1440" y2="142" stroke="rgba(var(--white-rgb), 0.25)" stroke-width="1.5"/>
 
-          <text x="60"   y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(240,238,233,0.40)">0%</text>
-          <text x="405"  y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(240,238,233,0.40)">25%</text>
-          <text x="750"  y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(240,238,233,0.40)">50%</text>
-          <text x="1095" y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(240,238,233,0.40)">75%</text>
-          <text x="1440" y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(240,238,233,0.40)">100%</text>
+          <text x="60"   y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(var(--text-rgb), 0.40)">0%</text>
+          <text x="405"  y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(var(--text-rgb), 0.40)">25%</text>
+          <text x="750"  y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(var(--text-rgb), 0.40)">50%</text>
+          <text x="1095" y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(var(--text-rgb), 0.40)">75%</text>
+          <text x="1440" y="165" text-anchor="middle" font-family="Space Mono,monospace" font-size="18" fill="rgba(var(--text-rgb), 0.40)">100%</text>
 
           <!-- Needle (vertical line + circle) — x driven by GSAP -->
           <line id="nLine" x1="60" y1="38" x2="60" y2="144"
@@ -167,7 +168,7 @@
                 filter="url(#nGlow)"/>
           <circle id="nDot" cx="60" cy="90" r="18"
                   fill="white"
-                  style="filter:drop-shadow(0 0 14px rgba(55,189,248,0.95)) drop-shadow(0 0 36px rgba(55,189,248,0.55));"/>
+                  style="filter:drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.95)) drop-shadow(0 0 36px rgba(var(--accent-rgb), 0.55));"/>
         </svg>
 
         <div class="label" data-slot="label">

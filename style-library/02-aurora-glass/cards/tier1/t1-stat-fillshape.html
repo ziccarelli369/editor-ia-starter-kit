@@ -82,7 +82,7 @@
           rgba(var(--accent-rgb), 0.14) 100%);
         /* ripple top edge */
         box-shadow: 0 -6px 28px rgba(var(--accent-rgb), 0.55),
-                    0 -2px 10px rgba(255,255,255,0.40);
+                    0 -2px 10px rgba(var(--white-rgb), 0.40);
         clip-path: inset(100% 0 0 0 round 4px);  /* starts fully hidden */
       }
 
@@ -102,6 +102,7 @@
         font-size: 120px; line-height: 1; letter-spacing: var(--track-tight);
         color: var(--white); text-shadow: var(--textglow);
         z-index: 3;
+        font-variant-numeric: tabular-nums;
       }
 
       /* waterline ticks on the vessel side */

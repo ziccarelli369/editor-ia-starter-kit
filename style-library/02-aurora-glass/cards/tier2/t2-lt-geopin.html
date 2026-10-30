@@ -52,8 +52,8 @@
 
       #t2-lt-geo .pin-svg {
         width: 44px; height: 58px;
-        filter: drop-shadow(0 0 10px rgba(55,189,248,0.80))
-                drop-shadow(0 0 24px rgba(55,189,248,0.45));
+        filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.80))
+                drop-shadow(0 0 24px rgba(var(--accent-rgb), 0.45));
       }
 
       /* Shadow dot under the pin when it lands */
@@ -84,7 +84,7 @@
       #t2-lt-geo .pill::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.48) 40%, rgba(255,255,255,0.48) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.48) 40%, rgba(var(--white-rgb), 0.48) 60%, transparent);
       }
 
       #t2-lt-geo .place {
@@ -126,10 +126,10 @@
           <svg class="pin-svg" viewBox="0 0 44 58" fill="none"
                xmlns="http://www.w3.org/2000/svg">
             <path d="M22 2C12.06 2 4 10.06 4 20c0 14.4 18 36 18 36s18-21.6 18-36C40 10.06 31.94 2 22 2z"
-                  fill="rgba(55,189,248,0.22)"
-                  stroke="#37BDF8" stroke-width="2.5"/>
+                  fill="rgba(var(--accent-rgb), 0.22)"
+                  stroke="var(--accent)" stroke-width="2.5"/>
             <circle cx="22" cy="20" r="6"
-                    fill="#37BDF8"
+                    fill="var(--accent)"
                     filter="url(#pin-glow)"/>
             <defs>
               <filter id="pin-glow" x="-100%" y="-100%" width="300%" height="300%">

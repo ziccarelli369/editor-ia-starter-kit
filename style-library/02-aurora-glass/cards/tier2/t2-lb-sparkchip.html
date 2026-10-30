@@ -58,8 +58,8 @@
         position: absolute; top: 0; left: 14px; right: 14px; height: 1px;
         background: linear-gradient(90deg,
           transparent,
-          rgba(255,255,255,0.48) 45%,
-          rgba(255,255,255,0.48) 55%,
+          rgba(var(--white-rgb), 0.48) 45%,
+          rgba(var(--white-rgb), 0.48) 55%,
           transparent);
       }
 
@@ -157,8 +157,8 @@
                   <feComposite in="SourceGraphic" in2="blur" operator="over"/>
                 </filter>
                 <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.45"/>
-                  <stop offset="100%" stop-color="#37BDF8" stop-opacity="1"/>
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="1"/>
                 </linearGradient>
               </defs>
               <!-- Upward trending sparkline path (7 control points) -->

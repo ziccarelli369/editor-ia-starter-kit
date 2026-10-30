@@ -21,8 +21,7 @@
       #t1-stat-cal .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-cal .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -31,7 +30,7 @@
       }
       #t1-stat-cal .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.18) 100%);
       }
       #t1-stat-cal .kicker {
         position: absolute; left: 130px; top: 260px;
@@ -47,7 +46,7 @@
       }
       #t1-stat-cal .cal {
         width: 580px;
-        box-shadow: 8px 20px 60px rgba(23,19,14,0.34);
+        box-shadow: 8px 20px 60px rgba(var(--ink-rgb), 0.34);
         border-radius: 8px; overflow: hidden;
         background: var(--paper);
         transform-origin: top center;
@@ -59,7 +58,7 @@
         display: flex; align-items: center; justify-content: space-around;
         padding: 0 80px; z-index: 2;
         /* top horizontal bar of the binder */
-        border-bottom: 3px solid rgba(23,19,14,0.25);
+        border-bottom: 3px solid rgba(var(--ink-rgb), 0.25);
       }
       #t1-stat-cal .ring {
         width: 48px; height: 48px;
@@ -67,7 +66,7 @@
         border: 7px solid var(--ink);
         background: var(--paper);
         margin-top: -14px;   /* straddle the top edge */
-        box-shadow: 0 2px 8px rgba(23,19,14,0.22);
+        box-shadow: 0 2px 8px rgba(var(--ink-rgb), 0.22);
       }
       /* red header band */
       #t1-stat-cal .header {
@@ -98,7 +97,7 @@
         position: absolute; inset: 140px 0 0 0;
         background-image: repeating-linear-gradient(
           0deg, transparent 0, transparent 70px,
-          rgba(23,19,14,0.06) 70px, rgba(23,19,14,0.06) 72px
+          rgba(var(--ink-rgb), 0.06) 70px, rgba(var(--ink-rgb), 0.06) 72px
         );
         pointer-events: none;
       }

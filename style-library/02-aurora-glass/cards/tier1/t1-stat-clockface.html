@@ -67,10 +67,11 @@
       #t1-stat-clock .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 110px; line-height: 0.95; letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 15%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(155deg, var(--white) 15%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-clock .stat-unit {
         font-family: var(--font-mono); font-size: 26px;
@@ -126,8 +127,8 @@
                viewBox="0 0 540 540" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="cGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#37BDF8" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
+                <stop offset="0%"   stop-color="var(--accent)" stop-opacity="1"/>
+                <stop offset="100%" stop-color="var(--white)" stop-opacity="0.95"/>
               </linearGradient>
               <filter id="cGlow" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
@@ -136,11 +137,11 @@
             </defs>
 
             <!-- outer face ring -->
-            <circle cx="270" cy="270" r="240" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
+            <circle cx="270" cy="270" r="240" stroke="rgba(var(--white-rgb), 0.06)" stroke-width="1.5" fill="rgba(var(--white-rgb), 0.02)"/>
 
             <!-- track arc -->
             <circle id="c-track" cx="270" cy="270" r="215"
-                    stroke="rgba(255,255,255,0.08)" stroke-width="20"
+                    stroke="rgba(var(--white-rgb), 0.08)" stroke-width="20"
                     stroke-linecap="round" fill="none"/>
 
             <!-- progress arc — dashoffset animated -->
@@ -157,38 +158,38 @@
             <!-- 0°(top)=270,30; 30°=377.5,110.5; 60°=454,186.5; 90°=510,270; etc -->
 
             <!-- 12 o'clock (0°) major -->
-            <line x1="270" y1="30"  x2="270" y2="52"  stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="270" y1="30"  x2="270" y2="52"  stroke="rgba(var(--white-rgb), 0.55)" stroke-width="3" stroke-linecap="round"/>
             <!-- 1 o'clock (30°) minor -->
-            <line x1="378" y1="55"  x2="371" y2="67"  stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="378" y1="55"  x2="371" y2="67"  stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 2 o'clock (60°) minor -->
-            <line x1="455" y1="132" x2="446" y2="139" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="455" y1="132" x2="446" y2="139" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 3 o'clock (90°) major -->
-            <line x1="488" y1="270" x2="510" y2="270" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="488" y1="270" x2="510" y2="270" stroke="rgba(var(--white-rgb), 0.55)" stroke-width="3" stroke-linecap="round"/>
             <!-- 4 o'clock (120°) minor -->
-            <line x1="455" y1="408" x2="446" y2="401" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="455" y1="408" x2="446" y2="401" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 5 o'clock (150°) minor -->
-            <line x1="378" y1="485" x2="371" y2="473" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="378" y1="485" x2="371" y2="473" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 6 o'clock (180°) major -->
-            <line x1="270" y1="510" x2="270" y2="488" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="270" y1="510" x2="270" y2="488" stroke="rgba(var(--white-rgb), 0.55)" stroke-width="3" stroke-linecap="round"/>
             <!-- 7 o'clock (210°) minor -->
-            <line x1="162" y1="485" x2="169" y2="473" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="162" y1="485" x2="169" y2="473" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 8 o'clock (240°) minor -->
-            <line x1="85"  y1="408" x2="94"  y2="401" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="85"  y1="408" x2="94"  y2="401" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 9 o'clock (270°) major -->
-            <line x1="30"  y1="270" x2="52"  y2="270" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="30"  y1="270" x2="52"  y2="270" stroke="rgba(var(--white-rgb), 0.55)" stroke-width="3" stroke-linecap="round"/>
             <!-- 10 o'clock (300°) minor -->
-            <line x1="85"  y1="132" x2="94"  y2="139" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="85"  y1="132" x2="94"  y2="139" stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
             <!-- 11 o'clock (330°) minor -->
-            <line x1="162" y1="55"  x2="169" y2="67"  stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="162" y1="55"  x2="169" y2="67"  stroke="rgba(var(--white-rgb), 0.22)" stroke-width="2" stroke-linecap="round"/>
 
             <!-- glowing tip dot at arc head — starts at top, moves with arc -->
             <circle id="c-tip" cx="270" cy="55" r="13"
                     fill="white"
-                    style="filter:drop-shadow(0 0 12px rgba(55,189,248,0.95)) drop-shadow(0 0 28px rgba(55,189,248,0.55));"/>
+                    style="filter:drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.95)) drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));"/>
 
             <!-- centre hub -->
-            <circle cx="270" cy="270" r="10" fill="rgba(55,189,248,0.70)"
-                    style="filter:drop-shadow(0 0 10px rgba(55,189,248,0.80));"/>
+            <circle cx="270" cy="270" r="10" fill="rgba(var(--accent-rgb), 0.70)"
+                    style="filter:drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.80));"/>
           </svg>
 
           <div class="clock-center">

@@ -22,8 +22,7 @@
       #t1-stat-corner .grid {
         position: absolute; inset: -2px; z-index: 0;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
 
       /* === YELLOW SLAB — diagonal accent in top-right quadrant === */
@@ -54,7 +53,7 @@
         transform-origin: top right;
         /* Clip to simulate bleeding off the canvas edge — only the left portion shows */
         clip-path: inset(0 0 0 0);
-        text-shadow: -6px 12px 0 rgba(23,19,14,0.14);
+        text-shadow: -6px 12px 0 rgba(var(--ink-rgb), 0.14);
         white-space: nowrap;
       }
 
@@ -108,7 +107,7 @@
       }
       #t1-stat-corner .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 7;
-        background: radial-gradient(130% 130% at 20% 70%, transparent 50%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(130% 130% at 20% 70%, transparent 50%, rgba(var(--ink-rgb), 0.18) 100%);
       }
     </style>
   </head>

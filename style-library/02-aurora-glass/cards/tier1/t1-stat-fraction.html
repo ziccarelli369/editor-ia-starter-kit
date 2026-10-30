@@ -57,7 +57,7 @@
         font-weight: var(--wt-black);
         font-size: 240px;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(160deg, #ffffff 12%, rgba(var(--accent-rgb),0.85) 82%);
+        background: linear-gradient(160deg, var(--white) 12%, rgba(var(--accent-rgb),0.85) 82%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.55))
@@ -78,7 +78,7 @@
         font-size: 140px;
         letter-spacing: var(--track-tight);
         color: var(--text-faint);
-        filter: drop-shadow(0 0 12px rgba(255,255,255,0.18));
+        filter: drop-shadow(0 0 12px rgba(var(--white-rgb), 0.18));
         padding-bottom: 8px;
       }
 
@@ -89,14 +89,14 @@
       #t1-stat-frac .dot {
         width: 52px; height: 52px; border-radius: 50%;
         /* Off state */
-        background: rgba(255,255,255,0.08);
-        border: 1.5px solid rgba(255,255,255,0.12);
+        background: rgba(var(--white-rgb), 0.08);
+        border: 1.5px solid rgba(var(--white-rgb), 0.12);
         transition: none;
         flex-shrink: 0;
       }
       #t1-stat-frac .dot.on {
         background: radial-gradient(circle at 40% 38%,
-          #ffffff 0%,
+          var(--white) 0%,
           rgba(var(--accent-rgb), 0.90) 45%,
           rgba(var(--accent-rgb), 0.35) 75%,
           transparent 100%);

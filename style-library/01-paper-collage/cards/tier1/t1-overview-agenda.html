@@ -20,8 +20,7 @@
       #t1-ov-agenda .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-ov-agenda .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-ov-agenda .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(130% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(130% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.16) 100%);
       }
 
       /* small marker title at top — left aligned, thinner bar */
@@ -57,13 +56,13 @@
         height: 168px;
         background: var(--paper-2);
         border: 4px solid var(--ink);
-        box-shadow: 6px 8px 0 rgba(23,19,14,0.12);
+        box-shadow: 6px 8px 0 rgba(var(--ink-rgb), 0.12);
         overflow: hidden;
       }
       /* active / top bar is yellow */
       #t1-ov-agenda .bar.active {
         background: var(--yellow);
-        box-shadow: 8px 10px 0 rgba(23,19,14,0.18);
+        box-shadow: 8px 10px 0 rgba(var(--ink-rgb), 0.18);
       }
 
       /* number chip */

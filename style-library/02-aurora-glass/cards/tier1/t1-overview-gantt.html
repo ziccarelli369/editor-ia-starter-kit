@@ -80,7 +80,7 @@
       #t1-ov-gantt .gantt-row {
         display: flex; align-items: center;
         padding: 18px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(var(--white-rgb), 0.05);
         flex: 1;
       }
 
@@ -101,7 +101,7 @@
       /* Faint lane background */
       #t1-ov-gantt .bar-track::before {
         content: ""; position: absolute; inset: 0;
-        background: rgba(255,255,255,0.02);
+        background: rgba(var(--white-rgb), 0.02);
         border-radius: 8px;
       }
 
@@ -121,7 +121,7 @@
       /* Bar inner top highlight */
       #t1-ov-gantt .bar::before {
         content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-        background: rgba(255,255,255,0.55); border-radius: 12px 12px 0 0;
+        background: rgba(var(--white-rgb), 0.55); border-radius: 12px 12px 0 0;
       }
       /* Milestone dot at bar end */
       #t1-ov-gantt .bar-end-dot {

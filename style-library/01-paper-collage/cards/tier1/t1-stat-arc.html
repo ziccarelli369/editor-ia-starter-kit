@@ -21,8 +21,7 @@
       #t1-stat-arc .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-arc .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-stat-arc .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 36% 50%, transparent 54%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 36% 50%, transparent 54%, rgba(var(--ink-rgb), 0.18) 100%);
       }
       #t1-stat-arc .kicker {
         position: absolute; left: 200px; top: 220px;
@@ -68,7 +67,7 @@
       <div class="kicker" data-slot="kicker">COMPLETION RATE</div>
       <div class="gaugewrap">
         <svg viewBox="0 0 240 240" data-pct="73">
-          <circle cx="120" cy="120" r="104" fill="none" stroke="rgba(23,19,14,0.16)" stroke-width="26" />
+          <circle cx="120" cy="120" r="104" fill="none" stroke="rgba(var(--ink-rgb), 0.16)" stroke-width="26" />
           <circle class="arc" cx="120" cy="120" r="104" fill="none" stroke="var(--yellow)"
                   stroke-width="26" stroke-linecap="butt" />
         </svg>

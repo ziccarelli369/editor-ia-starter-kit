@@ -65,7 +65,7 @@
       #t2-lt-pname .card::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50) 40%, rgba(255,255,255,0.50) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.50) 40%, rgba(var(--white-rgb), 0.50) 60%, transparent);
       }
 
       #t2-lt-pname .name {
@@ -104,9 +104,9 @@
       #t2-lt-pname .bar-track {
         height: 5px;
         width: 100%;
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(var(--white-rgb), 0.08);
         border-radius: 0 0 4px 4px;
-        border: var(--stroke) solid rgba(255, 255, 255, 0.08);
+        border: var(--stroke) solid rgba(var(--white-rgb), 0.08);
         border-top: none;
         position: relative;
         overflow: hidden;
@@ -135,9 +135,9 @@
         position: absolute;
         top: -3px; bottom: -3px;
         width: 10px;
-        background: rgba(255,255,255,0.90);
+        background: rgba(var(--white-rgb), 0.90);
         box-shadow:
-          0 0 6px rgba(255,255,255,0.80),
+          0 0 6px rgba(var(--white-rgb), 0.80),
           0 0 14px rgba(var(--accent-rgb), 0.80);
         border-radius: 2px;
         /* JS positions this via left % */

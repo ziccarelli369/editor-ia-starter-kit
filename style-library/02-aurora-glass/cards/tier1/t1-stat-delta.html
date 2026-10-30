@@ -91,17 +91,18 @@
         font-size: 220px;
         line-height: 1;
         letter-spacing: var(--track-tight);
+        font-variant-numeric: tabular-nums;
       }
       /* Up — accent gradient */
       #t1-stat-delta .stat.up {
-        background: linear-gradient(160deg, #ffffff 12%, rgba(var(--accent-rgb),0.85) 82%);
+        background: linear-gradient(160deg, var(--white) 12%, rgba(var(--accent-rgb),0.85) 82%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
       }
       /* Down — alert red gradient */
       #t1-stat-delta .stat.down {
-        background: linear-gradient(160deg, #ffffff 12%, rgba(var(--alert-rgb),0.85) 82%);
+        background: linear-gradient(160deg, var(--white) 12%, rgba(var(--alert-rgb),0.85) 82%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--alert-rgb), 0.55));
@@ -172,12 +173,12 @@
                  viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="caretGradUp" x1="60" y1="100" x2="60" y2="10" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="var(--white)" stop-opacity="1"/>
                 </linearGradient>
                 <linearGradient id="caretGradDown" x1="60" y1="10" x2="60" y2="100" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#FF3B30" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
+                  <stop offset="0%" stop-color="var(--alert)" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="var(--white)" stop-opacity="1"/>
                 </linearGradient>
                 <filter id="caretGlow" x="-30%" y="-30%" width="160%" height="160%">
                   <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>

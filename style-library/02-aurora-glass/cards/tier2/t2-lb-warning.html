@@ -36,8 +36,8 @@
         background: rgba(16, 22, 34, 0.60);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
-        border: 1.5px solid rgba(255, 59, 48, 0.30);
-        border-top: 1.5px solid rgba(255, 59, 48, 0.50);
+        border: 1.5px solid rgba(var(--alert-rgb), 0.30);
+        border-top: 1.5px solid rgba(var(--alert-rgb), 0.50);
         box-shadow: var(--glass-shadow),
                     0 0 0 1px rgba(var(--alert-rgb), 0.10),
                     0 0 40px rgba(var(--alert-rgb), 0.12);
@@ -82,8 +82,8 @@
         border-left: 18px solid transparent;
         border-right: 18px solid transparent;
         border-bottom: 32px solid var(--alert);
-        filter: drop-shadow(0 0 8px rgba(255,59,48,0.80))
-                drop-shadow(0 0 20px rgba(255,59,48,0.40));
+        filter: drop-shadow(0 0 8px rgba(var(--alert-rgb), 0.80))
+                drop-shadow(0 0 20px rgba(var(--alert-rgb), 0.40));
         position: relative;
       }
       #t2-lb-warn .warn-tri::after {

@@ -21,8 +21,7 @@
       #t1-stat-mag .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-mag .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-stat-mag .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 7;
-        background: radial-gradient(120% 120% at 52% 48%, transparent 54%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 52% 48%, transparent 54%, rgba(var(--ink-rgb), 0.18) 100%);
       }
 
       /* kicker */
@@ -68,8 +67,8 @@
         border: 22px solid var(--ink);
         background: var(--yellow);
         box-shadow:
-          0 18px 48px rgba(23,19,14,0.30),
-          inset 0 0 0 6px rgba(23,19,14,0.08);
+          0 18px 48px rgba(var(--ink-rgb), 0.30),
+          inset 0 0 0 6px rgba(var(--ink-rgb), 0.08);
       }
       /* glare highlight inside lens */
       #t1-stat-mag .lens-ring::after {
@@ -102,7 +101,7 @@
         top: 470px; left: 392px;
         transform-origin: 22px 0;
         transform: rotate(42deg);
-        box-shadow: 4px 6px 14px rgba(23,19,14,0.32);
+        box-shadow: 4px 6px 14px rgba(var(--ink-rgb), 0.32);
         z-index: 4;
       }
       /* handle end cap — round rubber grip feel */
@@ -111,7 +110,7 @@
         position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
         width: 52px; height: 52px; border-radius: 50%;
         background: var(--orange);
-        box-shadow: 0 4px 10px rgba(23,19,14,0.3);
+        box-shadow: 0 4px 10px rgba(var(--ink-rgb), 0.3);
       }
 
       /* label */

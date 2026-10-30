@@ -51,7 +51,7 @@
       /* Search bar wrapper */
       #t1-sec-search .search-bar {
         display: inline-flex; align-items: center; gap: 32px;
-        width: 1200px;
+        width: 1360px;
         padding: 38px 52px;
         background: var(--glass-bg);
         backdrop-filter: var(--glass-blur);
@@ -60,9 +60,9 @@
         border-radius: 60px;
         box-shadow:
           var(--glass-shadow),
-          0 0 0 1px rgba(255,255,255,0.06) inset,
-          0 1px 0 rgba(255,255,255,0.18) inset,
-          /* accent glow rim */
+          0 0 0 1px rgba(var(--white-rgb), 0.06) inset,
+          0 1px 0 rgba(var(--white-rgb), 0.18) inset,
+          
           0 0 48px rgba(var(--accent-rgb), 0.22),
           0 0 100px rgba(var(--accent-rgb), 0.10);
         position: relative;
@@ -109,7 +109,7 @@
       /* Soft glow halo behind the bar */
       #t1-sec-search .bar-glow {
         position: absolute; left: 50%; bottom: -40px; transform: translateX(-50%);
-        width: 1200px; height: 60px;
+        width: 1360px; height: 60px;
         background: radial-gradient(ellipse at 50% 50%,
           rgba(var(--accent-rgb), 0.28) 0%,
           transparent 70%);

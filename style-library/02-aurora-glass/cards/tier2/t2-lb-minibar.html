@@ -75,7 +75,7 @@
       #t2-lb-bar .pct {
         font-family: var(--font-mono); font-weight: 700;
         font-size: 28px; letter-spacing: -0.02em;
-        background: linear-gradient(110deg, #FFFFFF 0%, var(--accent) 100%);
+        background: linear-gradient(110deg, var(--white) 0%, var(--accent) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -86,7 +86,7 @@
       /* Track */
       #t2-lb-bar .bar-track {
         height: 10px; width: 100%;
-        background: rgba(255,255,255,0.08);
+        background: rgba(var(--white-rgb), 0.08);
         border-radius: 999px;
         overflow: hidden;
         margin-bottom: 14px;
@@ -96,7 +96,7 @@
       #t2-lb-bar .bar-fill {
         height: 100%; width: 100%; border-radius: 999px;
         background: linear-gradient(90deg,
-          rgba(var(--accent-rgb), 0.70) 0%, var(--accent) 60%, #FFFFFF 100%);
+          rgba(var(--accent-rgb), 0.70) 0%, var(--accent) 60%, var(--white) 100%);
         box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.65),
                     0 0 24px rgba(var(--accent-rgb), 0.30);
         transform-origin: left center;

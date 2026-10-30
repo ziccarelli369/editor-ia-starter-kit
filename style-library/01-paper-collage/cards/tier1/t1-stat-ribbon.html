@@ -20,8 +20,7 @@
       #t1-stat-ribbon .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-ribbon .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -29,7 +28,7 @@
       }
       #t1-stat-ribbon .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 42%, transparent 52%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 50% 42%, transparent 52%, rgba(var(--ink-rgb), 0.18) 100%);
       }
 
       /* kicker */
@@ -70,7 +69,7 @@
           100%  0%
         );
         display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 10px 28px rgba(23,19,14,0.22);
+        box-shadow: 0 10px 28px rgba(var(--ink-rgb), 0.22);
       }
       /* thin ink border illusion via a slightly-larger pseudo */
       #t1-stat-ribbon .ribbon::before {

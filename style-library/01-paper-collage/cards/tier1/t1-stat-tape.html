@@ -23,8 +23,7 @@
       #t1-stat-tape .grid {
         position: absolute; inset: -2px; z-index: 0;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
 
       /* === TAPE BAND === */
@@ -37,8 +36,8 @@
         z-index: 3;
         /* Slight top/bottom edge roughness via box-shadow */
         box-shadow:
-          0 -3px 0 0 rgba(23,19,14,0.5),
-          0 3px 0 0 rgba(23,19,14,0.5),
+          0 -3px 0 0 rgba(var(--ink-rgb), 0.5),
+          0 3px 0 0 rgba(var(--ink-rgb), 0.5),
           0 -8px 0 0 var(--paper-2),
           0 8px 0 0 var(--paper-2);
         overflow: hidden;
@@ -51,8 +50,8 @@
           90deg,
           transparent 0px,
           transparent 36px,
-          rgba(239,233,220,0.18) 36px,
-          rgba(239,233,220,0.18) 60px
+          rgba(var(--paper-rgb), 0.18) 36px,
+          rgba(var(--paper-rgb), 0.18) 60px
         );
         background-size: 96px 18px;
       }
@@ -127,7 +126,7 @@
       }
       #t1-stat-tape .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 8;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(var(--ink-rgb), 0.18) 100%);
       }
     </style>
   </head>

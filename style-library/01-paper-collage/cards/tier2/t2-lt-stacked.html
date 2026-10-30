@@ -50,7 +50,7 @@
         background: var(--yellow);
         padding: 16px 32px 16px 28px;
         /* Hard offset drop shadow */
-        box-shadow: 7px 7px 0 var(--ink), 10px 10px 0 rgba(23,19,14,0.22);
+        box-shadow: 7px 7px 0 var(--ink), 10px 10px 0 rgba(var(--ink-rgb), 0.22);
         transform: skewX(-2deg) translateX(8px);
         transform-origin: left bottom;
         position: relative;
@@ -75,7 +75,7 @@
         background: var(--paper);
         padding: 14px 32px 14px 28px;
         /* Hard offset drop shadow */
-        box-shadow: 7px 7px 0 var(--ink), 10px 10px 0 rgba(23,19,14,0.22);
+        box-shadow: 7px 7px 0 var(--ink), 10px 10px 0 rgba(var(--ink-rgb), 0.22);
         transform: skewX(1.5deg) translateX(0px);
         transform-origin: left top;
         margin-top: -6px;   /* overlap the yellow block slightly */

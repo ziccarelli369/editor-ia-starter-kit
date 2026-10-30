@@ -46,7 +46,7 @@
         background: linear-gradient(to top,
           rgba(var(--accent-rgb), 0.15) 0%,
           rgba(var(--accent-rgb), 0.80) 45%,
-          rgba(255,255,255,0.90) 50%,
+          rgba(var(--white-rgb), 0.90) 50%,
           rgba(var(--accent-rgb), 0.80) 55%,
           rgba(var(--accent-rgb), 0.15) 100%
         );
@@ -63,10 +63,10 @@
         background: linear-gradient(to right,
           transparent 0%,
           rgba(var(--accent-rgb), 0.35) 8%,
-          rgba(255,255,255,0.60) 50%,
+          rgba(var(--white-rgb), 0.60) 50%,
           rgba(var(--accent-rgb), 0.35) 92%,
           transparent 100%);
-        box-shadow: 0 0 8px rgba(255,255,255,0.35), 0 0 22px rgba(var(--accent-rgb),0.20);
+        box-shadow: 0 0 8px rgba(var(--white-rgb), 0.35), 0 0 22px rgba(var(--accent-rgb),0.20);
         z-index: 4;
       }
 
@@ -84,7 +84,7 @@
       #t1-sec-wform .plate {
         position: absolute; left: 50%; top: 76px; transform: translateX(-50%);
         width: 1200px; height: 160px; border-radius: 50%;
-        background: radial-gradient(60% 100% at 50% 50%, rgba(10,14,20,0.72), transparent 70%);
+        background: radial-gradient(60% 100% at 50% 50%, rgba(var(--canvas-rgb), 0.72), transparent 70%);
         filter: blur(20px); z-index: -1;
       }
       #t1-sec-wform .headline {

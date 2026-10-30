@@ -64,11 +64,12 @@
         font-size: 80px;
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 10%, rgba(var(--accent-rgb), 0.82) 78%);
+        background: linear-gradient(155deg, var(--white) 10%, rgba(var(--accent-rgb), 0.82) 78%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.55));
         white-space: nowrap;
+        font-variant-numeric: tabular-nums;
       }
 
       /* Dashed connector from value label to marker */
@@ -93,7 +94,7 @@
       /* Track bed: dim pill */
       #t1-st-rng .track-bed {
         width: 100%; height: 10px; border-radius: 5px;
-        background: rgba(255,255,255,0.10);
+        background: rgba(var(--white-rgb), 0.10);
         position: relative; z-index: 1;
       }
 
@@ -111,7 +112,7 @@
       #t1-st-rng .marker {
         position: absolute; top: 50%; transform: translate(-50%, -50%);
         width: 32px; height: 32px; border-radius: 50%;
-        background: #ffffff;
+        background: var(--white);
         box-shadow: 0 0 0 6px rgba(var(--accent-rgb), 0.35),
                     0 0 28px rgba(var(--accent-rgb), 0.80),
                     0 0 60px rgba(var(--accent-rgb), 0.40);

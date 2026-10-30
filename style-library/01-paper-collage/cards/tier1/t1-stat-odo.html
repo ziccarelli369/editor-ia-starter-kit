@@ -19,8 +19,7 @@
       #t1-stat-odo .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-odo .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -28,7 +27,7 @@
       }
       #t1-stat-odo .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 46%, transparent 54%, rgba(23,19,14,0.2) 100%);
+        background: radial-gradient(120% 120% at 50% 46%, transparent 54%, rgba(var(--ink-rgb), 0.2) 100%);
       }
       #t1-stat-odo .kicker {
         position: absolute; left: 50%; top: 250px; transform: translateX(-50%);
@@ -39,13 +38,13 @@
       #t1-stat-odo .odo {
         position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
         padding: 34px 48px; background: var(--ink); color: var(--paper);
-        border-radius: 8px; box-shadow: 0 22px 44px rgba(23,19,14,0.36);
+        border-radius: 8px; box-shadow: 0 22px 44px rgba(var(--ink-rgb), 0.36);
         font-weight: var(--wt-black); font-size: 300px; line-height: 1;
         letter-spacing: 0.06em; font-variant-numeric: tabular-nums;
         /* vertical cell dividers + a horizontal flap seam */
         background-image:
-          linear-gradient(0deg, transparent calc(50% - 2px), rgba(239,233,220,0.22) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)),
-          repeating-linear-gradient(90deg, transparent 0 0.92em, rgba(239,233,220,0.14) 0.92em 0.96em);
+          linear-gradient(0deg, transparent calc(50% - 2px), rgba(var(--paper-rgb), 0.22) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)),
+          repeating-linear-gradient(90deg, transparent 0 0.92em, rgba(var(--paper-rgb), 0.14) 0.92em 0.96em);
         overflow: hidden;
       }
       #t1-stat-odo .odo .clip { display: inline-block; }

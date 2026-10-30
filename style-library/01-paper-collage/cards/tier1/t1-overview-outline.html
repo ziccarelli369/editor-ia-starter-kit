@@ -25,7 +25,7 @@
       }
       #t1-ov-outline .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 9;
-        background: radial-gradient(130% 120% at 50% 40%, transparent 55%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(130% 120% at 50% 40%, transparent 55%, rgba(var(--ink-rgb), 0.18) 100%);
       }
 
       /* ruled lines across the full canvas — lecture paper */
@@ -35,8 +35,8 @@
           0deg,
           transparent,
           transparent 72px,
-          rgba(23,19,14,0.12) 72px,
-          rgba(23,19,14,0.12) 74px
+          rgba(var(--ink-rgb), 0.12) 72px,
+          rgba(var(--ink-rgb), 0.12) 74px
         );
       }
       /* three-hole punch — optional visual detail, non-animated */
@@ -47,7 +47,7 @@
       }
       #t1-ov-outline .hole {
         width: 32px; height: 32px; border-radius: 50%;
-        background: rgba(23,19,14,0.15); border: 2px solid rgba(23,19,14,0.2);
+        background: rgba(var(--ink-rgb), 0.15); border: 2px solid rgba(var(--ink-rgb), 0.2);
       }
 
       /* marker title */

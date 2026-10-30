@@ -20,8 +20,7 @@
       #t1-stat-rank .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-rank .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -29,7 +28,7 @@
       }
       #t1-stat-rank .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 54%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 54%, rgba(var(--ink-rgb), 0.18) 100%);
       }
       #t1-stat-rank .kicker {
         position: absolute; left: 130px; top: 88px;
@@ -64,14 +63,14 @@
         transform: scaleX(0); transform-origin: left center;
       }
       #t1-stat-rank .row.hero .fill { background: var(--yellow); box-shadow: 3px 0 0 0 var(--ink); }
-      #t1-stat-rank .row:not(.hero) .fill { background: var(--paper-2); filter: brightness(0.88); box-shadow: 3px 0 0 0 rgba(23,19,14,0.35); }
+      #t1-stat-rank .row:not(.hero) .fill { background: var(--paper-2); filter: brightness(0.88); box-shadow: 3px 0 0 0 rgba(var(--ink-rgb), 0.35); }
       #t1-stat-rank .row-val {
         position: absolute; top: 50%; transform: translateY(-50%);
         right: 18px; z-index: 3; font-weight: var(--wt-black); font-family: var(--font-display);
         font-variant-numeric: tabular-nums; color: var(--ink);
       }
       #t1-stat-rank .row.hero .row-val { font-size: 78px; line-height: 1; }
-      #t1-stat-rank .row:not(.hero) .row-val { font-size: 54px; line-height: 1; color: rgba(23,19,14,0.7); }
+      #t1-stat-rank .row:not(.hero) .row-val { font-size: 54px; line-height: 1; color: rgba(var(--ink-rgb), 0.7); }
       #t1-stat-rank .label {
         position: absolute; left: 130px; right: 130px; bottom: 148px;
         font-weight: var(--wt-thin); font-size: 52px; line-height: 1.06;

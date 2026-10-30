@@ -58,7 +58,7 @@
         content: "";
         position: absolute; inset: 0;
         background: linear-gradient(90deg,
-          transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+          transparent 0%, rgba(var(--white-rgb), 0.06) 50%, transparent 100%);
         transform: translateX(-100%);
       }
 
@@ -111,8 +111,8 @@
           <!-- magnifier icon as inline SVG -->
           <svg class="icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.5 21C17.1944 21 21 17.1944 21 12.5C21 7.80558 17.1944 4 12.5 4C7.80558 4 4 7.80558 4 12.5C4 17.1944 7.80558 21 12.5 21Z"
-              stroke="#37BDF8" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19 19L24 24" stroke="#37BDF8" stroke-width="2" stroke-linecap="round"/>
+              stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 19L24 24" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
           </svg>
           <div class="pill-text">
             <span data-slot="term">AI <em>trust signals</em></span>

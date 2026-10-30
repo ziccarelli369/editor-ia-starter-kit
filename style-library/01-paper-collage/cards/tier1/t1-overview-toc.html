@@ -19,8 +19,7 @@
       #t1-ov-toc .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-ov-toc .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -29,7 +28,7 @@
       }
       #t1-ov-toc .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(130% 120% at 50% 48%, transparent 58%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(130% 120% at 50% 48%, transparent 58%, rgba(var(--ink-rgb), 0.16) 100%);
       }
 
       /* chapter heading — big Fraunces italic, top left */
@@ -60,10 +59,10 @@
       }
       #t1-ov-toc .entry {
         display: flex; align-items: baseline; gap: 0;
-        padding: 22px 0; border-bottom: 1px solid rgba(23,19,14,0.14);
+        padding: 22px 0; border-bottom: 1px solid rgba(var(--ink-rgb), 0.14);
         overflow: hidden;
       }
-      #t1-ov-toc .entry:first-child { border-top: 1px solid rgba(23,19,14,0.14); }
+      #t1-ov-toc .entry:first-child { border-top: 1px solid rgba(var(--ink-rgb), 0.14); }
 
       #t1-ov-toc .entry-num {
         flex: 0 0 64px;
@@ -82,7 +81,7 @@
         flex: 1 1 auto; overflow: hidden; align-self: flex-end;
         margin: 0 24px 10px 24px;
         font-family: var(--font-label); font-weight: var(--wt-reg);
-        font-size: 22px; letter-spacing: 0.3em; color: rgba(23,19,14,0.3);
+        font-size: 22px; letter-spacing: 0.3em; color: rgba(var(--ink-rgb), 0.3);
         white-space: nowrap;
         /* repeated dot string */
       }

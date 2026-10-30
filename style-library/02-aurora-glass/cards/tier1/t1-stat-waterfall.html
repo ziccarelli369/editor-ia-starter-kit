@@ -51,7 +51,7 @@
       #t1-stat-water .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 120px; line-height: 0.9; letter-spacing: var(--track-tight);
-        background: linear-gradient(135deg, #ffffff 10%, rgba(var(--accent-rgb), 0.88) 80%);
+        background: linear-gradient(135deg, var(--white) 10%, rgba(var(--accent-rgb), 0.88) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
@@ -117,16 +117,16 @@
              fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="wgPos" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.90"/>
-              <stop offset="100%" stop-color="#37BDF8" stop-opacity="0.50"/>
+              <stop offset="0%" stop-color="var(--white)" stop-opacity="0.90"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.50"/>
             </linearGradient>
             <linearGradient id="wgNeg" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#FF8A5C" stop-opacity="0.75"/>
-              <stop offset="100%" stop-color="#FF3B30" stop-opacity="0.45"/>
+              <stop offset="0%" stop-color="var(--warm)" stop-opacity="0.75"/>
+              <stop offset="100%" stop-color="var(--alert)" stop-opacity="0.45"/>
             </linearGradient>
             <linearGradient id="wgTotal" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="1.00"/>
-              <stop offset="100%" stop-color="#37BDF8" stop-opacity="0.80"/>
+              <stop offset="0%" stop-color="var(--white)" stop-opacity="1.00"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.80"/>
             </linearGradient>
             <filter id="wGlow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
@@ -135,60 +135,60 @@
           </defs>
 
           <!-- baseline -->
-          <line x1="0" y1="580" x2="1640" y2="580" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+          <line x1="0" y1="580" x2="1640" y2="580" stroke="rgba(var(--white-rgb), 0.12)" stroke-width="1.5"/>
 
           <!-- connector dotted lines between bars -->
-          <line id="wc0" x1="190" y1="360" x2="248" y2="360" stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line id="wc1" x1="438" y1="195" x2="496" y2="195" stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line id="wc2" x1="686" y1="85"  x2="744" y2="85"  stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line id="wc3" x1="934" y1="10"  x2="992" y2="10"  stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line id="wc4" x1="1182" y1="65" x2="1312" y2="65" stroke="rgba(255,255,255,0.20)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line id="wc0" x1="190" y1="360" x2="248" y2="360" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line id="wc1" x1="438" y1="195" x2="496" y2="195" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line id="wc2" x1="686" y1="85"  x2="744" y2="85"  stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line id="wc3" x1="934" y1="10"  x2="992" y2="10"  stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line id="wc4" x1="1182" y1="65" x2="1312" y2="65" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1" stroke-dasharray="4 4"/>
 
           <!-- Bar 0: Courses +220, y=360..580 -->
           <rect id="wb0" x="0"    y="360" width="190" height="220"
                 fill="url(#wgPos)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(55,189,248,0.40)" stroke-width="1.5"/>
+                stroke="rgba(var(--accent-rgb), 0.40)" stroke-width="1.5"/>
 
           <!-- Bar 1: Certs +165, y=195..360 -->
           <rect id="wb1" x="248"  y="195" width="190" height="165"
                 fill="url(#wgPos)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(55,189,248,0.35)" stroke-width="1.5"/>
+                stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5"/>
 
           <!-- Bar 2: Coaching +110, y=85..195 -->
           <rect id="wb2" x="496"  y="85"  width="190" height="110"
                 fill="url(#wgPos)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(55,189,248,0.35)" stroke-width="1.5"/>
+                stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5"/>
 
           <!-- Bar 3: Events +75, y=10..85 -->
           <rect id="wb3" x="744"  y="10"  width="190" height="75"
                 fill="url(#wgPos)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(55,189,248,0.35)" stroke-width="1.5"/>
+                stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5"/>
 
           <!-- Bar 4: Refunds -55 (negative), y=10..65 -->
           <rect id="wb4" x="992"  y="10"  width="190" height="55"
                 fill="url(#wgNeg)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(255,59,48,0.50)" stroke-width="1.5"/>
+                stroke="rgba(var(--alert-rgb), 0.50)" stroke-width="1.5"/>
 
           <!-- Bar 5: TOTAL 515, y=65..580 -->
           <rect id="wb5" x="1312" y="65"  width="220" height="515"
                 fill="url(#wgTotal)" rx="5" filter="url(#wGlow)"
-                stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+                stroke="rgba(var(--white-rgb), 0.55)" stroke-width="2"/>
 
           <!-- Bar labels (bottom of chart area, at y=595) -->
-          <text x="95"   y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(240,238,233,0.55)">Courses</text>
-          <text x="343"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(240,238,233,0.55)">Certs</text>
-          <text x="591"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(240,238,233,0.55)">Coaching</text>
-          <text x="839"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(240,238,233,0.55)">Events</text>
-          <text x="1087" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(255,138,92,0.75)">Refunds</text>
-          <text x="1422" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(255,255,255,0.80)" font-weight="700">TOTAL</text>
+          <text x="95"   y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--text-rgb), 0.55)">Courses</text>
+          <text x="343"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--text-rgb), 0.55)">Certs</text>
+          <text x="591"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--text-rgb), 0.55)">Coaching</text>
+          <text x="839"  y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--text-rgb), 0.55)">Events</text>
+          <text x="1087" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--warm-rgb), 0.75)">Refunds</text>
+          <text x="1422" y="597" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="rgba(var(--white-rgb), 0.80)" font-weight="700">TOTAL</text>
 
           <!-- Value labels above each bar -->
-          <text id="wv0" x="95"   y="350" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.70)">+$1.4M</text>
-          <text id="wv1" x="343"  y="185" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.70)">+$1.0M</text>
-          <text id="wv2" x="591"  y="75"  text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.70)">+$680K</text>
-          <text id="wv3" x="839"  y="0"   text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,0.70)">+$460K</text>
-          <text id="wv4" x="1087" y="0"   text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(255,138,92,0.85)">−$340K</text>
-          <text id="wv5" x="1422" y="55"  text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="rgba(255,255,255,0.92)">$3.2M</text>
+          <text id="wv0" x="95"   y="350" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(var(--white-rgb), 0.70)">+$1.4M</text>
+          <text id="wv1" x="343"  y="185" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(var(--white-rgb), 0.70)">+$1.0M</text>
+          <text id="wv2" x="591"  y="75"  text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(var(--white-rgb), 0.70)">+$680K</text>
+          <text id="wv3" x="839"  y="0"   text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(var(--white-rgb), 0.70)">+$460K</text>
+          <text id="wv4" x="1087" y="0"   text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="22" font-weight="700" fill="rgba(var(--warm-rgb), 0.85)">−$340K</text>
+          <text id="wv5" x="1422" y="55"  text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="24" font-weight="800" fill="rgba(var(--white-rgb), 0.92)">$3.2M</text>
         </svg>
 
         <div class="label" data-slot="label">

@@ -19,8 +19,7 @@
       #t1-sec-stamp .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-sec-stamp .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -28,12 +27,12 @@
       }
       #t1-sec-stamp .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 54%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 54%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       #t1-sec-stamp .stamp {
         position: relative; z-index: 3; transform: rotate(-7deg); text-align: center;
         border: 10px solid var(--red); padding: 28px 64px; color: var(--red); opacity: 0.9;
-        box-shadow: 0 0 0 8px rgba(226,59,46,0.0);
+        box-shadow: 0 0 0 8px rgba(var(--red-rgb), 0.0);
       }
       #t1-sec-stamp .stamp::before, #t1-sec-stamp .stamp::after {
         content: ""; position: absolute; left: 14px; right: 14px; height: 4px; background: var(--red);

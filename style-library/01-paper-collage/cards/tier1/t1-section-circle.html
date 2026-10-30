@@ -19,8 +19,7 @@
       #t1-sec-circle .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-sec-circle .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -28,7 +27,7 @@
       }
       #t1-sec-circle .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(120% 120% at 50% 45%, transparent 55%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(120% 120% at 50% 45%, transparent 55%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       #t1-sec-circle .stage { position: absolute; inset: 0; transform-origin: 52% 50%; }
       #t1-sec-circle .circle {
@@ -56,7 +55,7 @@
         background-color: var(--paper-2); background-image: var(--tex-halftone);
         background-size: var(--tex-halftone-size);
         outline: 10px solid var(--orange); outline-offset: -10px;
-        transform: rotate(2.2deg); z-index: 2; box-shadow: 18px 22px 0 rgba(23,19,14,0.12);
+        transform: rotate(2.2deg); z-index: 2; box-shadow: 18px 22px 0 rgba(var(--ink-rgb), 0.12);
       }
       #t1-sec-circle .scrap::after {
         content: "ARCHIVE"; position: absolute; left: 14px; bottom: 12px;
