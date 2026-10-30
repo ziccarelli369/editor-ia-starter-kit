@@ -73,7 +73,7 @@
         background: linear-gradient(to right,
           transparent 0%,
           rgba(var(--accent-rgb), 0.70) 35%,
-          rgba(255,255,255,0.90) 50%,
+          rgba(var(--white-rgb), 0.90) 50%,
           rgba(var(--accent-rgb), 0.70) 65%,
           transparent 100%);
         box-shadow: 0 0 14px 2px rgba(var(--accent-rgb), 0.55);
@@ -87,11 +87,12 @@
         font-size: 200px;
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(160deg, #ffffff 15%, rgba(var(--accent-rgb),0.85) 82%);
+        background: linear-gradient(160deg, var(--white) 15%, rgba(var(--accent-rgb),0.85) 82%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55))
                 drop-shadow(0 0 70px rgba(var(--accent-rgb), 0.28));
+        font-variant-numeric: tabular-nums;
       }
 
       #t1-stat-cpill .label {

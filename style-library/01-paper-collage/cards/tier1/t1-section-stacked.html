@@ -19,8 +19,7 @@
       #t1-sec-stacked .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
         opacity: 0.6;
       }
       #t1-sec-stacked .grain {
@@ -29,7 +28,7 @@
       }
       #t1-sec-stacked .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(23,19,14,0.15) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 56%, rgba(var(--ink-rgb), 0.15) 100%);
       }
       #t1-sec-stacked .stage { position: absolute; inset: 0; transform-origin: 50% 50%; }
       #t1-sec-stacked .title { position: absolute; left: 150px; top: 250px; width: 1620px; }

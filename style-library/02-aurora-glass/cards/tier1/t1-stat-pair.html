@@ -64,15 +64,16 @@
         font-size: var(--size-mega);
         line-height: 0.88;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 10%, rgba(var(--accent-rgb), 0.80) 85%);
+        background: linear-gradient(155deg, var(--white) 10%, rgba(var(--accent-rgb), 0.80) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.50));
+        font-variant-numeric: tabular-nums;
       }
 
       /* Second stat uses yellow accent to distinguish the two metrics */
       #t1-stat-pair .metric.b .stat {
-        background: linear-gradient(155deg, #ffffff 10%, rgba(var(--accent2-rgb), 0.85) 85%);
+        background: linear-gradient(155deg, var(--white) 10%, rgba(var(--accent2-rgb), 0.85) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent2-rgb), 0.50));
@@ -98,7 +99,7 @@
           to bottom,
           transparent 0%,
           rgba(var(--accent-rgb), 0.6) 20%,
-          rgba(255,255,255,0.7) 50%,
+          rgba(var(--white-rgb), 0.7) 50%,
           rgba(var(--accent-rgb), 0.6) 80%,
           transparent 100%
         );

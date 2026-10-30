@@ -36,39 +36,9 @@
 
       /* ── SPLIT HEADLINE ──────────────────────────────────────────────── */
       /* Clip-wrapper for the top half: overflow:hidden clips at the center seam */
-      #t1-sec-srev .split-wrap {
-        position: absolute;
-        left: 0; right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
-      }
       /* The shared headline text — rendered twice (top/bottom halves) */
-      #t1-sec-srev .half-top-clip {
-        position: absolute;
-        left: 0; right: 0;
-        /* clip to upper half of the text block */
-        height: 140px;
-        bottom: 0; /* anchor bottom of clip at the seam */
-        overflow: hidden;
-      }
-      #t1-sec-srev .half-bottom-clip {
-        position: absolute;
-        left: 0; right: 0;
-        top: 0;
-        height: 140px;
-        overflow: hidden;
-      }
 
       /* Container that holds both halves at the seam-center */
-      #t1-sec-srev .seam-center {
-        position: absolute;
-        left: 0; right: 0;
-        top: 50%;
-        margin-top: -140px; /* half total text height */
-        height: 280px;
-        z-index: 3;
-      }
 
       /* The headline text block, shown in both clips */
       #t1-sec-srev .hl-text {
@@ -105,9 +75,9 @@
         background: linear-gradient(90deg,
           transparent 0%,
           rgba(var(--accent-rgb), 0.0) 10%,
-          rgba(255,255,255,0.90) 35%,
+          rgba(var(--white-rgb), 0.90) 35%,
           rgba(var(--accent-rgb), 1.0) 50%,
-          rgba(255,255,255,0.90) 65%,
+          rgba(var(--white-rgb), 0.90) 65%,
           rgba(var(--accent-rgb), 0.0) 90%,
           transparent 100%);
         box-shadow:

@@ -52,12 +52,6 @@
       }
 
       /* Vertical connector line behind the badges — SVG overlay */
-      #t1-ov-sum .connector-svg {
-        position: absolute; left: 200px; top: 230px; bottom: 72px;
-        width: 2px; z-index: 3; pointer-events: none;
-        /* positioned to align with badge centers */
-        left: calc(200px + 52px); /* 200px stack left + badge half-width */
-      }
 
       /* Individual key-point row */
       #t1-ov-sum .kp-row {
@@ -83,7 +77,7 @@
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 96px; line-height: 0.9; letter-spacing: var(--track-tight);
         /* gradient fill: white at top, accent at base */
-        background: linear-gradient(175deg, #FFFFFF 20%, var(--accent) 100%);
+        background: linear-gradient(175deg, var(--white) 20%, var(--accent) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.50));

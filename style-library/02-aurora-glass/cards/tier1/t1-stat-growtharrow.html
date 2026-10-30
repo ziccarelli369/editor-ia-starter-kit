@@ -43,12 +43,14 @@
         text-shadow: var(--textglow-accent);
       }
       #t1-stat-garrow .stat {
+        width: max-content;
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: var(--size-mega); line-height: 0.88; letter-spacing: var(--track-tight);
-        background: linear-gradient(145deg, #ffffff 10%, rgba(var(--accent-rgb), 0.88) 80%);
+        background: linear-gradient(145deg, var(--white) 10%, rgba(var(--accent-rgb), 0.88) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 32px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-garrow .label {
         font-family: var(--font-body); font-size: var(--size-body);
@@ -109,9 +111,9 @@
              width="680" height="640">
           <defs>
             <linearGradient id="agShaft" x1="80" y1="580" x2="560" y2="60" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.30"/>
-              <stop offset="50%" stop-color="#37BDF8" stop-opacity="0.80"/>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="1.00"/>
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.30"/>
+              <stop offset="50%" stop-color="var(--accent)" stop-opacity="0.80"/>
+              <stop offset="100%" stop-color="var(--white)" stop-opacity="1.00"/>
             </linearGradient>
             <filter id="agGlow" x="-30%" y="-30%" width="160%" height="160%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="b"/>
@@ -124,14 +126,14 @@
           </defs>
 
           <!-- baseline dashed axis -->
-          <line x1="40" y1="590" x2="640" y2="590" stroke="rgba(255,255,255,0.10)"
+          <line x1="40" y1="590" x2="640" y2="590" stroke="rgba(var(--white-rgb), 0.10)"
                 stroke-width="1.5" stroke-dasharray="8 8"/>
 
           <!-- small tick marks on baseline -->
-          <line x1="160" y1="582" x2="160" y2="598" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-          <line x1="280" y1="582" x2="280" y2="598" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-          <line x1="400" y1="582" x2="400" y2="598" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
-          <line x1="520" y1="582" x2="520" y2="598" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          <line x1="160" y1="582" x2="160" y2="598" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1.5"/>
+          <line x1="280" y1="582" x2="280" y2="598" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1.5"/>
+          <line x1="400" y1="582" x2="400" y2="598" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1.5"/>
+          <line x1="520" y1="582" x2="520" y2="598" stroke="rgba(var(--white-rgb), 0.15)" stroke-width="1.5"/>
 
           <!-- soft glow duplicate of shaft -->
           <line id="ag-glow" x1="80" y1="580" x2="560" y2="60"
@@ -147,15 +149,15 @@
           <!-- Pointing direction: approx 315° (upper-right diagonal) -->
           <polygon id="ag-head" points="560,60 510,100 550,120"
                    fill="white"
-                   style="filter:drop-shadow(0 0 16px rgba(255,255,255,0.90)) drop-shadow(0 0 40px rgba(55,189,248,0.80));"/>
+                   style="filter:drop-shadow(0 0 16px rgba(var(--white-rgb), 0.90)) drop-shadow(0 0 40px rgba(var(--accent-rgb), 0.80));"/>
 
           <!-- bright dot at tip -->
           <circle id="ag-tip" cx="560" cy="60" r="16" fill="white"
-                  style="filter:drop-shadow(0 0 18px rgba(255,255,255,0.95)) drop-shadow(0 0 50px rgba(55,189,248,0.80));"/>
+                  style="filter:drop-shadow(0 0 18px rgba(var(--white-rgb), 0.95)) drop-shadow(0 0 50px rgba(var(--accent-rgb), 0.80));"/>
 
           <!-- origin dot -->
-          <circle cx="80" cy="580" r="8" fill="rgba(55,189,248,0.50)"
-                  style="filter:drop-shadow(0 0 8px rgba(55,189,248,0.60));"/>
+          <circle cx="80" cy="580" r="8" fill="rgba(var(--accent-rgb), 0.50)"
+                  style="filter:drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.60));"/>
         </svg>
       </div>
 

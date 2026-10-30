@@ -58,7 +58,7 @@
       #t1-stat-nodes .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: var(--size-mega); line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb),0.80) 72%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb),0.80) 72%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
@@ -116,8 +116,8 @@
             <feComposite in="SourceGraphic" in2="b" operator="over"/>
           </filter>
           <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="rgba(55,189,248,0.18)"/>
-            <stop offset="100%" stop-color="rgba(55,189,248,0.72)"/>
+            <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.18)"/>
+            <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0.72)"/>
           </linearGradient>
         </defs>
 
@@ -135,21 +135,21 @@
               stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="0 800"/>
 
         <!-- satellite node circles -->
-        <circle id="nd-n1" cx="310" cy="260" r="22" fill="rgba(55,189,248,0.14)"
-                stroke="rgba(55,189,248,0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
-        <circle id="nd-n2" cx="310" cy="820" r="18" fill="rgba(55,189,248,0.14)"
-                stroke="rgba(55,189,248,0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
-        <circle id="nd-n3" cx="680" cy="150" r="26" fill="rgba(55,189,248,0.14)"
-                stroke="rgba(55,189,248,0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
-        <circle id="nd-n4" cx="1610" cy="260" r="20" fill="rgba(55,189,248,0.14)"
-                stroke="rgba(55,189,248,0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
-        <circle id="nd-n5" cx="1610" cy="820" r="24" fill="rgba(55,189,248,0.14)"
-                stroke="rgba(55,189,248,0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
+        <circle id="nd-n1" cx="310" cy="260" r="22" fill="rgba(var(--accent-rgb), 0.14)"
+                stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
+        <circle id="nd-n2" cx="310" cy="820" r="18" fill="rgba(var(--accent-rgb), 0.14)"
+                stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
+        <circle id="nd-n3" cx="680" cy="150" r="26" fill="rgba(var(--accent-rgb), 0.14)"
+                stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
+        <circle id="nd-n4" cx="1610" cy="260" r="20" fill="rgba(var(--accent-rgb), 0.14)"
+                stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
+        <circle id="nd-n5" cx="1610" cy="820" r="24" fill="rgba(var(--accent-rgb), 0.14)"
+                stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="1.5" filter="url(#nd-glow-sm)" opacity="0"/>
 
         <!-- hub glow ring -->
         <circle id="nd-hub-glow" cx="960" cy="540" r="170"
-                fill="rgba(55,189,248,0.06)"
-                stroke="rgba(55,189,248,0.22)" stroke-width="1" filter="url(#nd-glow)" opacity="0"/>
+                fill="rgba(var(--accent-rgb), 0.06)"
+                stroke="rgba(var(--accent-rgb), 0.22)" stroke-width="1" filter="url(#nd-glow)" opacity="0"/>
       </svg>
 
       <!-- node-label chips -->

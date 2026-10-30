@@ -104,7 +104,7 @@
       #t2-lb-mpie .detail-wrap::before {
         content: "";
         position: absolute; top: 0; left: 8px; right: 8px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.42) 50%, transparent);
       }
 
       #t2-lb-mpie .detail {
@@ -134,7 +134,7 @@
                viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Track circle -->
             <circle cx="65" cy="65" r="50"
-              stroke="rgba(255,255,255,0.08)"
+              stroke="rgba(var(--white-rgb), 0.08)"
               stroke-width="14" fill="none"
               stroke-linecap="round"/>
             <!-- Glowing fill arc — rotated to start at top -->
@@ -146,8 +146,8 @@
               transform="rotate(-90 65 65)"/>
             <defs>
               <linearGradient id="mpieGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#37BDF8" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.88"/>
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/>
+                <stop offset="100%" stop-color="var(--white)" stop-opacity="0.88"/>
               </linearGradient>
             </defs>
           </svg>

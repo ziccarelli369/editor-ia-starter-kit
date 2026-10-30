@@ -20,19 +20,19 @@
       #t1-sec-map .geo {
         position: absolute; inset: 0; opacity: 0.5;
         background-image:
-          repeating-linear-gradient(0deg, rgba(23,19,14,0.10) 0 1px, transparent 1px 120px),
-          repeating-linear-gradient(90deg, rgba(23,19,14,0.10) 0 1px, transparent 1px 120px);
+          repeating-linear-gradient(0deg, rgba(var(--ink-rgb), 0.10) 0 1px, transparent 1px 120px),
+          repeating-linear-gradient(90deg, rgba(var(--ink-rgb), 0.10) 0 1px, transparent 1px 120px);
       }
       #t1-sec-map svg.routes { position: absolute; inset: 0; opacity: 0.45; }
       #t1-sec-map svg.routes path { fill: none; stroke: var(--ink); stroke-width: 3; }
-      #t1-sec-map svg.routes path.river { stroke: rgba(23,19,14,0.5); stroke-width: 5; }
+      #t1-sec-map svg.routes path.river { stroke: rgba(var(--ink-rgb), 0.5); stroke-width: 5; }
       #t1-sec-map .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
         background-size: 180px 180px; mix-blend-mode: multiply; opacity: 0.5; pointer-events: none; z-index: 6;
       }
       #t1-sec-map .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(130% 120% at 40% 45%, transparent 52%, rgba(23,19,14,0.24) 100%);
+        background: radial-gradient(130% 120% at 40% 45%, transparent 52%, rgba(var(--ink-rgb), 0.24) 100%);
       }
       /* location marker (yellow dot + ink crosshair) */
       #t1-sec-map .marker { position: absolute; right: 430px; top: 300px; z-index: 4; }

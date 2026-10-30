@@ -49,7 +49,7 @@
         border: 1.5px solid rgba(var(--accent-rgb), 0.45);
         border-radius: var(--radius);
         box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.28),
-                    inset 0 1px 0 rgba(255,255,255,0.18),
+                    inset 0 1px 0 rgba(var(--white-rgb), 0.18),
                     var(--glass-shadow);
         position: relative;
         overflow: hidden;
@@ -59,7 +59,7 @@
       #t2-lb-bub .bubble-body::before {
         content: "";
         position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.55) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.55) 40%, rgba(var(--white-rgb), 0.55) 60%, transparent);
         border-radius: 1px;
       }
 

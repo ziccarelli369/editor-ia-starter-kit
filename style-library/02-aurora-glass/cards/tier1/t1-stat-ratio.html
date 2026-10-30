@@ -68,19 +68,20 @@
         font-weight: var(--wt-black);
         letter-spacing: var(--track-tight);
         line-height: 1;
+        font-variant-numeric: tabular-nums;
       }
       /* left side: pure white, extra large */
       #t1-stat-ratio .ratio-left .ratio-num {
         font-size: 260px;
-        background: linear-gradient(155deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+        background: linear-gradient(155deg, var(--white) 0%, rgba(var(--white-rgb), 0.75) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 40px rgba(255,255,255,0.30));
+        filter: drop-shadow(0 0 40px rgba(var(--white-rgb), 0.30));
       }
       /* right side: accent-tinted, slightly smaller */
       #t1-stat-ratio .ratio-right .ratio-num {
         font-size: 180px;
-        background: linear-gradient(155deg, rgba(var(--accent-rgb),0.95) 0%, rgba(255,255,255,0.55) 100%);
+        background: linear-gradient(155deg, rgba(var(--accent-rgb),0.95) 0%, rgba(var(--white-rgb), 0.55) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.55));

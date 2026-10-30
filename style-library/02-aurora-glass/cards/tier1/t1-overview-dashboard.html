@@ -89,11 +89,11 @@
       #t1-ov-dash .w1-num {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 160px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 20%, rgba(var(--accent-rgb), 0.80) 85%);
+        background: linear-gradient(150deg, var(--white) 20%, rgba(var(--accent-rgb), 0.80) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.50));
-        margin-top: auto; line-height: 0.95;
+        margin-top: auto; line-height: 0.95; font-variant-numeric: tabular-nums;
       }
       #t1-ov-dash .w1-unit {
         font-family: var(--font-body); font-size: var(--size-body);
@@ -139,9 +139,9 @@
       #t1-ov-dash .mini-ring-pct {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 38px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #fff 10%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
-        -webkit-text-fill-color: transparent; text-fill-color: transparent;
+        -webkit-text-fill-color: transparent; text-fill-color: transparent; font-variant-numeric: tabular-nums;
       }
       #t1-ov-dash .ring-aside {
         display: flex; flex-direction: column; gap: 10px;
@@ -211,14 +211,14 @@
               <svg class="mini-ring-svg" id="dash-w3-ring" data-pct="74"
                    viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="80" cy="80" r="66"
-                  stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-linecap="round"/>
+                  stroke="rgba(var(--white-rgb), 0.08)" stroke-width="14" stroke-linecap="round"/>
                 <circle id="dash-w3-arc" cx="80" cy="80" r="66"
                   stroke="url(#dashRingGrad)" stroke-width="14" stroke-linecap="round"
                   fill="none" transform="rotate(-90 80 80)"/>
                 <defs>
                   <linearGradient id="dashRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#37BDF8" stop-opacity="1"/>
-                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="var(--white)" stop-opacity="0.9"/>
                   </linearGradient>
                 </defs>
               </svg>
@@ -240,8 +240,8 @@
                  viewBox="0 0 700 120" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="rgba(55,189,248,0.35)"/>
-                  <stop offset="100%" stop-color="rgba(55,189,248,0.00)"/>
+                  <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.35)"/>
+                  <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0.00)"/>
                 </linearGradient>
               </defs>
               <!-- area fill + line injected by JS -->

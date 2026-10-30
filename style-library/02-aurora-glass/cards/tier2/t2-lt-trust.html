@@ -81,7 +81,7 @@
       #t2-lt-trust .card::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.48) 45%, rgba(255,255,255,0.48) 55%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.48) 45%, rgba(var(--white-rgb), 0.48) 55%, transparent);
       }
 
       /* Avatar circle */
@@ -90,7 +90,7 @@
         flex-shrink: 0;
         border-radius: 50%;
         background: radial-gradient(circle at 38% 32%,
-          rgba(255,255,255,0.18) 0%,
+          rgba(var(--white-rgb), 0.18) 0%,
           rgba(var(--accent-rgb), 0.22) 50%,
           rgba(var(--accent-rgb), 0.06) 100%);
         border: var(--stroke) solid rgba(var(--accent-rgb), 0.55);

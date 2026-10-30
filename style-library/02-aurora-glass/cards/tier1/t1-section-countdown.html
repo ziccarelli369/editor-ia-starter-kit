@@ -49,13 +49,13 @@
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 340px; line-height: 1; letter-spacing: -0.04em;
         /* Gradient text: white-to-blue */
-        background: linear-gradient(160deg, #ffffff 10%, rgba(var(--accent-rgb), 0.90) 85%);
+        background: linear-gradient(160deg, var(--white) 10%, rgba(var(--accent-rgb), 0.90) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         /* Use drop-shadow, NOT text-shadow, because of gradient clip */
         filter: drop-shadow(0 0 40px rgba(var(--accent-rgb), 0.55))
                 drop-shadow(0 0 100px rgba(var(--accent-rgb), 0.28));
-        position: relative; z-index: 2;
+        position: relative; z-index: 2; font-variant-numeric: tabular-nums;
       }
       /* Ambient glow halo around the number */
       #t1-sec-cdown .number-halo {

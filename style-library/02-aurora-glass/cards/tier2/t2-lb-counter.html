@@ -43,10 +43,11 @@
       #t2-lb-cntr .count-num {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 110px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb), 0.90) 85%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb), 0.90) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       #t2-lb-cntr .count-suffix {
@@ -80,7 +81,7 @@
       #t2-lb-cntr .text-block::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.40) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.40) 50%, transparent);
       }
 
       #t2-lb-cntr .term {

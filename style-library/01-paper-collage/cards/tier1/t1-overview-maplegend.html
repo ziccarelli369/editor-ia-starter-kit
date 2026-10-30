@@ -21,8 +21,7 @@
       #t1-ov-maplegend .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-ov-maplegend .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -31,7 +30,7 @@
       }
       #t1-ov-maplegend .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 9;
-        background: radial-gradient(130% 120% at 40% 50%, transparent 52%, rgba(23,19,14,0.2) 100%);
+        background: radial-gradient(130% 120% at 40% 50%, transparent 52%, rgba(var(--ink-rgb), 0.2) 100%);
       }
 
       /* marker title */
@@ -51,16 +50,16 @@
       #t1-ov-maplegend .map-contours {
         position: absolute; inset: 0;
         background:
-          radial-gradient(ellipse 420px 280px at 38% 60%, rgba(23,19,14,0.08) 0%, transparent 70%),
-          radial-gradient(ellipse 600px 400px at 28% 45%, rgba(23,19,14,0.06) 0%, transparent 65%),
-          radial-gradient(ellipse 300px 200px at 65% 35%, rgba(23,19,14,0.07) 0%, transparent 60%),
-          radial-gradient(ellipse 240px 160px at 55% 68%, rgba(23,19,14,0.05) 0%, transparent 55%),
-          radial-gradient(ellipse 800px 600px at 50% 55%, rgba(226,59,46,0.04) 0%, transparent 80%),
-          linear-gradient(155deg, rgba(23,19,14,0.04) 0%, transparent 50%);
+          radial-gradient(ellipse 420px 280px at 38% 60%, rgba(var(--ink-rgb), 0.08) 0%, transparent 70%),
+          radial-gradient(ellipse 600px 400px at 28% 45%, rgba(var(--ink-rgb), 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 300px 200px at 65% 35%, rgba(var(--ink-rgb), 0.07) 0%, transparent 60%),
+          radial-gradient(ellipse 240px 160px at 55% 68%, rgba(var(--ink-rgb), 0.05) 0%, transparent 55%),
+          radial-gradient(ellipse 800px 600px at 50% 55%, rgba(var(--red-rgb), 0.04) 0%, transparent 80%),
+          linear-gradient(155deg, rgba(var(--ink-rgb), 0.04) 0%, transparent 50%);
       }
       /* contour rings drawn as layered box-shadows on pseudo-elements via outline stacking */
       #t1-ov-maplegend .ring {
-        position: absolute; border-radius: 50%; border: 2px solid rgba(23,19,14,0.12);
+        position: absolute; border-radius: 50%; border: 2px solid rgba(var(--ink-rgb), 0.12);
       }
       #t1-ov-maplegend .ring1 { width: 280px; height: 180px; left: 198px; top: 210px; }
       #t1-ov-maplegend .ring2 { width: 450px; height: 300px; left: 114px; top: 140px; }
@@ -75,7 +74,7 @@
         background: var(--yellow); border: 3px solid var(--ink);
         display: flex; align-items: center; justify-content: center;
         font-weight: var(--wt-black); font-size: 32px;
-        box-shadow: 4px 4px 0 rgba(23,19,14,0.25);
+        box-shadow: 4px 4px 0 rgba(var(--ink-rgb), 0.25);
         transform: rotate(-4deg);
       }
       /* pin "stem" — a small square below */
@@ -113,7 +112,7 @@
       }
       #t1-ov-maplegend .leg-row {
         display: flex; align-items: flex-start; gap: 30px;
-        padding: 30px 0; border-bottom: 2px solid rgba(23,19,14,0.15);
+        padding: 30px 0; border-bottom: 2px solid rgba(var(--ink-rgb), 0.15);
       }
       #t1-ov-maplegend .leg-num {
         flex-shrink: 0;
@@ -121,7 +120,7 @@
         background: var(--yellow); border: 3px solid var(--ink);
         display: flex; align-items: center; justify-content: center;
         font-weight: var(--wt-black); font-size: 30px;
-        box-shadow: 3px 3px 0 rgba(23,19,14,0.2);
+        box-shadow: 3px 3px 0 rgba(var(--ink-rgb), 0.2);
         transform: rotate(-2deg); margin-top: 4px;
       }
       #t1-ov-maplegend .leg-text {

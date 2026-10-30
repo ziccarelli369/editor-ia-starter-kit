@@ -59,8 +59,8 @@
         position: absolute; top: 0; left: 14px; right: 14px; height: 1px;
         background: linear-gradient(90deg,
           transparent,
-          rgba(255,255,255,0.52) 40%,
-          rgba(255,255,255,0.52) 60%,
+          rgba(var(--white-rgb), 0.52) 40%,
+          rgba(var(--white-rgb), 0.52) 60%,
           transparent);
       }
 
@@ -82,7 +82,7 @@
         border: 1.5px solid rgba(var(--accent-rgb), 0.52);
         box-shadow:
           0 0 14px rgba(var(--accent-rgb), 0.36),
-          inset 0 1px 0 rgba(255,255,255,0.22);
+          inset 0 1px 0 rgba(var(--white-rgb), 0.22);
         display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
       }
@@ -157,15 +157,15 @@
           <div class="icon-tile">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="3" width="12" height="18" rx="2"
-                stroke="#37BDF8" stroke-width="1.8" stroke-linecap="round"/>
+                stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
               <circle cx="10" cy="9" r="1.4"
-                fill="#37BDF8"
-                style="filter: drop-shadow(0 0 4px rgba(55,189,248,0.90));"/>
+                fill="var(--accent)"
+                style="filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.90));"/>
               <line x1="8" y1="13" x2="14" y2="13"
-                stroke="#37BDF8" stroke-width="1.5" stroke-linecap="round"
-                style="filter: drop-shadow(0 0 3px rgba(55,189,248,0.70));"/>
+                stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
+                style="filter: drop-shadow(0 0 3px rgba(var(--accent-rgb), 0.70));"/>
               <line x1="8" y1="16" x2="12" y2="16"
-                stroke="rgba(55,189,248,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+                stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="term" data-slot="term">Active Learning Loop</div>

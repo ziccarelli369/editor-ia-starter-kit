@@ -60,7 +60,7 @@
       #t1-sec-tunnel .plate {
         position: absolute; left: 50%; top: 76px; transform: translateX(-50%);
         width: 1100px; height: 160px; border-radius: 50%;
-        background: radial-gradient(60% 100% at 50% 50%, rgba(10,14,20,0.80), transparent 70%);
+        background: radial-gradient(60% 100% at 50% 50%, rgba(var(--canvas-rgb), 0.80), transparent 70%);
         filter: blur(24px); z-index: -1;
       }
       #t1-sec-tunnel .headline {
@@ -103,29 +103,29 @@
         <!-- Rings drawn from outer to inner — each slightly more opaque as it nears center -->
         <!-- Outer rings: larger, lower opacity -->
         <rect class="tring" x="80"   y="45"   width="1760" height="990" rx="20"
-              fill="none" stroke="rgba(55,189,248,0.18)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.18)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="200"  y="110"  width="1520" height="860" rx="18"
-              fill="none" stroke="rgba(55,189,248,0.24)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.24)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="340"  y="186"  width="1240" height="708" rx="16"
-              fill="none" stroke="rgba(55,189,248,0.30)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.30)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="480"  y="264"  width="960"  height="552" rx="14"
-              fill="none" stroke="rgba(55,189,248,0.38)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.38)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="600"  y="330"  width="720"  height="420" rx="12"
-              fill="none" stroke="rgba(55,189,248,0.46)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.46)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="700"  y="386"  width="520"  height="308" rx="10"
-              fill="none" stroke="rgba(55,189,248,0.55)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="780"  y="430"  width="360"  height="220" rx="8"
-              fill="none" stroke="rgba(55,189,248,0.64)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.64)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="840"  y="464"  width="240"  height="152" rx="6"
-              fill="none" stroke="rgba(55,189,248,0.72)" stroke-width="1.2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.72)" stroke-width="1.2" filter="url(#ringGlow)"/>
         <rect class="tring" x="888"  y="492"  width="144"  height="96"  rx="4"
-              fill="none" stroke="rgba(55,189,248,0.82)" stroke-width="1.5" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--accent-rgb), 0.82)" stroke-width="1.5" filter="url(#ringGlow)"/>
         <!-- Innermost ring — bright white core -->
         <rect class="tring tring-core" x="928" y="518"  width="64"   height="44"  rx="3"
-              fill="none" stroke="rgba(255,255,255,0.90)" stroke-width="2" filter="url(#ringGlow)"/>
+              fill="none" stroke="rgba(var(--white-rgb), 0.90)" stroke-width="2" filter="url(#ringGlow)"/>
 
         <!-- Diagonal corner-to-center guide lines -->
-        <g class="tunnel-diag" stroke="rgba(55,189,248,0.14)" stroke-width="0.8">
+        <g class="tunnel-diag" stroke="rgba(var(--accent-rgb), 0.14)" stroke-width="0.8">
           <line x1="0"    y1="0"    x2="960" y2="540"/>
           <line x1="1920" y1="0"    x2="960" y2="540"/>
           <line x1="0"    y1="1080" x2="960" y2="540"/>

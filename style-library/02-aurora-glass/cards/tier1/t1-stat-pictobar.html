@@ -49,11 +49,11 @@
       }
       #t1-stat-picto .icon-unit.lit {
         opacity: 1;
-        filter: drop-shadow(0 0 8px rgba(55,189,248,0.80)) drop-shadow(0 0 20px rgba(55,189,248,0.45));
+        filter: drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.80)) drop-shadow(0 0 20px rgba(var(--accent-rgb), 0.45));
       }
       #t1-stat-picto .icon-unit.lit-top {
         opacity: 1;
-        filter: drop-shadow(0 0 14px rgba(255,255,255,0.90)) drop-shadow(0 0 30px rgba(55,189,248,0.80));
+        filter: drop-shadow(0 0 14px rgba(var(--white-rgb), 0.90)) drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.80));
       }
 
       /* Text column */
@@ -70,10 +70,11 @@
       #t1-stat-picto .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 180px; line-height: 0.9; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 15%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(150deg, var(--white) 15%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-picto .label {
         font-family: var(--font-body); font-size: var(--size-body);

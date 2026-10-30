@@ -95,7 +95,7 @@
         transform: translate(-50%, -50%);
         width: 520px; height: 520px; border-radius: 50%;
         background: radial-gradient(circle at 50% 44%,
-          rgba(255,255,255,0.85) 0%,
+          rgba(var(--white-rgb), 0.85) 0%,
           rgba(var(--accent-rgb), 0.72) 10%,
           rgba(var(--accent-rgb), 0.28) 40%,
           rgba(var(--accent-rgb), 0.06) 62%,
@@ -148,7 +148,7 @@
           <div class="panel-grid">
             <!-- SVG perspective grid (vanishing-point lines) -->
             <svg viewBox="0 0 780 780" xmlns="http://www.w3.org/2000/svg"
-                 fill="none" stroke="rgba(55,189,248,0.65)" stroke-width="0.8">
+                 fill="none" stroke="rgba(var(--accent-rgb), 0.65)" stroke-width="0.8">
               <!-- Horizontal lines converging toward center-top -->
               <line x1="0"   y1="780" x2="390" y2="300"/>
               <line x1="78"  y1="780" x2="390" y2="300"/>

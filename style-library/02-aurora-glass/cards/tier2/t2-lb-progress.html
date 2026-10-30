@@ -97,7 +97,7 @@
         display: flex; align-items: center; justify-content: center;
         font-family: var(--font-mono); font-weight: 700;
         font-size: 34px; letter-spacing: -0.02em;
-        background: linear-gradient(115deg, #FFFFFF 0%, var(--accent) 100%);
+        background: linear-gradient(115deg, var(--white) 0%, var(--accent) 100%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; color: transparent;
         filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.60));
@@ -141,8 +141,8 @@
           <svg class="ring-svg" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#37BDF8" stop-opacity="1"/>
+                <stop offset="0%" stop-color="var(--white)" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="1"/>
               </linearGradient>
             </defs>
             <!-- r=57 → cx=cy=65 -->

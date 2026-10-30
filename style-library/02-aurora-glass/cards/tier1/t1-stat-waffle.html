@@ -64,15 +64,15 @@
       #t1-stat-waffle .cell {
         width: 56px; height: 56px;
         border-radius: 8px;
-        background: rgba(255,255,255,0.05);
-        border: 1.5px solid rgba(255,255,255,0.06);
+        background: rgba(var(--white-rgb), 0.05);
+        border: 1.5px solid rgba(var(--white-rgb), 0.06);
         transition: none; /* GSAP drives this */
       }
 
       #t1-stat-waffle .cell.on {
         background: rgba(var(--accent-rgb), 0.75);
         border-color: rgba(var(--accent-rgb), 0.5);
-        box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.50), 0 0 6px rgba(255,255,255,0.30);
+        box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.50), 0 0 6px rgba(var(--white-rgb), 0.30);
       }
 
       /* Glow halo behind the waffle */
@@ -93,10 +93,11 @@
         font-size: 190px;
         line-height: 0.88;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 15%, rgba(var(--accent-rgb), 0.80) 85%);
+        background: linear-gradient(155deg, var(--white) 15%, rgba(var(--accent-rgb), 0.80) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
       #t1-stat-waffle .stat-unit {
         font-family: var(--font-mono);

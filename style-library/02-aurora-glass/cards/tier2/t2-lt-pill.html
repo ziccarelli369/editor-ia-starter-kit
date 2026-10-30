@@ -35,13 +35,6 @@
       }
 
       /* Outer accent glow ring (separate div for animating opacity) */
-      #t2-lt-pill .pill-glow {
-        position: absolute;
-        left: 80px; bottom: 138px;
-        border-radius: 999px;
-        pointer-events: none;
-        z-index: 2;
-      }
 
       /* Main pill */
       #t2-lt-pill .pill {
@@ -70,7 +63,7 @@
         content: "";
         position: absolute;
         top: 0; left: 15%; right: 15%; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50) 40%, rgba(255,255,255,0.50) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.50) 40%, rgba(var(--white-rgb), 0.50) 60%, transparent);
         border-radius: 1px;
       }
 

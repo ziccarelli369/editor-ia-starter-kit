@@ -49,15 +49,17 @@
       }
 
       #t1-stat-spark .stat {
+        width: max-content;
         font-family: var(--font-display);
         font-weight: var(--wt-black);
         font-size: var(--size-mega);
         line-height: 0.9;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 10%, rgba(var(--accent-rgb), 0.80) 85%);
+        background: linear-gradient(155deg, var(--white) 10%, rgba(var(--accent-rgb), 0.80) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       #t1-stat-spark .label {
@@ -132,13 +134,13 @@
              viewBox="0 0 1060 480" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.5"/>
-              <stop offset="70%" stop-color="#37BDF8" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.5"/>
+              <stop offset="70%" stop-color="var(--accent)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--white)" stop-opacity="0.95"/>
             </linearGradient>
             <linearGradient id="sparkFill" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(55,189,248,0.22)"/>
-              <stop offset="100%" stop-color="rgba(55,189,248,0)"/>
+              <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.22)"/>
+              <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0)"/>
             </linearGradient>
             <filter id="sparkGlow" x="-10%" y="-20%" width="120%" height="140%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
@@ -171,12 +173,12 @@
 
           <!-- Y-axis baseline -->
           <line x1="0" y1="446" x2="1060" y2="446"
-            stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+            stroke="rgba(var(--white-rgb), 0.07)" stroke-width="1.5"/>
 
           <!-- Glowing tip dot at line end -->
           <circle id="t1-stat-spark-tipdot" cx="1000" cy="52" r="11"
-            fill="#ffffff"
-            style="filter: drop-shadow(0 0 10px rgba(55,189,248,0.9)) drop-shadow(0 0 28px rgba(55,189,248,0.5));"/>
+            fill="var(--white)"
+            style="filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.9)) drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.5));"/>
         </svg>
       </div>
 

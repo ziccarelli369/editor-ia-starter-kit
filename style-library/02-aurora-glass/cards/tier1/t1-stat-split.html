@@ -82,7 +82,7 @@
         background: linear-gradient(to bottom,
           transparent 0%,
           rgba(var(--accent-rgb), 0.8) 30%,
-          rgba(255,255,255,0.9) 50%,
+          rgba(var(--white-rgb), 0.9) 50%,
           rgba(var(--accent-rgb), 0.8) 70%,
           transparent 100%);
         box-shadow: 0 0 14px 2px rgba(var(--accent-rgb), 0.6),
@@ -99,16 +99,16 @@
         letter-spacing: var(--track-tight);
       }
       #t1-stat-split .half-a .stat {
-        background: linear-gradient(155deg, #ffffff 15%, rgba(var(--accent-rgb),0.8) 80%);
+        background: linear-gradient(155deg, var(--white) 15%, rgba(var(--accent-rgb),0.8) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.60));
       }
       #t1-stat-split .half-b .stat {
-        background: linear-gradient(155deg, rgba(240,238,233,0.95) 20%, rgba(255,255,255,0.65) 85%);
+        background: linear-gradient(155deg, rgba(var(--text-rgb), 0.95) 20%, rgba(var(--white-rgb), 0.65) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
-        filter: drop-shadow(0 0 18px rgba(255,255,255,0.40));
+        filter: drop-shadow(0 0 18px rgba(var(--white-rgb), 0.40));
       }
 
       #t1-stat-split .half-label {

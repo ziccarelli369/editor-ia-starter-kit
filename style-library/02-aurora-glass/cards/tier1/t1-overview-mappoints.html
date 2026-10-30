@@ -127,13 +127,13 @@
           </defs>
 
           <!-- Subtle latitude/longitude grid lines -->
-          <line x1="0" y1="195" x2="1640" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="0" y1="390" x2="1640" y2="390" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="0" y1="585" x2="1640" y2="585" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="328" y1="0" x2="328" y2="780" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="656" y1="0" x2="656" y2="780" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="984" y1="0" x2="984" y2="780" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <line x1="1312" y1="0" x2="1312" y2="780" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <line x1="0" y1="195" x2="1640" y2="195" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="0" y1="390" x2="1640" y2="390" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="0" y1="585" x2="1640" y2="585" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="328" y1="0" x2="328" y2="780" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="656" y1="0" x2="656" y2="780" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="984" y1="0" x2="984" y2="780" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+          <line x1="1312" y1="0" x2="1312" y2="780" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
 
           <!-- Faint abstract continent outlines (simplified polygon shapes) -->
           <!-- Americas rough shape -->
@@ -143,7 +143,7 @@
                C320,520 295,530 270,520 C245,510 230,480 215,450
                C200,420 195,380 190,340 C185,300 175,270 170,230
                C165,190 170,145 200,120Z"
-            fill="rgba(55,189,248,0.06)" stroke="rgba(55,189,248,0.14)" stroke-width="1.5"
+            fill="rgba(var(--accent-rgb), 0.06)" stroke="rgba(var(--accent-rgb), 0.14)" stroke-width="1.5"
             opacity="0"/>
 
           <!-- Europe/Africa rough shape -->
@@ -153,7 +153,7 @@
                C825,570 790,610 760,620 C730,630 700,610 685,580
                C670,550 675,510 665,470 C655,430 640,400 645,350
                C650,300 645,260 650,210 C655,160 665,95 700,80Z"
-            fill="rgba(55,189,248,0.06)" stroke="rgba(55,189,248,0.14)" stroke-width="1.5"
+            fill="rgba(var(--accent-rgb), 0.06)" stroke="rgba(var(--accent-rgb), 0.14)" stroke-width="1.5"
             opacity="0"/>
 
           <!-- Asia rough shape -->
@@ -163,44 +163,44 @@
                C1230,580 1190,590 1150,580 C1110,570 1075,545 1045,510
                C1015,475 995,430 990,375 C985,320 990,270 1000,210
                C1010,150 990,90 1000,70Z"
-            fill="rgba(55,189,248,0.06)" stroke="rgba(55,189,248,0.14)" stroke-width="1.5"
+            fill="rgba(var(--accent-rgb), 0.06)" stroke="rgba(var(--accent-rgb), 0.14)" stroke-width="1.5"
             opacity="0"/>
 
           <!-- Point 1 — North America -->
           <g id="map-pt1" data-cx="520" data-cy="310" opacity="0">
             <!-- outer pulse ring -->
             <circle id="map-pt1-ring" cx="520" cy="310" r="28"
-              stroke="rgba(55,189,248,0.35)" stroke-width="1.5" fill="none"/>
+              stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5" fill="none"/>
             <!-- inner glow dot -->
             <circle cx="520" cy="310" r="10"
-              fill="rgba(55,189,248,0.90)"
-              style="filter:drop-shadow(0 0 14px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.90)"
+              style="filter:drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.90));"/>
             <!-- connector tick up -->
             <line id="map-pt1-tick" x1="520" y1="280" x2="520" y2="240"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5" stroke-dasharray="4 4"
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5" stroke-dasharray="4 4"
               stroke-dashoffset="0"/>
           </g>
 
           <!-- Point 2 — Europe -->
           <g id="map-pt2" data-cx="860" data-cy="480" opacity="0">
             <circle id="map-pt2-ring" cx="860" cy="480" r="28"
-              stroke="rgba(55,189,248,0.35)" stroke-width="1.5" fill="none"/>
+              stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5" fill="none"/>
             <circle cx="860" cy="480" r="10"
-              fill="rgba(55,189,248,0.90)"
-              style="filter:drop-shadow(0 0 14px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.90)"
+              style="filter:drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.90));"/>
             <line id="map-pt2-tick" x1="860" y1="450" x2="860" y2="410"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5" stroke-dasharray="4 4"/>
           </g>
 
           <!-- Point 3 — Asia -->
           <g id="map-pt3" data-cx="1180" data-cy="220" opacity="0">
             <circle id="map-pt3-ring" cx="1180" cy="220" r="28"
-              stroke="rgba(55,189,248,0.35)" stroke-width="1.5" fill="none"/>
+              stroke="rgba(var(--accent-rgb), 0.35)" stroke-width="1.5" fill="none"/>
             <circle cx="1180" cy="220" r="10"
-              fill="rgba(55,189,248,0.90)"
-              style="filter:drop-shadow(0 0 14px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.90)"
+              style="filter:drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.90));"/>
             <line id="map-pt3-tick" x1="1180" y1="190" x2="1180" y2="150"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5" stroke-dasharray="4 4"/>
           </g>
 
         </svg>

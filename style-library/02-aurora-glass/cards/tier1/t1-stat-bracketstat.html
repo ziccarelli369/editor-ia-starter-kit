@@ -59,7 +59,7 @@
       #t1-stat-brk .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 320px; line-height: 1; letter-spacing: -0.04em;
-        background: linear-gradient(165deg, #ffffff 10%, rgba(var(--accent-rgb),0.80) 75%);
+        background: linear-gradient(165deg, var(--white) 10%, rgba(var(--accent-rgb),0.80) 75%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 36px rgba(var(--accent-rgb), 0.55));
@@ -110,9 +110,9 @@
                 <feComposite in="SourceGraphic" in2="b" operator="over"/>
               </filter>
               <linearGradient id="brkGradL" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="rgba(55,189,248,0.30)"/>
-                <stop offset="50%" stop-color="#37BDF8"/>
-                <stop offset="100%" stop-color="rgba(55,189,248,0.30)"/>
+                <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.30)"/>
+                <stop offset="50%" stop-color="var(--accent)"/>
+                <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0.30)"/>
               </linearGradient>
             </defs>
             <!-- top arm -->
@@ -135,9 +135,9 @@
                 <feComposite in="SourceGraphic" in2="b" operator="over"/>
               </filter>
               <linearGradient id="brkGradR" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="rgba(55,189,248,0.30)"/>
-                <stop offset="50%" stop-color="#37BDF8"/>
-                <stop offset="100%" stop-color="rgba(55,189,248,0.30)"/>
+                <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.30)"/>
+                <stop offset="50%" stop-color="var(--accent)"/>
+                <stop offset="100%" stop-color="rgba(var(--accent-rgb), 0.30)"/>
               </linearGradient>
             </defs>
             <path d="M 12 10 L 68 10 L 68 450" stroke="url(#brkGradR)" stroke-width="3.5"

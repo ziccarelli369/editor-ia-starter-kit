@@ -27,7 +27,7 @@
         background:
           radial-gradient(ellipse 110% 90% at 50% 48%,
             #2a231a 0%,
-            #17130e 55%,
+            var(--ink) 55%,
             #0d0b08 100%
           );
       }
@@ -36,8 +36,8 @@
       #t1-stat-spot .grid {
         position: absolute; inset: -2px; z-index: 0;
         background-image:
-          repeating-linear-gradient(0deg,  rgba(239,233,220,0.03) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, rgba(239,233,220,0.03) 0 1px, transparent 1px var(--grid-size));
+          repeating-linear-gradient(0deg,  rgba(var(--paper-rgb), 0.03) 0 1px, transparent 1px var(--grid-size)),
+          repeating-linear-gradient(90deg, rgba(var(--paper-rgb), 0.03) 0 1px, transparent 1px var(--grid-size));
       }
 
       /* === SPOTLIGHT POOL — the warm circle of light === */
@@ -51,7 +51,7 @@
           ellipse 72% 60% at 50% 50%,
           rgba(200,235,255,0.22) 0%,
           rgba(120,210,250,0.12) 28%,
-          rgba(55,189,248,0.05) 55%,
+          rgba(var(--accent-rgb), 0.05) 55%,
           transparent 72%
         );
         z-index: 1;
@@ -133,7 +133,7 @@
         text-align: center;
         font-family: var(--font-label); font-weight: var(--wt-bold);
         font-size: var(--size-tiny); letter-spacing: var(--track-wide);
-        text-transform: uppercase; color: rgba(239,233,220,0.45);
+        text-transform: uppercase; color: rgba(var(--paper-rgb), 0.45);
       }
 
       /* === HEAVY VIGNETTE — the defining feature === */

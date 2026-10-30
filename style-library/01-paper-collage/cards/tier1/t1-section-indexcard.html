@@ -23,13 +23,13 @@
       }
       #t1-sec-index .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(120% 120% at 50% 48%, transparent 50%, rgba(23,19,14,0.22) 100%);
+        background: radial-gradient(120% 120% at 50% 48%, transparent 50%, rgba(var(--ink-rgb), 0.22) 100%);
       }
       #t1-sec-index .card {
         position: relative; z-index: 3; width: 1320px; height: 700px; background: var(--paper);
-        box-shadow: 0 28px 60px rgba(23,19,14,0.34);
+        box-shadow: 0 28px 60px rgba(var(--ink-rgb), 0.34);
         /* ruled lines */
-        background-image: repeating-linear-gradient(0deg, transparent 0 95px, rgba(23,19,14,0.10) 95px 96px);
+        background-image: repeating-linear-gradient(0deg, transparent 0 95px, rgba(var(--ink-rgb), 0.10) 95px 96px);
         background-position: 0 150px;
       }
       #t1-sec-index .redline { position: absolute; left: 120px; top: 0; bottom: 0; width: 4px; background: var(--red); opacity: 0.6; }

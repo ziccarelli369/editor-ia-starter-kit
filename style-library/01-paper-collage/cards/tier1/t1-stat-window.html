@@ -21,8 +21,7 @@
       #t1-stat-window .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-stat-window .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-stat-window .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 7;
-        background: radial-gradient(120% 120% at 50% 46%, transparent 52%, rgba(23,19,14,0.18) 100%);
+        background: radial-gradient(120% 120% at 50% 46%, transparent 52%, rgba(var(--ink-rgb), 0.18) 100%);
       }
 
       /* ── yellow backing layer ── */
@@ -80,9 +79,6 @@
         /* reset clip-path; actual clip applied via SVG below */
         clip-path: none;
       }
-      #t1-stat-window .overlay-svg {
-        position: absolute; inset: 0; z-index: 3; pointer-events: none;
-      }
 
       /* inner shadow on the window edge — simulated with a box-shadow on an
          absolutely positioned div matching the window rect, z above backing  */
@@ -92,8 +88,8 @@
         width: 1400px; height: 620px;
         z-index: 4;
         box-shadow: inset 0 0 0 5px var(--ink),
-                    inset 8px 12px 30px rgba(23,19,14,0.28),
-                    inset -6px -8px 20px rgba(23,19,14,0.16);
+                    inset 8px 12px 30px rgba(var(--ink-rgb), 0.28),
+                    inset -6px -8px 20px rgba(var(--ink-rgb), 0.16);
         pointer-events: none;
       }
 

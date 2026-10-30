@@ -75,10 +75,11 @@
       #t1-stat-compass .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 116px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb),0.82) 72%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb),0.82) 72%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       #t1-stat-compass .label {
@@ -131,8 +132,8 @@
                 <feComposite in="SourceGraphic" in2="b" operator="over"/>
               </filter>
               <linearGradient id="cp-arc-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(55,189,248,0.20)"/>
-                <stop offset="100%" stop-color="#37BDF8"/>
+                <stop offset="0%" stop-color="rgba(var(--accent-rgb), 0.20)"/>
+                <stop offset="100%" stop-color="var(--accent)"/>
               </linearGradient>
             </defs>
 
@@ -141,7 +142,7 @@
             <!-- Using stroke-dasharray on a full circle: semicircle = half circumference -->
             <!-- r=228, circ=2πr≈1432, half=716 -->
             <circle cx="270" cy="270" r="228"
-                    stroke="rgba(255,255,255,0.07)" stroke-width="18"
+                    stroke="rgba(var(--white-rgb), 0.07)" stroke-width="18"
                     stroke-dasharray="716 716"
                     transform="rotate(180 270 270)"
                     stroke-linecap="round"/>
@@ -160,36 +161,36 @@
             <!-- ticks at -90° (top), each 18° apart spanning 180° -->
             <g id="cp-ticks" opacity="0.35">
               <!-- 0deg=left=270 angle in our dial: SVG angle=180deg -->
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(180 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(162 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(144 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(126 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(108 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(90 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(72 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(54 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(36 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(18 270 270)"/>
-              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(55,189,248,0.6)" stroke-width="1.5"
+              <line x1="270" y1="42" x2="270" y2="62" stroke="rgba(var(--accent-rgb), 0.6)" stroke-width="1.5"
                     transform="rotate(0 270 270)"/>
             </g>
 
             <!-- endpoint dots -->
-            <circle cx="42" cy="270" r="7" fill="rgba(55,189,248,0.45)" filter="url(#cp-glow)"/>
-            <circle cx="498" cy="270" r="7" fill="rgba(55,189,248,0.45)" filter="url(#cp-glow)"/>
-            <text x="30" y="310" fill="rgba(240,238,233,0.40)"
+            <circle cx="42" cy="270" r="7" fill="rgba(var(--accent-rgb), 0.45)" filter="url(#cp-glow)"/>
+            <circle cx="498" cy="270" r="7" fill="rgba(var(--accent-rgb), 0.45)" filter="url(#cp-glow)"/>
+            <text x="30" y="310" fill="rgba(var(--text-rgb), 0.40)"
                   font-size="22" font-family="Space Mono, monospace">0</text>
-            <text x="486" y="310" fill="rgba(240,238,233,0.40)"
+            <text x="486" y="310" fill="rgba(var(--text-rgb), 0.40)"
                   font-size="22" font-family="Space Mono, monospace">100</text>
 
             <!-- needle group — rotates around pivot at 270,270 -->
@@ -197,14 +198,14 @@
             <g id="cp-needle" transform="rotate(-90 270 270)">
               <!-- needle shaft -->
               <line x1="270" y1="270" x2="270" y2="80"
-                    stroke="rgba(255,255,255,0.85)" stroke-width="2.5"
+                    stroke="rgba(var(--white-rgb), 0.85)" stroke-width="2.5"
                     stroke-linecap="round" filter="url(#cp-needle-glow)"/>
               <!-- tip glow dot -->
-              <circle cx="270" cy="80" r="10" fill="#ffffff"
-                      style="filter: drop-shadow(0 0 10px rgba(55,189,248,0.95)) drop-shadow(0 0 26px rgba(55,189,248,0.5));"/>
+              <circle cx="270" cy="80" r="10" fill="var(--white)"
+                      style="filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.95)) drop-shadow(0 0 26px rgba(var(--accent-rgb), 0.5));"/>
               <!-- pivot hub -->
-              <circle cx="270" cy="270" r="14" fill="rgba(55,189,248,0.30)"
-                      stroke="rgba(55,189,248,0.70)" stroke-width="2" filter="url(#cp-glow)"/>
+              <circle cx="270" cy="270" r="14" fill="rgba(var(--accent-rgb), 0.30)"
+                      stroke="rgba(var(--accent-rgb), 0.70)" stroke-width="2" filter="url(#cp-glow)"/>
             </g>
           </svg>
 

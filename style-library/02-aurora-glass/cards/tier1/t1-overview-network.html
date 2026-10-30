@@ -119,99 +119,99 @@
               <feComposite in="SourceGraphic" in2="blur" operator="over"/>
             </filter>
             <linearGradient id="edgeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.80"/>
-              <stop offset="100%" stop-color="#37BDF8" stop-opacity="0.20"/>
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.80"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.20"/>
             </linearGradient>
             <linearGradient id="edgeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.80"/>
-              <stop offset="100%" stop-color="#37BDF8" stop-opacity="0.20"/>
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.80"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.20"/>
             </linearGradient>
           </defs>
 
           <!-- Edges (drawn via stroke-dashoffset) -->
           <line id="e12" x1="820" y1="380" x2="280" y2="160"
-            stroke="rgba(55,189,248,0.55)" stroke-width="2" stroke-dasharray="10 6"
+            stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="2" stroke-dasharray="10 6"
             filter="url(#netEdgeGlow)"/>
           <line id="e13" x1="820" y1="380" x2="1360" y2="180"
-            stroke="rgba(55,189,248,0.55)" stroke-width="2" stroke-dasharray="10 6"
+            stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="2" stroke-dasharray="10 6"
             filter="url(#netEdgeGlow)"/>
           <line id="e14" x1="820" y1="380" x2="320" y2="580"
-            stroke="rgba(55,189,248,0.55)" stroke-width="2" stroke-dasharray="10 6"
+            stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="2" stroke-dasharray="10 6"
             filter="url(#netEdgeGlow)"/>
           <line id="e15" x1="820" y1="380" x2="1320" y2="600"
-            stroke="rgba(55,189,248,0.55)" stroke-width="2" stroke-dasharray="10 6"
+            stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="2" stroke-dasharray="10 6"
             filter="url(#netEdgeGlow)"/>
           <!-- cross edge 2-4 (secondary) -->
           <line id="e24" x1="280" y1="160" x2="320" y2="580"
-            stroke="rgba(55,189,248,0.25)" stroke-width="1.5" stroke-dasharray="6 8"
+            stroke="rgba(var(--accent-rgb), 0.25)" stroke-width="1.5" stroke-dasharray="6 8"
             filter="url(#netEdgeGlow)"/>
 
           <!-- Node halos (large soft glow circles) -->
           <circle id="halo-1" cx="820" cy="380" r="72"
-            fill="rgba(55,189,248,0.12)" opacity="0"/>
+            fill="rgba(var(--accent-rgb), 0.12)" opacity="0"/>
           <circle id="halo-2" cx="280" cy="160" r="48"
-            fill="rgba(55,189,248,0.10)" opacity="0"/>
+            fill="rgba(var(--accent-rgb), 0.10)" opacity="0"/>
           <circle id="halo-3" cx="1360" cy="180" r="48"
-            fill="rgba(55,189,248,0.10)" opacity="0"/>
+            fill="rgba(var(--accent-rgb), 0.10)" opacity="0"/>
           <circle id="halo-4" cx="320" cy="580" r="48"
-            fill="rgba(55,189,248,0.10)" opacity="0"/>
+            fill="rgba(var(--accent-rgb), 0.10)" opacity="0"/>
           <circle id="halo-5" cx="1320" cy="600" r="48"
-            fill="rgba(55,189,248,0.10)" opacity="0"/>
+            fill="rgba(var(--accent-rgb), 0.10)" opacity="0"/>
 
           <!-- Nodes (glass circles) -->
           <!-- N1 hub — larger -->
           <g id="node-1" opacity="0">
             <circle cx="820" cy="380" r="54"
               fill="rgba(16,24,38,0.80)"
-              stroke="rgba(55,189,248,0.70)" stroke-width="2"
-              style="filter:drop-shadow(0 0 22px rgba(55,189,248,0.60));"/>
+              stroke="rgba(var(--accent-rgb), 0.70)" stroke-width="2"
+              style="filter:drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.60));"/>
             <circle cx="820" cy="380" r="28"
-              fill="rgba(55,189,248,0.90)"
-              style="filter:drop-shadow(0 0 18px rgba(55,189,248,1.0));"/>
+              fill="rgba(var(--accent-rgb), 0.90)"
+              style="filter:drop-shadow(0 0 18px rgba(var(--accent-rgb), 1.0));"/>
           </g>
 
           <!-- N2 -->
           <g id="node-2" opacity="0">
             <circle cx="280" cy="160" r="36"
               fill="rgba(16,24,38,0.75)"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5"
-              style="filter:drop-shadow(0 0 16px rgba(55,189,248,0.50));"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5"
+              style="filter:drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.50));"/>
             <circle cx="280" cy="160" r="16"
-              fill="rgba(55,189,248,0.85)"
-              style="filter:drop-shadow(0 0 12px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.85)"
+              style="filter:drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.90));"/>
           </g>
 
           <!-- N3 -->
           <g id="node-3" opacity="0">
             <circle cx="1360" cy="180" r="36"
               fill="rgba(16,24,38,0.75)"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5"
-              style="filter:drop-shadow(0 0 16px rgba(55,189,248,0.50));"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5"
+              style="filter:drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.50));"/>
             <circle cx="1360" cy="180" r="16"
-              fill="rgba(55,189,248,0.85)"
-              style="filter:drop-shadow(0 0 12px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.85)"
+              style="filter:drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.90));"/>
           </g>
 
           <!-- N4 -->
           <g id="node-4" opacity="0">
             <circle cx="320" cy="580" r="36"
               fill="rgba(16,24,38,0.75)"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5"
-              style="filter:drop-shadow(0 0 16px rgba(55,189,248,0.50));"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5"
+              style="filter:drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.50));"/>
             <circle cx="320" cy="580" r="16"
-              fill="rgba(55,189,248,0.85)"
-              style="filter:drop-shadow(0 0 12px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.85)"
+              style="filter:drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.90));"/>
           </g>
 
           <!-- N5 -->
           <g id="node-5" opacity="0">
             <circle cx="1320" cy="600" r="36"
               fill="rgba(16,24,38,0.75)"
-              stroke="rgba(55,189,248,0.55)" stroke-width="1.5"
-              style="filter:drop-shadow(0 0 16px rgba(55,189,248,0.50));"/>
+              stroke="rgba(var(--accent-rgb), 0.55)" stroke-width="1.5"
+              style="filter:drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.50));"/>
             <circle cx="1320" cy="600" r="16"
-              fill="rgba(55,189,248,0.85)"
-              style="filter:drop-shadow(0 0 12px rgba(55,189,248,0.90));"/>
+              fill="rgba(var(--accent-rgb), 0.85)"
+              style="filter:drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.90));"/>
           </g>
 
         </svg>

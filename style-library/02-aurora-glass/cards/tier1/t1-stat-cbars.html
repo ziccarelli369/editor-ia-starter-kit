@@ -95,6 +95,7 @@
         font-size: 72px;
         line-height: 1;
         letter-spacing: var(--track-tight);
+        font-variant-numeric: tabular-nums;
       }
       /* A = accent blue, B = warm accent-2 yellow */
       #t1-stat-cbars .bar-row.row-a .bar-val {
@@ -109,7 +110,7 @@
       /* Track + fill */
       #t1-stat-cbars .bar-track {
         width: 100%; height: 24px;
-        background: rgba(255,255,255,0.06);
+        background: rgba(var(--white-rgb), 0.06);
         border-radius: 12px;
         position: relative; overflow: hidden;
       }
@@ -143,7 +144,7 @@
       /* Horizontal divider between rows */
       #t1-stat-cbars .divider {
         width: 100%; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.12) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.12) 40%, rgba(var(--white-rgb), 0.12) 60%, transparent);
       }
 
       #t1-stat-cbars .label {

@@ -62,7 +62,7 @@
       #t2-lt-neon .card {
         position: relative;
         padding: 28px 36px 26px;
-        background: rgba(10, 14, 20, 0.72);
+        background: rgba(var(--canvas-rgb), 0.72);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
         border-radius: var(--radius);
@@ -75,7 +75,7 @@
       #t2-lt-neon .card::before {
         content: "";
         position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35) 40%, rgba(255,255,255,0.35) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.35) 40%, rgba(var(--white-rgb), 0.35) 60%, transparent);
       }
 
       #t2-lt-neon .name {

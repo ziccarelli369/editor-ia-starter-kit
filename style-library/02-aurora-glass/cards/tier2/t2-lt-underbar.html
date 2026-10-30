@@ -69,14 +69,14 @@
         width: 0;
         border-radius: 2px;
         background: linear-gradient(90deg,
-          rgba(255,255,255,0.95),
+          rgba(var(--white-rgb), 0.95),
           var(--accent) 25%,
           rgba(var(--accent-rgb), 0.70) 70%,
           transparent);
         box-shadow:
           0 0 12px rgba(var(--accent-rgb), 0.85),
           0 0 30px rgba(var(--accent-rgb), 0.45),
-          0 0 2px rgba(255,255,255,0.90);
+          0 0 2px rgba(var(--white-rgb), 0.90);
       }
 
       /* Trailing bright tip on the line's right edge */
@@ -86,9 +86,9 @@
         left: 0; /* repositioned via GSAP */
         width: 10px; height: 10px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.95);
+        background: rgba(var(--white-rgb), 0.95);
         box-shadow:
-          0 0 10px rgba(255,255,255,0.90),
+          0 0 10px rgba(var(--white-rgb), 0.90),
           0 0 24px rgba(var(--accent-rgb), 0.80);
         pointer-events: none;
       }

@@ -20,8 +20,7 @@
       #t1-ov-grid6 .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
       #t1-ov-grid6 .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -30,7 +29,7 @@
       }
       #t1-ov-grid6 .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 5;
-        background: radial-gradient(130% 120% at 50% 40%, transparent 58%, rgba(23,19,14,0.16) 100%);
+        background: radial-gradient(130% 120% at 50% 40%, transparent 58%, rgba(var(--ink-rgb), 0.16) 100%);
       }
       /* marker title */
       #t1-ov-grid6 .title {
@@ -56,7 +55,7 @@
       /* hero tile 01 */
       #t1-ov-grid6 .tile.hero {
         background: var(--yellow);
-        box-shadow: inset 0 0 0 4px var(--ink), 10px 14px 0 rgba(23,19,14,0.14);
+        box-shadow: inset 0 0 0 4px var(--ink), 10px 14px 0 rgba(var(--ink-rgb), 0.14);
       }
       /* big number sits in corner */
       #t1-ov-grid6 .num {

@@ -55,7 +55,7 @@
       #t2-lt-grad .card::before {
         content: "";
         position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45) 45%, rgba(255,255,255,0.45) 55%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.45) 45%, rgba(var(--white-rgb), 0.45) 55%, transparent);
       }
 
       /* Gradient clip-text name */
@@ -67,7 +67,7 @@
         line-height: 1.05;
         /* gradient fill */
         background: linear-gradient(100deg,
-          #ffffff 0%,
+          var(--white) 0%,
           #d0effe 35%,
           var(--accent) 75%,
           rgba(var(--accent-rgb), 0.70) 100%);

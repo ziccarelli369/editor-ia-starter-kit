@@ -54,7 +54,7 @@
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.28),
-                    inset 0 1px 0 rgba(255,255,255,0.14);
+                    inset 0 1px 0 rgba(var(--white-rgb), 0.14);
       }
 
       /* Record dot */
@@ -101,7 +101,7 @@
       #t2-lt-clock .card::before {
         content: "";
         position: absolute; top: 0; left: 14px; right: 14px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.52) 40%, rgba(255,255,255,0.52) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.52) 40%, rgba(var(--white-rgb), 0.52) 60%, transparent);
       }
 
       #t2-lt-clock .name {

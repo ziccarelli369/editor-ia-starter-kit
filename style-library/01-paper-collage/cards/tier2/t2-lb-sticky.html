@@ -27,7 +27,7 @@
         background: var(--yellow);
         padding: 32px 40px 40px 40px;
         transform: rotate(-3deg);
-        box-shadow: 6px 8px 24px rgba(23,19,14,0.28), 2px 2px 0 rgba(23,19,14,0.10);
+        box-shadow: 6px 8px 24px rgba(var(--ink-rgb), 0.28), 2px 2px 0 rgba(var(--ink-rgb), 0.10);
         /* folded bottom-right corner via a pseudo element */
       }
       /* folded corner triangle */
@@ -37,7 +37,7 @@
         width: 0; height: 0;
         border-style: solid;
         border-width: 0 0 28px 28px;
-        border-color: transparent transparent rgba(23,19,14,0.18) transparent;
+        border-color: transparent transparent rgba(var(--ink-rgb), 0.18) transparent;
       }
 
       #t2-lb-sticky .term {
@@ -56,7 +56,7 @@
         max-width: 620px;
         font-family: var(--font-label); font-weight: var(--wt-reg);
         font-size: var(--size-body); line-height: 1.4; color: var(--ink);
-        background: rgba(239,233,220,0.92); padding: 10px 16px; display: inline-block;
+        background: rgba(var(--paper-rgb), 0.92); padding: 10px 16px; display: inline-block;
         /* undo sticky's rotation so detail is level */
         transform: rotate(3deg);
       }

@@ -64,10 +64,6 @@
         stroke-dashoffset: 1400;
       }
       /* Tick marks */
-      #t1-ov-matrix .tick {
-        stroke: rgba(var(--accent-rgb), 0.35);
-        stroke-width: 1;
-      }
 
       /* Axis labels */
       #t1-ov-matrix .axis-label {
@@ -134,8 +130,8 @@
       /* Quadrant dim backgrounds */
       #t1-ov-matrix .q-bg {
         position: absolute; border-radius: var(--radius);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
+        background: rgba(var(--white-rgb), 0.02);
+        border: 1px solid rgba(var(--white-rgb), 0.05);
       }
       #t1-ov-matrix .q-bg-tl { left: 0;   top: 0;   width: 48%; height: 48%; }
       #t1-ov-matrix .q-bg-tr { right: 0;  top: 0;   width: 48%; height: 48%; }
@@ -176,8 +172,8 @@
           <!-- Vertical axis -->
           <line class="axis-line" id="ax-y" x1="720" y1="0" x2="720" y2="780"/>
           <!-- Arrow heads -->
-          <polygon points="1440,390 1418,378 1418,402" fill="rgba(55,189,248,0.55)" filter="drop-shadow(0 0 6px rgba(55,189,248,0.5))"/>
-          <polygon points="720,0 708,22 732,22" fill="rgba(55,189,248,0.55)" filter="drop-shadow(0 0 6px rgba(55,189,248,0.5))"/>
+          <polygon points="1440,390 1418,378 1418,402" fill="rgba(var(--accent-rgb), 0.55)" filter="drop-shadow(0 0 6px rgba(55,189,248,0.5))"/>
+          <polygon points="720,0 708,22 732,22" fill="rgba(var(--accent-rgb), 0.55)" filter="drop-shadow(0 0 6px rgba(55,189,248,0.5))"/>
         </svg>
 
         <!-- Axis labels -->

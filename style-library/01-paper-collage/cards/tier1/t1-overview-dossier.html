@@ -26,7 +26,7 @@
       }
       #t1-ov-dossier .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 9;
-        background: radial-gradient(130% 120% at 50% 40%, transparent 52%, rgba(23,19,14,0.22) 100%);
+        background: radial-gradient(130% 120% at 50% 40%, transparent 52%, rgba(var(--ink-rgb), 0.22) 100%);
       }
       /* faint halftone texture on the whole bg */
       #t1-ov-dossier .halftone {
@@ -43,7 +43,7 @@
         background: var(--red); color: var(--paper); padding: 10px 36px; z-index: 5;
         font-weight: var(--wt-black); font-size: var(--size-title);
         letter-spacing: var(--track-tight); text-transform: uppercase; white-space: nowrap;
-        box-shadow: 5px 5px 0 rgba(23,19,14,0.3);
+        box-shadow: 5px 5px 0 rgba(var(--ink-rgb), 0.3);
       }
 
       /* file stack — centered vertically */
@@ -59,7 +59,7 @@
         display: flex; align-items: stretch;
         background: var(--paper);
         border: 3px solid var(--ink);
-        box-shadow: 6px 6px 0 rgba(23,19,14,0.2);
+        box-shadow: 6px 6px 0 rgba(var(--ink-rgb), 0.2);
         position: relative; overflow: hidden;
         min-height: 148px;
       }
@@ -97,12 +97,12 @@
       #t1-ov-dossier .file-body::before {
         content: '';
         position: absolute; left: 50px; right: 50px; bottom: 22px;
-        height: 2px; background: rgba(23,19,14,0.14);
+        height: 2px; background: rgba(var(--ink-rgb), 0.14);
       }
       #t1-ov-dossier .file-body::after {
         content: '';
         position: absolute; left: 50px; right: 50px; bottom: 40px;
-        height: 1px; background: rgba(23,19,14,0.09);
+        height: 1px; background: rgba(var(--ink-rgb), 0.09);
       }
 
       #t1-ov-dossier .file-title {

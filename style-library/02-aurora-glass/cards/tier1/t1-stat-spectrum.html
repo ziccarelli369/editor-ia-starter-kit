@@ -56,17 +56,18 @@
       #t1-stat-spec .stat {
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: var(--size-mega); line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 10%, rgba(var(--accent-rgb),0.80) 72%);
+        background: linear-gradient(150deg, var(--white) 10%, rgba(var(--accent-rgb),0.80) 72%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       /* spectrum bar track */
       #t1-stat-spec .bar-track {
         position: relative; width: 1160px; height: 28px; border-radius: 14px;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(var(--white-rgb), 0.06);
+        border: 1px solid rgba(var(--white-rgb), 0.10);
         overflow: visible;
       }
 
@@ -78,7 +79,7 @@
         background: linear-gradient(90deg,
           rgba(var(--accent-rgb), 0.25) 0%,
           rgba(var(--accent-rgb), 0.85) 45%,
-          #ffffff 75%,
+          var(--white) 75%,
           rgba(var(--accent-rgb), 0.55) 100%);
         box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.55),
                     0 0 56px rgba(var(--accent-rgb), 0.28);
@@ -96,7 +97,7 @@
       #t1-stat-spec .bar-marker {
         position: absolute; top: 50%; transform: translate(-50%, -50%);
         width: 36px; height: 36px; border-radius: 50%;
-        background: #ffffff;
+        background: var(--white);
         box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.90),
                     0 0 42px rgba(var(--accent-rgb), 0.55),
                     0 0 80px rgba(var(--accent-rgb), 0.30);

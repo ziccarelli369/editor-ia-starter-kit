@@ -19,8 +19,8 @@
       #t1-sec-classified .grid {
         position: absolute; inset: -2px;
         background-image:
-          repeating-linear-gradient(0deg,  rgba(23,19,14,0.06) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, rgba(23,19,14,0.06) 0 1px, transparent 1px var(--grid-size));
+          repeating-linear-gradient(0deg,  rgba(var(--ink-rgb), 0.06) 0 1px, transparent 1px var(--grid-size)),
+          repeating-linear-gradient(90deg, rgba(var(--ink-rgb), 0.06) 0 1px, transparent 1px var(--grid-size));
       }
       #t1-sec-classified .grain {
         position: absolute; inset: -40px; background: var(--tex-grain);
@@ -28,13 +28,13 @@
       }
       #t1-sec-classified .vignette {
         position: absolute; inset: 0; pointer-events: none;
-        background: radial-gradient(120% 120% at 50% 46%, transparent 50%, rgba(23,19,14,0.26) 100%);
+        background: radial-gradient(120% 120% at 50% 46%, transparent 50%, rgba(var(--ink-rgb), 0.26) 100%);
       }
       /* the pinned paper card */
       #t1-sec-classified .card {
         position: absolute; left: 360px; top: 300px; width: 1200px; height: 470px;
         background: var(--paper); z-index: 2; transform: rotate(-1.6deg);
-        box-shadow: 0 24px 50px rgba(23,19,14,0.32);
+        box-shadow: 0 24px 50px rgba(var(--ink-rgb), 0.32);
         display: flex; flex-direction: column; align-items: center; justify-content: center;
       }
       #t1-sec-classified .card .filed {
@@ -48,8 +48,8 @@
       }
       /* tape pieces */
       #t1-sec-classified .tape {
-        position: absolute; width: 180px; height: 56px; background: rgba(55, 189, 248,0.55);
-        z-index: 4; box-shadow: 0 2px 6px rgba(23,19,14,0.12);
+        position: absolute; width: 180px; height: 56px; background: rgba(var(--accent-rgb), 0.55);
+        z-index: 4; box-shadow: 0 2px 6px rgba(var(--ink-rgb), 0.12);
       }
       #t1-sec-classified .tape.tl { left: 320px; top: 282px; transform: rotate(-28deg); }
       #t1-sec-classified .tape.br { right: 320px; bottom: 290px; transform: rotate(-28deg); }
@@ -68,7 +68,7 @@
       /* sticky note */
       #t1-sec-classified .note {
         position: absolute; right: 180px; top: 250px; z-index: 6; width: 230px; height: 200px;
-        background: var(--yellow); transform: rotate(7deg); box-shadow: 0 10px 22px rgba(23,19,14,0.22);
+        background: var(--yellow); transform: rotate(7deg); box-shadow: 0 10px 22px rgba(var(--ink-rgb), 0.22);
         display: flex; align-items: center; justify-content: center; text-align: center;
         font-family: var(--font-hand); font-size: 50px; color: var(--ink); padding: 16px;
       }

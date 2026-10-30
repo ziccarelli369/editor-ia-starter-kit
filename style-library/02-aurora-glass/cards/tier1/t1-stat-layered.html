@@ -72,14 +72,14 @@
       }
       /* plane B — mid ghost / offset down */
       #t1-stat-layer .plane-b {
-        color: rgba(255,255,255,0.85);
+        color: rgba(var(--white-rgb), 0.85);
         text-shadow: 0 0 26px rgba(var(--accent-rgb),0.50);
         opacity: 0.55;
       }
       /* plane C — front / sharp / final glow */
       #t1-stat-layer .plane-c {
         color: var(--white);
-        text-shadow: 0 0 30px rgba(255,255,255,0.50), 0 0 64px rgba(var(--accent-rgb),0.50);
+        text-shadow: 0 0 30px rgba(var(--white-rgb), 0.50), 0 0 64px rgba(var(--accent-rgb),0.50);
         filter: drop-shadow(0 0 34px rgba(var(--accent-rgb),0.55));
         opacity: 1;
       }

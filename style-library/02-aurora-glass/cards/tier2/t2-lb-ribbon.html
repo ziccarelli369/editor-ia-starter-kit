@@ -51,7 +51,7 @@
         border-right: none;
         box-shadow:
           0 0 30px rgba(var(--accent-rgb), 0.40),
-          inset 0 1px 0 rgba(255,255,255,0.20),
+          inset 0 1px 0 rgba(var(--white-rgb), 0.20),
           0 4px 22px rgba(0,0,0,0.50);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
@@ -64,7 +64,7 @@
       #t2-lb-rib .ribbon::before {
         content: "";
         position: absolute; top: 0; left: 20px; right: 28px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.50) 50%, transparent);
       }
 
       /* Ribbon label text */
@@ -100,7 +100,7 @@
       #t2-lb-rib .detail-wrap::before {
         content: "";
         position: absolute; top: 0; left: 10px; right: 10px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.36) 50%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.36) 50%, transparent);
       }
 
       #t2-lb-rib .detail {

@@ -44,8 +44,8 @@
         background: linear-gradient(
           -54deg,
           transparent 42%,
-          rgba(23,19,14,0.22) calc(42% + 0px),
-          rgba(23,19,14,0.12) calc(42% + 20px),
+          rgba(var(--ink-rgb), 0.22) calc(42% + 0px),
+          rgba(var(--ink-rgb), 0.12) calc(42% + 20px),
           transparent calc(42% + 40px)
         );
       }
@@ -62,8 +62,7 @@
       #t1-stat-torn .grid {
         position: absolute; inset: -2px; z-index: 0;
         background-image:
-          repeating-linear-gradient(0deg,  var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-          repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+          var(--tex-grid);
       }
 
       /* === STAT NUMBER (split visually by the tear) === */
@@ -83,8 +82,8 @@
         color: var(--ink);
         font-variant-numeric: tabular-nums;
         text-shadow:
-          0 8px 32px rgba(23,19,14,0.18),
-          0 2px 0 rgba(23,19,14,0.35);
+          0 8px 32px rgba(var(--ink-rgb), 0.18),
+          0 2px 0 rgba(var(--ink-rgb), 0.35);
         user-select: none;
       }
 
@@ -131,7 +130,7 @@
       }
       #t1-stat-torn .vignette {
         position: absolute; inset: 0; pointer-events: none; z-index: 7;
-        background: radial-gradient(120% 120% at 50% 50%, transparent 52%, rgba(23,19,14,0.20) 100%);
+        background: radial-gradient(120% 120% at 50% 50%, transparent 52%, rgba(var(--ink-rgb), 0.20) 100%);
       }
     </style>
   </head>
@@ -149,7 +148,7 @@
           <polyline
             points="1920,453 1880,449 1840,455 1800,447 1760,452 1720,446 1680,453 1640,448 1600,455 1560,449 1520,454 1480,447 1440,453 1400,449 1360,456 1320,450 1280,455 1240,448 1200,454 1160,449 1120,456 1080,450 1040,1080"
             fill="none"
-            stroke="rgba(23,19,14,0.28)"
+            stroke="rgba(var(--ink-rgb), 0.28)"
             stroke-width="3"
           />
         </svg>

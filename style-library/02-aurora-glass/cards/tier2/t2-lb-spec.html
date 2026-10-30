@@ -42,7 +42,7 @@
         border-top: 2px solid rgba(var(--accent-rgb), 0.60);
         border-radius: var(--radius-sm);
         box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.20),
-                    inset 0 1px 0 rgba(255,255,255,0.14),
+                    inset 0 1px 0 rgba(var(--white-rgb), 0.14),
                     var(--glass-shadow);
         overflow: hidden;
       }
@@ -87,7 +87,7 @@
       #t2-lb-spec .spec-row {
         display: flex; align-items: baseline; gap: 0;
         padding: 10px 22px 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(var(--white-rgb), 0.05);
       }
 
       #t2-lb-spec .spec-row:last-child {
@@ -104,7 +104,7 @@
 
       #t2-lb-spec .spec-row-dots {
         flex: 1;
-        border-bottom: 1px dashed rgba(255,255,255,0.14);
+        border-bottom: 1px dashed rgba(var(--white-rgb), 0.14);
         margin: 0 10px;
         position: relative; top: -4px;
       }

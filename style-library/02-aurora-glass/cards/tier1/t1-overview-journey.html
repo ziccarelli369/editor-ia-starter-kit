@@ -58,7 +58,7 @@
         stroke-width: 3;
         stroke-linecap: round;
         stroke-linejoin: round;
-        filter: drop-shadow(0 0 12px rgba(55,189,248,0.55));
+        filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.55));
       }
       /* Ghost / backdrop path (thicker, darker — depth) */
       .journey-path-ghost {
@@ -127,9 +127,9 @@
       }
 
       /* Start / end arrow markers */
-      .journey-start-cap, .journey-end-arrow {
+      .journey-start-cap {
         fill: rgba(var(--accent-rgb), 0.90);
-        filter: drop-shadow(0 0 6px rgba(55,189,248,0.60));
+        filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.60));
       }
 
       #t1-ov-journey .vignette {

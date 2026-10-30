@@ -43,7 +43,7 @@
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
         border: 1.5px solid var(--glass-border);
-        border-top: 1.5px solid rgba(255,255,255,0.16);
+        border-top: 1.5px solid rgba(var(--white-rgb), 0.16);
         box-shadow: var(--glass-shadow);
         border-radius: var(--radius);
         padding: 26px 36px 24px;
@@ -67,7 +67,7 @@
         letter-spacing: var(--track-tight);
         line-height: 1.05;
         background: linear-gradient(100deg,
-          #FFFFFF 0%, #FFFFFF 45%,
+          var(--white) 0%, var(--white) 45%,
           var(--accent) 75%, rgba(var(--accent-rgb), 0.75) 100%);
         -webkit-background-clip: text;
         background-clip: text;
@@ -75,7 +75,7 @@
         color: transparent;
         /* halo glow via filter since text-shadow doesn't work on clip-text */
         filter: drop-shadow(0 0 18px rgba(var(--accent-rgb), 0.50))
-                drop-shadow(0 0 6px rgba(255,255,255,0.30));
+                drop-shadow(0 0 6px rgba(var(--white-rgb), 0.30));
         display: block;
         margin-bottom: 12px;
       }

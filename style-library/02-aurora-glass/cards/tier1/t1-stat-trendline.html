@@ -72,12 +72,13 @@
         display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
       }
       #t1-st-trend .end-callout .stat {
+        font-variant-numeric: tabular-nums;
         font-family: var(--font-display);
         font-weight: var(--wt-black);
         font-size: 90px;
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(160deg, #ffffff 15%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(160deg, var(--white) 15%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.65));
@@ -161,13 +162,13 @@
                fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.5"/>
-                <stop offset="70%" stop-color="#37BDF8" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9"/>
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.5"/>
+                <stop offset="70%" stop-color="var(--accent)" stop-opacity="1"/>
+                <stop offset="100%" stop-color="var(--white)" stop-opacity="0.9"/>
               </linearGradient>
               <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#37BDF8" stop-opacity="0.18"/>
-                <stop offset="100%" stop-color="#37BDF8" stop-opacity="0"/>
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
               </linearGradient>
               <filter id="lineGlow" x="-5%" y="-30%" width="110%" height="160%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
@@ -182,16 +183,16 @@
             <!-- Horizontal axis line -->
             <line id="t1-st-trend-xaxis"
               x1="60" y1="400" x2="1300" y2="400"
-              stroke="rgba(255,255,255,0.12)" stroke-width="1.5"
+              stroke="rgba(var(--white-rgb), 0.12)" stroke-width="1.5"
             />
 
             <!-- Faint vertical grid lines at each data point -->
-            <line x1="60"   y1="60"  x2="60"   y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="308"  y1="60"  x2="308"  y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="556"  y1="60"  x2="556"  y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="804"  y1="60"  x2="804"  y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="1052" y1="60"  x2="1052" y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="1300" y1="60"  x2="1300" y2="400" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="60"   y1="60"  x2="60"   y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+            <line x1="308"  y1="60"  x2="308"  y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+            <line x1="556"  y1="60"  x2="556"  y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+            <line x1="804"  y1="60"  x2="804"  y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+            <line x1="1052" y1="60"  x2="1052" y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
+            <line x1="1300" y1="60"  x2="1300" y2="400" stroke="rgba(var(--white-rgb), 0.05)" stroke-width="1"/>
 
             <!-- Area fill below line (clipped to reveal) -->
             <path id="t1-st-trend-area"
@@ -216,17 +217,17 @@
 
             <!-- Glowing end dot at (1300,20) — revealed after line draws -->
             <circle id="t1-st-trend-dot" cx="1300" cy="20" r="0"
-              fill="#ffffff"
-              style="filter: drop-shadow(0 0 14px rgba(55,189,248,0.95)) drop-shadow(0 0 36px rgba(55,189,248,0.60));"
+              fill="var(--white)"
+              style="filter: drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.95)) drop-shadow(0 0 36px rgba(var(--accent-rgb), 0.60));"
             />
 
             <!-- Tick marks on x-axis -->
-            <line x1="60"   y1="400" x2="60"   y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
-            <line x1="308"  y1="400" x2="308"  y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
-            <line x1="556"  y1="400" x2="556"  y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
-            <line x1="804"  y1="400" x2="804"  y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
-            <line x1="1052" y1="400" x2="1052" y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
-            <line x1="1300" y1="400" x2="1300" y2="410" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
+            <line x1="60"   y1="400" x2="60"   y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
+            <line x1="308"  y1="400" x2="308"  y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
+            <line x1="556"  y1="400" x2="556"  y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
+            <line x1="804"  y1="400" x2="804"  y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
+            <line x1="1052" y1="400" x2="1052" y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
+            <line x1="1300" y1="400" x2="1300" y2="410" stroke="rgba(var(--white-rgb), 0.20)" stroke-width="1.5"/>
           </svg>
 
           <!-- Floating value at end of line -->

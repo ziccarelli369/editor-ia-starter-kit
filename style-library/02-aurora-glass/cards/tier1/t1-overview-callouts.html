@@ -113,9 +113,10 @@
       #co-3 { left: 50%; transform: translateX(-50%); bottom: 80px; }
 
       .callout-num {
+        font-variant-numeric: tabular-nums;
         font-family: var(--font-display); font-weight: var(--wt-black);
         font-size: 110px; line-height: 1; letter-spacing: var(--track-tight);
-        background: linear-gradient(150deg, #ffffff 15%, rgba(var(--accent-rgb), 0.80) 85%);
+        background: linear-gradient(150deg, var(--white) 15%, rgba(var(--accent-rgb), 0.80) 85%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 24px rgba(var(--accent-rgb), 0.50));
@@ -166,32 +167,32 @@
         <!-- Center point = ~960, 540 -->
         <!-- to top-left callout endpoint ~490, 330 -->
         <line id="conn-1" x1="960" y1="540" x2="490" y2="330"
-          stroke="rgba(55,189,248,0.50)" stroke-width="1.5"
+          stroke="rgba(var(--accent-rgb), 0.50)" stroke-width="1.5"
           stroke-dasharray="8 6" filter="url(#connGlow)"/>
         <!-- to top-right callout ~1430, 330 -->
         <line id="conn-2" x1="960" y1="540" x2="1430" y2="330"
-          stroke="rgba(55,189,248,0.50)" stroke-width="1.5"
+          stroke="rgba(var(--accent-rgb), 0.50)" stroke-width="1.5"
           stroke-dasharray="8 6" filter="url(#connGlow)"/>
         <!-- to bottom-center ~960, 880 -->
         <line id="conn-3" x1="960" y1="540" x2="960" y2="880"
-          stroke="rgba(55,189,248,0.50)" stroke-width="1.5"
+          stroke="rgba(var(--accent-rgb), 0.50)" stroke-width="1.5"
           stroke-dasharray="8 6" filter="url(#connGlow)"/>
 
         <!-- small glow dot at each callout end -->
         <circle id="conn-dot-1" cx="490" cy="330" r="5"
-          fill="#37BDF8" opacity="0"
-          style="filter:drop-shadow(0 0 8px rgba(55,189,248,0.90));"/>
+          fill="var(--accent)" opacity="0"
+          style="filter:drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.90));"/>
         <circle id="conn-dot-2" cx="1430" cy="330" r="5"
-          fill="#37BDF8" opacity="0"
-          style="filter:drop-shadow(0 0 8px rgba(55,189,248,0.90));"/>
+          fill="var(--accent)" opacity="0"
+          style="filter:drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.90));"/>
         <circle id="conn-dot-3" cx="960" cy="880" r="5"
-          fill="#37BDF8" opacity="0"
-          style="filter:drop-shadow(0 0 8px rgba(55,189,248,0.90));"/>
+          fill="var(--accent)" opacity="0"
+          style="filter:drop-shadow(0 0 8px rgba(var(--accent-rgb), 0.90));"/>
 
         <!-- center origin dot -->
         <circle cx="960" cy="540" r="8"
-          fill="rgba(55,189,248,0.70)" id="center-dot"
-          style="filter:drop-shadow(0 0 14px rgba(55,189,248,0.80));" opacity="0"/>
+          fill="rgba(var(--accent-rgb), 0.70)" id="center-dot"
+          style="filter:drop-shadow(0 0 14px rgba(var(--accent-rgb), 0.80));" opacity="0"/>
       </svg>
 
       <!-- Central headline -->

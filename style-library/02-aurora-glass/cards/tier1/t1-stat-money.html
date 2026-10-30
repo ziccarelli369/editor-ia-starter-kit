@@ -81,7 +81,7 @@
         letter-spacing: var(--track-tight);
         align-self: flex-start;
         margin-top: 28px;
-        color: rgba(255,255,255,0.70);
+        color: rgba(var(--white-rgb), 0.70);
         text-shadow: 0 0 24px rgba(var(--accent-rgb), 0.45);
         position: relative; z-index: 1;
       }
@@ -93,11 +93,11 @@
         font-size: var(--size-mega);   /* 300px */
         line-height: 0.92;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 5%, rgba(var(--accent-rgb), 0.85) 80%);
+        background: linear-gradient(155deg, var(--white) 5%, rgba(var(--accent-rgb), 0.85) 80%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent; text-fill-color: transparent;
         filter: drop-shadow(0 0 36px rgba(var(--accent-rgb), 0.55));
-        position: relative; z-index: 1;
+        position: relative; z-index: 1; font-variant-numeric: tabular-nums;
       }
 
       /* Suffix (M / K / B) */
@@ -109,7 +109,7 @@
         letter-spacing: var(--track-tight);
         align-self: flex-end;
         margin-bottom: 16px;
-        color: rgba(255,255,255,0.55);
+        color: rgba(var(--white-rgb), 0.55);
         text-shadow: 0 0 24px rgba(var(--accent-rgb), 0.38);
         position: relative; z-index: 1;
       }

@@ -58,7 +58,7 @@
       #t2-lt-loc .card::before {
         content: "";
         position: absolute; top: 0; left: 12px; right: 12px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.52) 40%, rgba(255,255,255,0.52) 60%, transparent);
+        background: linear-gradient(90deg, transparent, rgba(var(--white-rgb), 0.52) 40%, rgba(var(--white-rgb), 0.52) 60%, transparent);
         border-radius: 1px;
       }
 
@@ -124,7 +124,7 @@
       /* Pin fill + glow drop-shadow applied via GSAP */
       #t2-lt-loc .pin-path {
         fill: var(--accent);
-        filter: drop-shadow(0 0 5px rgba(55,189,248,0.80)) drop-shadow(0 0 12px rgba(55,189,248,0.45));
+        filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.80)) drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.45));
       }
 
       #t2-lt-loc .location-text {
@@ -158,8 +158,8 @@
             <svg viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="pin-path"
                 d="M9 0C5.134 0 2 3.134 2 7c0 5.25 7 15 7 15s7-9.75 7-15c0-3.866-3.134-7-7-7Z"
-                fill="rgba(55,189,248,0.90)" />
-              <circle cx="9" cy="7" r="2.5" fill="rgba(7,18,28,0.80)" />
+                fill="rgba(var(--accent-rgb), 0.90)" />
+              <circle cx="9" cy="7" r="2.5" fill="rgba(var(--canvas-deep-rgb), 0.80)" />
             </svg>
           </div>
           <div class="location-text" data-slot="location">San Francisco, CA</div>

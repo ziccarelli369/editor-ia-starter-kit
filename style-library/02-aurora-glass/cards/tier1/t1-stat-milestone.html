@@ -55,10 +55,11 @@
         font-size: var(--size-mega);
         line-height: 1;
         letter-spacing: var(--track-tight);
-        background: linear-gradient(155deg, #ffffff 10%, rgba(var(--accent-rgb), 0.80) 88%);
+        background: linear-gradient(155deg, var(--white) 10%, rgba(var(--accent-rgb), 0.80) 88%);
         -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.55));
+        font-variant-numeric: tabular-nums;
       }
 
       /* track assembly */
@@ -71,7 +72,7 @@
       #t1-stat-mile .rail {
         position: absolute; top: 50%; left: 0; right: 0; height: 6px;
         transform: translateY(-50%);
-        background: rgba(255,255,255,0.10);
+        background: rgba(var(--white-rgb), 0.10);
         border-radius: 3px;
       }
 
@@ -88,7 +89,7 @@
       #t1-stat-mile .tick {
         position: absolute; top: 50%; width: 2px; height: 20px;
         transform: translate(-50%, -50%);
-        background: rgba(255,255,255,0.25);
+        background: rgba(var(--white-rgb), 0.25);
         border-radius: 1px;
       }
       #t1-stat-mile .tick-label {
@@ -103,7 +104,7 @@
         position: absolute; top: 50%; width: 28px; height: 28px;
         border-radius: 50%; left: 0;
         transform: translate(-50%, -50%);
-        background: #ffffff;
+        background: var(--white);
         box-shadow: 0 0 14px 4px rgba(var(--accent-rgb), 0.9),
                     0 0 40px 8px rgba(var(--accent-rgb), 0.50);
       }
