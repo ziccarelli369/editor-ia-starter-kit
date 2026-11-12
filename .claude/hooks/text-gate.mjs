@@ -10,7 +10,7 @@ const { tool_name: tool, tool_input: input = {} } = JSON.parse(readFileSync(0, '
 function change() {
   if (tool === 'Bash') {
     const path = (input.command || '').match(/[^\s"'=]*video-projects[\\/][^\s"'\\/]+/)?.[0];
-    return path && { path, before: '', after: input.command };
+    return path && /\bffmpeg\b/.test(input.command) && { path, before: '', after: input.command };
   }
   if (tool !== 'Write' && tool !== 'Edit') return null;
   const before = existsSync(input.file_path) ? readFileSync(input.file_path, 'utf8') : '';

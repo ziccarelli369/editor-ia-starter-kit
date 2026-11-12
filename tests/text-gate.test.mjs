@@ -86,6 +86,8 @@ test('the hook blocks the write that first puts text on screen, and lets the boa
     assert.equal(prototype.status, 0, prototype.stderr);
     const bash = hook({ tool_name: 'Bash', tool_input: { command: `ffmpeg -i ${p.projectDir}/assets/a.mov -vf "drawtext=text='LAST?'" out.mp4` } });
     assert.equal(bash.status, 2);
+    const grep = hook({ tool_name: 'Bash', tool_input: { command: `grep -n drawtext ${p.projectDir}/build.py` } });
+    assert.equal(grep.status, 0, 'reading a project for drawtext is not drawing text');
     const elsewhere = hook({ tool_name: 'Write', tool_input: { file_path: join(p.dir, 'notes.html'), content: '<p>hello</p>' } });
     assert.equal(elsewhere.status, 0);
   } finally {
