@@ -12,6 +12,7 @@ import { join, resolve, dirname } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { filmDoctor } from "./lib/film-doctor.mjs";
+import { gateMessage, textGate } from "./lib/text-gate.mjs";
 
 const SHADER_BLOCK_NAMES = new Set([
   "glitch", "whip-pan", "cinematic-zoom", "flash-through-white", "light-leak",
@@ -175,6 +176,12 @@ if (!existsSync(indexPath)) {
 const html = readFileSync(indexPath, "utf8");
 let hardFail = 0;
 let warns = 0;
+
+const text = textGate(projectDir, resolve(dirname(fileURLToPath(import.meta.url)), ".."));
+if (!text.ok) {
+  fail("text_board", gateMessage(text.files.join(", "), text.errors));
+  hardFail++;
+}
 
 // 1) Root div + required attrs
 const root = findRootDiv(html);

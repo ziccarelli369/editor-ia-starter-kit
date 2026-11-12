@@ -8,6 +8,7 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFi
 import { resolve, dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mainCheckoutOf } from './lib/worktree.mjs';
+import { gateMessage, textGate } from './lib/text-gate.mjs';
 import { trash } from './lib/trash.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -32,6 +33,8 @@ const kinds = [...config.outbox.required, ...config.outbox.extras];
 const projectFile = join(root, 'video-projects', id, 'project.json');
 if (!existsSync(projectFile)) throw new Error(`No project: ${id}`);
 const project = JSON.parse(readFileSync(projectFile, 'utf8'));
+const text = textGate(dirname(projectFile), root);
+if (!text.ok) throw new Error(`Delivery blocked.\n${gateMessage(text.files.join(', '), text.errors)}`);
 const name = opt('name') || project.slug;
 const staging = join(root, 'staging', id);
 const staged = existsSync(staging) ? readdirSync(staging) : [];
