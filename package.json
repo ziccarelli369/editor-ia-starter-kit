@@ -8,6 +8,7 @@
     "new-video": "node scripts/new-video.mjs",
     "inbox": "node scripts/inbox.mjs",
     "deliver": "node scripts/deliver.mjs",
+    "clean-staging": "node scripts/clean-staging.mjs",
     "projects": "node scripts/projects-index.mjs",
     "hearing": "node scripts/hearing-check.mjs",
     "align": "node scripts/align-captions.mjs",

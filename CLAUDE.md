@@ -26,9 +26,15 @@ Skills, docs and code stay in English.
 - `video-projects/<yyyy-mm-dd>-<slug>/`: all work in progress. `assets/` holds the
   moved sources. `project.json` is the truth about the project. Run HyperFrames
   from this folder.
-- `outbox/<project-id>/`: finals only. Every project ends here with a video and
-  a cover, plus `caption` and `srt` by default. `node scripts/deliver.mjs`
-  enforces the contract.
+- `staging/<project-id>/`: review versions. Each round is staged with
+  `node scripts/deliver.mjs <id> --stage ...` as `<name>-v<N>-<kind>`, so the
+  user can compare versions. Staging is temporary:
+  `npm run clean-staging -- [<id>] [--older-than <days>]` moves it to the
+  Recycle Bin or trash.
+- `outbox/<project-id>/`: finals only, one per deliverable, no version suffix.
+  Every project ends here with a video and a cover, plus `caption` and `srt` by
+  default. `node scripts/deliver.mjs <id> --promote <N>` copies the approved
+  staged version here, replaces the previous final and enforces the contract.
 - `brands/<slug>/`: one folder per client: `DESIGN.md`, `tokens.css`, `fonts/`,
   logo. A project names one brand in `project.json`; read that brand only.
   Another brand's files stay closed for this project.
@@ -113,9 +119,11 @@ Each gate needs the user's yes, in chat, every time:
   more treatments from the text skills, and the user's pick
   (`.claude/skills/short-form-edit/references/text-board.md`). A hook blocks
   the write until `text-board/text-board.json` is complete.
+- Promoting a staged version to `outbox/`, after the user has seen it.
 
 The outbox is the end: nothing is published, uploaded, posted or sent.
-Raw footage and delivered outbox files stay as they are.
+Raw footage stays as it is. Outbox finals are replaced only by an explicit
+promote. Review rounds go to `staging/`, never to `outbox/`.
 Before you move or archive a project folder, run `npm run unlock -- <id>`.
 
 Cut silences first, then cut mistakes on the retimed transcript. One timeline

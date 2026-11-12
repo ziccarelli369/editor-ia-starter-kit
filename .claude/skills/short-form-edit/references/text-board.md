@@ -5,7 +5,7 @@ countdowns, captions, CTAs. A rough preview counts. One ad-hoc line is a guess;
 a board is a choice.
 
 `.claude/hooks/text-gate.mjs` blocks any write that adds new on-screen text. `scripts/preflight.mjs` and
-`scripts/deliver.mjs` block the render and the delivery. All three run
+`scripts/deliver.mjs` block the render, the staged review and the promote. All three run
 `scripts/lib/text-gate.mjs`.
 
 ## Build it
