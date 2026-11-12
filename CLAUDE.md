@@ -109,6 +109,10 @@ Each gate needs the user's yes, in chat, every time:
 - Any paid API call. Name the cost first.
 - Promoting a style from `styles/drafts/` to `styles/core/`, after one test
   render the user has seen.
+- On-screen text, in any mode and in rough previews too: a text board of 3 or
+  more treatments from the text skills, and the user's pick
+  (`.claude/skills/short-form-edit/references/text-board.md`). A hook blocks
+  the write until `text-board/text-board.json` is complete.
 
 The outbox is the end: nothing is published, uploaded, posted or sent.
 Raw footage and delivered outbox files stay as they are.

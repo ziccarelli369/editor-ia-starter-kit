@@ -5,6 +5,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { resolve, dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mainCheckoutOf } from './lib/worktree.mjs';
+import { gateMessage, textGate } from './lib/text-gate.mjs';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const id = args[0];
@@ -23,6 +24,8 @@ const config = JSON.parse(readFileSync(join(root, 'kit.config.json'), 'utf8'));
 const projectFile = join(root, 'video-projects', id, 'project.json');
 if (!existsSync(projectFile)) throw new Error(`No project: ${id}`);
 const project = JSON.parse(readFileSync(projectFile, 'utf8'));
+const text = textGate(dirname(projectFile), root);
+if (!text.ok) throw new Error(`Delivery blocked.\n${gateMessage(text.files.join(', '), text.errors)}`);
 const name = opt('name') || project.slug;
 const out = join(root, 'outbox', id);
 mkdirSync(out, { recursive: true });
