@@ -83,7 +83,8 @@ Película 3D, solo si la quieres:
    **libre** (sin guion, tú diriges).
 4. Elige la marca. La primera vez, el agente copia `brands/_template/` y te
    pide colores y fuentes.
-5. Revisa cada borrador cuando el agente te lo pida.
+5. Revisa cada borrador cuando el agente te lo pida. Cada versión queda en
+   `staging/<proyecto>/`; la que apruebas pasa a `outbox/`.
 6. Recoge el video, la portada, el texto y los subtítulos en `outbox/<proyecto>/`.
 
 ### Carpetas
@@ -92,7 +93,8 @@ Película 3D, solo si la quieres:
 | --- | --- |
 | `inbox/` | Todo lo que entra. Sin orden. |
 | `video-projects/` | Trabajo en curso, un proyecto por carpeta con fecha. |
-| `outbox/` | Solo finales: video, portada, texto, subtítulos. |
+| `staging/` | Versiones de revisión (v1, v2…) para comparar. Temporal: `npm run clean-staging` la vacía. |
+| `outbox/` | Solo finales: video, portada, texto, subtítulos. Una versión por entrega, sin sufijo. |
 | `brands/` | Una carpeta por cliente: colores, fuentes, logo, reglas. |
 | `styles/` | Estilos de edición copiados de videos que te gustan. |
 | `.claude/skills/` | Las habilidades del agente. |
@@ -244,7 +246,8 @@ Then open Claude Code in this folder and type `/onboard` once. Read
    **freeform** (no script, you direct).
 4. Choose the brand. The first time, the agent copies `brands/_template/` and
    asks for colors and fonts.
-5. Review each draft when the agent asks.
+5. Review each draft when the agent asks. Each version stays in
+   `staging/<project>/`; the one you approve moves to `outbox/`.
 6. Collect the video, cover, caption and subtitles in `outbox/<project>/`.
 
 ### Folders
@@ -253,7 +256,8 @@ Then open Claude Code in this folder and type `/onboard` once. Read
 | --- | --- |
 | `inbox/` | Everything that comes in. Unsorted. |
 | `video-projects/` | Work in progress, one dated folder per project. |
-| `outbox/` | Finals only: video, cover, caption, subtitles. |
+| `staging/` | Review versions (v1, v2…) to compare. Temporary: `npm run clean-staging` empties it. |
+| `outbox/` | Finals only: video, cover, caption, subtitles. One version per deliverable, no suffix. |
 | `brands/` | One folder per client: colors, fonts, logo, rules. |
 | `styles/` | Editing styles copied from videos you like. |
 | `.claude/skills/` | The agent's skills. |

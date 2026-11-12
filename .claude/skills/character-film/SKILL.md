@@ -149,8 +149,9 @@ still of each final, chosen by the director:
 `deliver` skill's caption rules, written to `renders/caption.txt`.
 
 Then, from the kit root, with no `--srt` (the film has no voice):
-`node scripts/deliver.mjs <id> --video video-projects/<id>/renders/<slug>.mp4 --cover video-projects/<id>/renders/cover.png --caption video-projects/<id>/renders/caption.txt`.
-Deliver the vertical cut with `--name <slug>-9x16` and its own cover, and a
-fix with `--name <slug>-v2`. Ask the user to listen: a measured mix is not
-a heard mix. Before you move or archive the project folder, run
+`node scripts/deliver.mjs <id> --stage --video video-projects/<id>/renders/<slug>.mp4 --cover video-projects/<id>/renders/cover.png --caption video-projects/<id>/renders/caption.txt`.
+Stage the vertical cut with `--name <slug>-9x16` and its own cover. A fix is
+a new `--stage` run of the same name. Ask the user to listen: a measured mix
+is not a heard mix. After the user approves, promote each deliverable with
+`node scripts/deliver.mjs <id> --promote <N> [--name <slug>-9x16]`. Before you move or archive the project folder, run
 `npm run unlock -- <id>` and stop only the processes this session started.
