@@ -74,20 +74,39 @@ project folder; the ear outranks the transcriber. CUT_IN_WORD means a cut lands
 on speech: move the cut. LATE/EARLY after alignment means an on-screen caption
 was not re-timed.
 
-## 5. Deliver
+## 5. Stage, then promote
+
+Every review round goes to `staging/`, never to `outbox/`:
 
 ```sh
-node scripts/deliver.mjs <project-id> --video renders/final.mp4 --cover renders/cover.png --caption renders/caption.txt --srt renders/subtitles.srt
+node scripts/deliver.mjs <project-id> --stage --video renders/final.mp4 --cover renders/cover.png --caption renders/caption.txt --srt renders/subtitles.srt
 ```
 
-One run per deliverable (`--name <name>`) when a project ships several cuts.
-Inside a git worktree the script refuses and names the main checkout, because
-the git-ignored outbox dies with the worktree (`--allow-worktree` overrides).
+The script picks the next version number and writes
+`staging/<id>/<name>-v<N>-<kind>.<ext>`. Show the user that version. A fix is a
+new `--stage` run, not a new `--name`.
 
-Done when the script prints the outbox path and `project.json` `status` is
+When the user approves a version, promote it:
+
+```sh
+node scripts/deliver.mjs <project-id> --promote <N>
+```
+
+Promote copies version N to `outbox/<id>/<name>-<kind>.<ext>`, with no version
+suffix. It moves the previous final of that deliverable to the Recycle Bin or
+trash, records `version` in `project.json` `deliverables`, and enforces the
+contract (video and cover required). Promote only with the user's yes.
+
+Use `--name <name>` on both steps only for a different deliverable, such as a
+9:16 cut. Inside a git worktree the script refuses and names the main checkout,
+because the git-ignored staging and outbox die with the worktree
+(`--allow-worktree` overrides).
+
+Done when promote prints the outbox path and `project.json` `status` is
 `delivered`.
 
 ## 6. Close
 
 `npm run projects`. Tell the user the outbox path and the file names.
+Offer `npm run clean-staging -- <project-id>` to empty the review versions.
 The files stay in the outbox; publishing is the user's step.

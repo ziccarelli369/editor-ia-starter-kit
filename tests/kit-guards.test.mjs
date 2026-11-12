@@ -31,7 +31,7 @@ test('new-video and deliver refuse inside a linked worktree, name the main check
   try {
     for (const f of ['new-video.mjs', 'deliver.mjs', 'lib']) cpSync(join(root, 'scripts', f), join(kit, 'scripts', f), { recursive: true });
     writeFileSync(join(kit, '.git'), `gitdir: ${join(kit, 'main', '.git', 'worktrees', 'wt')}\n`);
-    for (const [script, ...args] of [['new-video.mjs', 'guard-test'], ['deliver.mjs', 'guard-test', '--video', 'v.mp4', '--cover', 'c.png']]) {
+    for (const [script, ...args] of [['new-video.mjs', 'guard-test'], ['deliver.mjs', 'guard-test', '--stage', '--video', 'v.mp4', '--cover', 'c.png']]) {
       const r = node(join(kit, 'scripts', script), args);
       assert.equal(r.status, 1, script);
       assert.ok(r.stderr.includes(slashed(join(kit, 'main'))), r.stderr);
