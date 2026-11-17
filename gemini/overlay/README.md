@@ -8,61 +8,38 @@ Este repo es un espejo de
 [editor-ia-starter-kit](https://github.com/ziccarelli369/editor-ia-starter-kit)
 (la versión para Claude Code). Se genera con un script; ver `MIRROR.txt`.
 
-## Qué necesitas
+## Empezar: dos prompts
 
-| Herramienta | Para qué | Enlace |
-| --- | --- | --- |
-| Antigravity (la app) | El agente de Gemini que edita. Entra con tu cuenta de Google. | [antigravity.google/download](https://antigravity.google/download) |
-| Node 22 o más nuevo | Los scripts del kit y HyperFrames | [nodejs.org](https://nodejs.org) |
-| FFmpeg | Cortar, medir y codificar | [ffmpeg.org/download.html](https://ffmpeg.org/download.html) |
-| Chrome | HyperFrames renderiza con él | [google.com/chrome](https://www.google.com/chrome/) |
-| Git | Bajar el kit | [git-scm.com](https://git-scm.com) |
+Necesitas [Antigravity](https://antigravity.google/download), la app de Google
+donde Gemini puede ejecutar programas en tu PC. Entra con tu cuenta de Google.
+El chat normal de Gemini no sirve: no puede cortar video.
 
-El chat normal de Gemini no sirve para esto: el kit necesita un agente que
-ejecute programas en tu PC, y eso lo hace Antigravity.
+**1. Instalar.** Abre Antigravity y pega esto en el chat:
 
-En Windows, FFmpeg se instala con un comando en PowerShell:
-
-```powershell
-winget install Gyan.FFmpeg
+```text
+Instala este kit de edición de video en mi PC: https://github.com/ziccarelli369/editor-ia-starter-kit-gemini
+Clónalo en mi carpeta Documentos. Entra en la carpeta y ejecuta npm install y luego node scripts/setup.mjs. Si falta Git, Node 22, FFmpeg o Chrome, dime cuál falta y pídeme permiso antes de instalarlo. Al terminar, dime la ruta de la carpeta.
 ```
 
-## Instalar
+Cuando termine, añade esa carpeta a Antigravity como proyecto. Así el agente
+lee las reglas del kit.
 
-1. Baja el kit:
+**2. Pedir el reel.** En el proyecto del kit, pega esto con la ruta de tus clips:
 
-   ```bash
-   git clone https://github.com/ziccarelli369/editor-ia-starter-kit-gemini.git
-   ```
+```text
+Hazme un reel de Instagram con el footage de C:utaamisclips
+```
 
-2. Abre Antigravity y añade la carpeta `editor-ia-starter-kit-gemini` como proyecto.
-3. Escribe en el chat:
+El agente copia tus clips, te hace unas preguntas y te enseña cada versión.
+Te pide un sí antes de poner texto en pantalla y antes de dar una versión por
+final. El video y la portada quedan en `outbox/<proyecto>/`.
 
-   ```text
-   /onboard
-   ```
+Para la música, copia a la carpeta `music/` una canción que tengas derecho a
+usar (mp3 o wav). Una canción de Spotify no vale. Sin canción, el reel usa el
+sonido de los clips.
 
-El agente instala lo que falta (`npm install`), revisa tu máquina y te pide los
-datos de tu marca. No crea ningún video todavía.
-
-## Hacer un reel
-
-1. Copia tus clips a la carpeta `inbox/`.
-2. Copia una canción que tengas derecho a usar a la carpeta `music/` (mp3 o
-   wav). Una canción de Spotify no vale. Sin canción, el reel usa el sonido de
-   los clips.
-3. Escribe en el chat:
-
-   ```text
-   /new-video Toma el footage de inbox/ y haz un reel de Instagram que enganche.
-   ```
-
-4. Responde cuando el agente pregunte. Te pide un sí antes de mover archivos,
-   antes de poner texto en pantalla, y antes de dar una versión por final.
-5. Recoge el video y la portada en `outbox/<proyecto>/`.
-
-Cuando Antigravity pida permiso para ejecutar `node`, `npm`, `npx` o `ffmpeg`,
-acepta: son las cuatro herramientas del kit.
+Cuando Antigravity pida permiso para ejecutar `git`, `node`, `npm`, `npx` o
+`ffmpeg`, acepta: son las herramientas del kit.
 
 ## Lo que el kit nunca hace
 
@@ -110,11 +87,12 @@ This repo is a generated mirror of
 [editor-ia-starter-kit](https://github.com/ziccarelli369/editor-ia-starter-kit),
 the Claude Code version; see `MIRROR.txt`.
 
-1. Install [Antigravity](https://antigravity.google/download), Node 22+, FFmpeg, Chrome and Git.
-2. Clone this repo and add the folder to Antigravity as a project.
-3. Type `/onboard` once. The agent installs dependencies and checks the machine.
-4. Put clips in `inbox/` and a track you own in `music/`.
-5. Type `/new-video` and describe the reel. Finals land in `outbox/<project>/`.
+1. Install [Antigravity](https://antigravity.google/download) and sign in with Google.
+2. Paste the first prompt above in its chat: it clones this repo, runs
+   `npm install` and checks the machine.
+3. Add the cloned folder to Antigravity as a project.
+4. Paste the second prompt with the path to your clips. Finals land in
+   `outbox/<project>/`.
 
 Optional paths (voice captions, ElevenLabs, Kie.ai, the Blender 3D film) are in
 [docs/EXPERTO.md](docs/EXPERTO.md). Licenses: `LICENSE`,

@@ -7,6 +7,10 @@ you can see under `.agents/skills/`. When you see none, say so and stop.
 whisper.cpp blocks only footage with speech: for speech-free footage, continue
 past that line of `setup.mjs` and say so.
 
+**Footage outside the kit.** When the user names a folder or files outside
+the kit, copy them into `inbox/` (copy, the originals stay) and go on with
+`new-video`. This copy needs no extra yes: the user asked for it.
+
 **Commands.** Run every command from the kit root. `scripts/inbox.mjs` takes
 bare file names, each in quotes: `node scripts/inbox.mjs <id> "clip 1.mp4"`.
 On a permission prompt for `node`, `npm`, `npx` or `ffmpeg`, tell the user
