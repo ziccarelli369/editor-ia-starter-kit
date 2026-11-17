@@ -71,3 +71,12 @@ con Gemini.
 - `website-to-hyperframes` (video desde una web): adaptado al navegador de
   Antigravity, sin prueba real.
 - El perfil `team` (subagentes de nivel flash).
+
+## Bloqueo de texto antes de escribir (hook)
+
+El kit ya impide entregar un video con texto en pantalla sin tablero de texto
+aprobado. Este hook añade el mismo control antes de cada escritura del agente.
+Para activarlo, copia `.agents/hooks.example.json` a `.agents/hooks.json` y
+reinicia Antigravity. Si el agente deja de poder escribir archivos o ejecutar
+comandos, borra `.agents/hooks.json`: el formato del hook no está probado con
+una instalación real.
