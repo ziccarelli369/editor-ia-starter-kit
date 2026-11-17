@@ -140,6 +140,9 @@ checks: see `character-film`, Kit checks.
 Before a draft render run `node scripts/preflight.mjs <project>` and
 `npx hyperframes lint`. Review the draft in Studio (browser pane): hero frames,
 transition boundaries, audio joins. Record what you saw in `VERIFY.md`.
+End `VERIFY.md` with an effort log of four numbers: the user's minutes (brief,
+notes, review), the review rounds, the paid cost, and the render minutes. Ask
+the user for their minutes; write `unknown` when they do not say.
 Visual proof is a reviewed render; lint is a structure check. Caption timing
 is measured, never estimated: `node scripts/align-captions.mjs <project> --srt <srt>`
 snaps every caption to the voice onset in the waveform; Whisper times are for
