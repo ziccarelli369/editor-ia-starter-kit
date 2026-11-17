@@ -48,10 +48,10 @@ function section(guide, heading, body) {
   return guide.replace(re, `$1\n${body.trim()}\n\n`);
 }
 
-if (existsSync(join(out, '.git'))) {
+if (existsSync(join(out, 'MIRROR.txt')) && existsSync(join(out, '.git'))) {
   for (const f of git(out, 'ls-files', '-z').split('\0').filter(Boolean)) rmSync(join(out, f), { force: true });
 } else if (existsSync(out) && readdirSync(out).length) {
-  throw new Error(`${out} is not empty and not a git repo`);
+  throw new Error(`${out} is not empty and is not a mirror (no MIRROR.txt)`);
 }
 mkdirSync(out, { recursive: true });
 
