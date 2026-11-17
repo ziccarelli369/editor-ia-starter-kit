@@ -27,7 +27,7 @@ lee las reglas del kit.
 **2. Pedir el reel.** En el proyecto del kit, pega esto con la ruta de tus clips:
 
 ```text
-Hazme un reel de Instagram con el footage de C:utaamisclips
+Hazme un reel de Instagram con el footage de C:\Videos\mis-clipsutaamisclips
 ```
 
 El agente copia tus clips, te hace unas preguntas y te enseña cada versión.
