@@ -10,6 +10,10 @@ Este repo es un espejo de
 
 ## Empezar: dos prompts
 
+[<img src="docs/tutorial/tutorial-instalacion-cover.png" width="240" alt="Tutorial de instalación (video de 16 s)">](docs/tutorial/tutorial-instalacion-video.mp4)
+
+Video de 16 segundos: [cómo instalar y usar el kit](docs/tutorial/tutorial-instalacion-video.mp4).
+
 Necesitas [Antigravity](https://antigravity.google/download), la app de Google
 donde Gemini puede ejecutar programas en tu PC. Entra con tu cuenta de Google.
 El chat normal de Gemini no sirve: no puede cortar video.
