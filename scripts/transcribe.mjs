@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // Transcribe with local Whisper using the languages set in kit.config.json, then
 // write the kit's transcript shape next to the input.
-// Usage: npm run transcribe -- <video-or-audio> [--out <raw.json>] [--language en|es|auto]
+// Usage: npm run transcribe -- <video-or-audio> [--out <raw.json>] [--language en|es|auto] [--via api] [--from <words.json>]
 //   languages ["en"]        -> model medium.en, --language en
 //   languages ["es"]        -> model medium,    --language es
 //   languages ["en","es"]   -> model medium,    --language auto (Whisper detects per file)
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -26,7 +26,28 @@ const out = opt('out') ?? join(dir, basename(input, extname(input)) + '.raw.json
 const envFile = join(root, '.env');
 const envKey = existsSync(envFile) ? (readFileSync(envFile, 'utf8').match(/^ELEVENLABS_API_KEY=(.+)$/m)?.[1] ?? '').trim() : '';
 const hasKey = Boolean(process.env.ELEVENLABS_API_KEY || envKey);
-if (config.transcription.provider === 'elevenlabs') {
+const access = config.elevenlabs?.access ?? 'auto';
+const from = opt('from');
+if (from) {
+  const src = JSON.parse(readFileSync(from, 'utf8'));
+  const list = Array.isArray(src) ? src : src.words;
+  if (!Array.isArray(list) || !list.length) { console.error(`${from}: no words array`); process.exit(1); }
+  const words = list.map(w => ({ ...w, text: w.text ?? w.word }));
+  const bad = words.findIndex((w, i) => typeof w.start !== 'number' || typeof w.end !== 'number' || w.end < w.start || (i > 0 && w.start < words[i - 1].start));
+  if (bad >= 0) { console.error(`${from}: word ${bad} has missing or out-of-order start/end`); process.exit(1); }
+  const probe = spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', input], { encoding: 'utf8' });
+  const duration = Number(src.audio_duration_secs ?? probe.stdout);
+  const text = src.text ?? words.filter(w => (w.type ?? 'word') === 'word').map(w => w.text).join(' ');
+  writeFileSync(out, JSON.stringify({ text, audio_duration_secs: duration, source: 'elevenlabs-mcp', words }, null, 2));
+  console.log(`ok ${words.length} words | ${duration}s | ${out}`);
+  process.exit(0);
+}
+const via = opt('via');
+if (config.transcription.provider === 'elevenlabs' && !via && access !== 'api') {
+  console.error(`ElevenLabs access is "${access}". If the elevenlabs MCP is connected, transcribe through it and finish with --from <words.json>; if not, run again with --via api (key in .env) or --via whisper. See docs/ELEVENLABS.md.`);
+  process.exit(2);
+}
+if (config.transcription.provider === 'elevenlabs' && via !== 'whisper') {
   if (!hasKey) { console.error('provider is elevenlabs but ELEVENLABS_API_KEY is empty in .env; falling back to whisper'); }
   else {
     const el = spawnSync(process.execPath, [join(root, 'scripts/transcribe-elevenlabs.mjs'), input, '--output', out, '--language', language], { stdio: 'inherit', cwd: root });

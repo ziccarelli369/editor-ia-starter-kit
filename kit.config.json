@@ -22,8 +22,12 @@
     "model_en": "medium.en",
     "$providers": {
       "whisper": "npm run transcribe -- <video>  (local, free; the fallback when no key is set)",
-      "elevenlabs": "npm run transcribe -- <video>  (used when provider is elevenlabs and ELEVENLABS_API_KEY is set in .env; Scribe word times are measured)"
+      "elevenlabs": "Scribe, measured word times. Through the MCP or the API key per elevenlabs.access; see docs/ELEVENLABS.md"
     }
+  },
+  "elevenlabs": {
+    "access": "auto",
+    "$access": "auto: the elevenlabs MCP when it is connected, else the API key in .env. mcp: MCP only. api: API key only. See docs/ELEVENLABS.md."
   },
   "defaults": {
     "width": 1080,

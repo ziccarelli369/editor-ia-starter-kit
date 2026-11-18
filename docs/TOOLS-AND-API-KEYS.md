@@ -38,6 +38,9 @@ for model choice and the mandatory quality check.
 
 ## ElevenLabs: the optional paid helper
 
+ElevenLabs runs through its MCP when connected, else through this key. See
+[ElevenLabs: MCP or API](ELEVENLABS.md) for the route and the steps.
+
 Create a key in [ElevenLabs API settings](https://elevenlabs.io/app/settings/api-keys)
 and put it in the root `.env` as `ELEVENLABS_API_KEY`. Then run:
 

@@ -29,7 +29,7 @@ const whisper = (whisperPath && existsSync(whisperPath)) || has('whisper-cli', [
 const eleven = Boolean(env.ELEVENLABS_API_KEY);
 if (eleven) ok('ElevenLabs key en .env (transcripción medida por palabra)');
 if (whisper) ok('whisper.cpp (transcripción local gratis)');
-if (!eleven && !whisper) bad('transcripción: pon ELEVENLABS_API_KEY en .env, o instala whisper.cpp y pon HYPERFRAMES_WHISPER_PATH en .env (docs/SETUP.md paso 3)');
+if (!eleven && !whisper) bad('transcripción: conecta el MCP de ElevenLabs (docs/ELEVENLABS.md), pon ELEVENLABS_API_KEY en .env, o instala whisper.cpp y pon HYPERFRAMES_WHISPER_PATH en .env (docs/SETUP.md paso 3)');
 if (config.transcription.provider === 'elevenlabs' && !eleven && whisper) console.log('  aviso  kit.config.json pide elevenlabs sin clave: se usará whisper local');
 env.KIE_API_KEY ? ok('Kie.ai key (música y clips generados)') : console.log('  opc.   sin KIE_API_KEY: la música y el B-roll serán gráficos del agente');
 
