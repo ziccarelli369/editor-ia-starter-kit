@@ -101,8 +101,10 @@ the kit's defaults.
 
 Transcription: `npm run transcribe -- <video>` (local Whisper; picks the model
 and language from `transcription.languages` and writes the `raw.json` shape the
-cutting tools read). `provider: elevenlabs` switches to `npm run transcribe:elevenlabs`. Without
-`ELEVENLABS_API_KEY` or `KIE_API_KEY`, sound, music, stills and B-roll are
+cutting tools read). `provider: elevenlabs` switches to Scribe.
+ElevenLabs goes through its MCP when connected, else the API key:
+`elevenlabs.access` and `docs/ELEVENLABS.md` set the route for every job. Without
+ElevenLabs (no MCP, no `ELEVENLABS_API_KEY`) or `KIE_API_KEY`, sound, music, stills and B-roll are
 motion graphics you design in HyperFrames; say so when you fall back.
 Analysis and rendering run on the user's machine; speed depends on its CPU,
 ffmpeg and Chrome.

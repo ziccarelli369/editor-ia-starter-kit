@@ -38,7 +38,7 @@ function transcribe() {
   if (ff.status !== 0) throw new Error(`ffmpeg audio extract failed: ${ff.stderr}`);
   const win = process.platform === 'win32';
   const q = s => (win ? `"${s}"` : s);
-  const r = run(win ? 'npm.cmd' : 'npm', ['run', 'transcribe', '--', q(wav), '--out', q(raw)],
+  const r = run(win ? 'npm.cmd' : 'npm', ['run', 'transcribe', '--', q(wav), '--out', q(raw), '--via', 'whisper'],
     { cwd: root, shell: win, stdio: ['ignore', 'inherit', 'inherit'], env: process.env });
   if (r.status !== 0 || !existsSync(raw)) throw new Error('transcribe failed');
   return JSON.parse(readFileSync(raw, 'utf8')).words.filter(w => w.text?.trim());

@@ -17,7 +17,7 @@ Reuse a word-level transcript that matches this exact recording. Otherwise trans
 npm run transcribe -- <video>        # local Whisper, language from kit.config.json, writes <video>.raw.json
 ```
 
-ElevenLabs Scribe (`npm run transcribe:elevenlabs -- <video>`) is the optional paid path; it uploads audio and spends credits, so get approval first. Read `docs/TOOLS-AND-API-KEYS.md` for provider setup and the transcript format.
+ElevenLabs Scribe is the optional paid path; it uploads audio and spends credits, so get approval first. It runs through the ElevenLabs MCP when connected, else the API key: follow `docs/ELEVENLABS.md`. Read `docs/TOOLS-AND-API-KEYS.md` for the transcript format.
 
 Done when: `raw.json` holds `words: [{ text, start, end }]` on the timeline of `raw.mp4`.
 
